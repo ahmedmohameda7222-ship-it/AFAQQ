@@ -3,7 +3,7 @@ export type ContentStatus = "verified" | "pending";
 export type Project = {
   slug: string;
   name: string;
-  voltage?: readonly string[];
+  voltage: readonly string[];
   technicalLabel?: string;
   scopes: readonly string[];
   summary: string;
@@ -62,6 +62,7 @@ export const projects: Project[] = [
   {
     slug: "benban-dcc",
     name: "Benban DCC",
+    voltage: [],
     technicalLabel: "Solar Power Plant",
     scopes: ["Secondary Systems", "Control Systems", "SCADA Adaptation / Integration"],
     summary:
@@ -76,7 +77,7 @@ export const projects: Project[] = [
 export const verifiedProjects = projects.filter((project) => project.status === "verified");
 
 export function getProjectTechnicalLabel(project: Project) {
-  if (project.voltage?.length) return project.voltage.join(" / ");
+  if (project.voltage.length) return project.voltage.join(" / ");
   return project.technicalLabel ?? "";
 }
 
