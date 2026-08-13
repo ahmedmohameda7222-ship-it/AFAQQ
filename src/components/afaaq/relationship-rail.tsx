@@ -19,7 +19,6 @@ const clientVisuals: Record<string, ClientVisual> = {
   "Siemens Energy": { domain: "siemens-energy.com" },
   ABB: { domain: "abb.com" },
   "Hitachi Energy": { domain: "hitachienergy.com" },
-  EGEMAC: { domain: "egemac.com.eg" },
   EETC: { domain: "eetc.gov.eg" },
   NECC: { domain: "eetc.gov.eg" },
 };
