@@ -21,19 +21,15 @@ function isCurrentSection(pathname: string, href: string) {
 
 export function MobileNav({ pathname }: MobileNavProps) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const panelId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     if (!open) return;
 
     const body = document.body;
+    const trigger = triggerRef.current;
     const previousOverflow = body.style.overflow;
     body.style.overflow = "hidden";
 
@@ -68,11 +64,11 @@ export function MobileNav({ pathname }: MobileNavProps) {
     return () => {
       body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
-      triggerRef.current?.focus();
+      trigger?.focus();
     };
   }, [open]);
 
-  const panel = mounted && open
+  const panel = open && typeof document !== "undefined"
     ? createPortal(
         <div
           ref={panelRef}
