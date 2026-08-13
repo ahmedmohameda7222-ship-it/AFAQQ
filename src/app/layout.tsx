@@ -2,15 +2,20 @@ import type { Metadata } from "next";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { company } from "@/content/company";
+import { getSiteUrl } from "@/lib/site-url";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.invalid"),
+  metadataBase: getSiteUrl(),
   title: {
     default: `${company.name} | Electrical Engineering & Contracting`,
     template: `%s | ${company.name}`,
   },
   description: company.description,
+  icons: {
+    icon: [{ url: "/brand/afaaq-mark.svg", type: "image/svg+xml" }],
+    shortcut: "/brand/afaaq-mark.svg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

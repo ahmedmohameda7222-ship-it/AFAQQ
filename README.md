@@ -2,22 +2,27 @@
 
 Canonical working repository for the new AFAAQ ARAB engineering website.
 
-## Current scope
-- Phase 4B foundation
+## Current implementation
 - Next.js App Router + React + TypeScript
-- Tailwind CSS v4.3 + CSS design tokens
-- Global responsive container/grid foundation
-- Accessible header/footer primitives
-- Typed company/service/project content with verification status
-- SEO metadata helpers, sitemap and robots
-- Reduced-motion and keyboard-focus foundations
-- Placeholder route shells only — final homepage/page compositions are intentionally not implemented yet
+- Tailwind CSS + CSS design tokens
+- Responsive Home, About, Services, Projects and Contact pages
+- Individual service detail routes
+- Individual project detail routes
+- Accessible desktop/mobile navigation
+- Client flow: automatic on desktop, manual horizontal swipe on mobile
+- Project inquiry form that prepares a structured email to AFAAQ
+- SEO metadata, sitemap, robots and Organization structured data
+- Reduced-motion and keyboard-focus support
+- Vercel validation gate before production builds
 
-## Important content rule
-Only `verified` content should be surfaced in production. Pending project/client/service claims must not become public copy until confirmed.
+## Content authority
+The previous AFAAQ website is the company-information source for this build. The new website uses a completely new design and simpler English while preserving the supplied company facts, services, projects, clients and technical information.
 
-## Brand rule
-The current accent token and system font fallback are temporary. Replace them only after the official AFAAQ logo/brand color and final font are visually locked.
+## Image workflow
+Image creation is intentionally deferred until the page system is complete. Final AI-created visuals will be added in one coordinated pass under `public/images/`. Until then, image slots remain intentional placeholders and no placeholder should be presented as real project photography.
 
-## Asset rule
-All production and placeholder website assets belong in this repository. Use `public/brand/` for approved brand assets and `public/images/` for project, field, human, and temporary placeholder imagery. Placeholder/generated imagery must be clearly named and replaced before launch if it is not authentic AFAAQ project photography.
+## Asset folders
+- `public/brand/` — approved logo and brand assets
+- `public/images/projects/` — project visuals
+- `public/images/people/` — engineering/people visuals
+- `public/images/placeholders/` — temporary implementation assets only

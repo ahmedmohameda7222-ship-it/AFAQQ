@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">AFAAQ ARAB mark</title>
+  <desc id="desc">Approved AFAAQ ARAB geometric A mark with blue sweep.</desc>
+  <defs>
+    <linearGradient id="aFill" x1="310" y1="930" x2="1080" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#061d58"/>
+      <stop offset="0.5" stop-color="#0a2f82"/>
+      <stop offset="1" stop-color="#073b9f"/>
+    </linearGradient>
+    <linearGradient id="sweepFill" x1="300" y1="760" x2="1170" y2="490" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0872ee"/>
+      <stop offset="0.55" stop-color="#0b8cff"/>
+      <stop offset="1" stop-color="#12a2ff"/>
+    </linearGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <path
+    fill="url(#aFill)"
+    fill-rule="evenodd"
+    d="M148 973 612 39h310l464 934h-316L770 316 466 973H148Zm622-636L599 661h342L770 337Z"
+  />
+
+  <path
+    fill="url(#sweepFill)"
+    d="M289 699C535 614 811 548 1168 486c-208 119-454 259-718 402L289 699Z"
+  />
+
+  <path
+    d="M742 606c141-45 279-82 426-120-115 68-238 138-371 214"
+    fill="none"
+    stroke="#fff"
+    stroke-width="11"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.96"
+    filter="url(#softGlow)"
+  />
+
+  <circle cx="1166" cy="488" r="15" fill="#fff" opacity="0.72" filter="url(#softGlow)"/>
+</svg>
