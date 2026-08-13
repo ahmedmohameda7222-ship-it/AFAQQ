@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Project } from "@/content/projects";
+import { getProjectTechnicalLabel, type Project } from "@/content/projects";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
 import { ProjectMedia } from "@/components/afaaq/project-media";
 
@@ -81,7 +81,7 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
             className="inline-flex h-12 w-12 items-center justify-center border border-[var(--rule)] bg-transparent text-[var(--ink)] transition-colors hover:border-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-blue)]"
             aria-label="Next projects"
           >
-            <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
+            <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1" fill="none">
               <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
             </svg>
           </button>
@@ -105,6 +105,7 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
         {projects.map((project) => {
           const projectIndex = allProjects.findIndex((item) => item.slug === project.slug);
           const projectNumber = String(projectIndex + 1).padStart(2, "0");
+          const technicalLabel = getProjectTechnicalLabel(project);
 
           return (
             <article
@@ -125,9 +126,11 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
                     <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
                       Project {projectNumber}
                     </p>
-                    <p className="font-technical m-0 shrink-0 text-[0.82rem] font-medium text-[var(--muted)]">
-                      {project.voltage.join(" / ")}
-                    </p>
+                    {technicalLabel ? (
+                      <p className="font-technical m-0 shrink-0 text-[0.82rem] font-medium text-[var(--muted)]">
+                        {technicalLabel}
+                      </p>
+                    ) : null}
                   </div>
 
                   <h3 className="mb-0 mt-3 text-[clamp(1.45rem,2.4vw,2rem)] font-medium leading-[1.06] tracking-[-0.03em] group-hover:text-[var(--brand-navy)]">
