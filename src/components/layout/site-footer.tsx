@@ -35,7 +35,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-10 border-t border-white/15 pt-10 md:mt-12 md:pt-12">
-          <div className="flex items-center gap-4 overflow-hidden sm:gap-6 md:gap-8 lg:gap-10">
+          <div className="flex items-center justify-center gap-4 overflow-hidden sm:gap-6 md:gap-8 lg:gap-10">
             <Image
               src="/brand/afaaq-mark.svg"
               alt="AFAAQ ARAB logo"
