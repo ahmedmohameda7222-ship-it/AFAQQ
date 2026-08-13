@@ -2,6 +2,7 @@
   "buildCommand": "npm run vercel-build",
   "git": {
     "deploymentEnabled": {
+      "**": false,
       "main": true
     }
   }
