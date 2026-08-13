@@ -39,7 +39,15 @@ export const services: Service[] = [
       "Commissioning and energization support",
     ],
     standards: ["IEC 60255", "IEC 62271", "IEEE C37"],
-    relatedProjectSlugs: ["delta-regional-control-center", "delta-control-project", "canal-control-project"],
+    relatedProjectSlugs: [
+      "delta-regional-control-center",
+      "delta-control-project",
+      "canal-control-project",
+      "heliopolis-dcc",
+      "menia-project",
+      "safaga-adaptation",
+      "gharbia-zone-project",
+    ],
     status: "verified",
   },
   {
@@ -67,7 +75,13 @@ export const services: Service[] = [
       "IEC 61850 verification",
     ],
     standards: ["IEC 61850", "IEC 60255", "IEEE C37"],
-    relatedProjectSlugs: ["delta-regional-control-center", "delta-control-project", "canal-control-project"],
+    relatedProjectSlugs: [
+      "delta-regional-control-center",
+      "delta-control-project",
+      "canal-control-project",
+      "menia-project",
+      "gharbia-zone-project",
+    ],
     status: "verified",
   },
   {
@@ -111,7 +125,7 @@ export const services: Service[] = [
       "Control and protection circuits",
       "RTU and telecommunication connections",
     ],
-    relatedProjectSlugs: ["delta-regional-control-center"],
+    relatedProjectSlugs: ["delta-regional-control-center", "heliopolis-dcc", "menia-project", "safaga-adaptation"],
     status: "verified",
   },
   {

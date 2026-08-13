@@ -1,77 +1,110 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
-import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
-import { projects } from "@/content/projects";
+import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
+import { ProjectMedia } from "@/components/afaaq/project-media";
+import { verifiedProjects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Projects",
-  description: "Selected AFAAQ ARAB electrical engineering, protection, SCADA, testing and commissioning projects.",
+  description:
+    "AFAAQ ARAB major project experience across 220 kV, 66 kV and medium-voltage systems, including testing, commissioning, protection, control, SCADA and electrical works.",
   path: "/projects",
 });
-
-const flagship = projects.find((project) => project.slug === "delta-regional-control-center");
-const others = projects.filter((project) => project.slug !== "delta-regional-control-center");
 
 export default function ProjectsPage() {
   return (
     <>
-      <section className="pb-20 pt-14 md:pb-28 md:pt-20">
+      <section className="pb-16 pt-14 md:pb-20 md:pt-20">
         <Container>
           <div className="grid gap-10 md:grid-cols-12 md:items-end">
             <div className="md:col-span-8">
-              <SectionLabel>Projects</SectionLabel>
-              <h1 className="mt-6 max-w-4xl text-[clamp(3rem,6vw,5.3rem)] font-medium leading-[0.96] tracking-[-0.052em]">
-                Electrical work across power and control systems.
+              <SectionLabel>Major Projects</SectionLabel>
+              <h1 className="mt-6 max-w-4xl text-[clamp(2.8rem,5.4vw,4.8rem)] font-medium leading-[0.98] tracking-[-0.045em]">
+                Project experience across transmission, distribution and control systems.
               </h1>
             </div>
             <p className="m-0 max-w-lg text-[1.05rem] leading-8 text-[var(--muted)] md:col-span-4">
-              Selected AFAAQ projects covering testing, commissioning, protection, SCADA and electrical installation.
+              Seven AFAAQ ARAB references across 220 kV, 66 kV and medium-voltage environments, covering protection, SCADA, electrical works, testing and commissioning.
             </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-3 border-y border-[var(--rule)] md:mt-14">
+            <div className="py-6 pr-2 sm:pr-4 md:py-7">
+              <p className="font-technical m-0 text-[clamp(1.7rem,3vw,2.6rem)] font-medium leading-none tracking-[-0.04em]">
+                {String(verifiedProjects.length).padStart(2, "0")}
+              </p>
+              <p className="font-technical mb-0 mt-2 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Major projects</p>
+            </div>
+            <div className="border-x border-[var(--rule)] px-2 py-6 sm:px-4 md:px-7 md:py-7">
+              <p className="font-technical m-0 text-[clamp(0.8rem,3vw,2.2rem)] font-medium leading-none tracking-[-0.035em]">11 / 66 / 220 kV</p>
+              <p className="font-technical mb-0 mt-2 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">System levels</p>
+            </div>
+            <div className="py-6 pl-2 sm:pl-4 md:py-7 md:pl-7">
+              <p className="font-technical m-0 text-[clamp(1.7rem,3vw,2.6rem)] font-medium leading-none tracking-[-0.04em]">MV</p>
+              <p className="font-technical mb-0 mt-2 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Distribution work</p>
+            </div>
           </div>
         </Container>
       </section>
 
-      {flagship ? (
-        <section className="pb-20 md:pb-28">
-          <Container>
-            <div className="grid gap-8 border-t border-[var(--rule)] pt-8 md:grid-cols-12 md:pt-10">
-              <div className="md:col-span-8">
-                <SectionLabel>Featured Project</SectionLabel>
-                <h2 className="mt-6 max-w-3xl text-[clamp(2.5rem,5vw,4.4rem)] font-medium leading-[0.98] tracking-[-0.05em]">{flagship.name}</h2>
-                <div className="project-media-placeholder mt-10 aspect-[16/10] min-h-[24rem] bg-[var(--graphite)]" aria-hidden="true" />
-              </div>
-              <div className="md:col-span-4 md:pt-16">
-                <p className="m-0 text-[clamp(1.8rem,3.5vw,3rem)] font-medium tracking-[-0.045em]">{flagship.voltage.join(" / ")}</p>
-                <p className="mt-7 max-w-md text-[1rem] leading-7 text-[var(--muted)]">{flagship.summary}</p>
-                <div className="mt-8"><ArrowLink href={`/projects/${flagship.slug}`}>View Project Scope</ArrowLink></div>
-              </div>
-            </div>
-          </Container>
-        </section>
-      ) : null}
-
-      <section className="py-20 md:py-28">
+      <section className="pb-20 md:pb-28">
         <Container>
-          <SectionLabel>Selected Work</SectionLabel>
-          <div className="mt-10 grid gap-14 md:grid-cols-12 md:gap-x-8 md:gap-y-20">
-            {others.map((project, index) => (
-              <article key={project.slug} className={index % 2 === 0 ? "md:col-span-7" : "md:col-span-5 md:pt-20"}>
-                <Link href={`/projects/${project.slug}`} className="group block">
-                  <div className={`project-media-placeholder bg-[#d8d7d1] ${index % 2 === 0 ? "aspect-[16/10]" : "aspect-[4/3]"}`} aria-hidden="true" />
-                  <div className="mt-5 flex items-start justify-between gap-6 border-t border-[var(--rule)] pt-4">
-                    <div>
-                      <h2 className="m-0 text-[clamp(1.7rem,3vw,2.7rem)] font-medium leading-[1] tracking-[-0.04em]">{project.name}</h2>
-                      <p className="mb-0 mt-4 max-w-lg text-sm leading-6 text-[var(--muted)]">{project.summary}</p>
+          <div className="border-t border-[var(--rule)]">
+            {verifiedProjects.map((project, index) => {
+              const projectNumber = String(index + 1).padStart(2, "0");
+              const projectMeta = [project.location, project.year].filter(Boolean).join(" · ");
+
+              return (
+                <article key={project.slug} className="border-b border-[var(--rule)] py-8 md:py-10">
+                  <Link href={`/projects/${project.slug}`} className="group grid gap-7 md:grid-cols-12 md:items-center md:gap-8">
+                    <ProjectMedia
+                      project={project}
+                      priority={index === 0}
+                      className="aspect-[16/10] md:col-span-4"
+                      imageClassName="transition-transform duration-500 group-hover:scale-[1.015]"
+                    />
+
+                    <div className="md:col-span-5">
+                      <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
+                        Project {projectNumber}
+                      </p>
+                      <h2 className="mb-0 mt-3 text-[clamp(1.85rem,3.2vw,2.9rem)] font-medium leading-[1.02] tracking-[-0.04em] group-hover:text-[var(--brand-navy)]">
+                        {project.name}
+                      </h2>
+
+                      {project.relationship ? (
+                        <div className="mt-4">
+                          <ProjectClientMark name={project.relationship} />
+                        </div>
+                      ) : null}
+
+                      <p className="mb-0 mt-5 max-w-2xl text-[0.98rem] leading-7 text-[var(--muted)]">
+                        {project.scopes.join(" · ")}
+                      </p>
                     </div>
-                    <p className="m-0 shrink-0 text-sm font-medium text-[var(--muted)]">{project.voltage.join(" / ")}</p>
-                  </div>
-                </Link>
-              </article>
-            ))}
+
+                    <div className="flex items-end justify-between gap-6 md:col-span-3 md:h-full md:flex-col md:items-end md:justify-between md:py-1 md:text-right">
+                      <div>
+                        <p className="font-technical m-0 text-[1rem] font-medium text-[var(--ink)]">{project.voltage.join(" / ")}</p>
+                        {projectMeta ? (
+                          <p className="font-technical mb-0 mt-2 text-[0.78rem] leading-5 text-[var(--muted)]">{projectMeta}</p>
+                        ) : null}
+                      </div>
+                      <span className="inline-flex items-center gap-3 text-[0.9rem] font-medium">
+                        View Project Scope
+                        <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1" fill="none">
+                          <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
+                        </svg>
+                      </span>
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -80,10 +113,14 @@ export default function ProjectsPage() {
         <Container>
           <div className="grid gap-8 md:grid-cols-12 md:items-end">
             <div className="md:col-span-8">
-              <SectionLabel>Similar Project?</SectionLabel>
-              <h2 className="mt-6 max-w-3xl text-[clamp(2.4rem,5vw,4.4rem)] font-medium leading-[0.98] tracking-[-0.05em]">Send us the scope and voltage level.</h2>
+              <SectionLabel>Project Inquiry</SectionLabel>
+              <h2 className="mt-6 max-w-3xl text-[clamp(2.35rem,5vw,4.4rem)] font-medium leading-[0.98] tracking-[-0.045em]">
+                Have a project scope at MV, 66 kV or 220 kV?
+              </h2>
             </div>
-            <div className="md:col-span-4"><PrimaryAction href="/contact" tone="light">Discuss a Project Scope</PrimaryAction></div>
+            <div className="md:col-span-4">
+              <PrimaryAction href="/contact" tone="light">Discuss a Project Scope</PrimaryAction>
+            </div>
           </div>
         </Container>
       </section>

@@ -3,11 +3,13 @@ import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { ExecutionTrack } from "@/components/afaaq/execution-track";
+import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
+import { ProjectMedia } from "@/components/afaaq/project-media";
+import { ProjectShowcaseRail } from "@/components/afaaq/project-showcase-rail";
 import { RelationshipRail } from "@/components/afaaq/relationship-rail";
 import { ServiceIndex } from "@/components/afaaq/service-index";
 import { clients } from "@/content/company";
 import { verifiedProjects } from "@/content/projects";
-import { SelectedProjects } from "@/components/afaaq/selected-projects";
 
 const disciplines = [
   "Testing & Commissioning",
@@ -15,10 +17,13 @@ const disciplines = [
   "SCADA / RTU Integration",
 ] as const;
 
-const flagshipProject = verifiedProjects.find((project) => project.slug === "delta-regional-control-center");
-const selectedProjects = verifiedProjects.filter((project) => project.slug !== "delta-regional-control-center");
+const latestProject = verifiedProjects.find((project) => project.latest) ?? verifiedProjects[0];
+const projectRail = latestProject ? verifiedProjects.filter((project) => project.slug !== latestProject.slug) : verifiedProjects;
 
 export default function HomePage() {
+  const latestIndex = latestProject ? verifiedProjects.findIndex((project) => project.slug === latestProject.slug) : -1;
+  const latestNumber = latestIndex >= 0 ? String(latestIndex + 1).padStart(2, "0") : "01";
+
   return (
     <>
       <section className="overflow-hidden pb-16 pt-8 sm:pt-10 md:pb-20 md:pt-12 lg:pb-20 lg:pt-14">
@@ -85,47 +90,64 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {flagshipProject ? (
+      {latestProject ? (
         <section className="pb-20 md:pb-28">
           <Container>
-            <div className="grid gap-8 border-t border-[var(--rule)] pt-8 md:grid-cols-12 md:pt-9">
-              <div className="md:col-span-8">
-                <SectionLabel>Selected Project / 01</SectionLabel>
-                <h2 className="mt-6 max-w-3xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.042em]">
-                  {flagshipProject.name}
-                </h2>
-                <div
-                  className="project-media-placeholder mt-8 aspect-[16/10] min-h-[24rem] bg-[var(--graphite)] md:mt-10"
-                  aria-label="Delta Regional Control Center project photography placeholder"
-                  role="img"
-                />
+            <div className="border-t border-[var(--rule)] pt-8 md:pt-9">
+              <div className="grid gap-6 md:grid-cols-12 md:items-end">
+                <div className="md:col-span-7">
+                  <SectionLabel>Major Projects</SectionLabel>
+                  <h2 className="mt-6 max-w-3xl text-[clamp(2.1rem,3.9vw,3.55rem)] font-medium leading-[1.02] tracking-[-0.04em]">
+                    Seven project references across transmission, distribution and control systems.
+                  </h2>
+                </div>
+                <div className="md:col-span-3 md:col-start-10">
+                  <ArrowLink href="/projects">View All Projects</ArrowLink>
+                </div>
               </div>
 
-              <div className="md:col-span-4 md:pt-[3.75rem]">
-                <p className="font-technical m-0 text-[clamp(1.9rem,3.6vw,3.05rem)] font-medium leading-none tracking-[-0.04em]">
-                  {flagshipProject.voltage.map((item) => item.replace(" kV", "")).join(" / ")} <span className="text-[0.82rem] tracking-normal text-[var(--muted)]">kV</span>
-                </p>
-
-                <div className="mt-8 border-t border-[var(--rule)] pt-5">
-                  <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Scope</p>
-                  <ul className="mt-4 grid list-none gap-3 p-0 text-[1rem] leading-7">
-                    {flagshipProject.scopes.map((scope) => (
-                      <li key={scope}>{scope}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                {flagshipProject.relationship ? (
-                  <div className="mt-8 border-t border-[var(--rule)] pt-5">
-                    <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Project Relationship</p>
-                    <p className="mb-0 mt-3 text-lg font-medium leading-7 tracking-[-0.02em]">{flagshipProject.relationship}</p>
+              <article className="mt-10 grid gap-8 border-t border-[var(--rule)] pt-8 md:mt-12 md:grid-cols-12 md:gap-10 md:pt-10">
+                <div className="md:col-span-7">
+                  <div className="flex items-center justify-between gap-6">
+                    <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
+                      Latest Project Reference / {latestNumber}
+                    </p>
+                    <p className="font-technical m-0 text-[0.82rem] font-medium text-[var(--muted)]">{latestProject.voltage.join(" / ")}</p>
                   </div>
-                ) : null}
-
-                <div className="mt-7">
-                  <ArrowLink href={`/projects/${flagshipProject.slug}`}>View Full Project Scope</ArrowLink>
+                  <h3 className="mt-5 max-w-3xl text-[clamp(2.3rem,4.4vw,3.9rem)] font-medium leading-[1] tracking-[-0.042em]">
+                    {latestProject.name}
+                  </h3>
+                  <ProjectMedia project={latestProject} priority className="mt-8 aspect-[16/9] min-h-[23rem] md:mt-10" />
                 </div>
-              </div>
+
+                <div className="md:col-span-4 md:col-start-9 md:pt-[4.2rem]">
+                  {latestProject.relationship ? (
+                    <div className="border-t border-[var(--rule)] pt-5">
+                      <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">Project Relationship</p>
+                      <div className="mt-4">
+                        <ProjectClientMark name={latestProject.relationship} />
+                      </div>
+                    </div>
+                  ) : null}
+
+                  <div className="mt-8 border-t border-[var(--rule)] pt-5">
+                    <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">Scope</p>
+                    <ul className="mt-4 grid list-none gap-3 p-0 text-[0.98rem] leading-6">
+                      {latestProject.scopes.map((scope) => <li key={scope}>{scope}</li>)}
+                    </ul>
+                  </div>
+
+                  <p className="font-technical mt-7 text-[0.78rem] leading-5 text-[var(--muted)]">
+                    {[latestProject.location, latestProject.year].filter(Boolean).join(" · ")}
+                  </p>
+
+                  <div className="mt-7">
+                    <ArrowLink href={`/projects/${latestProject.slug}`}>View Full Project Scope</ArrowLink>
+                  </div>
+                </div>
+              </article>
+
+              <ProjectShowcaseRail projects={projectRail} allProjects={verifiedProjects} />
             </div>
           </Container>
         </section>
@@ -168,25 +190,6 @@ export default function HomePage() {
             </p>
           </div>
           <ExecutionTrack />
-        </Container>
-      </section>
-
-      <section className="pb-16 md:pb-20">
-        <Container>
-          <div className="border-t border-[var(--rule)] pt-8 md:pt-9">
-            <div className="grid gap-6 md:grid-cols-12 md:items-end">
-              <div className="md:col-span-7">
-                <SectionLabel>Selected Projects</SectionLabel>
-                <h2 className="mt-6 max-w-3xl text-[clamp(2.1rem,3.9vw,3.55rem)] font-medium leading-[1.02] tracking-[-0.04em]">
-                  Selected work across transmission, distribution and control systems.
-                </h2>
-              </div>
-              <div className="md:col-span-3 md:col-start-10">
-                <ArrowLink href="/projects">View All Projects</ArrowLink>
-              </div>
-            </div>
-            <SelectedProjects projects={selectedProjects} startIndex={2} />
-          </div>
         </Container>
       </section>
 

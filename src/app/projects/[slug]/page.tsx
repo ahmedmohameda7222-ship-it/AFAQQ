@@ -4,6 +4,8 @@ import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
+import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
+import { ProjectMedia } from "@/components/afaaq/project-media";
 import { getProject, projects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
@@ -25,18 +27,20 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   const currentIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
+  const projectNumber = String(currentIndex + 1).padStart(2, "0");
+  const projectMeta = [project.location, project.year].filter(Boolean).join(" · ");
   const inquiryHref = `/contact?project=${encodeURIComponent(project.name)}&voltage=${encodeURIComponent(project.voltage.join(" / "))}`;
 
   return (
     <>
       <section className="pb-14 pt-14 md:pb-20 md:pt-20">
         <Container>
-          <SectionLabel>Project</SectionLabel>
+          <SectionLabel>Project / {projectNumber}</SectionLabel>
           <div className="mt-6 grid gap-8 md:grid-cols-12 md:items-end">
             <h1 className="m-0 max-w-4xl text-[clamp(3rem,6vw,5.3rem)] font-medium leading-[0.96] tracking-[-0.052em] md:col-span-8">{project.name}</h1>
             <div className="md:col-span-4">
-              <p className="m-0 text-[clamp(1.8rem,3.5vw,3rem)] font-medium tracking-[-0.045em]">{project.voltage.join(" / ")}</p>
-              {project.location ? <p className="mb-0 mt-3 text-sm text-[var(--muted)]">{project.location}</p> : null}
+              <p className="font-technical m-0 text-[clamp(1.8rem,3.5vw,3rem)] font-medium tracking-[-0.045em]">{project.voltage.join(" / ")}</p>
+              {projectMeta ? <p className="font-technical mb-0 mt-3 text-[0.78rem] leading-5 text-[var(--muted)]">{projectMeta}</p> : null}
             </div>
           </div>
         </Container>
@@ -44,7 +48,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
       <section className="pb-20 md:pb-28">
         <Container>
-          <div className="project-media-placeholder aspect-[16/8] min-h-[28rem] bg-[var(--graphite)]" aria-hidden="true" />
+          <ProjectMedia project={project} priority className="aspect-[16/8] min-h-[28rem]" />
         </Container>
       </section>
 
@@ -56,15 +60,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               <p className="mt-6 max-w-md text-[1.05rem] leading-8 text-[var(--muted)]">{project.summary}</p>
               {project.relationship ? (
                 <div className="mt-8 border-t border-[var(--rule)] pt-5">
-                  <p className="m-0 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">Project Relationship</p>
-                  <p className="mb-0 mt-3 text-lg font-medium">{project.relationship}</p>
+                  <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">Project Relationship</p>
+                  <div className="mt-4">
+                    <ProjectClientMark name={project.relationship} />
+                  </div>
                 </div>
               ) : null}
             </div>
             <div className="md:col-span-7 md:col-start-6">
               {project.scopes.map((scope, index) => (
                 <div key={scope} className="grid grid-cols-[3rem_1fr] gap-4 border-t border-[var(--rule)] py-5 last:border-b">
-                  <span className="text-xs font-semibold tracking-[0.1em] text-[var(--muted)]">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="font-technical text-[0.78rem] font-medium tracking-[0.08em] text-[var(--muted)]">{String(index + 1).padStart(2, "0")}</span>
                   <p className="m-0 text-[1.1rem] font-medium leading-7">{scope}</p>
                 </div>
               ))}
@@ -97,7 +103,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <div className="md:col-span-7">
               <SectionLabel>Next Project</SectionLabel>
               <h2 className="mt-6 text-[clamp(2.2rem,4vw,3.8rem)] font-medium leading-[1] tracking-[-0.045em]">{nextProject.name}</h2>
-              <p className="mt-4 text-[var(--muted)]">{nextProject.voltage.join(" / ")}</p>
+              <p className="font-technical mt-4 text-[0.82rem] text-[var(--muted)]">{nextProject.voltage.join(" / ")}</p>
             </div>
             <div className="md:col-span-4 md:col-start-9"><ArrowLink href={`/projects/${nextProject.slug}`}>View Next Project</ArrowLink></div>
           </div>
