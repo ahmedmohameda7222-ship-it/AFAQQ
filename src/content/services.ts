@@ -124,7 +124,7 @@ export const services: Service[] = [
     summary: "Technical training for electrical testing, protection and control work.",
     intro:
       "AFAAQ provides technical training to help engineers and technicians build practical knowledge in electrical systems.",
-    capabilities: ["Testing fundamentals", "Protection systems", "Control systems", "SCADA and automation", "Practical site knowledge"],
+    capabilities: ["Testing fundamentals", "Protection systems", "Control systems", "Secondary systems", "Practical site knowledge"],
     relatedProjectSlugs: [],
     status: "verified",
   },
