@@ -1,9 +1,8 @@
-Place final approved AFAAQ brand assets here.
+# AFAAQ brand assets
 
-Required before Phase 4C visual implementation:
-- official vector logo (SVG preferred)
-- light/dark-safe logo variants if officially available
-- favicon source
-- confirmed brand accent color
+Approved web brand assets live in this directory.
 
-Do not use raster screenshots of the logo as production assets.
+- `afaaq-mark-approved.webp` — approved AFAAQ ARAB logo mark generated from the accepted logo revision, with transparent background, for direct website use.
+- `afaaq-mark.svg` — web-ready vector interpretation for scalable interface use.
+
+Do not replace these assets without explicit design approval.
