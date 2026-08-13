@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:site-url": "node --experimental-strip-types scripts/test-site-url.mjs",
+    "check": "npm run test:site-url && npm run lint && npm run typecheck",
+    "vercel-build": "npm run check && next build"
   },
   "dependencies": {
     "next": "16.2.11",
