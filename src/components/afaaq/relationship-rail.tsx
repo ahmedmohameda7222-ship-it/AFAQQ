@@ -22,15 +22,6 @@ const clientVisuals: Record<string, ClientVisual> = {
   EGEMAC: { domain: "egemac.com.eg" },
   EETC: { domain: "eetc.gov.eg" },
   NECC: { domain: "eetc.gov.eg" },
-  "Red Sea Development Company": {
-    logoUrl: "https://smartwatermagazine.com/sites/default/files/red_sea_logo.png",
-    wide: true,
-  },
-  "GAMA Construction": { domain: "gama.com.eg" },
-  "Orascom Construction": { domain: "orascom.com" },
-  Petrojet: { domain: "petrojet.com.eg" },
-  ENPPI: { domain: "enppi.com" },
-  "The Arab Contractors": { domain: "arabcont.com" },
 };
 
 function fallbackMark(name: string) {
@@ -54,12 +45,12 @@ function ClientItem({ name }: { name: string }) {
 
   return (
     <span className="flex min-w-0 items-center">
-      {logoUrl ? (
-        <span
-          className={`relative mr-3 inline-flex h-9 shrink-0 items-center justify-center overflow-hidden rounded-[2px] bg-white md:mr-4 md:h-10 ${visual?.wide ? "w-14 md:w-16" : "w-9 md:w-10"}`}
-          aria-hidden="true"
-        >
-          <span className="font-technical text-[0.55rem] font-semibold tracking-[-0.04em] text-[var(--brand-navy)]/55">{fallbackMark(name)}</span>
+      <span
+        className={`relative mr-3 inline-flex h-9 shrink-0 items-center justify-center overflow-hidden rounded-[2px] bg-white md:mr-4 md:h-10 ${visual?.wide ? "w-14 md:w-16" : "w-9 md:w-10"}`}
+        aria-hidden="true"
+      >
+        <span className="font-technical text-[0.55rem] font-semibold tracking-[-0.04em] text-[var(--brand-navy)]/55">{fallbackMark(name)}</span>
+        {logoUrl ? (
           <Image
             src={logoUrl}
             alt=""
@@ -69,8 +60,8 @@ function ClientItem({ name }: { name: string }) {
             loading="lazy"
             className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${visual?.wide ? "h-8 w-12 md:h-9 md:w-14" : "h-7 w-7 md:h-8 md:w-8"}`}
           />
-        </span>
-      ) : null}
+        ) : null}
+      </span>
       <span className="min-w-0">{name}</span>
     </span>
   );
