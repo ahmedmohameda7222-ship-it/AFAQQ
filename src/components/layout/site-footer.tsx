@@ -44,6 +44,21 @@ export function SiteFooter() {
         <div className="mt-14 border-t border-white/15 pt-7 text-[0.72rem] tracking-[0.12em] text-white/45">
           AFAAQ ARAB FOR ENGINEERING & CONTRACTING
         </div>
+
+        <div className="mt-12 border-t border-white/15 pt-10 md:mt-16 md:pt-14">
+          <div className="flex items-center gap-4 overflow-hidden sm:gap-6 md:gap-8 lg:gap-10">
+            <Image
+              src="/brand/afaaq-mark.svg"
+              alt="AFAAQ ARAB logo"
+              width={300}
+              height={200}
+              className="h-auto w-[clamp(90px,24vw,140px)] shrink-0 object-contain md:w-[clamp(150px,15vw,250px)]"
+            />
+            <p className="m-0 min-w-0 whitespace-nowrap text-[clamp(2.5rem,10vw,4.5rem)] font-semibold leading-[0.82] tracking-[-0.055em] text-[#f4f3ef] md:text-[clamp(5rem,9vw,10.5rem)]">
+              AFAAQ ARAB
+            </p>
+          </div>
+        </div>
       </Container>
     </footer>
   );
