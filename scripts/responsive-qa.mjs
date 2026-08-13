@@ -23,6 +23,24 @@ const viewports = [
 const outDir = path.resolve("qa-artifacts");
 await mkdir(outDir, { recursive: true });
 
+async function revealWholePage(page) {
+  await page.evaluate(async () => {
+    const step = Math.max(Math.floor(window.innerHeight * 0.72), 420);
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    let previousY = -1;
+
+    while (window.scrollY !== previousY) {
+      previousY = window.scrollY;
+      window.scrollBy({ top: step, behavior: "instant" });
+      await delay(90);
+    }
+
+    await delay(250);
+    window.scrollTo({ top: 0, behavior: "instant" });
+    await delay(180);
+  });
+}
+
 const browser = await chromium.launch({ headless: true });
 const report = [];
 
@@ -33,17 +51,46 @@ for (const [viewportName, viewport] of viewports) {
     const page = await context.newPage();
     const consoleErrors = [];
     const pageErrors = [];
+    const failedResponses = [];
 
     page.on("console", (message) => {
       if (message.type() === "error") consoleErrors.push(message.text());
     });
     page.on("pageerror", (error) => pageErrors.push(error.message));
+    page.on("response", (res) => {
+      if (res.status() >= 400) {
+        failedResponses.push({ status: res.status(), url: res.url() });
+      }
+    });
 
     const response = await page.goto(`${baseUrl}${route}`, {
       waitUntil: "domcontentloaded",
       timeout: 60_000,
     });
-    await page.waitForTimeout(1800);
+    await page.waitForTimeout(1200);
+
+    let mobileMenu = null;
+    if (viewport.width < 768) {
+      const menu = page.getByRole("button", { name: "Menu" });
+      if (await menu.count()) {
+        await menu.click();
+        await page.waitForTimeout(150);
+        mobileMenu = await page.evaluate(() => {
+          const dialog = document.querySelector('[role="dialog"][aria-label="Site navigation"]');
+          const current = dialog?.querySelector('[aria-current="page"]');
+          return {
+            open: Boolean(dialog),
+            bodyOverflow: document.body.style.overflow,
+            activeItem: current?.textContent?.trim() || null,
+          };
+        });
+        await page.screenshot({ path: path.join(outDir, `${viewportName}-${pageName}-menu.png`), fullPage: false });
+        await page.keyboard.press("Escape");
+        await page.waitForTimeout(100);
+      }
+    }
+
+    await revealWholePage(page);
 
     const metrics = await page.evaluate(() => {
       const doc = document.documentElement;
@@ -66,6 +113,8 @@ for (const [viewportName, viewport] of viewports) {
         })
         .filter((item) => item.width > 0 && item.height > 0 && item.width < 44 && item.height < 44)
         .slice(0, 30);
+      const hiddenRevealSections = Array.from(document.querySelectorAll("main > section.reveal-section:not(.is-revealed)"))
+        .map((section) => section.querySelector("h1,h2,h3")?.textContent?.trim() || section.textContent?.trim().slice(0, 100) || "Unnamed section");
 
       return {
         title: document.title,
@@ -86,28 +135,9 @@ for (const [viewportName, viewport] of viewports) {
         activeNav: active,
         brokenImages,
         smallTargets,
+        hiddenRevealSections,
       };
     });
-
-    let mobileMenu = null;
-    if (viewport.width < 768) {
-      const menu = page.getByRole("button", { name: "Menu" });
-      if (await menu.count()) {
-        await menu.click();
-        await page.waitForTimeout(150);
-        mobileMenu = await page.evaluate(() => {
-          const dialog = document.querySelector('[role="dialog"][aria-label="Site navigation"]');
-          const current = dialog?.querySelector('[aria-current="page"]');
-          return {
-            open: Boolean(dialog),
-            bodyOverflow: document.body.style.overflow,
-            activeItem: current?.textContent?.trim() || null,
-          };
-        });
-        await page.screenshot({ path: path.join(outDir, `${viewportName}-${pageName}-menu.png`), fullPage: false });
-        await page.keyboard.press("Escape");
-      }
-    }
 
     await page.screenshot({ path: path.join(outDir, `${viewportName}-${pageName}.png`), fullPage: true });
 
@@ -122,6 +152,7 @@ for (const [viewportName, viewport] of viewports) {
       mobileMenu,
       consoleErrors,
       pageErrors,
+      failedResponses,
     });
 
     await page.close();
@@ -139,6 +170,7 @@ const failures = report.filter((entry) =>
   entry.horizontalOverflow > 1 ||
   entry.brokenImages.length > 0 ||
   entry.pageErrors.length > 0 ||
+  entry.hiddenRevealSections.length > 0 ||
   !entry.footerPresent ||
   (entry.dimensions.width < 768 && entry.mobileMenu && (!entry.mobileMenu.open || entry.mobileMenu.bodyOverflow !== "hidden"))
 );
