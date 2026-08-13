@@ -5,7 +5,9 @@ import { SectionLabel } from "@/components/primitives/section-label";
 import { ExecutionTrack } from "@/components/afaaq/execution-track";
 import { RelationshipRail } from "@/components/afaaq/relationship-rail";
 import { ServiceIndex } from "@/components/afaaq/service-index";
+import { clients } from "@/content/company";
 import { verifiedProjects } from "@/content/projects";
+import { SelectedProjects } from "@/components/afaaq/selected-projects";
 
 const disciplines = [
   "Testing & Commissioning",
@@ -13,26 +15,19 @@ const disciplines = [
   "SCADA / RTU Integration",
 ] as const;
 
-const verifiedRelationships = Array.from(
-  new Set(
-    verifiedProjects
-      .map((project) => project.relationship)
-      .filter((relationship): relationship is string => Boolean(relationship)),
-  ),
-);
-
 const flagshipProject = verifiedProjects.find((project) => project.slug === "delta-regional-control-center");
+const selectedProjects = verifiedProjects.filter((project) => project.slug !== "delta-regional-control-center");
 
 export default function HomePage() {
   return (
     <>
-      <section className="overflow-hidden pb-20 pt-12 sm:pt-16 md:pb-28 md:pt-20 lg:min-h-[calc(100svh-76px)] lg:pb-20 lg:pt-24">
+      <section className="overflow-hidden pb-20 pt-8 sm:pt-10 md:pb-28 md:pt-12 lg:pb-24 lg:pt-14">
         <Container>
-          <div className="grid items-end gap-14 lg:grid-cols-12 lg:gap-8">
-            <div className="lg:col-span-7 lg:pb-10">
+          <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-7 lg:pt-4">
               <SectionLabel>Electrical Engineering & Contracting</SectionLabel>
 
-              <h1 className="mt-7 max-w-[12ch] text-[clamp(3rem,6.1vw,5.25rem)] font-medium leading-[0.96] tracking-[-0.052em] text-[var(--ink)]">
+              <h1 className="mt-6 max-w-[760px] text-[clamp(2.9rem,5.1vw,4.55rem)] font-medium leading-[0.98] tracking-[-0.05em] text-[var(--ink)]">
                 Electrical testing, commissioning and protection for power systems.
               </h1>
 
@@ -48,7 +43,7 @@ export default function HomePage() {
 
             <div className="lg:col-span-5">
               <div
-                className="hero-media-placeholder relative aspect-[4/5] min-h-[28rem] overflow-hidden bg-[var(--graphite)] lg:min-h-[34rem]"
+                className="hero-media-placeholder relative aspect-[4/5] min-h-[27rem] overflow-hidden bg-[var(--graphite)] lg:min-h-[32rem]"
                 aria-label="AFAAQ project photography placeholder"
                 role="img"
               >
@@ -138,7 +133,7 @@ export default function HomePage() {
 
       <section className="pb-24 md:pb-32">
         <Container>
-          <RelationshipRail names={verifiedRelationships} />
+          <RelationshipRail names={clients} />
         </Container>
       </section>
 
@@ -146,7 +141,7 @@ export default function HomePage() {
         <Container>
           <SectionLabel>Core Technical Services</SectionLabel>
           <h2 className="mt-7 max-w-4xl text-[clamp(2.4rem,5.3vw,4.5rem)] font-medium leading-[0.98] tracking-[-0.05em]">
-            From protection testing to complete commissioning scope.
+            Testing, protection and control for power systems.
           </h2>
           <ServiceIndex />
 
@@ -165,14 +160,33 @@ export default function HomePage() {
             <div className="md:col-span-5">
               <SectionLabel>Project Execution</SectionLabel>
               <h2 className="mt-6 max-w-xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.048em]">
-                From engineering review to system handover.
+                From project review to energization and handover.
               </h2>
             </div>
             <p className="m-0 max-w-lg self-end text-[1rem] leading-7 text-[var(--muted)] md:col-span-5 md:col-start-8">
-              AFAAQ supports project execution through a structured engineering, installation, verification and commissioning sequence aligned to the approved scope.
+              AFAAQ reviews the scope, installs the systems, tests the functions and supports commissioning through final handover.
             </p>
           </div>
           <ExecutionTrack />
+        </Container>
+      </section>
+
+      <section className="pb-24 md:pb-36">
+        <Container>
+          <div className="border-t border-[var(--rule)] pt-8 md:pt-10">
+            <div className="grid gap-6 md:grid-cols-12 md:items-end">
+              <div className="md:col-span-7">
+                <SectionLabel>Selected Projects</SectionLabel>
+                <h2 className="mt-6 max-w-3xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.048em]">
+                  Power and control projects across different voltage levels.
+                </h2>
+              </div>
+              <div className="md:col-span-3 md:col-start-10">
+                <ArrowLink href="/projects">View All Projects</ArrowLink>
+              </div>
+            </div>
+            <SelectedProjects projects={selectedProjects} />
+          </div>
         </Container>
       </section>
 
@@ -216,7 +230,7 @@ export default function HomePage() {
                 Discuss your project requirements directly with AFAAQ&apos;s engineering team.
               </p>
               <div className="mt-7">
-                <PrimaryAction href="/contact">Discuss a Project Scope</PrimaryAction>
+                <PrimaryAction href="/contact" tone="light">Discuss a Project Scope</PrimaryAction>
               </div>
             </div>
           </div>

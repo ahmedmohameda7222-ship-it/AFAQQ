@@ -26,18 +26,25 @@ export const projects: Project[] = [
     status: "verified",
   },
   {
+    slug: "delta-control-project",
+    name: "Delta Control Project",
+    voltage: ["66 kV", "220 kV"],
+    scopes: ["Protection & Control", "SCADA", "Testing & Commissioning"],
+    status: "verified",
+  },
+  {
     slug: "canal-control-project",
     name: "Canal Control Project",
     voltage: ["66 kV", "220 kV"],
     scopes: ["Protection & Control", "SCADA", "Testing & Commissioning"],
-    status: "pending",
+    status: "verified",
   },
   {
     slug: "heliopolis-dcc",
     name: "Heliopolis DCC",
     voltage: ["MV"],
-    scopes: ["ARMU", "Distribution", "Testing & Commissioning"],
-    status: "pending",
+    scopes: ["Distribution", "Testing & Commissioning"],
+    status: "verified",
   },
 ];
 

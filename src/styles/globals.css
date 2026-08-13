@@ -40,7 +40,7 @@ body {
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif; /* temporary until font lock */
+  font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif; /* temporary until final font lock */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -92,8 +92,8 @@ img { max-width: 100%; height: auto; }
   animation: relationship-marquee 52s linear infinite;
 }
 
-.relationship-marquee:hover .relationship-marquee__track,
-.relationship-marquee:focus-within .relationship-marquee__track {
+.relationship-rail__viewport:hover .relationship-marquee__track,
+.relationship-rail__viewport:focus-within .relationship-marquee__track {
   animation-play-state: paused;
 }
 
@@ -101,4 +101,14 @@ img { max-width: 100%; height: auto; }
   .relationship-marquee__track {
     animation: none;
   }
+}
+
+.relationship-rail__viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x proximity;
+}
+
+.relationship-rail__viewport::-webkit-scrollbar {
+  display: none;
 }

@@ -5,39 +5,36 @@ type RelationshipRailProps = {
 export function RelationshipRail({ names }: RelationshipRailProps) {
   if (names.length === 0) return null;
 
-  if (names.length < 3) {
-    return (
-      <div className="border-y border-[var(--rule)] py-9 md:py-11">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-10 gap-y-3">
-          <p className="m-0 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-[var(--muted)]">
-            Verified Project Relationship
-          </p>
-          <p className="m-0 text-[clamp(1.55rem,3vw,2.45rem)] font-medium tracking-[-0.035em]">
-            {names[0]}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  const items = [...names, ...names];
+  const desktopItems = [...names, ...names];
 
   return (
-    <div className="relationship-marquee overflow-hidden border-y border-[var(--rule)] py-9 md:py-11">
-      <p className="mb-7 mt-0 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-[var(--muted)]">
-        Selected Project Relationships
+    <div className="border-y border-[var(--rule)] py-8 md:py-10">
+      <p className="mb-7 mt-0 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
+        Selected Clients
       </p>
-      <div className="relationship-marquee__track flex w-max items-center whitespace-nowrap" aria-label={names.join(", ")}>
-        {items.map((name, index) => (
-          <span
-            key={`${name}-${index}`}
-            className="flex items-center text-[clamp(1.65rem,3.5vw,2.75rem)] font-medium tracking-[-0.04em]"
-            aria-hidden={index >= names.length}
-          >
-            {name}
-            <span className="mx-7 text-[var(--rule)] md:mx-10">—</span>
-          </span>
-        ))}
+
+      <div className="relationship-rail__viewport overflow-x-auto md:overflow-hidden">
+        <div className="flex w-max items-center whitespace-nowrap md:hidden" aria-label={names.join(", ")}>
+          {names.map((name) => (
+            <span key={name} className="flex snap-start items-center text-[1.65rem] font-medium tracking-[-0.035em]">
+              {name}
+              <span className="mx-7 text-[var(--rule)]">—</span>
+            </span>
+          ))}
+        </div>
+
+        <div className="relationship-marquee__track hidden w-max items-center whitespace-nowrap md:flex" aria-label={names.join(", ")}>
+          {desktopItems.map((name, index) => (
+            <span
+              key={`${name}-${index}`}
+              className="flex items-center text-[clamp(1.8rem,3.2vw,2.65rem)] font-medium tracking-[-0.04em]"
+              aria-hidden={index >= names.length}
+            >
+              {name}
+              <span className="mx-9 text-[var(--rule)] lg:mx-12">—</span>
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

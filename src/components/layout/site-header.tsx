@@ -13,9 +13,9 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--rule)]/70 bg-[color:var(--canvas)]/95 backdrop-blur-[8px]">
       <Container className="relative flex h-[76px] items-center justify-between">
-        <Link href="/" className="inline-flex min-h-12 items-center" aria-label="AFAAQ ARAB home">
-          <span className="text-[0.95rem] font-semibold tracking-[0.32em]">AFAAQ</span>
-          <span className="sr-only"> ARAB</span>
+        <Link href="/" className="inline-flex min-h-12 items-center gap-2" aria-label="AFAAQ ARAB home">
+          <span className="text-[0.98rem] font-semibold tracking-[0.25em]">AFAAQ</span>
+          <span className="text-[0.68rem] font-semibold tracking-[0.22em] text-[var(--muted)]">ARAB</span>
         </Link>
         <nav aria-label="Primary navigation" className="hidden md:block">
           <ul className="m-0 flex list-none items-center gap-8 p-0">
