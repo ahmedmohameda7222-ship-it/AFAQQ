@@ -171,7 +171,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="pb-24 md:pb-36">
+      <section className="pb-20 md:pb-28">
         <Container>
           <div className="border-t border-[var(--rule)] pt-8 md:pt-10">
             <div className="grid gap-6 md:grid-cols-12 md:items-end">
@@ -190,19 +190,19 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="pb-24 md:pb-36">
+      <section className="pb-24 md:pb-28">
         <Container>
-          <div className="grid gap-10 border-t border-[var(--rule)] pt-8 md:grid-cols-12 md:pt-10">
-            <div className="md:col-span-7">
+          <div className="grid gap-10 border-t border-[var(--rule)] pt-8 md:grid-cols-12 md:items-center md:pt-10">
+            <div className="md:col-span-6">
               <div
-                className="human-media-placeholder aspect-[4/3] min-h-[25rem] bg-[#d8d7d1]"
+                className="human-media-placeholder aspect-[4/3] min-h-[22rem] bg-[#d8d7d1]"
                 aria-label="AFAAQ engineer field photography placeholder"
                 role="img"
               />
             </div>
-            <div className="self-end md:col-span-5 md:pb-2">
+            <div className="md:col-span-5 md:col-start-8">
               <SectionLabel>About AFAAQ</SectionLabel>
-              <h2 className="mt-6 text-[clamp(2.2rem,4.4vw,3.9rem)] font-medium leading-[1] tracking-[-0.048em]">
+              <h2 className="mt-6 max-w-[13ch] text-[clamp(2.15rem,4vw,3.6rem)] font-medium leading-[1] tracking-[-0.048em]">
                 Engineering capability from installation through energization.
               </h2>
               <p className="mt-7 max-w-lg text-[1rem] leading-7 text-[var(--muted)]">
