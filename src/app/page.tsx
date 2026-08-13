@@ -10,20 +10,21 @@ import { ProjectShowcaseRail } from "@/components/afaaq/project-showcase-rail";
 import { RelationshipRail } from "@/components/afaaq/relationship-rail";
 import { ServiceIndex } from "@/components/afaaq/service-index";
 import { clients } from "@/content/company";
-import { verifiedProjects } from "@/content/projects";
+import { getProjectTechnicalLabel, verifiedProjects } from "@/content/projects";
 
 const disciplines = [
   "Testing & Commissioning",
   "Protection & Control",
-  "SCADA / RTU Integration",
+  "Electrical Installation",
 ] as const;
 
-const latestProject = verifiedProjects.find((project) => project.latest) ?? verifiedProjects[0];
-const projectRail = latestProject ? verifiedProjects.filter((project) => project.slug !== latestProject.slug) : verifiedProjects;
+const featuredProject = verifiedProjects[0];
+const projectRail = featuredProject ? verifiedProjects.filter((project) => project.slug !== featuredProject.slug) : verifiedProjects;
 
 export default function HomePage() {
-  const latestIndex = latestProject ? verifiedProjects.findIndex((project) => project.slug === latestProject.slug) : -1;
-  const latestNumber = latestIndex >= 0 ? String(latestIndex + 1).padStart(2, "0") : "01";
+  const featuredIndex = featuredProject ? verifiedProjects.findIndex((project) => project.slug === featuredProject.slug) : -1;
+  const featuredNumber = featuredIndex >= 0 ? String(featuredIndex + 1).padStart(2, "0") : "01";
+  const featuredTechnicalLabel = featuredProject ? getProjectTechnicalLabel(featuredProject) : "";
 
   return (
     <>
@@ -67,9 +68,9 @@ export default function HomePage() {
 
             <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4 md:mt-12 md:gap-8">
               {[
-                ["11", "kV"],
-                ["66", "kV"],
                 ["220", "kV"],
+                ["66", "kV"],
+                ["11", "kV"],
               ].map(([value, unit]) => (
                 <div key={value} className="min-w-0 border-r border-[var(--rule)] pr-1 last:border-r-0 sm:pr-0">
                   <div className="flex items-end gap-1 sm:gap-1.5">
@@ -91,7 +92,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {latestProject ? (
+      {featuredProject ? (
         <section className="pb-16 sm:pb-20 md:pb-28">
           <Container>
             <div className="border-t border-[var(--rule)] pt-7 sm:pt-8 md:pt-9">
@@ -99,7 +100,7 @@ export default function HomePage() {
                 <div className="min-w-0 md:col-span-7">
                   <SectionLabel>Major Projects</SectionLabel>
                   <h2 className="mt-5 max-w-3xl text-[clamp(2rem,3.9vw,3.55rem)] font-medium leading-[1.02] tracking-[-0.04em] sm:mt-6">
-                    Seven project references across transmission, distribution and control systems.
+                    Project references across regional control centers and solar-power infrastructure.
                   </h2>
                 </div>
                 <div className="md:col-span-3 md:col-start-10">
@@ -111,15 +112,17 @@ export default function HomePage() {
                 <div className="min-w-0 md:col-span-7">
                   <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
                     <p className="font-technical m-0 text-[0.75rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)] sm:text-[0.78rem]">
-                      Latest Project Reference / {latestNumber}
+                      Project Reference / {featuredNumber}
                     </p>
-                    <p className="font-technical m-0 shrink-0 text-[0.82rem] font-medium text-[var(--muted)]">{latestProject.voltage.join(" / ")}</p>
+                    {featuredTechnicalLabel ? (
+                      <p className="font-technical m-0 shrink-0 text-[0.82rem] font-medium text-[var(--muted)]">{featuredTechnicalLabel}</p>
+                    ) : null}
                   </div>
                   <h3 className="mt-4 max-w-3xl text-[clamp(2.15rem,4.4vw,3.9rem)] font-medium leading-[1] tracking-[-0.042em] sm:mt-5">
-                    {latestProject.name}
+                    {featuredProject.name}
                   </h3>
                   <ProjectMedia
-                    project={latestProject}
+                    project={featuredProject}
                     priority
                     sizes="(max-width: 767px) calc(100vw - 2.5rem), 58vw"
                     className="mt-7 aspect-[4/3] sm:mt-8 sm:aspect-[16/10] md:mt-10 md:aspect-[16/9] md:min-h-[23rem]"
@@ -127,11 +130,11 @@ export default function HomePage() {
                 </div>
 
                 <div className="min-w-0 md:col-span-4 md:col-start-9 md:pt-[4.2rem]">
-                  {latestProject.relationship ? (
+                  {featuredProject.relationship ? (
                     <div className="border-t border-[var(--rule)] pt-5">
                       <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">Project Relationship</p>
                       <div className="mt-4">
-                        <ProjectClientMark name={latestProject.relationship} />
+                        <ProjectClientMark name={featuredProject.relationship} />
                       </div>
                     </div>
                   ) : null}
@@ -139,16 +142,16 @@ export default function HomePage() {
                   <div className="mt-7 border-t border-[var(--rule)] pt-5 md:mt-8">
                     <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">Scope</p>
                     <ul className="mt-4 grid list-none gap-2.5 p-0 text-[0.98rem] leading-6 sm:gap-3">
-                      {latestProject.scopes.map((scope) => <li key={scope}>{scope}</li>)}
+                      {featuredProject.scopes.map((scope) => <li key={scope}>{scope}</li>)}
                     </ul>
                   </div>
 
                   <p className="font-technical mt-6 text-[0.78rem] leading-5 text-[var(--muted)] md:mt-7">
-                    {[latestProject.location, latestProject.year].filter(Boolean).join(" · ")}
+                    {[featuredProject.location, featuredProject.year].filter(Boolean).join(" · ")}
                   </p>
 
                   <div className="mt-5 md:mt-7">
-                    <ArrowLink href={`/projects/${latestProject.slug}`}>View Full Project Scope</ArrowLink>
+                    <ArrowLink href={`/projects/${featuredProject.slug}`}>View Full Project Scope</ArrowLink>
                   </div>
                 </div>
               </article>
@@ -211,7 +214,7 @@ export default function HomePage() {
                 A Cairo-based engineering contractor focused on power-system delivery.
               </h2>
               <p className="mt-5 max-w-xl text-[1rem] leading-7 text-[var(--muted)] sm:mt-6 md:text-[1.02rem]">
-                Founded in 2017, AFAAQ ARAB delivers electrical contracting, testing and commissioning, protection, control and automation work for power-system environments.
+                Founded in 2017, AFAAQ ARAB delivers electrical contracting, testing and commissioning, protection and control work for power-system environments.
               </p>
               <div className="mt-5 sm:mt-6">
                 <ArrowLink href="/about">About AFAAQ</ArrowLink>

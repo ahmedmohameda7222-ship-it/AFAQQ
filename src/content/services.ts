@@ -39,15 +39,7 @@ export const services: Service[] = [
       "Commissioning and energization support",
     ],
     standards: ["IEC 60255", "IEC 62271", "IEEE C37"],
-    relatedProjectSlugs: [
-      "delta-regional-control-center",
-      "delta-control-project",
-      "canal-control-project",
-      "heliopolis-dcc",
-      "menia-project",
-      "safaga-adaptation",
-      "gharbia-zone-project",
-    ],
+    relatedProjectSlugs: ["delta-regional-control-center"],
     status: "verified",
   },
   {
@@ -75,40 +67,7 @@ export const services: Service[] = [
       "IEC 61850 verification",
     ],
     standards: ["IEC 61850", "IEC 60255", "IEEE C37"],
-    relatedProjectSlugs: [
-      "delta-regional-control-center",
-      "delta-control-project",
-      "canal-control-project",
-      "menia-project",
-      "gharbia-zone-project",
-    ],
-    status: "verified",
-  },
-  {
-    slug: "scada-automation",
-    title: "SCADA & Automation",
-    summary: "We connect field systems to monitoring, control and data platforms.",
-    intro:
-      "AFAAQ supports SCADA and automation work for electrical projects, including RTU and PLC configuration, HMI work, communications, data integration and system testing.",
-    capabilities: [
-      "SCADA engineering",
-      "RTU configuration",
-      "PLC configuration",
-      "HMI development",
-      "Communication systems",
-      "Data acquisition and integration",
-      "Signal mapping and verification",
-      "Testing and commissioning",
-    ],
-    methods: [
-      "Point-to-point signal tests",
-      "Remote command checks",
-      "Alarm and status checks",
-      "Communication link checks",
-      "RTU and control center integration",
-    ],
-    standards: ["IEC 61850", "IEC 60870", "IEC 60870-5-104", "DNP3", "Modbus TCP/IP"],
-    relatedProjectSlugs: ["delta-regional-control-center", "delta-control-project", "canal-control-project"],
+    relatedProjectSlugs: ["delta-regional-control-center", "cairo-regional-control-center-upgrade", "benban-dcc"],
     status: "verified",
   },
   {
@@ -125,7 +84,7 @@ export const services: Service[] = [
       "Control and protection circuits",
       "RTU and telecommunication connections",
     ],
-    relatedProjectSlugs: ["delta-regional-control-center", "heliopolis-dcc", "menia-project", "safaga-adaptation"],
+    relatedProjectSlugs: ["delta-regional-control-center"],
     status: "verified",
   },
   {
@@ -165,18 +124,20 @@ export const services: Service[] = [
     summary: "Technical training for electrical testing, protection and control work.",
     intro:
       "AFAAQ provides technical training to help engineers and technicians build practical knowledge in electrical systems.",
-    capabilities: ["Testing fundamentals", "Protection systems", "Control systems", "SCADA and automation", "Practical site knowledge"],
+    capabilities: ["Testing fundamentals", "Protection systems", "Control systems", "Secondary systems", "Practical site knowledge"],
     relatedProjectSlugs: [],
     status: "verified",
   },
 ];
 
+const primaryServiceSlugs = ["testing-commissioning", "protection-control"] as const;
+
 export const primaryServices = services.filter((service) =>
-  ["testing-commissioning", "protection-control", "scada-automation"].includes(service.slug),
+  primaryServiceSlugs.includes(service.slug as (typeof primaryServiceSlugs)[number]),
 );
 
 export const supportingServices = services.filter((service) =>
-  !["testing-commissioning", "protection-control", "scada-automation"].includes(service.slug),
+  !primaryServiceSlugs.includes(service.slug as (typeof primaryServiceSlugs)[number]),
 );
 
 export function getService(slug: string) {

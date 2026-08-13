@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Electrical Engineering Services",
-  description: "Testing, commissioning, protection, control, SCADA, electrical installation and engineering services from AFAAQ ARAB.",
+  description: "Testing, commissioning, protection, control, electrical installation and engineering services from AFAAQ ARAB.",
   path: "/services",
 });
 
@@ -97,7 +97,7 @@ export default function ServicesPage() {
             <div className="min-w-0 md:col-span-4">
               <SectionLabel>Standards & Protocols</SectionLabel>
               <p className="mt-5 max-w-sm text-[1rem] leading-7 text-[var(--muted)]">
-                Technical standards and communication protocols used across testing, protection and automation work.
+                Technical standards and communication protocols used across testing, protection and control work.
               </p>
             </div>
             <div className="flex min-w-0 flex-wrap gap-x-4 gap-y-3 text-[clamp(1.15rem,2.2vw,1.8rem)] font-medium tracking-[-0.025em] sm:gap-x-6 sm:gap-y-4 sm:tracking-[-0.03em] md:col-span-7 md:col-start-6">

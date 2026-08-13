@@ -46,17 +46,14 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-9 border-t border-white/15 pt-9 md:mt-12 md:pt-12">
-          <div className="grid grid-cols-[3.5rem_minmax(0,1fr)] items-center gap-3 sm:grid-cols-[5rem_minmax(0,1fr)] sm:gap-5 md:flex md:justify-center md:gap-8 lg:gap-10">
+          <div className="flex justify-center">
             <Image
               src="/brand/afaaq-mark.svg"
               alt="AFAAQ ARAB logo"
               width={300}
               height={200}
-              className="h-auto w-14 object-contain sm:w-20 md:w-[clamp(145px,15vw,250px)] md:shrink-0"
+              className="h-auto w-24 object-contain sm:w-32 md:w-40 lg:w-48"
             />
-            <p className="m-0 min-w-0 whitespace-nowrap text-[clamp(1.5rem,7.5vw,2.5rem)] font-semibold leading-[0.9] tracking-[-0.045em] text-[#f4f3ef] sm:text-[clamp(2rem,7vw,3.5rem)] md:text-[clamp(5rem,9vw,10.5rem)] md:leading-[0.82] md:tracking-[-0.055em]">
-              AFAAQ ARAB
-            </p>
           </div>
         </div>
       </Container>

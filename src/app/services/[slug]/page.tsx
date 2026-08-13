@@ -5,7 +5,7 @@ import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { getService, services } from "@/content/services";
-import { projects } from "@/content/projects";
+import { getProjectTechnicalLabel, projects } from "@/content/projects";
 import { equipment } from "@/content/company";
 import { buildMetadata } from "@/lib/seo";
 
@@ -123,11 +123,15 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <Container>
             <SectionLabel>Related Projects</SectionLabel>
             <div className="mt-6 grid gap-0 sm:mt-8">
-              {relatedProjects.map((project) => (
-                <ArrowLink key={project.slug} href={`/projects/${project.slug}`} className="w-full border-t border-[var(--rule)] py-4 text-[1rem] last:border-b sm:py-5 sm:text-lg">
-                  {project.name} — {project.voltage.join(" / ")}
-                </ArrowLink>
-              ))}
+              {relatedProjects.map((project) => {
+                const technicalLabel = getProjectTechnicalLabel(project);
+
+                return (
+                  <ArrowLink key={project.slug} href={`/projects/${project.slug}`} className="w-full border-t border-[var(--rule)] py-4 text-[1rem] last:border-b sm:py-5 sm:text-lg">
+                    {project.name}{technicalLabel ? ` — ${technicalLabel}` : ""}
+                  </ArrowLink>
+                );
+              })}
             </div>
           </Container>
         </section>

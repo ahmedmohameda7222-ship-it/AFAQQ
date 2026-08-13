@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { services } from "@/content/services";
 
-const primarySlugs = ["testing-commissioning", "protection-control", "scada-automation"] as const;
+const primarySlugs = ["testing-commissioning", "protection-control"] as const;
 
 const detailLabels: Record<(typeof primarySlugs)[number], string> = {
   "testing-commissioning": "Review Testing Capabilities",
   "protection-control": "Review Protection Capabilities",
-  "scada-automation": "Review SCADA Capabilities",
 };
 
 export function ServiceIndex() {

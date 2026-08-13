@@ -21,13 +21,17 @@ const projectSlugs = new Set(projects.map((project) => project.slug));
 for (const project of projects) {
   assert(project.name.trim(), `Project ${project.slug} is missing a name.`);
   assert(project.summary.trim(), `Project ${project.slug} is missing a summary.`);
-  assert(project.image.trim(), `Project ${project.slug} is missing an image.`);
-  assert(project.voltage.length > 0, `Project ${project.slug} is missing a voltage/system level.`);
+  assert(
+    project.voltage.length > 0 || project.technicalLabel?.trim(),
+    `Project ${project.slug} is missing a voltage/system level or technical label.`,
+  );
   assert(project.scopes.length > 0, `Project ${project.slug} is missing scope data.`);
   assert(["verified", "pending"].includes(project.status), `Project ${project.slug} has an invalid status.`);
-}
 
-assert(projects.filter((project) => project.latest).length <= 1, "Only one project can be marked latest.");
+  if (project.image) {
+    assert(project.imageAlt?.trim(), `Project ${project.slug} has an image but is missing image alt text.`);
+  }
+}
 
 for (const service of services) {
   assert(service.title.trim(), `Service ${service.slug} is missing a title.`);

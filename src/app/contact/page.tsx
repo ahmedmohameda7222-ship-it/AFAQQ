@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Discuss a Project Scope",
-  description: "Send AFAAQ ARAB your testing, commissioning, protection, SCADA or electrical project requirement.",
+  description: "Send AFAAQ ARAB your testing, commissioning, protection, control or electrical project requirement.",
   path: "/contact",
 });
 

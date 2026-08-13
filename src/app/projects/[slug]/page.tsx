@@ -6,7 +6,7 @@ import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
 import { ProjectMedia } from "@/components/afaaq/project-media";
-import { getProject, projects } from "@/content/projects";
+import { getProject, getProjectTechnicalLabel, projects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -29,7 +29,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const projectNumber = String(currentIndex + 1).padStart(2, "0");
   const projectMeta = [project.location, project.year].filter(Boolean).join(" · ");
-  const inquiryHref = `/contact?project=${encodeURIComponent(project.name)}&voltage=${encodeURIComponent(project.voltage.join(" / "))}`;
+  const technicalLabel = getProjectTechnicalLabel(project);
+  const nextTechnicalLabel = getProjectTechnicalLabel(nextProject);
+  const inquiryHref = `/contact?project=${encodeURIComponent(project.name)}&voltage=${encodeURIComponent(technicalLabel)}`;
 
   return (
     <>
@@ -39,7 +41,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <div className="mt-5 grid gap-6 sm:mt-6 sm:gap-8 md:grid-cols-12 md:items-end">
             <h1 className="m-0 min-w-0 max-w-4xl text-[clamp(2.55rem,6vw,5.3rem)] font-medium leading-[0.97] tracking-[-0.048em] md:col-span-8 md:leading-[0.96] md:tracking-[-0.052em]">{project.name}</h1>
             <div className="min-w-0 md:col-span-4">
-              <p className="font-technical m-0 text-[clamp(1.65rem,3.5vw,3rem)] font-medium tracking-[-0.04em] md:tracking-[-0.045em]">{project.voltage.join(" / ")}</p>
+              {technicalLabel ? (
+                <p className="font-technical m-0 text-[clamp(1.45rem,3.2vw,2.75rem)] font-medium tracking-[-0.035em] md:tracking-[-0.04em]">{technicalLabel}</p>
+              ) : null}
               {projectMeta ? <p className="font-technical mb-0 mt-2 text-[0.78rem] leading-5 text-[var(--muted)] sm:mt-3">{projectMeta}</p> : null}
             </div>
           </div>
@@ -108,7 +112,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <div className="min-w-0 md:col-span-7">
               <SectionLabel>Next Project</SectionLabel>
               <h2 className="mt-5 text-[clamp(2.05rem,4vw,3.8rem)] font-medium leading-[1] tracking-[-0.042em] sm:mt-6 md:tracking-[-0.045em]">{nextProject.name}</h2>
-              <p className="font-technical mt-3 text-[0.82rem] text-[var(--muted)] sm:mt-4">{nextProject.voltage.join(" / ")}</p>
+              {nextTechnicalLabel ? (
+                <p className="font-technical mt-3 text-[0.82rem] text-[var(--muted)] sm:mt-4">{nextTechnicalLabel}</p>
+              ) : null}
             </div>
             <div className="min-w-0 md:col-span-4 md:col-start-9"><ArrowLink href={`/projects/${nextProject.slug}`}>View Next Project</ArrowLink></div>
           </div>
