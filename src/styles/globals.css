@@ -51,7 +51,7 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-a { color: inherit; text-decoration: none; }
+a { text-decoration: none; }
 button, input, textarea, select { font: inherit; }
 img { max-width: 100%; height: auto; }
 ::selection { background: color-mix(in srgb, var(--brand-blue) 22%, transparent); }

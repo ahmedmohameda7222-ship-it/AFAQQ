@@ -4,14 +4,14 @@ import { Container } from "./container";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[var(--graphite)] py-14 text-[#f4f3ef] md:py-16">
+    <footer className="bg-[var(--graphite)] py-12 text-[#f4f3ef] md:py-14">
       <Container>
-        <div className="grid gap-12 md:grid-cols-12 md:gap-8">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-6">
             <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-white/45">
               AFAAQ ARAB / Engineering & Contracting
             </p>
-            <p className="mt-6 max-w-md text-sm leading-6 text-white/65">
+            <p className="mt-4 max-w-md text-sm leading-6 text-white/65">
               Electrical engineering and contracting for power-system installation, testing, commissioning, protection and control.
             </p>
           </div>
@@ -34,11 +34,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="font-technical mt-14 border-t border-white/15 pt-7 text-[0.68rem] uppercase tracking-[0.1em] text-white/45">
-          AFAAQ ARAB FOR ENGINEERING & CONTRACTING
-        </div>
-
-        <div className="mt-12 border-t border-white/15 pt-10 md:mt-16 md:pt-14">
+        <div className="mt-10 border-t border-white/15 pt-10 md:mt-12 md:pt-12">
           <div className="flex items-center gap-4 overflow-hidden sm:gap-6 md:gap-8 lg:gap-10">
             <Image
               src="/brand/afaaq-mark.svg"
