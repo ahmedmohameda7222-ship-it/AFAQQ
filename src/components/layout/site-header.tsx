@@ -18,10 +18,11 @@ export function SiteHeader() {
           <Image
             src="/brand/afaaq-mark-approved.webp"
             alt=""
-            width={66}
-            height={44}
+            width={54}
+            height={36}
             priority
-            className="h-10 w-auto shrink-0 md:h-11"
+            className="shrink-0 object-contain"
+            style={{ width: "54px", height: "auto" }}
           />
           <span className="text-[0.98rem] font-semibold tracking-[0.17em] sm:text-[1.04rem]">AFAAQ ARAB</span>
         </Link>
