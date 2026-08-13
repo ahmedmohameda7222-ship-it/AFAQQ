@@ -37,7 +37,7 @@ export default function HomePage() {
 
               <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
                 <PrimaryAction href="/contact">Discuss a Project Scope</PrimaryAction>
-                <ArrowLink href="/projects">View Selected Projects</ArrowLink>
+                <ArrowLink href="/projects">View Our Projects</ArrowLink>
               </div>
             </div>
 
@@ -176,7 +176,7 @@ export default function HomePage() {
           <div className="border-t border-[var(--rule)] pt-8 md:pt-10">
             <div className="grid gap-6 md:grid-cols-12 md:items-end">
               <div className="md:col-span-7">
-                <SectionLabel>Selected Projects</SectionLabel>
+                <SectionLabel>Our Project</SectionLabel>
                 <h2 className="mt-6 max-w-3xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.048em]">
                   Power and control projects across different voltage levels.
                 </h2>
