@@ -73,3 +73,32 @@ img { max-width: 100%; height: auto; }
   background-size: 20% 100%, 100% 16.666%, 100% 100%;
   background-position: 0 0, 0 0, center;
 }
+
+.project-media-placeholder,
+.human-media-placeholder {
+  background-image:
+    linear-gradient(135deg, color-mix(in srgb, var(--ink) 5%, transparent), transparent 42%),
+    linear-gradient(to right, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px);
+  background-size: 100% 100%, 12.5% 100%, 100% 20%;
+}
+
+@keyframes relationship-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.relationship-marquee__track {
+  animation: relationship-marquee 52s linear infinite;
+}
+
+.relationship-marquee:hover .relationship-marquee__track,
+.relationship-marquee:focus-within .relationship-marquee__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .relationship-marquee__track {
+    animation: none;
+  }
+}
