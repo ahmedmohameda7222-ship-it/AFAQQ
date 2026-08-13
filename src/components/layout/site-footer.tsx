@@ -10,7 +10,7 @@ export function SiteFooter() {
           <div className="md:col-span-6">
             <div className="flex items-center gap-5 md:gap-7">
               <Image
-                src="/brand/afaaq-mark-approved.webp"
+                src="/brand/afaaq-mark.svg"
                 alt=""
                 width={260}
                 height={173}
