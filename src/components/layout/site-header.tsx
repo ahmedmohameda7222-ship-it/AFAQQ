@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Container } from "./container";
 import { MobileNav } from "./mobile-nav";
 
@@ -10,7 +13,13 @@ const nav = [
   ["Contact", "/contact"],
 ] as const;
 
+function isCurrentSection(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function SiteHeader() {
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--rule)]/70 bg-[color:var(--canvas)]/95 backdrop-blur-[8px]">
       <Container className="relative flex h-[82px] items-center justify-between">
@@ -24,23 +33,28 @@ export function SiteHeader() {
             className="shrink-0 object-contain"
             style={{ width: "54px", height: "auto" }}
           />
-          <span className="text-[0.98rem] font-semibold tracking-[0.17em] sm:text-[1.04rem]">AFAAQ ARAB</span>
+          <span className="text-[0.98rem] font-semibold tracking-[0.15em] sm:text-[1.04rem]">AFAAQ ARAB</span>
         </Link>
         <nav aria-label="Primary navigation" className="hidden md:block">
           <ul className="m-0 flex list-none items-center gap-9 p-0 lg:gap-11">
-            {nav.map(([label, href]) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className="relative inline-flex min-h-12 items-center text-[0.95rem] font-medium after:absolute after:bottom-2.5 after:left-0 after:h-px after:w-0 after:bg-[var(--brand-blue)] after:transition-[width] after:duration-[var(--motion-ui)] hover:after:w-full focus-visible:after:w-full"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+            {nav.map(([label, href]) => {
+              const active = isCurrentSection(pathname, href);
+
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    aria-current={active ? "page" : undefined}
+                    className={`relative inline-flex min-h-12 items-center text-[0.95rem] font-medium after:absolute after:bottom-2.5 after:left-0 after:h-px after:bg-[var(--brand-blue)] after:transition-[width] after:duration-[var(--motion-ui)] hover:after:w-full focus-visible:after:w-full ${active ? "after:w-full" : "after:w-0"}`}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
-        <MobileNav />
+        <MobileNav pathname={pathname} />
       </Container>
     </header>
   );
