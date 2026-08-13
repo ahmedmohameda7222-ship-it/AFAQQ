@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AboutBrandArtwork } from "@/components/afaaq/about-brand-artwork";
 import { Container } from "@/components/layout/container";
 import { RelationshipRail } from "@/components/afaaq/relationship-rail";
 import { ArrowLink } from "@/components/primitives/arrow-link";
@@ -36,7 +37,7 @@ export default function AboutPage() {
 
       <section className="pb-20 md:pb-28">
         <Container>
-          <div className="human-media-placeholder aspect-[16/8] min-h-[28rem] bg-[#d8d7d1]" aria-hidden="true" />
+          <AboutBrandArtwork variant="wide" />
         </Container>
       </section>
 

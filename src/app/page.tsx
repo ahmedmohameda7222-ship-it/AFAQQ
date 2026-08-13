@@ -2,6 +2,7 @@ import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
+import { AboutBrandArtwork } from "@/components/afaaq/about-brand-artwork";
 import { ExecutionTrack } from "@/components/afaaq/execution-track";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
 import { ProjectMedia } from "@/components/afaaq/project-media";
@@ -197,11 +198,7 @@ export default function HomePage() {
         <Container>
           <div className="grid gap-8 border-t border-[var(--rule)] pt-8 md:grid-cols-12 md:items-center md:pt-9">
             <div className="md:col-span-6">
-              <div
-                className="human-media-placeholder aspect-[4/3] min-h-[22rem] bg-[#d8d7d1]"
-                aria-label="AFAAQ engineer field photography placeholder"
-                role="img"
-              />
+              <AboutBrandArtwork variant="compact" />
             </div>
             <div className="md:col-span-6 md:col-start-7">
               <SectionLabel>About AFAAQ</SectionLabel>
