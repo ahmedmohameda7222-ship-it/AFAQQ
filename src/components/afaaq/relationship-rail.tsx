@@ -47,8 +47,8 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
 
   return (
     <div className="border-y border-[var(--rule)] py-8 md:py-10">
-      <p className="mb-7 mt-0 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
-        Our Clients
+      <p className="font-technical mb-7 mt-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[var(--muted)]">
+        Project Relationships
       </p>
 
       <div className="relationship-rail__viewport overflow-x-auto md:overflow-hidden">
