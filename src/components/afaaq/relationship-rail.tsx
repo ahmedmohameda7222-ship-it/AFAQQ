@@ -4,35 +4,55 @@ type RelationshipRailProps = {
   names: readonly string[];
 };
 
-const clientDomains: Record<string, string> = {
-  "Schneider Electric": "se.com",
-  "ELSEWEDY ELECTRIC": "elsewedyelectric.com",
-  Madkour: "madkour.com.eg",
-  "GE Vernova": "gevernova.com",
-  "Siemens Energy": "siemens-energy.com",
-  ABB: "abb.com",
-  "Hitachi Energy": "hitachienergy.com",
-  EGEMAC: "egemac.com.eg",
-  EETC: "eetc.gov.eg",
-  NECC: "eetc.gov.eg",
-  "GAMA Construction": "gama.com.eg",
-  "Orascom Construction": "orascom.com",
-  Petrojet: "petrojet.com.eg",
-  ENPPI: "enppi.com",
-  "The Arab Contractors": "arabcont.com",
+type ClientVisual = {
+  domain?: string;
+  logoUrl?: string;
+  wide?: boolean;
+};
+
+const clientVisuals: Record<string, ClientVisual> = {
+  "Schneider Electric": { domain: "se.com" },
+  "ELSEWEDY ELECTRIC": { domain: "elsewedyelectric.com" },
+  Madkour: { domain: "madkour.com.eg" },
+  "GE Vernova": { domain: "gevernova.com" },
+  "Siemens Energy": { domain: "siemens-energy.com" },
+  ABB: { domain: "abb.com" },
+  "Hitachi Energy": { domain: "hitachienergy.com" },
+  EGEMAC: { domain: "egemac.com.eg" },
+  EETC: { domain: "eetc.gov.eg" },
+  NECC: { domain: "eetc.gov.eg" },
+  "Red Sea Development Company": {
+    logoUrl: "https://smartwatermagazine.com/sites/default/files/red_sea_logo.png",
+    wide: true,
+  },
+  "GAMA Construction": { domain: "gama.com.eg" },
+  "Orascom Construction": { domain: "orascom.com" },
+  Petrojet: { domain: "petrojet.com.eg" },
+  ENPPI: { domain: "enppi.com" },
+  "The Arab Contractors": { domain: "arabcont.com" },
 };
 
 function ClientItem({ name }: { name: string }) {
-  const domain = clientDomains[name];
-  const logoUrl = domain
-    ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${domain}`)}&sz=128`
-    : null;
+  const visual = clientVisuals[name];
+  const logoUrl = visual?.logoUrl ?? (visual?.domain
+    ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${visual.domain}`)}&sz=128`
+    : null);
 
   return (
     <span className="flex items-center">
       {logoUrl ? (
-        <span className="mr-3 inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-[2px] bg-white md:mr-4 md:h-10 md:w-10">
-          <img src={logoUrl} alt="" width="40" height="40" loading="lazy" className="h-7 w-7 object-contain md:h-8 md:w-8" />
+        <span
+          className={`mr-3 inline-flex h-9 shrink-0 items-center justify-center overflow-hidden rounded-[2px] bg-white md:mr-4 md:h-10 ${visual?.wide ? "w-14 md:w-16" : "w-9 md:w-10"}`}
+        >
+          <img
+            src={logoUrl}
+            alt=""
+            width={visual?.wide ? 64 : 40}
+            height="40"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            className={visual?.wide ? "h-8 w-12 object-contain md:h-9 md:w-14" : "h-7 w-7 object-contain md:h-8 md:w-8"}
+          />
         </span>
       ) : null}
       <span>{name}</span>

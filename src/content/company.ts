@@ -27,6 +27,7 @@ export const clients = [
   "EGEMAC",
   "EETC",
   "NECC",
+  "Red Sea Development Company",
   "GAMA Construction",
   "Orascom Construction",
   "Petrojet",
