@@ -5,13 +5,13 @@ import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
 import { ProjectMedia } from "@/components/afaaq/project-media";
-import { verifiedProjects } from "@/content/projects";
+import { getProjectTechnicalLabel, verifiedProjects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Projects",
   description:
-    "AFAAQ ARAB major project experience across 220 kV, 66 kV and medium-voltage systems, including testing, commissioning, protection, control, SCADA and electrical works.",
+    "AFAAQ ARAB major project experience across 220 kV, 66 kV and 11 kV control-center systems and solar-power infrastructure, including testing, commissioning, protection, control and secondary systems.",
   path: "/projects",
 });
 
@@ -24,11 +24,11 @@ export default function ProjectsPage() {
             <div className="min-w-0 md:col-span-8">
               <SectionLabel>Major Projects</SectionLabel>
               <h1 className="mt-5 max-w-4xl text-[clamp(2.55rem,5.4vw,4.8rem)] font-medium leading-[0.98] tracking-[-0.045em] sm:mt-6">
-                Project experience across transmission, distribution and control systems.
+                Project experience across control centers and power infrastructure.
               </h1>
             </div>
             <p className="m-0 max-w-lg text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-4 md:text-[1.05rem] md:leading-8">
-              Seven AFAAQ ARAB references across 220 kV, 66 kV and medium-voltage environments, covering protection, SCADA, electrical works, testing and commissioning.
+              Three AFAAQ ARAB project references covering regional control centers and solar-power infrastructure, including 220 kV, 66 kV, 11 kV and secondary control systems.
             </p>
           </div>
 
@@ -40,12 +40,12 @@ export default function ProjectsPage() {
               <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">Major projects</p>
             </div>
             <div className="px-4 py-5 sm:border-r sm:border-[var(--rule)] md:px-7 md:py-7">
-              <p className="font-technical m-0 text-[clamp(0.9rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.025em] sm:leading-none sm:tracking-[-0.035em]">11 / 66 / 220 kV</p>
+              <p className="font-technical m-0 text-[clamp(0.9rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.025em] sm:leading-none sm:tracking-[-0.035em]">220 / 66 / 11 kV</p>
               <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">System levels</p>
             </div>
             <div className="col-span-2 border-t border-[var(--rule)] py-5 sm:col-span-1 sm:border-t-0 sm:pl-4 md:py-7 md:pl-7">
-              <p className="font-technical m-0 text-[clamp(1.7rem,3vw,2.6rem)] font-medium leading-none tracking-[-0.04em]">MV</p>
-              <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">Distribution work</p>
+              <p className="font-technical m-0 text-[clamp(1.7rem,3vw,2.6rem)] font-medium leading-none tracking-[-0.04em]">Solar</p>
+              <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">Power plant project</p>
             </div>
           </div>
         </Container>
@@ -57,6 +57,7 @@ export default function ProjectsPage() {
             {verifiedProjects.map((project, index) => {
               const projectNumber = String(index + 1).padStart(2, "0");
               const projectMeta = [project.location, project.year].filter(Boolean).join(" · ");
+              const technicalLabel = getProjectTechnicalLabel(project);
 
               return (
                 <article key={project.slug} className="border-b border-[var(--rule)] py-7 sm:py-8 md:py-10">
@@ -90,7 +91,9 @@ export default function ProjectsPage() {
 
                     <div className="flex min-w-0 flex-col items-start gap-4 md:col-span-3 md:h-full md:items-end md:justify-between md:gap-6 md:py-1 md:text-right">
                       <div className="min-w-0">
-                        <p className="font-technical m-0 text-[0.95rem] font-medium text-[var(--ink)] sm:text-[1rem]">{project.voltage.join(" / ")}</p>
+                        {technicalLabel ? (
+                          <p className="font-technical m-0 text-[0.95rem] font-medium text-[var(--ink)] sm:text-[1rem]">{technicalLabel}</p>
+                        ) : null}
                         {projectMeta ? (
                           <p className="font-technical mb-0 mt-2 text-[0.78rem] leading-5 text-[var(--muted)]">{projectMeta}</p>
                         ) : null}
@@ -116,7 +119,7 @@ export default function ProjectsPage() {
             <div className="min-w-0 md:col-span-8">
               <SectionLabel>Project Inquiry</SectionLabel>
               <h2 className="mt-5 max-w-3xl text-[clamp(2.2rem,5vw,4.4rem)] font-medium leading-[0.98] tracking-[-0.045em] sm:mt-6">
-                Have a project scope at MV, 66 kV or 220 kV?
+                Have a control-center, testing or electrical project scope?
               </h2>
             </div>
             <div className="min-w-0 md:col-span-4">
