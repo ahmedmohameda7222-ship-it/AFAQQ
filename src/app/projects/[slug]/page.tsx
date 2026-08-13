@@ -25,6 +25,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   const currentIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
+  const inquiryHref = `/contact?project=${encodeURIComponent(project.name)}&voltage=${encodeURIComponent(project.voltage.join(" / "))}`;
 
   return (
     <>
@@ -110,7 +111,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               <SectionLabel>Project Inquiry</SectionLabel>
               <h2 className="mt-6 max-w-3xl text-[clamp(2.4rem,5vw,4.4rem)] font-medium leading-[0.98] tracking-[-0.05em]">Working on a similar electrical project?</h2>
             </div>
-            <div className="md:col-span-4"><PrimaryAction href="/contact" tone="light">Send Project Requirement</PrimaryAction></div>
+            <div className="md:col-span-4"><PrimaryAction href={inquiryHref} tone="light">Send Project Requirement</PrimaryAction></div>
           </div>
         </Container>
       </section>

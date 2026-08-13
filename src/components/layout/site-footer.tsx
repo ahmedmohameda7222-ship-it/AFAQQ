@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { company } from "@/content/company";
 import { Container } from "./container";
 
 export function SiteFooter() {
@@ -7,7 +8,7 @@ export function SiteFooter() {
     <footer className="bg-[var(--graphite)] py-12 text-[#f4f3ef] md:py-14">
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-6">
+          <div className="md:col-span-5">
             <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.1em] text-white/60">
               AFAAQ ARAB / Engineering & Contracting
             </p>
@@ -15,20 +16,28 @@ export function SiteFooter() {
               Electrical engineering and contracting for power-system installation, testing, commissioning, protection and control.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 text-[0.95rem] leading-6 text-white/90 md:col-span-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 text-[0.95rem] leading-6 text-white/90 sm:grid-cols-3 md:col-span-7">
             <div>
               <p className="font-technical mb-3 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-white/60">Navigate</p>
               <div className="grid gap-2.5">
                 <Link href="/services">Services</Link>
                 <Link href="/projects">Projects</Link>
                 <Link href="/about">About</Link>
+                <Link href="/contact">Contact</Link>
               </div>
             </div>
             <div>
-              <p className="font-technical mb-3 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-white/60">Contact</p>
+              <p className="font-technical mb-3 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-white/60">Direct</p>
               <div className="grid gap-2.5">
-                <Link href="/contact">Project inquiry</Link>
-                <span>Cairo, Egypt</span>
+                <a href={`mailto:${company.email}`} className="break-all">{company.email}</a>
+                <a href={`tel:${company.phone.replace(/\s/g, "")}`}>{company.phone}</a>
+              </div>
+            </div>
+            <div>
+              <p className="font-technical mb-3 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-white/60">Office</p>
+              <div className="grid gap-2.5">
+                <span>{company.location}</span>
+                <Link href="/contact">Discuss a project</Link>
               </div>
             </div>
           </div>

@@ -26,6 +26,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   if (!service) notFound();
 
   const relatedProjects = projects.filter((project) => service.relatedProjectSlugs.includes(project.slug));
+  const inquiryHref = `/contact?service=${encodeURIComponent(service.title)}`;
 
   return (
     <>
@@ -141,7 +142,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 Need support for a {service.title.toLowerCase()} scope?
               </h2>
             </div>
-            <div className="md:col-span-4"><PrimaryAction href="/contact" tone="light">Send Project Requirement</PrimaryAction></div>
+            <div className="md:col-span-4"><PrimaryAction href={inquiryHref} tone="light">Send Project Requirement</PrimaryAction></div>
           </div>
         </Container>
       </section>
