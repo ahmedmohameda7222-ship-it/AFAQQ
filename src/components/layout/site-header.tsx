@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./container";
 import { MobileNav } from "./mobile-nav";
@@ -14,15 +13,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--rule)]/70 bg-[color:var(--canvas)]/95 backdrop-blur-[8px]">
       <Container className="relative flex h-[82px] items-center justify-between">
-        <Link href="/" className="inline-flex min-h-12 items-center gap-3.5" aria-label="AFAAQ ARAB home">
-          <Image
+        <Link href="/" className="inline-flex min-h-12 items-center gap-4" aria-label="AFAAQ ARAB home">
+          <img
             src="/brand/afaaq-mark-approved.png"
-            alt=""
-            width={54}
-            height={36}
-            priority
-            className="shrink-0 object-contain"
-            style={{ width: "54px", height: "auto" }}
+            alt="AFAAQ ARAB"
+            width="78"
+            height="52"
+            className="block h-[52px] w-auto shrink-0 object-contain"
           />
           <span className="text-[0.98rem] font-semibold tracking-[0.17em] sm:text-[1.04rem]">AFAAQ ARAB</span>
         </Link>
