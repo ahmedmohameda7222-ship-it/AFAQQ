@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 
 type RelationshipRailProps = {
   names: readonly string[];
@@ -49,6 +49,8 @@ function ClientItem({ name }: { name: string }) {
   const logoUrl = visual?.logoUrl ?? (visual?.domain
     ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${visual.domain}`)}&sz=128`
     : null);
+  const width = visual?.wide ? 64 : 40;
+  const height = 40;
 
   return (
     <span className="flex min-w-0 items-center">
@@ -58,14 +60,13 @@ function ClientItem({ name }: { name: string }) {
           aria-hidden="true"
         >
           <span className="font-technical text-[0.55rem] font-semibold tracking-[-0.04em] text-[var(--brand-navy)]/55">{fallbackMark(name)}</span>
-          <img
+          <Image
             src={logoUrl}
             alt=""
-            width={visual?.wide ? 64 : 40}
-            height="40"
+            width={width}
+            height={height}
+            sizes={`${width}px`}
             loading="lazy"
-            decoding="async"
-            referrerPolicy="no-referrer"
             className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${visual?.wide ? "h-8 w-12 md:h-9 md:w-14" : "h-7 w-7 md:h-8 md:w-8"}`}
           />
         </span>

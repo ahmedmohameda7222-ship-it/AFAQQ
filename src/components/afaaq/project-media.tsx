@@ -23,8 +23,7 @@ export function ProjectMedia({
         alt={project.imageAlt}
         fill
         sizes={sizes}
-        quality={82}
-        priority={priority}
+        preload={priority}
         className={`object-cover ${imageClassName}`}
         style={{ objectPosition: project.imagePosition }}
       />

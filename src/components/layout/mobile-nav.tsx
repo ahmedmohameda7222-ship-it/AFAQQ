@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 
 const nav = [
@@ -10,15 +11,12 @@ const nav = [
   ["Contact", "/contact"],
 ] as const;
 
-type MobileNavProps = {
-  pathname: string;
-};
-
 function isCurrentSection(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function MobileNav({ pathname }: MobileNavProps) {
+export function MobileNav() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -65,6 +63,10 @@ export function MobileNav({ pathname }: MobileNavProps) {
       triggerRef.current?.focus();
     };
   }, [open]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <div className="md:hidden">

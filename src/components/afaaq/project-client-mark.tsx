@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 
 type ProjectClientMarkProps = {
   name: string;
@@ -39,6 +39,7 @@ export function ProjectClientMark({ name, compact = false }: ProjectClientMarkPr
   const logoUrl = domain
     ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${domain}`)}&sz=128`
     : null;
+  const imageSize = compact ? 24 : 30;
 
   return (
     <span className="inline-flex max-w-full min-w-0 items-center gap-3">
@@ -48,14 +49,13 @@ export function ProjectClientMark({ name, compact = false }: ProjectClientMarkPr
           aria-hidden="true"
         >
           <span className="font-technical text-[0.5rem] font-semibold text-[var(--brand-navy)]/55">{fallbackMark(name)}</span>
-          <img
+          <Image
             src={logoUrl}
             alt=""
-            width={compact ? 24 : 30}
-            height={compact ? 24 : 30}
+            width={imageSize}
+            height={imageSize}
+            sizes={`${imageSize}px`}
             loading="lazy"
-            decoding="async"
-            referrerPolicy="no-referrer"
             className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${compact ? "h-6 w-6" : "h-[1.875rem] w-[1.875rem]"}`}
           />
         </span>
