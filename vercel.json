@@ -1,3 +1,8 @@
 {
-  "buildCommand": "npm run vercel-build"
+  "buildCommand": "npm run vercel-build",
+  "git": {
+    "deploymentEnabled": {
+      "fix/footer-approved-logo-layout": false
+    }
+  }
 }
