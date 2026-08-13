@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const nav = [
   ["Services", "/services"],
@@ -20,9 +21,14 @@ function isCurrentSection(pathname: string, href: string) {
 
 export function MobileNav({ pathname }: MobileNavProps) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const panelId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -66,21 +72,8 @@ export function MobileNav({ pathname }: MobileNavProps) {
     };
   }, [open]);
 
-  return (
-    <div className="md:hidden">
-      <button
-        ref={triggerRef}
-        type="button"
-        className="inline-flex min-h-12 min-w-12 items-center justify-end text-sm font-medium"
-        aria-expanded={open}
-        aria-controls={panelId}
-        aria-haspopup="dialog"
-        onClick={() => setOpen((value) => !value)}
-      >
-        {open ? "Close" : "Menu"}
-      </button>
-
-      {open ? (
+  const panel = mounted && open
+    ? createPortal(
         <div
           ref={panelRef}
           id={panelId}
@@ -114,8 +107,25 @@ export function MobileNav({ pathname }: MobileNavProps) {
               })}
             </ul>
           </nav>
-        </div>
-      ) : null}
+        </div>,
+        document.body,
+      )
+    : null;
+
+  return (
+    <div className="md:hidden">
+      <button
+        ref={triggerRef}
+        type="button"
+        className="inline-flex min-h-12 min-w-12 items-center justify-end text-sm font-medium"
+        aria-expanded={open}
+        aria-controls={panelId}
+        aria-haspopup="dialog"
+        onClick={() => setOpen((value) => !value)}
+      >
+        {open ? "Close" : "Menu"}
+      </button>
+      {panel}
     </div>
   );
 }
