@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const nav = [
   ["Services", "/services"],
@@ -28,6 +29,7 @@ export function MobileNav({ pathname }: MobileNavProps) {
     if (!open) return;
 
     const body = document.body;
+    const trigger = triggerRef.current;
     const previousOverflow = body.style.overflow;
     body.style.overflow = "hidden";
 
@@ -62,25 +64,12 @@ export function MobileNav({ pathname }: MobileNavProps) {
     return () => {
       body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
-      triggerRef.current?.focus();
+      trigger?.focus();
     };
   }, [open]);
 
-  return (
-    <div className="md:hidden">
-      <button
-        ref={triggerRef}
-        type="button"
-        className="inline-flex min-h-12 min-w-12 items-center justify-end text-sm font-medium"
-        aria-expanded={open}
-        aria-controls={panelId}
-        aria-haspopup="dialog"
-        onClick={() => setOpen((value) => !value)}
-      >
-        {open ? "Close" : "Menu"}
-      </button>
-
-      {open ? (
+  const panel = open && typeof document !== "undefined"
+    ? createPortal(
         <div
           ref={panelRef}
           id={panelId}
@@ -114,8 +103,25 @@ export function MobileNav({ pathname }: MobileNavProps) {
               })}
             </ul>
           </nav>
-        </div>
-      ) : null}
+        </div>,
+        document.body,
+      )
+    : null;
+
+  return (
+    <div className="md:hidden">
+      <button
+        ref={triggerRef}
+        type="button"
+        className="inline-flex min-h-12 min-w-12 items-center justify-end text-sm font-medium"
+        aria-expanded={open}
+        aria-controls={panelId}
+        aria-haspopup="dialog"
+        onClick={() => setOpen((value) => !value)}
+      >
+        {open ? "Close" : "Menu"}
+      </button>
+      {panel}
     </div>
   );
 }
