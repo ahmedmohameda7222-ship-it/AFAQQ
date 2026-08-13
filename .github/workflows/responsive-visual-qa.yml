@@ -1,0 +1,41 @@
+name: Responsive Visual QA
+
+on:
+  push:
+    branches:
+      - qa/responsive-visual-pass
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save --no-audit --no-fund playwright
+          npx playwright install --with-deps chromium
+
+      - name: Audit production responsive UI
+        env:
+          QA_BASE_URL: https://affag-lz8kju1gs-affaq.vercel.app
+        run: node scripts/responsive-qa.mjs
+
+      - name: Upload QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-qa-evidence
+          path: qa-artifacts
+          if-no-files-found: error
+          retention-days: 1
