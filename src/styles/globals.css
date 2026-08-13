@@ -36,21 +36,33 @@
   --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+@media (max-width: 359px) {
+  :root {
+    --gutter-mobile: 1rem;
+  }
+}
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
 body {
   margin: 0;
+  overflow-x: clip;
   background: var(--canvas);
   color: var(--ink);
   font-family: var(--font-sans), "Helvetica Neue", "Segoe UI", Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+main { min-width: 0; }
 
 h1,
 h2,
 h3 {
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 p {
@@ -124,6 +136,8 @@ img { max-width: 100%; height: auto; }
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-snap-type: x proximity;
+  overscroll-behavior-inline: contain;
+  touch-action: pan-x pan-y;
 }
 
 .relationship-rail__viewport::-webkit-scrollbar {

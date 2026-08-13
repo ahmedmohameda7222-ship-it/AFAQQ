@@ -18,40 +18,40 @@ export const metadata: Metadata = buildMetadata({
 export default function ProjectsPage() {
   return (
     <>
-      <section className="pb-16 pt-14 md:pb-20 md:pt-20">
+      <section className="pb-14 pt-12 sm:pb-16 sm:pt-14 md:pb-20 md:pt-20">
         <Container>
-          <div className="grid gap-10 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-8">
+          <div className="grid gap-7 sm:gap-10 md:grid-cols-12 md:items-end">
+            <div className="min-w-0 md:col-span-8">
               <SectionLabel>Major Projects</SectionLabel>
-              <h1 className="mt-6 max-w-4xl text-[clamp(2.8rem,5.4vw,4.8rem)] font-medium leading-[0.98] tracking-[-0.045em]">
+              <h1 className="mt-5 max-w-4xl text-[clamp(2.55rem,5.4vw,4.8rem)] font-medium leading-[0.98] tracking-[-0.045em] sm:mt-6">
                 Project experience across transmission, distribution and control systems.
               </h1>
             </div>
-            <p className="m-0 max-w-lg text-[1.05rem] leading-8 text-[var(--muted)] md:col-span-4">
+            <p className="m-0 max-w-lg text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-4 md:text-[1.05rem] md:leading-8">
               Seven AFAAQ ARAB references across 220 kV, 66 kV and medium-voltage environments, covering protection, SCADA, electrical works, testing and commissioning.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-3 border-y border-[var(--rule)] md:mt-14">
-            <div className="py-6 pr-2 sm:pr-4 md:py-7">
+          <div className="mt-10 grid grid-cols-2 border-y border-[var(--rule)] sm:mt-12 sm:grid-cols-3 md:mt-14">
+            <div className="border-r border-[var(--rule)] py-5 pr-4 md:py-7">
               <p className="font-technical m-0 text-[clamp(1.7rem,3vw,2.6rem)] font-medium leading-none tracking-[-0.04em]">
                 {String(verifiedProjects.length).padStart(2, "0")}
               </p>
-              <p className="font-technical mb-0 mt-2 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Major projects</p>
+              <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">Major projects</p>
             </div>
-            <div className="border-x border-[var(--rule)] px-2 py-6 sm:px-4 md:px-7 md:py-7">
-              <p className="font-technical m-0 text-[clamp(0.8rem,3vw,2.2rem)] font-medium leading-none tracking-[-0.035em]">11 / 66 / 220 kV</p>
-              <p className="font-technical mb-0 mt-2 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">System levels</p>
+            <div className="px-4 py-5 sm:border-r sm:border-[var(--rule)] md:px-7 md:py-7">
+              <p className="font-technical m-0 text-[clamp(0.9rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.025em] sm:leading-none sm:tracking-[-0.035em]">11 / 66 / 220 kV</p>
+              <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">System levels</p>
             </div>
-            <div className="py-6 pl-2 sm:pl-4 md:py-7 md:pl-7">
+            <div className="col-span-2 border-t border-[var(--rule)] py-5 sm:col-span-1 sm:border-t-0 sm:pl-4 md:py-7 md:pl-7">
               <p className="font-technical m-0 text-[clamp(1.7rem,3vw,2.6rem)] font-medium leading-none tracking-[-0.04em]">MV</p>
-              <p className="font-technical mb-0 mt-2 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Distribution work</p>
+              <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">Distribution work</p>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="pb-20 md:pb-28">
+      <section className="pb-16 sm:pb-20 md:pb-28">
         <Container>
           <div className="border-t border-[var(--rule)]">
             {verifiedProjects.map((project, index) => {
@@ -59,20 +59,21 @@ export default function ProjectsPage() {
               const projectMeta = [project.location, project.year].filter(Boolean).join(" · ");
 
               return (
-                <article key={project.slug} className="border-b border-[var(--rule)] py-8 md:py-10">
-                  <Link href={`/projects/${project.slug}`} className="group grid gap-7 md:grid-cols-12 md:items-center md:gap-8">
+                <article key={project.slug} className="border-b border-[var(--rule)] py-7 sm:py-8 md:py-10">
+                  <Link href={`/projects/${project.slug}`} className="group grid min-w-0 gap-6 sm:gap-7 md:grid-cols-12 md:items-center md:gap-8">
                     <ProjectMedia
                       project={project}
                       priority={index === 0}
+                      sizes="(max-width: 767px) calc(100vw - 2.5rem), 34vw"
                       className="aspect-[16/10] md:col-span-4"
                       imageClassName="transition-transform duration-500 group-hover:scale-[1.015]"
                     />
 
-                    <div className="md:col-span-5">
+                    <div className="min-w-0 md:col-span-5">
                       <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
                         Project {projectNumber}
                       </p>
-                      <h2 className="mb-0 mt-3 text-[clamp(1.85rem,3.2vw,2.9rem)] font-medium leading-[1.02] tracking-[-0.04em] group-hover:text-[var(--brand-navy)]">
+                      <h2 className="mb-0 mt-3 text-[clamp(1.8rem,3.2vw,2.9rem)] font-medium leading-[1.03] tracking-[-0.035em] group-hover:text-[var(--brand-navy)] sm:tracking-[-0.04em]">
                         {project.name}
                       </h2>
 
@@ -82,20 +83,20 @@ export default function ProjectsPage() {
                         </div>
                       ) : null}
 
-                      <p className="mb-0 mt-5 max-w-2xl text-[0.98rem] leading-7 text-[var(--muted)]">
+                      <p className="mb-0 mt-4 max-w-2xl text-[0.96rem] leading-7 text-[var(--muted)] sm:mt-5 sm:text-[0.98rem]">
                         {project.scopes.join(" · ")}
                       </p>
                     </div>
 
-                    <div className="flex items-end justify-between gap-6 md:col-span-3 md:h-full md:flex-col md:items-end md:justify-between md:py-1 md:text-right">
-                      <div>
-                        <p className="font-technical m-0 text-[1rem] font-medium text-[var(--ink)]">{project.voltage.join(" / ")}</p>
+                    <div className="flex min-w-0 flex-col items-start gap-4 md:col-span-3 md:h-full md:items-end md:justify-between md:gap-6 md:py-1 md:text-right">
+                      <div className="min-w-0">
+                        <p className="font-technical m-0 text-[0.95rem] font-medium text-[var(--ink)] sm:text-[1rem]">{project.voltage.join(" / ")}</p>
                         {projectMeta ? (
                           <p className="font-technical mb-0 mt-2 text-[0.78rem] leading-5 text-[var(--muted)]">{projectMeta}</p>
                         ) : null}
                       </div>
-                      <span className="inline-flex items-center gap-3 text-[0.9rem] font-medium">
-                        View Project Scope
+                      <span className="inline-flex min-h-12 items-center gap-3 text-[0.9rem] font-medium">
+                        <span>View Project Scope</span>
                         <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1" fill="none">
                           <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
                         </svg>
@@ -109,16 +110,16 @@ export default function ProjectsPage() {
         </Container>
       </section>
 
-      <section className="bg-[var(--graphite)] py-20 text-[var(--canvas)] md:py-24">
+      <section className="bg-[var(--graphite)] py-16 text-[var(--canvas)] sm:py-20 md:py-24">
         <Container>
-          <div className="grid gap-8 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-8">
+          <div className="grid gap-7 sm:gap-8 md:grid-cols-12 md:items-end">
+            <div className="min-w-0 md:col-span-8">
               <SectionLabel>Project Inquiry</SectionLabel>
-              <h2 className="mt-6 max-w-3xl text-[clamp(2.35rem,5vw,4.4rem)] font-medium leading-[0.98] tracking-[-0.045em]">
+              <h2 className="mt-5 max-w-3xl text-[clamp(2.2rem,5vw,4.4rem)] font-medium leading-[0.98] tracking-[-0.045em] sm:mt-6">
                 Have a project scope at MV, 66 kV or 220 kV?
               </h2>
             </div>
-            <div className="md:col-span-4">
+            <div className="min-w-0 md:col-span-4">
               <PrimaryAction href="/contact" tone="light">Discuss a Project Scope</PrimaryAction>
             </div>
           </div>

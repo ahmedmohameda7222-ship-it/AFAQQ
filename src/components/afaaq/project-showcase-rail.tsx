@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Project } from "@/content/projects";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
+import { ProjectMedia } from "@/components/afaaq/project-media";
 
 type ProjectShowcaseRailProps = {
   projects: readonly Project[];
@@ -12,14 +13,22 @@ type ProjectShowcaseRailProps = {
 
 export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRailProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
-  const [paused, setPaused] = useState(false);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [hoveredOrFocused, setHoveredOrFocused] = useState(false);
+  const [interactionPaused, setInteractionPaused] = useState(false);
+
+  const pauseForInteraction = useCallback(() => {
+    setInteractionPaused(true);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = setTimeout(() => setInteractionPaused(false), 10000);
+  }, []);
 
   const move = useCallback((direction: 1 | -1) => {
     const viewport = viewportRef.current;
     if (!viewport) return;
 
     const firstCard = viewport.querySelector<HTMLElement>("[data-project-card]");
-    const step = firstCard ? firstCard.offsetWidth + 24 : Math.max(viewport.clientWidth * 0.72, 320);
+    const step = firstCard ? firstCard.offsetWidth + 24 : Math.max(viewport.clientWidth * 0.72, 280);
     const maxScroll = viewport.scrollWidth - viewport.clientWidth;
 
     if (direction > 0 && viewport.scrollLeft >= maxScroll - step * 0.35) {
@@ -37,25 +46,29 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (paused || reduceMotion.matches || projects.length < 2) return;
+    if (hoveredOrFocused || interactionPaused || reduceMotion.matches || projects.length < 2) return;
 
-    const timer = window.setInterval(() => move(1), 5600);
+    const timer = window.setInterval(() => move(1), 6200);
     return () => window.clearInterval(timer);
-  }, [move, paused, projects.length]);
+  }, [hoveredOrFocused, interactionPaused, move, projects.length]);
+
+  useEffect(() => () => {
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+  }, []);
 
   if (projects.length === 0) return null;
 
   return (
-    <div className="mt-10 md:mt-12">
-      <div className="mb-5 flex items-center justify-between gap-5 border-t border-[var(--rule)] pt-5">
-        <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
+    <div className="mt-9 md:mt-12">
+      <div className="mb-5 flex items-center justify-between gap-4 border-t border-[var(--rule)] pt-5 sm:gap-5">
+        <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">
           Major Project Portfolio
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <button
             type="button"
-            onClick={() => move(-1)}
-            className="inline-flex h-11 w-11 items-center justify-center border border-[var(--rule)] bg-transparent text-[var(--ink)] transition-colors hover:border-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-blue)]"
+            onClick={() => { pauseForInteraction(); move(-1); }}
+            className="inline-flex h-12 w-12 items-center justify-center border border-[var(--rule)] bg-transparent text-[var(--ink)] transition-colors hover:border-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-blue)]"
             aria-label="Previous projects"
           >
             <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
@@ -64,8 +77,8 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
           </button>
           <button
             type="button"
-            onClick={() => move(1)}
-            className="inline-flex h-11 w-11 items-center justify-center border border-[var(--rule)] bg-transparent text-[var(--ink)] transition-colors hover:border-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-blue)]"
+            onClick={() => { pauseForInteraction(); move(1); }}
+            className="inline-flex h-12 w-12 items-center justify-center border border-[var(--rule)] bg-transparent text-[var(--ink)] transition-colors hover:border-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-blue)]"
             aria-label="Next projects"
           >
             <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
@@ -77,14 +90,17 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
 
       <div
         ref={viewportRef}
-        className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        onPointerEnter={() => setPaused(true)}
-        onPointerLeave={() => setPaused(false)}
-        onFocusCapture={() => setPaused(true)}
+        className="flex snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain pb-3 pr-[var(--gutter-mobile)] [scrollbar-width:none] [scroll-padding-left:0] [&::-webkit-scrollbar]:hidden"
+        onMouseEnter={() => setHoveredOrFocused(true)}
+        onMouseLeave={() => setHoveredOrFocused(false)}
+        onPointerDown={pauseForInteraction}
+        onWheel={pauseForInteraction}
+        onFocusCapture={() => setHoveredOrFocused(true)}
         onBlurCapture={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setPaused(false);
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHoveredOrFocused(false);
         }}
         aria-label="AFAAQ major projects"
+        aria-roledescription="carousel"
       >
         {projects.map((project) => {
           const projectIndex = allProjects.findIndex((item) => item.slug === project.slug);
@@ -96,21 +112,16 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
               data-project-card
               className="w-[82vw] max-w-[430px] shrink-0 snap-start sm:w-[56vw] lg:w-[31vw]"
             >
-              <Link href={`/projects/${project.slug}`} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden bg-[#d8d7d1]">
-                  <img
-                    src={project.image}
-                    alt={project.imageAlt}
-                    loading="lazy"
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
-                    style={{ objectPosition: project.imagePosition }}
-                  />
-                </div>
+              <Link href={`/projects/${project.slug}`} className="group block min-w-0">
+                <ProjectMedia
+                  project={project}
+                  sizes="(max-width: 639px) 82vw, (max-width: 1023px) 56vw, 31vw"
+                  className="aspect-[4/3]"
+                  imageClassName="transition-transform duration-500 group-hover:scale-[1.015]"
+                />
 
                 <div className="mt-5 border-t border-[var(--rule)] pt-4">
-                  <div className="flex items-start justify-between gap-5">
+                  <div className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2">
                     <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
                       Project {projectNumber}
                     </p>

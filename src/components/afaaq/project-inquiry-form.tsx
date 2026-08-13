@@ -70,11 +70,11 @@ export function ProjectInquiryForm({
   }
 
   const fieldClass =
-    "min-h-13 w-full border-0 border-b border-[var(--rule)] bg-transparent px-0 py-4 text-[1rem] text-[var(--ink)] outline-none placeholder:text-[var(--muted)]/75 focus:border-[var(--ink)]";
-  const labelClass = "text-xs font-semibold uppercase tracking-[0.1em] text-[var(--muted)]";
+    "min-h-13 w-full min-w-0 max-w-full border-0 border-b border-[var(--rule)] bg-transparent px-0 py-4 text-[1rem] text-[var(--ink)] outline-none placeholder:text-[var(--muted)]/75 focus:border-[var(--ink)]";
+  const labelClass = "text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--muted)] sm:text-xs";
 
   return (
-    <form onSubmit={onSubmit} className="relative grid gap-x-8 md:grid-cols-2">
+    <form onSubmit={onSubmit} aria-busy={status === "submitting"} className="relative grid min-w-0 gap-x-8 md:grid-cols-2">
       <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
         <label>
           Website
@@ -82,23 +82,23 @@ export function ProjectInquiryForm({
         </label>
       </div>
 
-      <label className="grid gap-2">
+      <label className="grid min-w-0 gap-2">
         <span className={labelClass}>Name *</span>
         <input name="name" className={fieldClass} autoComplete="name" maxLength={100} required />
       </label>
-      <label className="grid gap-2">
+      <label className="mt-7 grid min-w-0 gap-2 md:mt-0">
         <span className={labelClass}>Company *</span>
         <input name="company" className={fieldClass} autoComplete="organization" maxLength={120} required />
       </label>
-      <label className="mt-7 grid gap-2">
+      <label className="mt-7 grid min-w-0 gap-2">
         <span className={labelClass}>Business Email *</span>
-        <input name="email" type="email" className={fieldClass} autoComplete="email" maxLength={160} required />
+        <input name="email" type="email" inputMode="email" className={fieldClass} autoComplete="email" maxLength={160} required />
       </label>
-      <label className="mt-7 grid gap-2">
+      <label className="mt-7 grid min-w-0 gap-2">
         <span className={labelClass}>Phone</span>
-        <input name="phone" type="tel" className={fieldClass} autoComplete="tel" maxLength={50} />
+        <input name="phone" type="tel" inputMode="tel" className={fieldClass} autoComplete="tel" maxLength={50} />
       </label>
-      <label className="mt-7 grid gap-2">
+      <label className="mt-7 grid min-w-0 gap-2">
         <span className={labelClass}>Service Required *</span>
         <select name="service" className={fieldClass} defaultValue={defaultService} required>
           <option value="" disabled>Select a service</option>
@@ -108,13 +108,13 @@ export function ProjectInquiryForm({
           <option value="Other / Not sure">Other / Not sure</option>
         </select>
       </label>
-      <label className="mt-7 grid gap-2">
+      <label className="mt-7 grid min-w-0 gap-2">
         <span className={labelClass}>Project / Site Location</span>
         <input name="location" className={fieldClass} maxLength={160} />
       </label>
 
       {defaultProject ? (
-        <label className="mt-7 grid gap-2 md:col-span-2">
+        <label className="mt-7 grid min-w-0 gap-2 md:col-span-2">
           <span className={labelClass}>Reference Project</span>
           <input name="project" className={`${fieldClass} cursor-default`} defaultValue={defaultProject} maxLength={160} readOnly />
         </label>
@@ -122,7 +122,7 @@ export function ProjectInquiryForm({
         <input type="hidden" name="project" value="" />
       )}
 
-      <label className="mt-7 grid gap-2 md:col-span-2">
+      <label className="mt-7 grid min-w-0 gap-2 md:col-span-2">
         <span className={labelClass}>Voltage / System Level</span>
         <input
           name="voltage"
@@ -132,31 +132,31 @@ export function ProjectInquiryForm({
           placeholder="Example: 66 kV, 220 kV, MV"
         />
       </label>
-      <label className="mt-7 grid gap-2 md:col-span-2">
+      <label className="mt-7 grid min-w-0 gap-2 md:col-span-2">
         <span className={labelClass}>Technical Requirement / Scope *</span>
-        <textarea name="scope" rows={6} className={`${fieldClass} resize-y`} minLength={20} maxLength={5000} required />
+        <textarea name="scope" rows={6} className={`${fieldClass} min-h-40 resize-y`} minLength={20} maxLength={5000} required />
       </label>
 
-      <label className="mt-7 grid gap-3 md:col-span-2">
+      <label className="mt-7 grid min-w-0 gap-3 md:col-span-2">
         <span className={labelClass}>Technical Files <span className="normal-case tracking-normal">(optional)</span></span>
         <input
           name="attachments"
           type="file"
           multiple
           accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg"
-          className="block w-full border-b border-[var(--rule)] pb-4 text-sm text-[var(--muted)] file:mr-4 file:border-0 file:bg-[var(--ink)] file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-[var(--canvas)]"
+          className="block w-full min-w-0 max-w-full overflow-hidden border-b border-[var(--rule)] pb-4 text-[0.8rem] text-[var(--muted)] file:mr-3 file:min-h-11 file:border-0 file:bg-[var(--ink)] file:px-4 file:py-2.5 file:text-[0.8rem] file:font-semibold file:text-[var(--canvas)] sm:text-sm sm:file:mr-4 sm:file:text-sm"
         />
-        <span className="text-xs leading-5 text-[var(--muted)]">Up to 3 files, 3 MB total. PDF, Word, Excel, JPG or PNG.</span>
+        <span className="text-[0.75rem] leading-5 text-[var(--muted)] sm:text-xs">Up to 3 files, 3 MB total. PDF, Word, Excel, JPG or PNG.</span>
       </label>
 
-      <div className="mt-9 md:col-span-2">
+      <div className="mt-8 min-w-0 md:col-span-2 md:mt-9">
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="group inline-flex min-h-[52px] items-center justify-between gap-8 rounded-[var(--radius-xs)] bg-[var(--ink)] px-5 text-sm font-semibold text-[var(--canvas)] transition-colors hover:bg-[var(--graphite)] disabled:cursor-wait disabled:opacity-60"
+          className="group inline-flex min-h-[52px] w-full max-w-full items-center justify-between gap-6 rounded-[var(--radius-xs)] bg-[var(--ink)] px-5 text-sm font-semibold text-[var(--canvas)] transition-colors hover:bg-[var(--graphite)] disabled:cursor-wait disabled:opacity-60 sm:w-auto sm:gap-8"
         >
-          <span>{status === "submitting" ? "Sending Requirement…" : "Send Project Requirement"}</span>
-          <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none">
+          <span className="min-w-0">{status === "submitting" ? "Sending Requirement…" : "Send Project Requirement"}</span>
+          <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" fill="none">
             <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
           </svg>
         </button>
@@ -165,10 +165,10 @@ export function ProjectInquiryForm({
           {message ? (
             <p className={`m-0 max-w-2xl text-sm leading-6 ${status === "success" ? "font-medium text-[var(--ink)]" : "text-[var(--muted)]"}`}>
               {message}{" "}
-              {status === "error" ? <a href={`mailto:${company.email}`} className="font-semibold underline underline-offset-4">Email AFAAQ directly</a> : null}
+              {status === "error" ? <a href={`mailto:${company.email}`} className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">Email AFAAQ directly</a> : null}
             </p>
           ) : (
-            <p className="m-0 max-w-xl text-xs leading-5 text-[var(--muted)]">
+            <p className="m-0 max-w-xl text-[0.75rem] leading-5 text-[var(--muted)] sm:text-xs">
               Your requirement is sent directly to AFAAQ&apos;s engineering contact. Required fields are marked with *.
             </p>
           )}

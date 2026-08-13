@@ -12,6 +12,7 @@ type ClientVisual = {
 
 const clientVisuals: Record<string, ClientVisual> = {
   "Schneider Electric": { domain: "se.com" },
+  "ELSEWED ELECTRIC": { domain: "elsewedyelectric.com" },
   "ELSEWEDY ELECTRIC": { domain: "elsewedyelectric.com" },
   Madkour: { domain: "madkour.com.eg" },
   "GE Vernova": { domain: "gevernova.com" },
@@ -32,6 +33,17 @@ const clientVisuals: Record<string, ClientVisual> = {
   "The Arab Contractors": { domain: "arabcont.com" },
 };
 
+function fallbackMark(name: string) {
+  return name
+    .replace(/[^A-Za-z0-9 ]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
+
 function ClientItem({ name }: { name: string }) {
   const visual = clientVisuals[name];
   const logoUrl = visual?.logoUrl ?? (visual?.domain
@@ -39,23 +51,26 @@ function ClientItem({ name }: { name: string }) {
     : null);
 
   return (
-    <span className="flex items-center">
+    <span className="flex min-w-0 items-center">
       {logoUrl ? (
         <span
-          className={`mr-3 inline-flex h-9 shrink-0 items-center justify-center overflow-hidden rounded-[2px] bg-white md:mr-4 md:h-10 ${visual?.wide ? "w-14 md:w-16" : "w-9 md:w-10"}`}
+          className={`relative mr-3 inline-flex h-9 shrink-0 items-center justify-center overflow-hidden rounded-[2px] bg-white md:mr-4 md:h-10 ${visual?.wide ? "w-14 md:w-16" : "w-9 md:w-10"}`}
+          aria-hidden="true"
         >
+          <span className="font-technical text-[0.55rem] font-semibold tracking-[-0.04em] text-[var(--brand-navy)]/55">{fallbackMark(name)}</span>
           <img
             src={logoUrl}
             alt=""
             width={visual?.wide ? 64 : 40}
             height="40"
             loading="lazy"
+            decoding="async"
             referrerPolicy="no-referrer"
-            className={visual?.wide ? "h-8 w-12 object-contain md:h-9 md:w-14" : "h-7 w-7 object-contain md:h-8 md:w-8"}
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${visual?.wide ? "h-8 w-12 md:h-9 md:w-14" : "h-7 w-7 md:h-8 md:w-8"}`}
           />
         </span>
       ) : null}
-      <span>{name}</span>
+      <span className="min-w-0">{name}</span>
     </span>
   );
 }
@@ -66,17 +81,22 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
   const desktopItems = [...names, ...names];
 
   return (
-    <div className="border-y border-[var(--rule)] py-8 md:py-10">
-      <p className="font-technical mb-7 mt-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.1em] text-[var(--muted)]">
+    <div className="border-y border-[var(--rule)] py-7 sm:py-8 md:py-10">
+      <p className="font-technical mb-6 mt-0 text-[0.75rem] font-medium uppercase leading-5 tracking-[0.09em] text-[var(--muted)] sm:mb-7 sm:text-[0.78rem] sm:tracking-[0.1em]">
         Project Relationships
       </p>
 
-      <div className="relationship-rail__viewport overflow-x-auto md:overflow-hidden">
+      <div
+        className="relationship-rail__viewport overflow-x-auto pb-1 md:overflow-hidden md:pb-0"
+        role="region"
+        aria-label="Project relationships. Swipe or scroll horizontally on smaller screens."
+        tabIndex={0}
+      >
         <div className="flex w-max items-center whitespace-nowrap md:hidden" aria-label={names.join(", ")}>
           {names.map((name) => (
-            <span key={name} className="flex snap-start items-center text-[1.55rem] font-medium tracking-[-0.03em]">
+            <span key={name} className="flex snap-start items-center text-[1.3rem] font-medium tracking-[-0.025em] sm:text-[1.55rem] sm:tracking-[-0.03em]">
               <ClientItem name={name} />
-              <span className="mx-7 text-[var(--rule)]">—</span>
+              <span className="mx-5 text-[var(--rule)] sm:mx-7">—</span>
             </span>
           ))}
         </div>

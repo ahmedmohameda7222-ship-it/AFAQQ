@@ -15,9 +15,9 @@ export function PrimaryAction({ href, children, tone = "dark" }: PrimaryActionPr
   return (
     <Link
       href={href}
-      className={`group inline-flex min-h-[52px] items-center justify-between gap-8 rounded-[var(--radius-xs)] px-5 text-sm font-semibold transition-colors duration-[var(--motion-ui)] ${toneClasses}`}
+      className={`group inline-flex min-h-[52px] w-full max-w-full items-center justify-between gap-6 rounded-[var(--radius-xs)] px-5 text-sm font-semibold transition-colors duration-[var(--motion-ui)] sm:w-auto sm:gap-8 ${toneClasses}`}
     >
-      <span>{children}</span>
+      <span className="min-w-0">{children}</span>
       <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1" fill="none">
         <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
       </svg>

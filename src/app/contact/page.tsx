@@ -30,26 +30,26 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
 
   return (
     <>
-      <section className="pb-16 pt-14 md:pb-20 md:pt-20">
+      <section className="pb-14 pt-12 sm:pb-16 sm:pt-14 md:pb-20 md:pt-20">
         <Container>
-          <div className="grid gap-10 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-8">
+          <div className="grid gap-7 sm:gap-10 md:grid-cols-12 md:items-end">
+            <div className="min-w-0 md:col-span-8">
               <SectionLabel>Discuss a Project Scope</SectionLabel>
-              <h1 className="mt-6 max-w-4xl text-[clamp(3rem,6vw,5.3rem)] font-medium leading-[0.96] tracking-[-0.052em]">
+              <h1 className="mt-5 max-w-4xl text-[clamp(2.55rem,6vw,5.3rem)] font-medium leading-[0.97] tracking-[-0.048em] sm:mt-6 md:leading-[0.96] md:tracking-[-0.052em]">
                 Send AFAAQ your technical requirement.
               </h1>
             </div>
-            <p className="m-0 max-w-lg text-[1.05rem] leading-8 text-[var(--muted)] md:col-span-4">
+            <p className="m-0 max-w-lg text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-4 md:text-[1.05rem] md:leading-8">
               Send the service, voltage level, project details and any useful technical files. The form keeps service or project context when you arrive from another AFAAQ page.
             </p>
           </div>
         </Container>
       </section>
 
-      <section className="pb-24 md:pb-32">
+      <section className="pb-20 sm:pb-24 md:pb-32">
         <Container>
-          <div className="grid gap-14 border-t border-[var(--rule)] pt-10 md:grid-cols-12 md:gap-10">
-            <div className="md:col-span-7">
+          <div className="grid gap-10 border-t border-[var(--rule)] pt-8 sm:gap-12 sm:pt-10 md:grid-cols-12 md:gap-10">
+            <div className="min-w-0 md:col-span-7">
               <ProjectInquiryForm
                 serviceOptions={serviceOptions}
                 defaultService={defaultService}
@@ -57,22 +57,22 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 defaultVoltage={defaultVoltage}
               />
             </div>
-            <aside className="md:col-span-4 md:col-start-9">
-              <div className="border-t border-[var(--rule)] pt-5">
-                <p className="m-0 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">Email</p>
-                <a href={`mailto:${company.email}`} className="mt-3 block break-all text-lg font-medium">{company.email}</a>
+            <aside className="min-w-0 border-t border-[var(--rule)] pt-7 md:col-span-4 md:col-start-9 md:border-t-0 md:pt-0">
+              <div className="border-t border-[var(--rule)] pt-5 md:border-t">
+                <p className="m-0 text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--muted)] sm:text-xs sm:tracking-[0.12em]">Email</p>
+                <a href={`mailto:${company.email}`} className="mt-2 inline-flex min-h-12 max-w-full items-center break-all text-[1rem] font-medium sm:mt-3 sm:text-lg">{company.email}</a>
               </div>
-              <div className="mt-9 border-t border-[var(--rule)] pt-5">
-                <p className="m-0 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">Phone</p>
-                <a href={`tel:${company.phone.replace(/\s/g, "")}`} className="mt-3 block text-lg font-medium">{company.phone}</a>
+              <div className="mt-6 border-t border-[var(--rule)] pt-5 sm:mt-9">
+                <p className="m-0 text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--muted)] sm:text-xs sm:tracking-[0.12em]">Phone</p>
+                <a href={`tel:${company.phone.replace(/\s/g, "")}`} className="mt-2 inline-flex min-h-12 items-center text-[1rem] font-medium sm:mt-3 sm:text-lg">{company.phone}</a>
               </div>
-              <div className="mt-9 border-t border-[var(--rule)] pt-5">
-                <p className="m-0 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">Office</p>
-                <p className="mb-0 mt-3 text-lg font-medium">{company.location}</p>
+              <div className="mt-6 border-t border-[var(--rule)] pt-5 sm:mt-9">
+                <p className="m-0 text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--muted)] sm:text-xs sm:tracking-[0.12em]">Office</p>
+                <p className="mb-0 mt-3 text-[1rem] font-medium sm:text-lg">{company.location}</p>
               </div>
-              <div className="mt-9 border-t border-[var(--rule)] pt-5">
-                <p className="m-0 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">For Faster Review</p>
-                <p className="mb-0 mt-3 max-w-sm text-sm leading-6 text-[var(--muted)]">
+              <div className="mt-6 border-t border-[var(--rule)] pt-5 sm:mt-9">
+                <p className="m-0 text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--muted)] sm:text-xs sm:tracking-[0.12em]">For Faster Review</p>
+                <p className="mb-0 mt-3 max-w-sm text-[0.88rem] leading-6 text-[var(--muted)] sm:text-sm">
                   Include the voltage level, project location, required service, technical scope and relevant drawings or specifications where available.
                 </p>
               </div>

@@ -23,6 +23,17 @@ function resolveClientDomain(name: string) {
   return null;
 }
 
+function fallbackMark(name: string) {
+  return name
+    .replace(/[^A-Za-z0-9 ]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
+
 export function ProjectClientMark({ name, compact = false }: ProjectClientMarkProps) {
   const domain = resolveClientDomain(name);
   const logoUrl = domain
@@ -30,19 +41,22 @@ export function ProjectClientMark({ name, compact = false }: ProjectClientMarkPr
     : null;
 
   return (
-    <span className="inline-flex min-w-0 items-center gap-3">
+    <span className="inline-flex max-w-full min-w-0 items-center gap-3">
       {logoUrl ? (
         <span
-          className={`inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)] bg-white ${compact ? "h-8 w-8" : "h-10 w-10"}`}
+          className={`relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)] bg-white ${compact ? "h-8 w-8" : "h-10 w-10"}`}
           aria-hidden="true"
         >
+          <span className="font-technical text-[0.5rem] font-semibold text-[var(--brand-navy)]/55">{fallbackMark(name)}</span>
           <img
             src={logoUrl}
             alt=""
             width={compact ? 24 : 30}
             height={compact ? 24 : 30}
             loading="lazy"
-            className={compact ? "h-6 w-6 object-contain" : "h-[1.875rem] w-[1.875rem] object-contain"}
+            decoding="async"
+            referrerPolicy="no-referrer"
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${compact ? "h-6 w-6" : "h-[1.875rem] w-[1.875rem]"}`}
           />
         </span>
       ) : null}

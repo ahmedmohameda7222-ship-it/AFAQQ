@@ -22,18 +22,17 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--rule)]/70 bg-[color:var(--canvas)]/95 backdrop-blur-[8px]">
-      <Container className="relative flex h-[82px] items-center justify-between">
-        <Link href="/" className="inline-flex min-h-12 items-center gap-3.5" aria-label="AFAAQ ARAB home">
+      <Container className="relative flex h-[82px] min-w-0 items-center justify-between gap-3">
+        <Link href="/" className="inline-flex min-h-12 min-w-0 items-center gap-2.5 sm:gap-3.5" aria-label="AFAAQ ARAB home">
           <Image
             src="/brand/afaaq-mark.svg"
             alt=""
             width={54}
             height={36}
             priority
-            className="shrink-0 object-contain"
-            style={{ width: "54px", height: "auto" }}
+            className="w-12 shrink-0 object-contain sm:w-[54px]"
           />
-          <span className="text-[0.98rem] font-semibold tracking-[0.15em] sm:text-[1.04rem]">AFAAQ ARAB</span>
+          <span className="min-w-0 whitespace-nowrap text-[0.9rem] font-semibold tracking-[0.11em] sm:text-[1.04rem] sm:tracking-[0.15em]">AFAAQ ARAB</span>
         </Link>
         <nav aria-label="Primary navigation" className="hidden md:block">
           <ul className="m-0 flex list-none items-center gap-9 p-0 lg:gap-11">
