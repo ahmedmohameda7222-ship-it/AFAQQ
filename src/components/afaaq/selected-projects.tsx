@@ -12,7 +12,7 @@ export function SelectedProjects({ projects, startIndex = 1 }: SelectedProjectsP
   const visibleProjects = projects.slice(0, 3);
 
   return (
-    <div className="mt-12 grid gap-x-8 gap-y-12 md:mt-16 md:grid-cols-12 md:gap-y-16">
+    <div className="mt-10 grid gap-x-8 gap-y-10 md:mt-12 md:grid-cols-12 md:gap-y-14">
       {visibleProjects.map((project, index) => {
         const projectNumber = String(startIndex + index).padStart(2, "0");
         const projectHref = `/projects/${project.slug}`;
