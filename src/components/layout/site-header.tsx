@@ -16,7 +16,7 @@ export function SiteHeader() {
       <Container className="relative flex h-[82px] items-center justify-between">
         <Link href="/" className="inline-flex min-h-12 items-center gap-3.5" aria-label="AFAAQ ARAB home">
           <Image
-            src="/brand/afaaq-mark.svg"
+            src="/brand/afaaq-mark-approved.png"
             alt=""
             width={54}
             height={36}
