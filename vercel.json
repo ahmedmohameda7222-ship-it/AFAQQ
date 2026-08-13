@@ -3,7 +3,8 @@
   "git": {
     "deploymentEnabled": {
       "fix/footer-approved-logo-layout": false,
-      "feat/client-logos-and-png-brand": false
+      "feat/client-logos-and-png-brand": false,
+      "fix/header-logo-footer-lockup": false
     }
   }
 }
