@@ -8,24 +8,16 @@ export function SiteFooter() {
       <Container>
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-6">
-            <div className="flex items-center gap-5 md:gap-7">
-              <Image
-                src="/brand/afaaq-mark.svg"
-                alt=""
-                width={260}
-                height={173}
-                className="shrink-0 object-contain"
-                style={{ width: "clamp(180px, 18vw, 260px)", height: "auto" }}
-              />
-              <p className="m-0 text-[1rem] font-semibold tracking-[0.17em]">AFAAQ ARAB</p>
-            </div>
+            <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-white/45">
+              AFAAQ ARAB / Engineering & Contracting
+            </p>
             <p className="mt-6 max-w-md text-sm leading-6 text-white/65">
               Electrical engineering and contracting for power-system installation, testing, commissioning, protection and control.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-8 text-sm md:col-span-6 md:grid-cols-3">
             <div>
-              <p className="mb-3 text-white/45">Navigate</p>
+              <p className="font-technical mb-3 text-[0.7rem] uppercase tracking-[0.1em] text-white/45">Navigate</p>
               <div className="grid gap-3">
                 <Link href="/services">Services</Link>
                 <Link href="/projects">Projects</Link>
@@ -33,7 +25,7 @@ export function SiteFooter() {
               </div>
             </div>
             <div>
-              <p className="mb-3 text-white/45">Contact</p>
+              <p className="font-technical mb-3 text-[0.7rem] uppercase tracking-[0.1em] text-white/45">Contact</p>
               <div className="grid gap-3">
                 <Link href="/contact">Project inquiry</Link>
                 <span>Cairo, Egypt</span>
@@ -41,7 +33,8 @@ export function SiteFooter() {
             </div>
           </div>
         </div>
-        <div className="mt-14 border-t border-white/15 pt-7 text-[0.72rem] tracking-[0.12em] text-white/45">
+
+        <div className="font-technical mt-14 border-t border-white/15 pt-7 text-[0.68rem] uppercase tracking-[0.1em] text-white/45">
           AFAAQ ARAB FOR ENGINEERING & CONTRACTING
         </div>
 
@@ -52,9 +45,9 @@ export function SiteFooter() {
               alt="AFAAQ ARAB logo"
               width={300}
               height={200}
-              className="h-auto w-[clamp(90px,24vw,140px)] shrink-0 object-contain md:w-[clamp(150px,15vw,250px)]"
+              className="h-auto w-[clamp(72px,21vw,120px)] shrink-0 object-contain md:w-[clamp(145px,15vw,250px)]"
             />
-            <p className="m-0 min-w-0 whitespace-nowrap text-[clamp(2.5rem,10vw,4.5rem)] font-semibold leading-[0.82] tracking-[-0.055em] text-[#f4f3ef] md:text-[clamp(5rem,9vw,10.5rem)]">
+            <p className="m-0 min-w-0 whitespace-nowrap text-[clamp(1.85rem,9.5vw,4rem)] font-semibold leading-[0.82] tracking-[-0.055em] text-[#f4f3ef] md:text-[clamp(5rem,9vw,10.5rem)]">
               AFAAQ ARAB
             </p>
           </div>
