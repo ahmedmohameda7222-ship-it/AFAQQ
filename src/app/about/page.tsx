@@ -10,11 +10,11 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "About AFAAQ ARAB",
-  description: "AFAAQ ARAB is an electrical engineering and contracting company focused on power systems, testing, commissioning, protection, control and SCADA.",
+  description: "AFAAQ ARAB is an electrical engineering and contracting company focused on power systems, testing, commissioning, protection and control.",
   path: "/about",
 });
 
-const focus = ["Power Systems", "Testing & Commissioning", "Protection & Control", "SCADA & Automation"] as const;
+const focus = ["Power Systems", "Testing & Commissioning", "Protection & Control", "Electrical Installation"] as const;
 
 export default function AboutPage() {
   return (
@@ -29,7 +29,7 @@ export default function AboutPage() {
               </h1>
             </div>
             <p className="m-0 max-w-lg text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-4 md:text-[1.05rem] md:leading-8">
-              AFAAQ ARAB works on power-system installation, testing, commissioning, protection, control and automation projects.
+              AFAAQ ARAB works on power-system installation, testing, commissioning, protection and control projects.
             </p>
           </div>
         </Container>
@@ -55,7 +55,7 @@ export default function AboutPage() {
                 Founded in {company.founded} and based in {company.location}, AFAAQ ARAB provides electrical engineering and contracting services for power and infrastructure projects.
               </p>
               <p className="mt-5 text-[1rem] leading-7 text-[var(--muted)] sm:mt-6">
-                Our work combines electrical installation with testing, protection, control and automation. The goal is simple: make sure the systems are installed correctly, tested clearly and ready for safe operation.
+                Our work combines electrical installation with testing, protection and control. The goal is simple: make sure the systems are installed correctly, tested clearly and ready for safe operation.
               </p>
             </div>
           </div>
