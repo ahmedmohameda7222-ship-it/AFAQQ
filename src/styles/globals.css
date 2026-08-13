@@ -32,8 +32,9 @@
 
   --motion-fast: 180ms;
   --motion-ui: 220ms;
-  --motion-reveal: 500ms;
+  --motion-reveal: 820ms;
   --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (max-width: 359px) {
@@ -84,6 +85,32 @@ img { max-width: 100%; height: auto; }
   outline-offset: 4px;
 }
 
+html.reveal-ready .reveal-section > * {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 700ms var(--ease-reveal),
+    transform var(--motion-reveal) var(--ease-reveal);
+  transition-delay: 45ms;
+}
+
+html.reveal-ready .reveal-section.is-revealed > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 639px) {
+  html.reveal-ready .reveal-section > * {
+    transform: translate3d(0, 18px, 0);
+    transition-duration: 620ms, 760ms;
+    transition-delay: 25ms;
+  }
+
+  html.reveal-ready .reveal-section.is-revealed > * {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -91,6 +118,11 @@ img { max-width: 100%; height: auto; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  html.reveal-ready .reveal-section > * {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
@@ -113,12 +145,19 @@ img { max-width: 100%; height: auto; }
 }
 
 @keyframes relationship-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 .relationship-marquee__track {
-  animation: relationship-marquee 52s linear infinite;
+  animation: relationship-marquee 50s linear infinite;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .relationship-marquee__track {
+    animation-duration: 52s;
+  }
 }
 
 .relationship-rail__viewport:hover .relationship-marquee__track,
@@ -129,15 +168,14 @@ img { max-width: 100%; height: auto; }
 @media (prefers-reduced-motion: reduce) {
   .relationship-marquee__track {
     animation: none;
+    transform: none;
   }
 }
 
 .relationship-rail__viewport {
   scrollbar-width: none;
   -ms-overflow-style: none;
-  scroll-snap-type: x proximity;
   overscroll-behavior-inline: contain;
-  touch-action: pan-x pan-y;
 }
 
 .relationship-rail__viewport::-webkit-scrollbar {

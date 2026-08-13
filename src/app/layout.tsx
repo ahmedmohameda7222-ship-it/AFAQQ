@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { ScrollRevealManager } from "@/components/layout/scroll-reveal-manager";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { company } from "@/content/company";
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
+        <ScrollRevealManager />
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />

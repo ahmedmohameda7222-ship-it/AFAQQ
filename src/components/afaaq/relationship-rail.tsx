@@ -78,7 +78,7 @@ function ClientItem({ name }: { name: string }) {
 export function RelationshipRail({ names }: RelationshipRailProps) {
   if (names.length === 0) return null;
 
-  const desktopItems = [...names, ...names];
+  const items = [...names, ...names];
 
   return (
     <div className="border-y border-[var(--rule)] py-7 sm:py-8 md:py-10">
@@ -87,29 +87,19 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
       </p>
 
       <div
-        className="relationship-rail__viewport overflow-x-auto pb-1 md:overflow-hidden md:pb-0"
+        className="relationship-rail__viewport overflow-hidden"
         role="region"
-        aria-label="Project relationships. Swipe or scroll horizontally on smaller screens."
-        tabIndex={0}
+        aria-label="Project relationships"
       >
-        <div className="flex w-max items-center whitespace-nowrap md:hidden" aria-label={names.join(", ")}>
-          {names.map((name) => (
-            <span key={name} className="flex snap-start items-center text-[1.3rem] font-medium tracking-[-0.025em] sm:text-[1.55rem] sm:tracking-[-0.03em]">
-              <ClientItem name={name} />
-              <span className="mx-5 text-[var(--rule)] sm:mx-7">—</span>
-            </span>
-          ))}
-        </div>
-
-        <div className="relationship-marquee__track hidden w-max items-center whitespace-nowrap md:flex" aria-label={names.join(", ")}>
-          {desktopItems.map((name, index) => (
+        <div className="relationship-marquee__track flex w-max items-center whitespace-nowrap" aria-label={names.join(", ")}>
+          {items.map((name, index) => (
             <span
               key={`${name}-${index}`}
-              className="flex items-center text-[clamp(1.65rem,2.8vw,2.35rem)] font-medium tracking-[-0.035em]"
+              className="flex items-center text-[1.3rem] font-medium tracking-[-0.025em] sm:text-[1.55rem] sm:tracking-[-0.03em] md:text-[clamp(1.65rem,2.8vw,2.35rem)] md:tracking-[-0.035em]"
               aria-hidden={index >= names.length}
             >
               <ClientItem name={name} />
-              <span className="mx-9 text-[var(--rule)] lg:mx-12">—</span>
+              <span className="mx-5 text-[var(--rule)] sm:mx-7 md:mx-9 lg:mx-12">—</span>
             </span>
           ))}
         </div>
