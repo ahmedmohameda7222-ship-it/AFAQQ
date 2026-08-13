@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  --canvas: #f4f3ef;
+  --ink: #111315;
+  --graphite: #121517;
+  --muted: #6d7478;
+  --rule: #d6d6d1;
+  --accent: #8f6a35; /* temporary neutral accent; replace from official logo */
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+
+  --container-max: 80rem;
+  --gutter-mobile: 1.25rem;
+  --gutter-tablet: 2rem;
+  --gutter-desktop: 3.5rem;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+
+  --motion-fast: 180ms;
+  --motion-ui: 220ms;
+  --motion-reveal: 500ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif; /* temporary until font lock */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+img { max-width: 100%; height: auto; }
+::selection { background: color-mix(in srgb, var(--accent) 24%, transparent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
