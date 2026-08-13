@@ -5,7 +5,8 @@
       "fix/footer-approved-logo-layout": false,
       "feat/client-logos-and-png-brand": false,
       "fix/header-logo-footer-lockup": false,
-      "fix/rollback-footer-lockup": false
+      "fix/rollback-footer-lockup": false,
+      "fix/use-svg-brand-mark": false
     }
   }
 }

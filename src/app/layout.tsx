@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   },
   description: company.description,
   icons: {
-    icon: [{ url: "/brand/afaaq-mark-approved.png", type: "image/png" }],
-    shortcut: "/brand/afaaq-mark-approved.png",
+    icon: [{ url: "/brand/afaaq-mark.svg", type: "image/svg+xml" }],
+    shortcut: "/brand/afaaq-mark.svg",
   },
 };
 
