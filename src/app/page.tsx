@@ -31,8 +31,8 @@ export default function HomePage() {
                 Electrical testing, commissioning and protection for power systems.
               </h1>
 
-              <p className="mt-8 max-w-[39rem] text-[1.05rem] leading-7 text-[var(--muted)] md:text-[1.12rem] md:leading-8">
-                AFAAQ ARAB supports power and substation projects from electrical installation and system integration through testing, commissioning, energization and handover.
+              <p className="mt-8 max-w-[42rem] text-[1.05rem] leading-7 text-[var(--muted)] md:text-[1.12rem] md:leading-8">
+                AFAAQ ARAB supports utilities, EPC contractors and power-system teams across substations and control infrastructure, from electrical installation and system integration through testing, energization and handover.
               </p>
 
               <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-7">
@@ -67,8 +67,8 @@ export default function HomePage() {
               ].map(([value, unit]) => (
                 <div key={value} className="border-r border-[var(--rule)] last:border-r-0">
                   <div className="flex items-end gap-1.5">
-                    <span className="text-[clamp(2.6rem,5.7vw,4.6rem)] font-medium leading-none tracking-[-0.055em]">{value}</span>
-                    <span className="mb-1 text-[0.72rem] font-medium uppercase tracking-[0.1em] text-[var(--muted)] md:mb-2 md:text-xs">{unit}</span>
+                    <span className="font-technical text-[clamp(2.6rem,5.7vw,4.6rem)] font-medium leading-none tracking-[-0.055em]">{value}</span>
+                    <span className="font-technical mb-1 text-[0.72rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)] md:mb-2 md:text-xs">{unit}</span>
                   </div>
                 </div>
               ))}
@@ -102,12 +102,12 @@ export default function HomePage() {
               </div>
 
               <div className="md:col-span-4 md:pt-[4.25rem]">
-                <p className="m-0 text-[clamp(2rem,4vw,3.35rem)] font-medium leading-none tracking-[-0.05em]">
+                <p className="font-technical m-0 text-[clamp(2rem,4vw,3.35rem)] font-medium leading-none tracking-[-0.05em]">
                   {flagshipProject.voltage.map((item) => item.replace(" kV", "")).join(" / ")} <span className="text-sm tracking-normal text-[var(--muted)]">kV</span>
                 </p>
 
                 <div className="mt-10 border-t border-[var(--rule)] pt-5">
-                  <p className="m-0 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-[var(--muted)]">Scope</p>
+                  <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[var(--muted)]">Scope</p>
                   <ul className="mt-5 grid list-none gap-3 p-0 text-[0.98rem] leading-6">
                     {flagshipProject.scopes.map((scope) => (
                       <li key={scope}>{scope}</li>
@@ -117,13 +117,13 @@ export default function HomePage() {
 
                 {flagshipProject.relationship ? (
                   <div className="mt-9 border-t border-[var(--rule)] pt-5">
-                    <p className="m-0 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-[var(--muted)]">Project Relationship</p>
+                    <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[var(--muted)]">Project Relationship</p>
                     <p className="mb-0 mt-4 text-lg font-medium tracking-[-0.025em]">{flagshipProject.relationship}</p>
                   </div>
                 ) : null}
 
                 <div className="mt-8">
-                  <ArrowLink href="/projects">View Full Project Scope</ArrowLink>
+                  <ArrowLink href={`/projects/${flagshipProject.slug}`}>View Full Project Scope</ArrowLink>
                 </div>
               </div>
             </div>
@@ -141,7 +141,7 @@ export default function HomePage() {
         <Container>
           <SectionLabel>Core Technical Services</SectionLabel>
           <h2 className="mt-7 max-w-4xl text-[clamp(2.4rem,5.3vw,4.5rem)] font-medium leading-[0.98] tracking-[-0.05em]">
-            Testing, protection and control for power systems.
+            Technical disciplines for substations, protection and control.
           </h2>
           <ServiceIndex />
 
@@ -160,11 +160,11 @@ export default function HomePage() {
             <div className="md:col-span-5">
               <SectionLabel>Project Execution</SectionLabel>
               <h2 className="mt-6 max-w-xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.048em]">
-                From project review to energization and handover.
+                A controlled path from engineering review to energization.
               </h2>
             </div>
             <p className="m-0 max-w-lg self-end text-[1rem] leading-7 text-[var(--muted)] md:col-span-5 md:col-start-8">
-              AFAAQ reviews the scope, installs the systems, tests the functions and supports commissioning through final handover.
+              Each scope moves through documented review, approved procedures, installation, functional testing, commissioning and final records for handover.
             </p>
           </div>
           <ExecutionTrack />
@@ -176,16 +176,16 @@ export default function HomePage() {
           <div className="border-t border-[var(--rule)] pt-8 md:pt-10">
             <div className="grid gap-6 md:grid-cols-12 md:items-end">
               <div className="md:col-span-7">
-                <SectionLabel>Our Project</SectionLabel>
+                <SectionLabel>Selected Projects</SectionLabel>
                 <h2 className="mt-6 max-w-3xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.048em]">
-                  Power and control projects across different voltage levels.
+                  Selected work across transmission, distribution and control systems.
                 </h2>
               </div>
               <div className="md:col-span-3 md:col-start-10">
                 <ArrowLink href="/projects">View All Projects</ArrowLink>
               </div>
             </div>
-            <SelectedProjects projects={selectedProjects} />
+            <SelectedProjects projects={selectedProjects} startIndex={2} />
           </div>
         </Container>
       </section>
@@ -202,11 +202,11 @@ export default function HomePage() {
             </div>
             <div className="md:col-span-5 md:col-start-8">
               <SectionLabel>About AFAAQ</SectionLabel>
-              <h2 className="mt-6 max-w-[13ch] text-[clamp(2.15rem,4vw,3.6rem)] font-medium leading-[1] tracking-[-0.048em]">
-                Engineering capability from installation through energization.
+              <h2 className="mt-6 max-w-[14ch] text-[clamp(2.15rem,4vw,3.6rem)] font-medium leading-[1] tracking-[-0.048em]">
+                A Cairo-based engineering contractor focused on power-system delivery.
               </h2>
               <p className="mt-7 max-w-lg text-[1rem] leading-7 text-[var(--muted)]">
-                Founded in 2017 and based in Cairo, AFAAQ ARAB works across electrical contracting, testing and commissioning, protection, control and automation for power-system environments.
+                Founded in 2017, AFAAQ ARAB delivers electrical contracting, testing and commissioning, protection, control and automation work for power-system environments.
               </p>
               <div className="mt-7">
                 <ArrowLink href="/about">About AFAAQ</ArrowLink>
@@ -220,7 +220,7 @@ export default function HomePage() {
         <Container>
           <div className="grid gap-10 md:grid-cols-12 md:items-end">
             <div className="md:col-span-8">
-              <p className="m-0 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-white/45">Project Inquiry</p>
+              <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-white/45">Project Inquiry</p>
               <h2 className="mt-7 max-w-4xl text-[clamp(2.5rem,5.7vw,5rem)] font-medium leading-[0.96] tracking-[-0.052em]">
                 Have a testing, commissioning or protection scope?
               </h2>

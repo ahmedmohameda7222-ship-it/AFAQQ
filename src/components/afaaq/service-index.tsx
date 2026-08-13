@@ -18,7 +18,7 @@ export function ServiceIndex() {
     <div className="mt-14 md:mt-20">
       {primaryServices.map((service, index) => (
         <article key={service.slug} id={service.slug} className="grid gap-5 border-t border-white/18 py-8 md:grid-cols-12 md:gap-8 md:py-10">
-          <p className="m-0 text-sm text-white/45 md:col-span-1">{String(index + 1).padStart(2, "0")}</p>
+          <p className="font-technical m-0 text-[0.7rem] text-white/45 md:col-span-1">{String(index + 1).padStart(2, "0")}</p>
           <div className="md:col-span-6">
             <h3 className="m-0 text-[clamp(1.8rem,3.2vw,3rem)] font-medium leading-[1.03] tracking-[-0.04em]">
               {service.title}
