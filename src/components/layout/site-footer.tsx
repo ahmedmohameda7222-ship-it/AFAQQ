@@ -8,14 +8,14 @@ export function SiteFooter() {
       <Container>
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-6">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-5 md:gap-7">
               <Image
-                src="/brand/afaaq-mark-reversed.svg"
+                src="/brand/afaaq-mark-approved.webp"
                 alt=""
-                width={64}
-                height={43}
-                className="shrink-0"
-                style={{ width: "64px", height: "auto" }}
+                width={260}
+                height={173}
+                className="shrink-0 object-contain"
+                style={{ width: "clamp(180px, 18vw, 260px)", height: "auto" }}
               />
               <p className="m-0 text-[1rem] font-semibold tracking-[0.17em]">AFAAQ ARAB</p>
             </div>
