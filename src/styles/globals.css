@@ -64,3 +64,12 @@ img { max-width: 100%; height: auto; }
     scroll-behavior: auto !important;
   }
 }
+
+.hero-media-placeholder {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, white 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, white 8%, transparent) 1px, transparent 1px),
+    radial-gradient(circle at 70% 22%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 32%);
+  background-size: 20% 100%, 100% 16.666%, 100% 100%;
+  background-position: 0 0, 0 0, center;
+}
