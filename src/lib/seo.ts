@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { company } from "@/content/company";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.invalid";
+import { getSiteUrl } from "@/lib/site-url";
 
 export function buildMetadata({
   title,
@@ -12,7 +11,7 @@ export function buildMetadata({
   description: string;
   path?: string;
 }): Metadata {
-  const url = new URL(path, siteUrl);
+  const url = new URL(path, getSiteUrl());
   return {
     title,
     description,
