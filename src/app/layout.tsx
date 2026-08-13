@@ -12,6 +12,10 @@ export const metadata: Metadata = {
     template: `%s | ${company.name}`,
   },
   description: company.description,
+  icons: {
+    icon: [{ url: "/brand/afaaq-mark.svg", type: "image/svg+xml" }],
+    shortcut: "/brand/afaaq-mark.svg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
