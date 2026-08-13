@@ -27,11 +27,11 @@ export default function HomePage() {
             <div className="lg:col-span-7 lg:pt-4">
               <SectionLabel>Electrical Engineering & Contracting</SectionLabel>
 
-              <h1 className="mt-6 max-w-[760px] text-[clamp(2.9rem,5.1vw,4.55rem)] font-medium leading-[0.98] tracking-[-0.05em] text-[var(--ink)]">
+              <h1 className="mt-6 max-w-[740px] text-[clamp(2.75rem,4.8vw,4.25rem)] font-medium leading-[0.99] tracking-[-0.042em] text-[var(--ink)]">
                 Electrical testing, commissioning and protection for power systems.
               </h1>
 
-              <p className="mt-7 max-w-[42rem] text-[1.05rem] leading-7 text-[var(--muted)] md:text-[1.12rem] md:leading-8">
+              <p className="mt-7 max-w-[42rem] text-[1.06rem] leading-7 text-[var(--muted)] md:text-[1.13rem] md:leading-8">
                 AFAAQ ARAB supports utilities, EPC contractors and power-system teams across substations and control infrastructure, from electrical installation and system integration through testing, energization and handover.
               </p>
 
@@ -67,8 +67,8 @@ export default function HomePage() {
               ].map(([value, unit]) => (
                 <div key={value} className="border-r border-[var(--rule)] last:border-r-0">
                   <div className="flex items-end gap-1.5">
-                    <span className="font-technical text-[clamp(2.6rem,5.7vw,4.6rem)] font-medium leading-none tracking-[-0.055em]">{value}</span>
-                    <span className="font-technical mb-1 text-[0.72rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)] md:mb-2 md:text-xs">{unit}</span>
+                    <span className="font-technical text-[clamp(2.6rem,5.4vw,4.35rem)] font-medium leading-none tracking-[-0.045em]">{value}</span>
+                    <span className="font-technical mb-1 text-[0.78rem] font-medium uppercase tracking-[0.06em] text-[var(--muted)] md:mb-2">{unit}</span>
                   </div>
                 </div>
               ))}
@@ -76,7 +76,7 @@ export default function HomePage() {
 
             <div className="mt-8 grid gap-3 border-t border-[var(--rule)] pt-6 md:mt-10 md:grid-cols-3 md:gap-8 md:pt-7">
               {disciplines.map((discipline) => (
-                <p key={discipline} className="m-0 text-sm font-medium tracking-[-0.01em] md:text-[0.95rem]">
+                <p key={discipline} className="m-0 text-[0.95rem] font-medium leading-6 tracking-[-0.01em] md:text-[1rem]">
                   {discipline}
                 </p>
               ))}
@@ -91,7 +91,7 @@ export default function HomePage() {
             <div className="grid gap-8 border-t border-[var(--rule)] pt-8 md:grid-cols-12 md:pt-9">
               <div className="md:col-span-8">
                 <SectionLabel>Selected Project / 01</SectionLabel>
-                <h2 className="mt-6 max-w-3xl text-[clamp(2.4rem,5vw,4.3rem)] font-medium leading-[0.98] tracking-[-0.05em]">
+                <h2 className="mt-6 max-w-3xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.042em]">
                   {flagshipProject.name}
                 </h2>
                 <div
@@ -102,13 +102,13 @@ export default function HomePage() {
               </div>
 
               <div className="md:col-span-4 md:pt-[3.75rem]">
-                <p className="font-technical m-0 text-[clamp(2rem,4vw,3.35rem)] font-medium leading-none tracking-[-0.05em]">
-                  {flagshipProject.voltage.map((item) => item.replace(" kV", "")).join(" / ")} <span className="text-sm tracking-normal text-[var(--muted)]">kV</span>
+                <p className="font-technical m-0 text-[clamp(1.9rem,3.6vw,3.05rem)] font-medium leading-none tracking-[-0.04em]">
+                  {flagshipProject.voltage.map((item) => item.replace(" kV", "")).join(" / ")} <span className="text-[0.82rem] tracking-normal text-[var(--muted)]">kV</span>
                 </p>
 
                 <div className="mt-8 border-t border-[var(--rule)] pt-5">
-                  <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[var(--muted)]">Scope</p>
-                  <ul className="mt-5 grid list-none gap-3 p-0 text-[0.98rem] leading-6">
+                  <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Scope</p>
+                  <ul className="mt-4 grid list-none gap-3 p-0 text-[1rem] leading-7">
                     {flagshipProject.scopes.map((scope) => (
                       <li key={scope}>{scope}</li>
                     ))}
@@ -117,8 +117,8 @@ export default function HomePage() {
 
                 {flagshipProject.relationship ? (
                   <div className="mt-8 border-t border-[var(--rule)] pt-5">
-                    <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[var(--muted)]">Project Relationship</p>
-                    <p className="mb-0 mt-4 text-lg font-medium tracking-[-0.025em]">{flagshipProject.relationship}</p>
+                    <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Project Relationship</p>
+                    <p className="mb-0 mt-3 text-lg font-medium leading-7 tracking-[-0.02em]">{flagshipProject.relationship}</p>
                   </div>
                 ) : null}
 
@@ -140,12 +140,12 @@ export default function HomePage() {
       <section className="bg-[var(--graphite)] py-20 text-[var(--canvas)] md:py-24">
         <Container>
           <SectionLabel>Core Technical Services</SectionLabel>
-          <h2 className="mt-6 max-w-4xl text-[clamp(2.4rem,5.3vw,4.5rem)] font-medium leading-[0.98] tracking-[-0.05em]">
+          <h2 className="mt-6 max-w-4xl text-[clamp(2.3rem,4.8vw,4.1rem)] font-medium leading-[1] tracking-[-0.042em]">
             Technical disciplines for substations, protection and control.
           </h2>
           <ServiceIndex />
 
-          <div className="mt-10 grid gap-3 border-t border-white/18 pt-7 text-sm text-white/64 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-3 border-t border-white/18 pt-7 text-[0.95rem] leading-6 text-white/72 sm:grid-cols-2 lg:grid-cols-4">
             <span>Electrical Installation</span>
             <span>Power Quality</span>
             <span>Operation & Maintenance</span>
@@ -156,14 +156,14 @@ export default function HomePage() {
 
       <section className="py-20 md:py-28">
         <Container>
-          <div className="grid gap-8 md:grid-cols-12">
+          <div className="grid gap-7 md:grid-cols-12 md:items-end md:gap-8">
             <div className="md:col-span-5">
               <SectionLabel>Project Execution</SectionLabel>
-              <h2 className="mt-6 max-w-xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.048em]">
+              <h2 className="mt-6 max-w-[15ch] text-[clamp(2.1rem,3.8vw,3.55rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                 A controlled path from engineering review to energization.
               </h2>
             </div>
-            <p className="m-0 max-w-lg self-end text-[1rem] leading-7 text-[var(--muted)] md:col-span-5 md:col-start-8">
+            <p className="m-0 max-w-xl text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-6 md:col-start-7">
               Each scope moves through documented review, approved procedures, installation, functional testing, commissioning and final records for handover.
             </p>
           </div>
@@ -177,7 +177,7 @@ export default function HomePage() {
             <div className="grid gap-6 md:grid-cols-12 md:items-end">
               <div className="md:col-span-7">
                 <SectionLabel>Selected Projects</SectionLabel>
-                <h2 className="mt-6 max-w-3xl text-[clamp(2.25rem,4.5vw,4rem)] font-medium leading-[1] tracking-[-0.048em]">
+                <h2 className="mt-6 max-w-3xl text-[clamp(2.1rem,3.9vw,3.55rem)] font-medium leading-[1.02] tracking-[-0.04em]">
                   Selected work across transmission, distribution and control systems.
                 </h2>
               </div>
@@ -200,12 +200,12 @@ export default function HomePage() {
                 role="img"
               />
             </div>
-            <div className="md:col-span-5 md:col-start-8">
+            <div className="md:col-span-6 md:col-start-7">
               <SectionLabel>About AFAAQ</SectionLabel>
-              <h2 className="mt-5 max-w-[14ch] text-[clamp(2.15rem,4vw,3.6rem)] font-medium leading-[1] tracking-[-0.048em]">
+              <h2 className="mt-5 max-w-[18ch] text-[clamp(2rem,3.35vw,3.15rem)] font-medium leading-[1.03] tracking-[-0.038em]">
                 A Cairo-based engineering contractor focused on power-system delivery.
               </h2>
-              <p className="mt-6 max-w-lg text-[1rem] leading-7 text-[var(--muted)]">
+              <p className="mt-6 max-w-xl text-[1.02rem] leading-7 text-[var(--muted)]">
                 Founded in 2017, AFAAQ ARAB delivers electrical contracting, testing and commissioning, protection, control and automation work for power-system environments.
               </p>
               <div className="mt-6">
@@ -220,13 +220,13 @@ export default function HomePage() {
         <Container>
           <div className="grid gap-10 md:grid-cols-12 md:items-end">
             <div className="md:col-span-8">
-              <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-white/45">Project Inquiry</p>
-              <h2 className="mt-6 max-w-4xl text-[clamp(2.5rem,5.7vw,5rem)] font-medium leading-[0.96] tracking-[-0.052em]">
+              <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.08em] text-white/60">Project Inquiry</p>
+              <h2 className="mt-6 max-w-4xl text-[clamp(2.35rem,5vw,4.5rem)] font-medium leading-[0.98] tracking-[-0.045em]">
                 Have a testing, commissioning or protection scope?
               </h2>
             </div>
             <div className="md:col-span-4">
-              <p className="m-0 max-w-md text-[1rem] leading-7 text-white/62">
+              <p className="m-0 max-w-md text-[1.02rem] leading-7 text-white/72">
                 Discuss your project requirements directly with AFAAQ&apos;s engineering team.
               </p>
               <div className="mt-6">

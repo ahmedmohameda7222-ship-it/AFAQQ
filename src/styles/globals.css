@@ -4,7 +4,8 @@
   --canvas: #f4f3ef;
   --ink: #111315;
   --graphite: #121517;
-  --muted: #6d7478;
+  --muted: #5b6266;
+  --muted-dark: #a5aaad;
   --rule: #d6d6d1;
   --brand-navy: #082a72;
   --brand-blue: #0b8cff;
@@ -44,6 +45,16 @@ body {
   font-family: var(--font-sans), "Helvetica Neue", "Segoe UI", Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 .font-technical {

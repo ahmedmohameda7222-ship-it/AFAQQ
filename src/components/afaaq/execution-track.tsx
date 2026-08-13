@@ -15,9 +15,9 @@ export function ExecutionTrack() {
           key={title}
           className="relative border-t border-[var(--rule)] py-6 md:min-h-48 md:px-6 md:py-7 lg:px-8"
         >
-          <p className="font-technical m-0 text-[0.7rem] font-medium tracking-[0.1em] text-[var(--muted)]">{String(index + 1).padStart(2, "0")}</p>
-          <h3 className="mb-0 mt-6 max-w-[18rem] text-[1.35rem] font-medium leading-7 tracking-[-0.03em]">{title}</h3>
-          <p className="mb-0 mt-4 max-w-[24rem] text-[0.94rem] leading-7 text-[var(--muted)]">{description}</p>
+          <p className="font-technical m-0 text-[0.78rem] font-medium leading-5 tracking-[0.08em] text-[var(--muted)]">{String(index + 1).padStart(2, "0")}</p>
+          <h3 className="mb-0 mt-5 max-w-[19rem] text-[1.3rem] font-medium leading-7 tracking-[-0.025em]">{title}</h3>
+          <p className="mb-0 mt-3 max-w-[24rem] text-[1rem] leading-7 text-[var(--muted)]">{description}</p>
         </li>
       ))}
     </ol>

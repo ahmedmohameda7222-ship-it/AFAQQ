@@ -8,25 +8,25 @@ export function SiteFooter() {
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-6">
-            <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-white/45">
+            <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.1em] text-white/60">
               AFAAQ ARAB / Engineering & Contracting
             </p>
-            <p className="mt-4 max-w-md text-sm leading-6 text-white/65">
+            <p className="mt-4 max-w-md text-[0.95rem] leading-6 text-white/72">
               Electrical engineering and contracting for power-system installation, testing, commissioning, protection and control.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 text-sm md:col-span-6 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 text-[0.95rem] leading-6 text-white/90 md:col-span-6 md:grid-cols-3">
             <div>
-              <p className="font-technical mb-3 text-[0.7rem] uppercase tracking-[0.1em] text-white/45">Navigate</p>
-              <div className="grid gap-3">
+              <p className="font-technical mb-3 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-white/60">Navigate</p>
+              <div className="grid gap-2.5">
                 <Link href="/services">Services</Link>
                 <Link href="/projects">Projects</Link>
                 <Link href="/about">About</Link>
               </div>
             </div>
             <div>
-              <p className="font-technical mb-3 text-[0.7rem] uppercase tracking-[0.1em] text-white/45">Contact</p>
-              <div className="grid gap-3">
+              <p className="font-technical mb-3 text-[0.78rem] uppercase leading-5 tracking-[0.08em] text-white/60">Contact</p>
+              <div className="grid gap-2.5">
                 <Link href="/contact">Project inquiry</Link>
                 <span>Cairo, Egypt</span>
               </div>

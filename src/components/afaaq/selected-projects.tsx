@@ -24,10 +24,10 @@ export function SelectedProjects({ projects, startIndex = 1 }: SelectedProjectsP
                 <div className="project-media-placeholder aspect-[16/10] bg-[#d8d7d1] md:col-span-5" aria-hidden="true" />
                 <div className="border-t border-[var(--rule)] pt-4 md:col-span-5 md:col-start-7 md:pb-2">
                   <div className="flex items-start justify-between gap-6">
-                    <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.1em] text-[var(--muted)]">Project {projectNumber}</p>
-                    <p className="font-technical m-0 shrink-0 text-sm font-medium text-[var(--muted)]">{project.voltage.join(" / ")}</p>
+                    <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Project {projectNumber}</p>
+                    <p className="font-technical m-0 shrink-0 text-[0.82rem] font-medium leading-5 text-[var(--muted)]">{project.voltage.join(" / ")}</p>
                   </div>
-                  <h3 className="mb-0 mt-4 max-w-[18ch] text-[clamp(1.6rem,2.8vw,2.5rem)] font-medium leading-[1.02] tracking-[-0.04em]">{project.name}</h3>
+                  <h3 className="mb-0 mt-3 max-w-[20ch] text-[clamp(1.55rem,2.6vw,2.3rem)] font-medium leading-[1.06] tracking-[-0.03em]">{project.name}</h3>
                 </div>
               </Link>
             </article>
@@ -40,10 +40,10 @@ export function SelectedProjects({ projects, startIndex = 1 }: SelectedProjectsP
               <div className={`project-media-placeholder bg-[#d8d7d1] ${index === 0 ? "aspect-[16/10]" : "aspect-[4/3]"}`} aria-hidden="true" />
               <div className="mt-5 flex items-start justify-between gap-6 border-t border-[var(--rule)] pt-4">
                 <div>
-                  <p className="font-technical m-0 text-[0.7rem] font-medium uppercase tracking-[0.1em] text-[var(--muted)]">Project {projectNumber}</p>
-                  <h3 className="mb-0 mt-3 text-[clamp(1.45rem,2.5vw,2.2rem)] font-medium leading-tight tracking-[-0.035em]">{project.name}</h3>
+                  <p className="font-technical m-0 text-[0.78rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">Project {projectNumber}</p>
+                  <h3 className="mb-0 mt-3 text-[clamp(1.4rem,2.3vw,2rem)] font-medium leading-[1.08] tracking-[-0.03em]">{project.name}</h3>
                 </div>
-                <p className="font-technical m-0 shrink-0 text-sm font-medium text-[var(--muted)]">{project.voltage.join(" / ")}</p>
+                <p className="font-technical m-0 shrink-0 text-[0.82rem] font-medium leading-5 text-[var(--muted)]">{project.voltage.join(" / ")}</p>
               </div>
             </Link>
           </article>
