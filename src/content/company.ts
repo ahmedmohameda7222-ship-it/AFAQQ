@@ -6,7 +6,7 @@ export const company = {
   phone: "+20 101 783 1083",
   email: "mohamed.bakr@afaaqarab.com",
   description:
-    "Electrical engineering and contracting for power-system installation, testing, commissioning, protection, control and automation.",
+    "Electrical engineering and contracting for power-system installation, testing, commissioning, protection and control.",
 } as const;
 
 export const companyFacts = [
@@ -27,12 +27,7 @@ export const clients = [
   "EGEMAC",
   "EETC",
   "NECC",
-  "Red Sea Development Company",
-  "GAMA Construction",
-  "Orascom Construction",
-  "Petrojet",
-  "ENPPI",
-  "The Arab Contractors",
+  "Arab Organization for Industrialization",
 ] as const;
 
 export const sectors = [
