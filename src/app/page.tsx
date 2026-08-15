@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
@@ -49,12 +50,16 @@ export default function HomePage() {
             </div>
 
             <div className="min-w-0 lg:col-span-5">
-              <div
-                className="hero-media-placeholder relative aspect-[4/3] overflow-hidden bg-[var(--graphite)] sm:aspect-[16/10] lg:aspect-[4/5] lg:min-h-[32rem]"
-                aria-label="AFAAQ project photography placeholder"
-                role="img"
-              >
-                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/28 to-transparent" aria-hidden="true" />
+              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--graphite)] sm:aspect-[16/10] lg:aspect-[4/5] lg:min-h-[32rem]">
+                <Image
+                  src="/images/home/home-substation.webp"
+                  alt="High-voltage electrical substation at blue hour."
+                  fill
+                  priority
+                  sizes="(max-width: 1023px) calc(100vw - 2.5rem), 42vw"
+                  className="object-cover object-center lg:object-[55%_center]"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/24 to-transparent" aria-hidden="true" />
               </div>
             </div>
           </div>
