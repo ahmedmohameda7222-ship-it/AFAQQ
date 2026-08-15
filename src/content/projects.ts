@@ -25,10 +25,9 @@ export const projects: Project[] = [
     scopes: ["Electrical Installation", "Testing & Commissioning", "Protection & Control", "RTU & Telecommunications"],
     summary:
       "Electrical installation, testing and commissioning work across power, protection, control and RTU systems at the Delta Regional Control Center.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/5/59/Performing_relay_trip_check_and_setting_on_a_switchgear_cabinet_at_a_power_facility_in_Queens._10-01-2019_%2848843694488%29.jpg",
-    imageAlt: "Protection and control testing on switchgear equipment.",
-    imagePosition: "center 47%",
+    image: "/images/projects/drcc.webp",
+    imageAlt: "Delta Regional Control Center project building in Egypt.",
+    imagePosition: "center center",
     systems: [
       "Switchgear panels",
       "Electrical panels",
@@ -50,13 +49,27 @@ export const projects: Project[] = [
     scopes: ["Regional Control Center Upgrade"],
     summary:
       "Upgrade of the Cairo Regional Control Center across 220 kV, 66 kV and 11 kV systems.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/0/0f/US_Navy_110328-N-OJ170-009_Hideji_Kawasaki_operates_the_supervisory_control_and_data_acquisition_%28SCADA%29_system_to_balance_an_electrical_load_insid.jpg",
-    imageAlt: "Electrical supervisory control and data acquisition control-room operations.",
-    imagePosition: "center 52%",
+    image: "/images/projects/crcc.webp",
+    imageAlt: "Regional control center upgrade with SCADA monitoring and operator workstations.",
+    imagePosition: "center center",
     relationship: "Madkour",
     location: "Cairo, Egypt",
     year: "2022",
+    status: "verified",
+  },
+  {
+    slug: "canal-control-project",
+    name: "Canal Control Project (RCC)",
+    voltage: ["220 kV", "66 kV", "22 kV"],
+    scopes: ["Control & Monitoring", "SCADA Integration", "Testing & Commissioning"],
+    summary:
+      "Control and monitoring, SCADA integration, testing and commissioning work for the Regional Control Center serving the Canal Region.",
+    image: "/images/projects/rcc.webp",
+    imageAlt: "Engineers testing and commissioning control and SCADA panels for a regional control center.",
+    imagePosition: "center center",
+    relationship: "ELSEWEDY ELECTRIC T&D",
+    location: "Canal Region, Egypt",
+    year: "2023",
     status: "verified",
   },
   {
@@ -67,6 +80,9 @@ export const projects: Project[] = [
     scopes: ["Secondary Systems", "Control Systems", "SCADA Adaptation / Integration"],
     summary:
       "Secondary-system and control work for Benban DCC, including SCADA adaptation and integration.",
+    image: "/images/projects/benban.webp",
+    imageAlt: "Solar power plant and electrical infrastructure in the Aswan desert.",
+    imagePosition: "center center",
     relationship: "GE",
     location: "Aswan, Egypt",
     year: "2021–2022",
