@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Projects",
   description:
-    "AFAAQ ARAB major project experience across 220 kV, 66 kV and 11 kV control-center systems and solar-power infrastructure, including testing, commissioning, protection, control and secondary systems.",
+    "AFAAQ ARAB major project experience across 220 kV, 66 kV, 22 kV and 11 kV control-center systems and solar-power infrastructure, including testing, commissioning, protection, control and secondary systems.",
   path: "/projects",
 });
 
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
               </h1>
             </div>
             <p className="m-0 max-w-lg text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-4 md:text-[1.05rem] md:leading-8">
-              Three AFAAQ ARAB project references covering regional control centers and solar-power infrastructure, including 220 kV, 66 kV, 11 kV and secondary control systems.
+              Four AFAAQ ARAB project references covering regional control centers and solar-power infrastructure, including 220 kV, 66 kV, 22 kV, 11 kV and secondary control systems.
             </p>
           </div>
 
@@ -40,7 +40,7 @@ export default function ProjectsPage() {
               <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">Major projects</p>
             </div>
             <div className="px-4 py-5 sm:border-r sm:border-[var(--rule)] md:px-7 md:py-7">
-              <p className="font-technical m-0 text-[clamp(0.9rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.025em] sm:leading-none sm:tracking-[-0.035em]">220 / 66 / 11 kV</p>
+              <p className="font-technical m-0 text-[clamp(0.9rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.025em] sm:leading-none sm:tracking-[-0.035em]">220 / 66 / 22 / 11 kV</p>
               <p className="font-technical mb-0 mt-2 text-[0.72rem] uppercase leading-5 tracking-[0.06em] text-[var(--muted)] sm:text-[0.78rem] sm:tracking-[0.08em]">System levels</p>
             </div>
             <div className="col-span-2 border-t border-[var(--rule)] py-5 sm:col-span-1 sm:border-t-0 sm:pl-4 md:py-7 md:pl-7">
