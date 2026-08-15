@@ -5,7 +5,7 @@ import { RelationshipRail } from "@/components/afaaq/relationship-rail";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
-import { clients, company, companyFacts, equipment, sectors, standards } from "@/content/company";
+import { clients, company, companyFacts, equipment, standards } from "@/content/company";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -101,22 +101,6 @@ export default function AboutPage() {
       </section>
 
       <section className="py-16 sm:py-20 md:py-28">
-        <Container>
-          <div className="grid gap-8 sm:gap-12 md:grid-cols-12">
-            <div className="min-w-0 md:col-span-4">
-              <SectionLabel>Sectors</SectionLabel>
-              <p className="mt-5 max-w-sm text-[1rem] leading-7 text-[var(--muted)]">AFAAQ capabilities support electrical projects across utilities, industry and infrastructure.</p>
-            </div>
-            <div className="flex min-w-0 flex-wrap content-start gap-x-5 gap-y-3 sm:gap-x-7 sm:gap-y-4 md:col-span-7 md:col-start-6">
-              {sectors.map((sector) => (
-                <span key={sector} className="text-[clamp(1.25rem,2.5vw,2rem)] font-medium tracking-[-0.03em] sm:tracking-[-0.035em]">{sector}</span>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="pb-16 sm:pb-20 md:pb-28">
         <Container><RelationshipRail names={clients} /></Container>
       </section>
 
