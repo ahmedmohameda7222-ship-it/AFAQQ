@@ -60,15 +60,17 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 border-y border-[var(--rule)] sm:mt-16 md:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 border-y border-[var(--rule)] sm:mt-16 md:grid-cols-5">
             {companyFacts.map(([value, label], index) => {
-              const mobileBorders = `${index % 2 === 0 ? "border-r" : ""} ${index < 2 ? "border-b" : ""}`;
-              const desktopBorders = index < companyFacts.length - 1 ? "md:border-r" : "md:border-r-0";
+              const isLast = index === companyFacts.length - 1;
+              const mobileLayout = isLast ? "col-span-2" : "";
+              const mobileBorders = !isLast ? `${index % 2 === 0 ? "border-r" : ""} border-b` : "";
+              const desktopBorders = !isLast ? "md:border-r md:border-b-0" : "md:border-r-0 md:border-b-0";
 
               return (
                 <div
                   key={label}
-                  className={`${mobileBorders} ${desktopBorders} border-[var(--rule)] px-0 py-6 odd:pr-4 even:pl-4 md:border-b-0 md:px-6 md:py-7 md:first:pl-0 md:last:pr-0`}
+                  className={`${mobileLayout} ${mobileBorders} ${desktopBorders} border-[var(--rule)] px-4 py-6 md:col-span-1 md:px-5 md:py-7 md:first:pl-0 md:last:pr-0`}
                 >
                   <p className="m-0 text-[clamp(2rem,4vw,3.6rem)] font-medium tracking-[-0.05em]">{value}</p>
                   <p className="mb-0 mt-2 text-[0.82rem] leading-5 text-[var(--muted)] sm:text-sm">{label}</p>
