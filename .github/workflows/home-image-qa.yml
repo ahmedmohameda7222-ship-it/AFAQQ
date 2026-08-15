@@ -1,0 +1,27 @@
+name: Home Image QA
+
+on:
+  push:
+    branches:
+      - home/approved-substation-image
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Repository checks
+        run: npm run check
+      - name: Production build
+        run: npm run build
+      - name: Confirm Home image asset
+        run: test -s public/images/home/home-substation.webp
