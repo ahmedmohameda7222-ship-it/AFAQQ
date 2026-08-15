@@ -12,8 +12,9 @@ export const company = {
 export const companyFacts = [
   ["2017", "Founded"],
   ["10+", "Years of experience"],
-  ["65+", "Substations delivered"],
+  ["150+", "Substations delivered"],
   ["50+", "Engineers & technicians"],
+  ["60%", "of EETC control centers project experience"],
 ] as const;
 
 export const clients = [
