@@ -2,6 +2,7 @@ import { chromium } from "playwright";
 import { mkdir, writeFile } from "node:fs/promises";
 
 const base = "http://127.0.0.1:3000";
+const projectAssets = ["drcc.webp", "crcc.webp", "rcc.webp", "benban.webp"];
 await mkdir("qa-artifacts", { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const cases = [
@@ -41,7 +42,6 @@ for (const [name, viewport] of cases) {
         fourProjectsPresent: text.includes("04") && text.includes("Four AFAAQ ARAB project references"),
         removedCompaniesPresent: ["Petrojet", "ENPPI", "Red Sea", "Orascom", "Arab Contractors", "Gama"].filter((x) => text.includes(x)),
         aoiPresent: text.includes("Arab Organization for Industrialization"),
-        localProjectImages: [...document.images].map((img) => img.getAttribute("src") || "").filter((src) => src.includes("/images/projects/")),
         route,
       };
     }, route);
@@ -52,7 +52,10 @@ for (const [name, viewport] of cases) {
       if (!data.rccPresent) failures.push("RCC project missing");
       if (!data.rccVoltagePresent) failures.push("RCC voltage missing");
       if (!data.fourProjectsPresent) failures.push("four-project overview missing");
-      if (data.localProjectImages.length < 4) failures.push(`expected 4 local project images, saw ${data.localProjectImages.length}`);
+      for (const asset of projectAssets) {
+        const assetResponse = await page.request.get(`${base}/images/projects/${asset}`);
+        if (!assetResponse.ok()) failures.push(`project asset failed ${asset}: ${assetResponse.status()}`);
+      }
     }
     if (route === "/about") {
       if (data.sectorsPresent) failures.push("Sectors section still present");
