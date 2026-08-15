@@ -24,7 +24,7 @@ jobs:
       - name: Capture production Home
         run: |
           mkdir -p qa-home
-          cat > /tmp/home-qa.mjs <<'EOF'
+          cat > home-qa.mjs <<'EOF'
           import { chromium } from 'playwright';
           import { writeFile } from 'node:fs/promises';
           const cases = [
@@ -68,7 +68,7 @@ jobs:
           console.log(JSON.stringify(report,null,2));
           if(report.some(r=>r.failures.length)) process.exit(1);
           EOF
-          node /tmp/home-qa.mjs
+          node home-qa.mjs
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v4
