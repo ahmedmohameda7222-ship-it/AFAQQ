@@ -1,0 +1,22 @@
+name: Verify affag production domain
+
+on:
+  push:
+    branches:
+      - qa/verify-affag-domain
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify production HTML
+        run: |
+          set -euo pipefail
+          html="$(curl -fsSL --retry 3 --retry-delay 2 https://affag.vercel.app/)"
+          echo "$html" | grep -F "High-voltage substation at blue hour" >/dev/null
+          echo "$html" | grep -F "150+" >/dev/null
+          echo "$html" | grep -F "60%" >/dev/null
+          echo "Production domain is serving the latest Home/About content."
