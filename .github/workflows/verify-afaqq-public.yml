@@ -1,0 +1,25 @@
+name: Verify AFAQQ public production
+
+on:
+  push:
+    branches:
+      - qa/verify-afaqq-public
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify Home and About markers
+        run: |
+          set -euo pipefail
+          home="$(curl -fsSL --retry 3 --retry-delay 2 https://afaqq-affaq.vercel.app/)"
+          about="$(curl -fsSL --retry 3 --retry-delay 2 https://afaqq-affaq.vercel.app/about)"
+          echo "$home" | grep -F "High-voltage substation at blue hour" >/dev/null
+          echo "$about" | grep -F "150+" >/dev/null
+          echo "$about" | grep -F "60%" >/dev/null
+          echo "home_image=present"
+          echo "about_150=present"
+          echo "about_60=present"
