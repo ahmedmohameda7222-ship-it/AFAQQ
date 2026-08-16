@@ -1,0 +1,111 @@
+name: Restore project JPG assets
+
+on:
+  push:
+    branches:
+      - qa/restore-project-jpgs
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create clean fix branch from main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git switch -C fix/project-jpg-assets origin/main
+
+      - name: Download the original project photographs
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/afaaq-projects
+          curl -fL --retry 3 'https://upload.wikimedia.org/wikipedia/commons/5/59/Performing_relay_trip_check_and_setting_on_a_switchgear_cabinet_at_a_power_facility_in_Queens._10-01-2019_%2848843694488%29.jpg' -o /tmp/afaaq-projects/drcc.jpg
+          curl -fL --retry 3 'https://upload.wikimedia.org/wikipedia/commons/0/0f/US_Navy_110328-N-OJ170-009_Hideji_Kawasaki_operates_the_supervisory_control_and_data_acquisition_%28SCADA%29_system_to_balance_an_electrical_load_insid.jpg' -o /tmp/afaaq-projects/crcc.jpg
+          curl -fL --retry 3 'https://upload.wikimedia.org/wikipedia/commons/1/10/Layout_and_installation_of_control_panels_in_a_recently_installed_power_substation_in_Queens._09-11-2019_%2848727688143%29.jpg' -o /tmp/afaaq-projects/rcc.jpg
+          curl -fL --retry 3 'https://upload.wikimedia.org/wikipedia/commons/7/79/Distribution_substation_switchgear.jpg' -o /tmp/afaaq-projects/benban.jpg
+
+      - name: Compress and validate JPEG assets
+        run: |
+          python -m pip install --quiet pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+
+          src_dir = Path('/tmp/afaaq-projects')
+          out_dir = Path('public/images/projects')
+          out_dir.mkdir(parents=True, exist_ok=True)
+          names = ['drcc', 'crcc', 'rcc', 'benban']
+
+          for name in names:
+              source = src_dir / f'{name}.jpg'
+              target = out_dir / f'{name}.jpg'
+              image = ImageOps.exif_transpose(Image.open(source)).convert('RGB')
+              max_width = 1400
+              if image.width > max_width:
+                  height = round(image.height * max_width / image.width)
+                  image = image.resize((max_width, height), Image.Resampling.LANCZOS)
+
+              quality = 78
+              while True:
+                  image.save(target, 'JPEG', quality=quality, optimize=True, progressive=True, subsampling=2)
+                  if target.stat().st_size <= 230 * 1024 or quality <= 50:
+                      break
+                  quality -= 4
+
+              with Image.open(target) as check:
+                  check.verify()
+
+              size_kb = target.stat().st_size / 1024
+              print(f'{target}: {image.width}x{image.height}, q={quality}, {size_kb:.1f} KB')
+          PY
+
+      - name: Replace WebP references with JPG and remove broken assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('src/content/projects.ts')
+          text = p.read_text()
+          for name in ['drcc', 'crcc', 'rcc', 'benban']:
+              text = text.replace(f'/images/projects/{name}.webp', f'/images/projects/{name}.jpg')
+          p.write_text(text)
+          PY
+          rm -f public/images/projects/drcc.webp public/images/projects/crcc.webp public/images/projects/rcc.webp public/images/projects/benban.webp
+
+      - name: Repository checks and production build
+        run: |
+          npm ci
+          npm run check
+          npm run build
+
+      - name: Verify Next.js can render every project image
+        run: |
+          set -euo pipefail
+          npm start > /tmp/afaaq-next.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000/ >/tmp/home.html; then break; fi
+            sleep 1
+          done
+          for name in drcc crcc rcc benban; do
+            grep -Fq "/images/projects/${name}.jpg" /tmp/home.html
+            code=$(curl -sS -o "/tmp/${name}-optimized" -w '%{http_code}' "http://127.0.0.1:3000/_next/image?url=%2Fimages%2Fprojects%2F${name}.jpg&w=1080&q=82")
+            test "$code" = "200"
+            test -s "/tmp/${name}-optimized"
+            echo "${name}: Next image optimizer HTTP ${code}"
+          done
+
+      - name: Commit clean production fix branch
+        run: |
+          git add src/content/projects.ts public/images/projects
+          git status --short
+          git commit -m "Replace broken project WebP images with compressed JPGs"
+          git push --force-with-lease origin HEAD:fix/project-jpg-assets
