@@ -77,7 +77,12 @@ p {
 
 a { text-decoration: none; }
 button, input, textarea, select { font: inherit; }
-img { max-width: 100%; height: auto; }
+img { max-width: 100%; }
+img[data-nimg="fill"] {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none;
+}
 ::selection { background: color-mix(in srgb, var(--brand-blue) 22%, transparent); }
 
 :focus-visible {
@@ -85,30 +90,12 @@ img { max-width: 100%; height: auto; }
   outline-offset: 4px;
 }
 
-html.reveal-ready .reveal-section > * {
-  opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  transition:
-    opacity 700ms var(--ease-reveal),
-    transform var(--motion-reveal) var(--ease-reveal);
-  transition-delay: 45ms;
-}
-
-html.reveal-ready .reveal-section.is-revealed > * {
+/* Scroll reveal is intentionally non-blocking: content is always visible.
+   This prevents off-screen sections disappearing in full-page captures or
+   when IntersectionObserver is unavailable. */
+.reveal-section > * {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-@media (max-width: 639px) {
-  html.reveal-ready .reveal-section > * {
-    transform: translate3d(0, 18px, 0);
-    transition-duration: 620ms, 760ms;
-    transition-delay: 25ms;
-  }
-
-  html.reveal-ready .reveal-section.is-revealed > * {
-    transform: translate3d(0, 0, 0);
-  }
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -118,11 +105,6 @@ html.reveal-ready .reveal-section.is-revealed > * {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  html.reveal-ready .reveal-section > * {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }
 
