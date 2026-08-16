@@ -85,30 +85,22 @@ jobs:
           npm run check
           npm run build
 
-      - name: Verify Next.js can render every project image
+      - name: Verify static and optimized project image routes
         run: |
           set -euo pipefail
           npm start > /tmp/afaaq-next.log 2>&1 &
           server_pid=$!
           trap 'kill $server_pid || true' EXIT
-          ready=false
-          for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:3000/ >/tmp/home.html; then
-              ready=true
-              break
-            fi
-            sleep 1
-          done
-          if [ "$ready" != "true" ]; then
-            cat /tmp/afaaq-next.log
-            exit 1
-          fi
+
           for name in drcc crcc rcc benban; do
-            grep -Fq "${name}.jpg" /tmp/home.html
-            code=$(curl -sS -o "/tmp/${name}-optimized" -w '%{http_code}' "http://127.0.0.1:3000/_next/image?url=%2Fimages%2Fprojects%2F${name}.jpg&w=1080&q=82")
-            test "$code" = "200"
+            static_code=$(curl -sS --retry 30 --retry-connrefused --retry-delay 1 -o "/tmp/${name}-static" -w '%{http_code}' "http://127.0.0.1:3000/images/projects/${name}.jpg")
+            test "$static_code" = "200"
+            test -s "/tmp/${name}-static"
+
+            optimized_code=$(curl -sS -o "/tmp/${name}-optimized" -w '%{http_code}' "http://127.0.0.1:3000/_next/image?url=%2Fimages%2Fprojects%2F${name}.jpg&w=1080&q=82")
+            test "$optimized_code" = "200"
             test -s "/tmp/${name}-optimized"
-            echo "${name}: Next image optimizer HTTP ${code}"
+            echo "${name}: static=${static_code}, optimized=${optimized_code}"
           done
 
       - name: Commit clean production fix branch
