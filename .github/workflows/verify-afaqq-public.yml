@@ -12,14 +12,13 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - name: Verify Home and About markers
+      - name: Inspect Home and About markers
         run: |
           set -euo pipefail
           home="$(curl -fsSL --retry 3 --retry-delay 2 https://afaqq-affaq.vercel.app/)"
           about="$(curl -fsSL --retry 3 --retry-delay 2 https://afaqq-affaq.vercel.app/about)"
-          echo "$home" | grep -F "High-voltage substation at blue hour" >/dev/null
-          echo "$about" | grep -F "150+" >/dev/null
-          echo "$about" | grep -F "60%" >/dev/null
-          echo "home_image=present"
-          echo "about_150=present"
-          echo "about_60=present"
+          echo "home_image=$(echo "$home" | grep -Fq "High-voltage substation at blue hour" && echo yes || echo no)"
+          echo "about_150=$(echo "$about" | grep -Fq "150+" && echo yes || echo no)"
+          echo "about_60=$(echo "$about" | grep -Fq "60%" && echo yes || echo no)"
+          echo "home_title=$(echo "$home" | sed -n 's:.*<title>\(.*\)</title>.*:\1:p' | head -1)"
+          echo "about_title=$(echo "$about" | sed -n 's:.*<title>\(.*\)</title>.*:\1:p' | head -1)"
