@@ -52,6 +52,7 @@ jobs:
               heroRect: heroRect && { width: heroRect.width, height: heroRect.height },
               imgRect: imgRect && { width: imgRect.width, height: imgRect.height },
               natural: img && { width: img.naturalWidth, height: img.naturalHeight },
+              currentSrc: img?.currentSrc || null,
               hiddenSections,
             };
           });
@@ -69,5 +70,7 @@ jobs:
         if: always()
         with:
           name: home-rendering-qa
-          path: home-rendering.png
+          path: |
+            home-rendering.png
+            public/images/home/home-substation.webp
           retention-days: 1
