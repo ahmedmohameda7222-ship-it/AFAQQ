@@ -20,7 +20,7 @@ jobs:
           for name in drcc crcc rcc benban; do
             printf '%s' "$home" | grep -Fq "${name}.jpg"
             curl -fsSL --retry 5 --retry-all-errors "https://afaqq-affaq.vercel.app/images/projects/${name}.jpg" -o "/tmp/${name}-static.jpg"
-            curl -fsSL --retry 5 --retry-all-errors "https://afaqq-affaq.vercel.app/_next/image?url=%2Fimages%2Fprojects%2F${name}.jpg&w=1080&q=82" -o "/tmp/${name}-optimized"
+            curl -fsSL --retry 5 --retry-all-errors "https://afaqq-affaq.vercel.app/_next/image?url=%2Fimages%2Fprojects%2F${name}.jpg&w=1080&q=75" -o "/tmp/${name}-optimized"
           done
           python - <<'PY'
           from PIL import Image
