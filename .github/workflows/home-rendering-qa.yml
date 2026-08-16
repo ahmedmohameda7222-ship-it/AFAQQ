@@ -37,8 +37,8 @@ jobs:
           const page = await browser.newPage({ viewport: { width: 1366, height: 768 } });
           await page.goto('http://127.0.0.1:3000', { waitUntil: 'networkidle' });
           const result = await page.evaluate(() => {
-            const hero = document.querySelector('.hero-media-placeholder');
-            const img = hero?.querySelector('img');
+            const img = [...document.images].find(image => image.alt === 'High-voltage electrical substation at blue hour.');
+            const hero = img?.parentElement;
             const heroRect = hero?.getBoundingClientRect();
             const imgRect = img?.getBoundingClientRect();
             const sections = [...document.querySelectorAll('main > section')];
@@ -58,6 +58,7 @@ jobs:
           console.log(JSON.stringify(result, null, 2));
           if (!result.heroRect || !result.imgRect) process.exit(1);
           if (Math.abs(result.heroRect.height - result.imgRect.height) > 2) process.exit(1);
+          if (Math.abs(result.heroRect.width - result.imgRect.width) > 2) process.exit(1);
           if (!result.natural || result.natural.width === 0 || result.natural.height === 0) process.exit(1);
           if (result.hiddenSections !== 0) process.exit(1);
           await page.screenshot({ path: 'home-rendering.png', fullPage: true });
