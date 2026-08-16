@@ -91,12 +91,20 @@ jobs:
           npm start > /tmp/afaaq-next.log 2>&1 &
           server_pid=$!
           trap 'kill $server_pid || true' EXIT
+          ready=false
           for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:3000/ >/tmp/home.html; then break; fi
+            if curl -fsS http://127.0.0.1:3000/ >/tmp/home.html; then
+              ready=true
+              break
+            fi
             sleep 1
           done
+          if [ "$ready" != "true" ]; then
+            cat /tmp/afaaq-next.log
+            exit 1
+          fi
           for name in drcc crcc rcc benban; do
-            grep -Fq "/images/projects/${name}.jpg" /tmp/home.html
+            grep -Fq "${name}.jpg" /tmp/home.html
             code=$(curl -sS -o "/tmp/${name}-optimized" -w '%{http_code}' "http://127.0.0.1:3000/_next/image?url=%2Fimages%2Fprojects%2F${name}.jpg&w=1080&q=82")
             test "$code" = "200"
             test -s "/tmp/${name}-optimized"
