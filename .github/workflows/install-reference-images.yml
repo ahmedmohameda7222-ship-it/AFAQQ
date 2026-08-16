@@ -1,0 +1,87 @@
+name: Install reference images
+
+on:
+  push:
+    branches:
+      - qa/install-reference-images2
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Decode and validate image bundle
+        run: |
+          set -euo pipefail
+          base64 -d .asset-staging/reference-images.zip.b64 > /tmp/reference-images.zip
+          echo "18d0e114bb45a4c39b9c0ba5c32c2d0fd960e84bccffa1707b369218d4516bfa  /tmp/reference-images.zip" | sha256sum -c -
+          rm -rf /tmp/reference-images
+          mkdir -p /tmp/reference-images
+          unzip -q /tmp/reference-images.zip -d /tmp/reference-images
+          file /tmp/reference-images/public/images/home/home-substation.jpg
+          file /tmp/reference-images/public/images/projects/drcc.jpg
+          file /tmp/reference-images/public/images/projects/crcc.jpg
+          file /tmp/reference-images/public/images/projects/rcc.jpg
+          file /tmp/reference-images/public/images/projects/benban.jpg
+
+      - name: Create clean feature branch from main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git switch -C fix/reference-images-actual origin/main
+          cp /tmp/reference-images/public/images/home/home-substation.jpg public/images/home/home-substation.jpg
+          cp /tmp/reference-images/public/images/projects/drcc.jpg public/images/projects/drcc.jpg
+          cp /tmp/reference-images/public/images/projects/crcc.jpg public/images/projects/crcc.jpg
+          cp /tmp/reference-images/public/images/projects/rcc.jpg public/images/projects/rcc.jpg
+          cp /tmp/reference-images/public/images/projects/benban.jpg public/images/projects/benban.jpg
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('src/app/page.tsx')
+          s = p.read_text()
+          old = 'src="/images/home/home-substation.webp"'
+          new = 'src="/images/home/home-substation.jpg"'
+          assert old in s, 'Expected current hero path not found'
+          p.write_text(s.replace(old, new, 1))
+          PY
+
+      - name: Verify only requested files changed
+        run: |
+          set -euo pipefail
+          git status --short
+          changed="$(git diff --name-only origin/main | sort)"
+          expected="$(printf '%s\n' \
+            public/images/home/home-substation.jpg \
+            public/images/projects/benban.jpg \
+            public/images/projects/crcc.jpg \
+            public/images/projects/drcc.jpg \
+            public/images/projects/rcc.jpg \
+            src/app/page.tsx | sort)"
+          test "$changed" = "$expected"
+          git diff -- src/app/page.tsx
+
+      - name: Validate project references and build
+        run: |
+          set -euo pipefail
+          grep -Fq 'src="/images/home/home-substation.jpg"' src/app/page.tsx
+          grep -Fq 'image: "/images/projects/drcc.jpg"' src/content/projects.ts
+          grep -Fq 'image: "/images/projects/crcc.jpg"' src/content/projects.ts
+          grep -Fq 'image: "/images/projects/rcc.jpg"' src/content/projects.ts
+          grep -Fq 'image: "/images/projects/benban.jpg"' src/content/projects.ts
+          npm install --no-audit --no-fund
+          npm run check
+          npm run build
+
+      - name: Commit and push clean feature branch
+        run: |
+          set -euo pipefail
+          git add src/app/page.tsx public/images/home/home-substation.jpg public/images/projects/drcc.jpg public/images/projects/crcc.jpg public/images/projects/rcc.jpg public/images/projects/benban.jpg
+          git commit -m "Replace home and project images with approved references"
+          git push --force-with-lease origin HEAD:fix/reference-images-actual
