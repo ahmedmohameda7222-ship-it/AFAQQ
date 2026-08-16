@@ -1,0 +1,77 @@
+name: Restore Project Image Assets
+
+on:
+  push:
+    branches:
+      - fix/restore-image-assets
+    paths:
+      - ".asset-staging/**"
+      - ".github/workflows/restore-project-assets.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild and validate image archive
+        run: |
+          set -euo pipefail
+          cat .asset-staging/part-* > /tmp/assets.b64
+          test "$(wc -c < /tmp/assets.b64)" -eq 202896
+          base64 -d /tmp/assets.b64 > /tmp/assets.zip
+          echo "bf8c0635d383befc9b1f75c7ca367cda45cee25f0f3f16196c5d1d2c419851fb  /tmp/assets.zip" | sha256sum -c -
+          mkdir -p /tmp/restored
+          unzip -q /tmp/assets.zip -d /tmp/restored
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+
+          expected = {
+              "drcc.webp": (800, 600),
+              "crcc.webp": (800, 600),
+              "rcc.webp": (1000, 563),
+              "benban.webp": (800, 600),
+              "home-substation.webp": (1000, 563),
+          }
+          root = Path('/tmp/restored')
+          for name, size in expected.items():
+              path = root / name
+              with Image.open(path) as image:
+                  image.load()
+                  assert image.format == 'WEBP', (name, image.format)
+                  assert image.size == size, (name, image.size, size)
+                  print(f"VALID {name}: {image.size[0]}x{image.size[1]}")
+          PY
+
+      - name: Create clean restoration branch from latest main
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B fix/project-images-restored origin/main
+          cp /tmp/restored/drcc.webp public/images/projects/drcc.webp
+          cp /tmp/restored/crcc.webp public/images/projects/crcc.webp
+          cp /tmp/restored/rcc.webp public/images/projects/rcc.webp
+          cp /tmp/restored/benban.webp public/images/projects/benban.webp
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          for name in ['drcc.webp', 'crcc.webp', 'rcc.webp', 'benban.webp']:
+              path = Path('public/images/projects') / name
+              with Image.open(path) as image:
+                  image.load()
+                  print(f"RESTORED {name}: {image.size}")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/projects/drcc.webp public/images/projects/crcc.webp public/images/projects/rcc.webp public/images/projects/benban.webp
+          git diff --cached --quiet && { echo "No image changes to commit"; exit 1; }
+          git commit -m "Restore valid project image assets"
+          git push --force origin fix/project-images-restored
