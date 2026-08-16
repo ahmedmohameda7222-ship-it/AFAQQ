@@ -17,6 +17,8 @@ jobs:
           set -euo pipefail
           python -m pip install --quiet pillow
           home="$(curl -fsSL --retry 5 --retry-all-errors https://afaqq-affaq.vercel.app/)"
+          ! printf '%s' "$home" | grep -Fq 'q=82'
+          printf '%s' "$home" | grep -Fq 'q=75'
           for name in drcc crcc rcc benban; do
             printf '%s' "$home" | grep -Fq "${name}.jpg"
             curl -fsSL --retry 5 --retry-all-errors "https://afaqq-affaq.vercel.app/images/projects/${name}.jpg" -o "/tmp/${name}-static.jpg"
