@@ -1,0 +1,163 @@
+name: Restore Project Images via Valid AVIF Blobs
+
+on:
+  push:
+    branches:
+      - fix/project-images-avif
+    paths:
+      - ".github/workflows/project-images-avif-restore.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  restore-and-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch validated binary blobs from Git object store
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/project-images
+          fetch_blob() {
+            local sha="$1"
+            local out="$2"
+            gh api "repos/${REPO}/git/blobs/${sha}" --jq '.content' | tr -d '\n' | base64 -d > "$out"
+          }
+          fetch_blob 562678dde6213d6a80b9ea604342c92b32caab54 /tmp/project-images/drcc.avif
+          fetch_blob b6eddbe0e914644f8eee490c99cb74c6749926cd /tmp/project-images/crcc.avif
+          fetch_blob 1a803c1a5770e55887d3396dc676f6ddc9d84529 /tmp/project-images/rcc.avif
+          fetch_blob 854dfa3cff7de00b36c87aa51846e0a4c9316d35 /tmp/project-images/benban.avif
+          sha256sum /tmp/project-images/*.avif
+          test "$(sha256sum /tmp/project-images/drcc.avif | cut -d' ' -f1)" = "6a52baab789305cad423507dfa307e23386124ac4dcf1d00871dec3624bf75a5"
+          test "$(sha256sum /tmp/project-images/crcc.avif | cut -d' ' -f1)" = "66fded72a3da727d513e5612ad382f0efe73e6d1945e73fbcb5743e71c5b632d"
+          test "$(sha256sum /tmp/project-images/rcc.avif | cut -d' ' -f1)" = "c3ca8e0f13bc8d300b08981656365d49b07881ed7e35779ae02a9b6370dfcf81"
+          test "$(sha256sum /tmp/project-images/benban.avif | cut -d' ' -f1)" = "2ae8e22936667c685a6c38fd64d12fa51a92ad51bb05fcacba5030df0706339a"
+
+      - name: Decode-check AVIF files
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet pillow pillow-avif-plugin
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import pillow_avif
+
+          expected = {
+              'drcc.avif': (800, 600),
+              'crcc.avif': (800, 600),
+              'rcc.avif': (1000, 563),
+              'benban.avif': (800, 600),
+          }
+          root = Path('/tmp/project-images')
+          for name, size in expected.items():
+              with Image.open(root / name) as image:
+                  image.load()
+                  assert image.size == size, (name, image.size, size)
+                  print(f'VALID {name}: {image.size[0]}x{image.size[1]}')
+          PY
+
+      - name: Build clean feature branch from latest main
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B fix/project-images-avif-clean origin/main
+          cp /tmp/project-images/*.avif public/images/projects/
+          sed -i 's#/images/projects/drcc\.webp#/images/projects/drcc.avif#g' src/content/projects.ts
+          sed -i 's#/images/projects/crcc\.webp#/images/projects/crcc.avif#g' src/content/projects.ts
+          sed -i 's#/images/projects/rcc\.webp#/images/projects/rcc.avif#g' src/content/projects.ts
+          sed -i 's#/images/projects/benban\.webp#/images/projects/benban.avif#g' src/content/projects.ts
+          grep -n 'images/projects/.*\.avif' src/content/projects.ts
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install and run project checks
+        run: |
+          npm install --no-audit --no-fund
+          npm run check
+          npm run build
+
+      - name: Render QA with real image decode checks
+        run: |
+          set -euo pipefail
+          npm install --no-save --no-audit --no-fund playwright
+          npx playwright install --with-deps chromium
+          npm run start > /tmp/afaaq-next.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          for i in {1..40}; do
+            if curl -fsS http://127.0.0.1:3000 >/dev/null; then break; fi
+            sleep 1
+          done
+          cat > /tmp/project-images-qa.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          const browser = await chromium.launch({ headless: true });
+          const page = await browser.newPage({ viewport: { width: 1366, height: 900 }, deviceScaleFactor: 1 });
+          const errors = [];
+          page.on('pageerror', e => errors.push(`pageerror: ${e.message}`));
+          page.on('console', m => { if (m.type() === 'error') errors.push(`console: ${m.text()}`); });
+          await page.goto('http://127.0.0.1:3000', { waitUntil: 'networkidle' });
+          const height = await page.evaluate(() => document.documentElement.scrollHeight);
+          for (let y = 0; y < height; y += 650) {
+            await page.evaluate(v => window.scrollTo(0, v), y);
+            await page.waitForTimeout(100);
+          }
+          await page.evaluate(() => window.scrollTo(0, 0));
+          await page.waitForTimeout(250);
+          const alts = [
+            'Delta Regional Control Center project building in Egypt.',
+            'Regional control center upgrade with SCADA monitoring and operator workstations.',
+            'Engineers testing and commissioning control and SCADA panels for a regional control center.',
+            'Solar power plant and electrical infrastructure in the Aswan desert.',
+          ];
+          const report = await page.evaluate((alts) => {
+            return alts.map(alt => {
+              const img = [...document.images].find(i => i.alt === alt);
+              if (!img) return { alt, found: false };
+              const rect = img.getBoundingClientRect();
+              return {
+                alt,
+                found: true,
+                complete: img.complete,
+                naturalWidth: img.naturalWidth,
+                naturalHeight: img.naturalHeight,
+                currentSrc: img.currentSrc,
+                rect: { width: rect.width, height: rect.height },
+              };
+            });
+          }, alts);
+          console.log(JSON.stringify({ report, errors }, null, 2));
+          for (const item of report) {
+            if (!item.found || !item.complete || item.naturalWidth <= 0 || item.naturalHeight <= 0) process.exitCode = 1;
+          }
+          if (errors.length) process.exitCode = 1;
+          await page.screenshot({ path: 'project-images-home.png', fullPage: true });
+          await browser.close();
+          EOF
+          node /tmp/project-images-qa.mjs
+
+      - name: Commit and push only after QA succeeds
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/projects.ts public/images/projects/drcc.avif public/images/projects/crcc.avif public/images/projects/rcc.avif public/images/projects/benban.avif
+          git diff --cached --quiet && { echo 'No changes'; exit 1; }
+          git commit -m "Restore project photography with valid AVIF assets"
+          git push --force origin fix/project-images-avif-clean
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: project-images-avif-qa
+          path: project-images-home.png
+          retention-days: 1
