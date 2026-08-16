@@ -1,0 +1,29 @@
+name: Image Assets Audit
+
+on:
+  push:
+    branches:
+      - qa/image-assets-audit
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect image metadata
+        run: |
+          set -euo pipefail
+          echo "== files =="
+          find public/images -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -print -exec file {} \;
+          echo "== sizes =="
+          du -h public/images/home/* public/images/projects/* 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afaaq-image-assets
+          path: |
+            public/images/home
+            public/images/projects
+          retention-days: 1
