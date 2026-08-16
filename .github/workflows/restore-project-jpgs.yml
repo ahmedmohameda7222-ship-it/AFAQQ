@@ -48,7 +48,7 @@ jobs:
               source = src_dir / f'{name}.jpg'
               target = out_dir / f'{name}.jpg'
               image = ImageOps.exif_transpose(Image.open(source)).convert('RGB')
-              max_width = 1400
+              max_width = 1280
               if image.width > max_width:
                   height = round(image.height * max_width / image.width)
                   image = image.resize((max_width, height), Image.Resampling.LANCZOS)
@@ -81,7 +81,7 @@ jobs:
 
       - name: Repository checks and production build
         run: |
-          npm ci
+          npm install --no-audit --no-fund
           npm run check
           npm run build
 
