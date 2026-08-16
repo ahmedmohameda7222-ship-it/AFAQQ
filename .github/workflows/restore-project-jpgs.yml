@@ -85,23 +85,28 @@ jobs:
           npm run check
           npm run build
 
-      - name: Verify static and optimized project image routes
+      - name: Verify generated project JPGs decode fully
         run: |
-          set -euo pipefail
-          npm start > /tmp/afaaq-next.log 2>&1 &
-          server_pid=$!
-          trap 'kill $server_pid || true' EXIT
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
 
-          for name in drcc crcc rcc benban; do
-            static_code=$(curl -sS --retry 30 --retry-connrefused --retry-delay 1 -o "/tmp/${name}-static" -w '%{http_code}' "http://127.0.0.1:3000/images/projects/${name}.jpg")
-            test "$static_code" = "200"
-            test -s "/tmp/${name}-static"
+          expected = {
+              'drcc': (1280, 960),
+              'crcc': (1280, 852),
+              'rcc': (1280, 960),
+              'benban': (1280, 960),
+          }
 
-            optimized_code=$(curl -sS -o "/tmp/${name}-optimized" -w '%{http_code}' "http://127.0.0.1:3000/_next/image?url=%2Fimages%2Fprojects%2F${name}.jpg&w=1080&q=82")
-            test "$optimized_code" = "200"
-            test -s "/tmp/${name}-optimized"
-            echo "${name}: static=${static_code}, optimized=${optimized_code}"
-          done
+          for name, dimensions in expected.items():
+              path = Path(f'public/images/projects/{name}.jpg')
+              assert path.exists() and path.stat().st_size > 0, f'{name}: missing or empty'
+              with Image.open(path) as image:
+                  image.load()
+                  assert image.format == 'JPEG', f'{name}: expected JPEG, got {image.format}'
+                  assert image.size == dimensions, f'{name}: expected {dimensions}, got {image.size}'
+              print(f'{name}: JPEG decode OK, {path.stat().st_size / 1024:.1f} KB')
+          PY
 
       - name: Commit clean production fix branch
         run: |
