@@ -1,0 +1,33 @@
+name: Audit reference images
+on:
+  push:
+    branches: [qa/reference-images-upload-final]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Find candidate image files and hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== LOCAL CURRENT BRANCH FILE NAMES ==='
+          git branch -r | sed 's#^[ *]*##' | while read ref; do
+            case "$ref" in
+              *'->'*) continue ;;
+            esac
+            for p in public/images/home/home-substation.jpg public/images/projects/drcc.jpg public/images/projects/crcc.jpg public/images/projects/rcc.jpg public/images/projects/benban.jpg; do
+              if git cat-file -e "$ref:$p" 2>/dev/null; then
+                tmp=$(mktemp)
+                git show "$ref:$p" > "$tmp"
+                h=$(sha256sum "$tmp" | awk '{print $1}')
+                s=$(wc -c < "$tmp")
+                echo "$ref | $p | $h | $s"
+                rm -f "$tmp"
+              fi
+            done
+          done
