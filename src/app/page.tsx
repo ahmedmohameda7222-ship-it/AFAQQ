@@ -52,7 +52,7 @@ export default function HomePage() {
             <div className="min-w-0 lg:col-span-5">
               <div className="relative aspect-[4/3] overflow-hidden bg-[var(--graphite)] sm:aspect-[16/10] lg:aspect-[4/5] lg:min-h-[32rem]">
                 <Image
-                  src="/images/home/home-substation.webp"
+                  src="/images/home/home-substation.avif"
                   alt="High-voltage electrical substation at blue hour."
                   fill
                   priority
