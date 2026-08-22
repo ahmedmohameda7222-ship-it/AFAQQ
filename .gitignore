@@ -6,3 +6,4 @@ out/
 .DS_Store
 *.log
 .vercel/
+public/images/home/home-substation-original.avif
