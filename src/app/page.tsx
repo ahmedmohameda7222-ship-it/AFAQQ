@@ -29,10 +29,10 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="overflow-hidden pb-14 pt-7 sm:pb-16 sm:pt-10 md:pb-20 md:pt-12 lg:pt-14">
-        <Container>
-          <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-12">
-            <div className="min-w-0 lg:col-span-7 lg:pt-4">
+      <section className="relative isolate overflow-hidden pt-7 sm:pt-10 md:pt-12 lg:min-h-[650px] lg:pt-0 xl:min-h-[690px]">
+        <Container className="relative z-10">
+          <div className="lg:flex lg:min-h-[650px] lg:items-center xl:min-h-[690px]">
+            <div className="min-w-0 lg:w-[56%] lg:py-14 xl:w-[54%] xl:py-16">
               <SectionLabel>Electrical Engineering & Contracting</SectionLabel>
 
               <h1 className="mt-5 max-w-[740px] text-[clamp(2.6rem,4.8vw,4.25rem)] font-medium leading-[0.99] tracking-[-0.042em] text-[var(--ink)] sm:mt-6">
@@ -48,25 +48,40 @@ export default function HomePage() {
                 <ArrowLink href="/projects">View Our Projects</ArrowLink>
               </div>
             </div>
-
-            <div className="min-w-0 lg:col-span-5">
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--graphite)] sm:aspect-[16/10] lg:aspect-[4/5] lg:min-h-[32rem]">
-                <Image
-                  src="/images/home/home-substation.avif"
-                  alt="High-voltage electrical substation at blue hour."
-                  fill
-                  priority
-                  sizes="(max-width: 1023px) calc(100vw - 2.5rem), 42vw"
-                  className="object-cover object-center lg:object-[55%_center]"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/24 to-transparent" aria-hidden="true" />
-              </div>
-            </div>
           </div>
         </Container>
+
+        <div className="relative z-0 mt-6 overflow-hidden sm:mt-8 lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[64%] xl:w-[62%]">
+          <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:h-full lg:aspect-auto">
+            <Image
+              src="/images/home/home-substation-original-1440.jpg"
+              alt="High-voltage electrical substation at sunset."
+              fill
+              priority
+              sizes="(max-width: 1023px) 100vw, 64vw"
+              className="object-cover object-center lg:object-[58%_center]"
+            />
+            <div
+              className="absolute inset-0 lg:hidden"
+              style={{
+                background:
+                  "linear-gradient(180deg, var(--canvas) 0%, color-mix(in srgb, var(--canvas) 82%, transparent) 10%, color-mix(in srgb, var(--canvas) 36%, transparent) 22%, transparent 36%)",
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute inset-0 hidden lg:block"
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--canvas) 0%, var(--canvas) 10%, color-mix(in srgb, var(--canvas) 96%, transparent) 22%, color-mix(in srgb, var(--canvas) 70%, transparent) 38%, color-mix(in srgb, var(--canvas) 24%, transparent) 52%, transparent 68%)",
+              }}
+              aria-hidden="true"
+            />
+          </div>
+        </div>
       </section>
 
-      <section className="pb-16 md:pb-24">
+      <section className="pb-16 pt-12 md:pb-24 md:pt-14 lg:pt-16">
         <Container>
           <div className="border-t border-[var(--rule)] pt-7 md:pt-8">
             <SectionLabel>Power System Experience</SectionLabel>
