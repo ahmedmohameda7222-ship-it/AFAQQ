@@ -29,10 +29,10 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="overflow-hidden pb-14 pt-7 sm:pb-16 sm:pt-10 md:pb-20 md:pt-12 lg:pt-14">
+      <section className="overflow-hidden pb-14 pt-7 sm:pb-16 sm:pt-10 md:pb-20 md:pt-12 lg:py-12 xl:py-14">
         <Container>
-          <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-12">
-            <div className="min-w-0 lg:col-span-7 lg:pt-4">
+          <div className="relative lg:min-h-[40rem] xl:min-h-[43rem]">
+            <div className="relative z-10 min-w-0 lg:w-[57%] lg:py-12 xl:py-14">
               <SectionLabel>Electrical Engineering & Contracting</SectionLabel>
 
               <h1 className="mt-5 max-w-[740px] text-[clamp(2.6rem,4.8vw,4.25rem)] font-medium leading-[0.99] tracking-[-0.042em] text-[var(--ink)] sm:mt-6">
@@ -49,18 +49,15 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="min-w-0 lg:col-span-5">
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--graphite)] sm:aspect-[16/10] lg:aspect-[4/5] lg:min-h-[32rem]">
-                <Image
-                  src="/images/home/home-substation.avif"
-                  alt="High-voltage electrical substation at blue hour."
-                  fill
-                  priority
-                  sizes="(max-width: 1023px) calc(100vw - 2.5rem), 42vw"
-                  className="object-cover object-center lg:object-[55%_center]"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/24 to-transparent" aria-hidden="true" />
-              </div>
+            <div className="home-hero-media relative mt-9 aspect-[16/10] overflow-hidden sm:mt-10 sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[64%] lg:aspect-auto">
+              <Image
+                src="/images/home/home-substation-original.avif"
+                alt="High-voltage electrical substation in warm evening light."
+                fill
+                priority
+                sizes="(max-width: 1023px) calc(100vw - 2.5rem), 64vw"
+                className="object-cover object-[58%_center] lg:object-[62%_center]"
+              />
             </div>
           </div>
         </Container>

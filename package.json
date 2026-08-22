@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "materialize:hero": "node scripts/materialize-home-hero.mjs",
+    "dev": "npm run materialize:hero && next dev",
+    "build": "npm run materialize:hero && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:site-url": "node --experimental-strip-types scripts/test-site-url.mjs",
     "test:content": "node --experimental-strip-types scripts/validate-content.mjs",
-    "check": "npm run test:site-url && npm run test:content && npm run lint && npm run typecheck",
-    "vercel-build": "npm run check && next build"
+    "test:hero": "node scripts/test-home-hero.mjs",
+    "check": "npm run test:site-url && npm run test:content && npm run test:hero && npm run lint && npm run typecheck",
+    "vercel-build": "npm run materialize:hero && npm run check && next build"
   },
   "dependencies": {
     "next": "16.2.11",
