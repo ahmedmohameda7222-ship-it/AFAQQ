@@ -29,17 +29,17 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="overflow-hidden pb-14 pt-7 sm:pb-16 sm:pt-10 md:pb-20 md:pt-12 lg:pt-14">
+      <section className="relative isolate overflow-hidden pb-14 pt-7 sm:pb-16 sm:pt-10 md:pb-20 md:pt-12 lg:min-h-[38rem] lg:py-0 xl:min-h-[41rem]">
         <Container>
-          <div className="grid items-start gap-8 sm:gap-10 lg:grid-cols-12">
-            <div className="min-w-0 lg:col-span-7 lg:pt-4">
+          <div className="relative z-10 grid lg:min-h-[38rem] lg:grid-cols-12 lg:items-center xl:min-h-[41rem]">
+            <div className="min-w-0 lg:col-span-6 lg:py-16 xl:py-20">
               <SectionLabel>Electrical Engineering & Contracting</SectionLabel>
 
               <h1 className="mt-5 max-w-[740px] text-[clamp(2.6rem,4.8vw,4.25rem)] font-medium leading-[0.99] tracking-[-0.042em] text-[var(--ink)] sm:mt-6">
                 Electrical testing, commissioning and protection for power systems.
               </h1>
 
-              <p className="mt-6 max-w-[42rem] text-[1.03rem] leading-7 text-[var(--muted)] sm:mt-7 md:text-[1.13rem] md:leading-8">
+              <p className="mt-6 max-w-[42rem] text-[1.03rem] leading-7 text-[var(--muted)] sm:mt-7 md:text-[1.13rem] md:leading-8 lg:max-w-[36rem]">
                 AFAAQ ARAB supports utilities, EPC contractors and power-system teams across substations and control infrastructure, from electrical installation and system integration through testing, energization and handover.
               </p>
 
@@ -48,22 +48,35 @@ export default function HomePage() {
                 <ArrowLink href="/projects">View Our Projects</ArrowLink>
               </div>
             </div>
-
-            <div className="min-w-0 lg:col-span-5">
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--graphite)] sm:aspect-[16/10] lg:aspect-[4/5] lg:min-h-[32rem]">
-                <Image
-                  src="/images/home/home-substation.avif"
-                  alt="High-voltage electrical substation at blue hour."
-                  fill
-                  priority
-                  sizes="(max-width: 1023px) calc(100vw - 2.5rem), 42vw"
-                  className="object-cover object-center lg:object-[55%_center]"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/24 to-transparent" aria-hidden="true" />
-              </div>
-            </div>
           </div>
         </Container>
+
+        <div className="relative mt-8 aspect-[16/10] overflow-hidden sm:mt-10 sm:aspect-[16/9] lg:pointer-events-none lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[62%] lg:aspect-auto">
+          <Image
+            src="/images/home/home-substation-original-1440.jpg"
+            alt="High-voltage electrical substation at sunrise."
+            fill
+            priority
+            sizes="(max-width: 1023px) 100vw, 62vw"
+            className="object-cover object-[56%_center] lg:object-[55%_center]"
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 h-[28%] lg:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, var(--canvas) 0%, rgba(244,243,239,0.9) 18%, rgba(244,243,239,0.46) 52%, rgba(244,243,239,0) 100%)",
+            }}
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-0 hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(90deg, var(--canvas) 0%, rgba(244,243,239,0.98) 9%, rgba(244,243,239,0.88) 24%, rgba(244,243,239,0.55) 41%, rgba(244,243,239,0.18) 57%, rgba(244,243,239,0) 72%)",
+            }}
+            aria-hidden="true"
+          />
+        </div>
       </section>
 
       <section className="pb-16 md:pb-24">
