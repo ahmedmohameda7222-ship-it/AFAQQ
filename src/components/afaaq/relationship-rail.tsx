@@ -1,103 +1,39 @@
-import Image from "next/image";
-
 type RelationshipRailProps = {
   names: readonly string[];
 };
 
-type ClientVisual = {
-  domain?: string;
-  logoUrl?: string;
-  wide?: boolean;
-};
-
-const clientVisuals: Record<string, ClientVisual> = {
-  "Schneider Electric": { domain: "se.com" },
-  "ELSEWED ELECTRIC": { domain: "elsewedyelectric.com" },
-  "ELSEWEDY ELECTRIC": { domain: "elsewedyelectric.com" },
-  Madkour: { domain: "madkour.com.eg" },
-  "GE Vernova": { domain: "gevernova.com" },
-  "Siemens Energy": { domain: "siemens-energy.com" },
-  ABB: { domain: "abb.com" },
-  "Hitachi Energy": { domain: "hitachienergy.com" },
-  EETC: { domain: "eetc.gov.eg" },
-  NECC: { domain: "eetc.gov.eg" },
-};
-
-function fallbackMark(name: string) {
-  return name
-    .replace(/[^A-Za-z0-9 ]/g, " ")
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
-}
-
-function ClientItem({ name }: { name: string }) {
-  const visual = clientVisuals[name];
-  const logoUrl = visual?.logoUrl ?? (visual?.domain
-    ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${visual.domain}`)}&sz=128`
-    : null);
-  const width = visual?.wide ? 80 : 52;
-  const height = 52;
-
-  return (
-    <span className="flex min-w-0 items-center">
-      <span
-        className={`relative mr-4 inline-flex h-12 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)]/75 bg-white md:mr-5 md:h-13 ${visual?.wide ? "w-[72px] md:w-20" : "w-12 md:w-13"}`}
-        aria-hidden="true"
-      >
-        <span className="font-technical text-[0.6rem] font-semibold tracking-[-0.04em] text-[var(--brand-navy)]/60">{fallbackMark(name)}</span>
-        {logoUrl ? (
-          <Image
-            src={logoUrl}
-            alt=""
-            width={width}
-            height={height}
-            sizes={`${width}px`}
-            loading="lazy"
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${visual?.wide ? "h-9 w-14 md:h-10 md:w-16" : "h-8 w-8 md:h-9 md:w-9"}`}
-          />
-        ) : null}
-      </span>
-      <span className="min-w-0">{name}</span>
-    </span>
-  );
-}
-
 export function RelationshipRail({ names }: RelationshipRailProps) {
   if (names.length === 0) return null;
 
-  const items = [...names, ...names];
-
   return (
-    <div className="border-y border-[var(--rule)] py-8 sm:py-9 md:py-11">
-      <div className="mb-7 flex items-end justify-between gap-5 sm:mb-8">
-        <p className="font-technical m-0 text-[0.8rem] font-medium uppercase leading-5 tracking-[0.09em] text-[var(--muted)] sm:text-[0.82rem]">
-          Project Relationships
+    <section aria-labelledby="relationship-heading">
+      <div className="grid gap-5 md:grid-cols-12 md:items-end md:gap-8">
+        <div className="min-w-0 md:col-span-8">
+          <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-[var(--brand-navy)]">
+            Relationships
+          </p>
+          <h2
+            id="relationship-heading"
+            className="font-display mb-0 mt-4 max-w-[20ch] text-[clamp(2.1rem,3.7vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.032em] text-[var(--ink)]"
+          >
+            Selected Project & Client Relationships
+          </h2>
+        </div>
+        <p className="m-0 max-w-lg text-[1rem] leading-7 text-[var(--muted)] md:col-span-4 md:justify-self-end md:text-[1.05rem]">
+          Organizations and engineering partners connected to AFAAQ&apos;s verified project and delivery experience.
         </p>
-        <span className="hidden h-px max-w-[18rem] flex-1 bg-[var(--rule)] sm:block" aria-hidden="true" />
       </div>
 
-      <div
-        className="relationship-rail__viewport overflow-hidden"
-        role="region"
-        aria-label="Project relationships"
-      >
-        <div className="relationship-marquee__track flex w-max items-center whitespace-nowrap" aria-label={names.join(", ")}>
-          {items.map((name, index) => (
-            <span
-              key={`${name}-${index}`}
-              className="flex items-center text-[1.5rem] font-medium tracking-[-0.028em] sm:text-[1.72rem] md:text-[clamp(1.85rem,2.5vw,2.3rem)]"
-              aria-hidden={index >= names.length}
-            >
-              <ClientItem name={name} />
-              <span className="mx-6 h-7 w-px bg-[var(--rule)] sm:mx-7 md:mx-9 lg:mx-10" aria-hidden="true" />
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
+      <ul className="mt-8 grid list-none border-y border-[var(--rule)] p-0 sm:grid-cols-2 lg:grid-cols-3">
+        {names.map((name, index) => (
+          <li
+            key={name}
+            className={`min-w-0 py-6 text-[1.08rem] font-semibold leading-7 text-[var(--ink)] sm:min-h-[6.5rem] sm:px-6 sm:py-7 sm:text-[1.14rem] lg:min-h-[7rem] lg:px-7 lg:text-[1.2rem] ${index > 0 ? "border-t border-[var(--rule)] sm:border-t-0" : ""} ${index % 2 === 1 ? "sm:border-l sm:border-[var(--rule)]" : ""} ${index >= 2 ? "sm:border-t" : ""} ${index % 3 !== 0 ? "lg:border-l" : "lg:border-l-0"} ${index >= 3 ? "lg:border-t" : "lg:border-t-0"}`}
+          >
+            <span className="block max-w-[24rem] break-words">{name}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
