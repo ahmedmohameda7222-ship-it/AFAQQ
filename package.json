@@ -11,7 +11,8 @@
     "test:site-url": "node --experimental-strip-types scripts/test-site-url.mjs",
     "test:content": "node --experimental-strip-types scripts/validate-content.mjs",
     "test:project-media": "node --experimental-strip-types scripts/validate-project-media.mjs",
-    "check": "npm run test:site-url && npm run test:content && npm run test:project-media && npm run lint && npm run typecheck",
+    "test:home-polish": "node --experimental-strip-types scripts/validate-home-polish.mjs",
+    "check": "npm run test:site-url && npm run test:content && npm run test:project-media && npm run test:home-polish && npm run lint && npm run typecheck",
     "vercel-build": "npm run check && next build"
   },
   "dependencies": {
