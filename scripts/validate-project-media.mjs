@@ -14,11 +14,13 @@ for (const project of projects) {
 const dossierSurfaces = [
   "../src/app/page.tsx",
   "../src/components/afaaq/project-showcase-rail.tsx",
+  "../src/components/afaaq/project-dossier.tsx",
 ];
 
 for (const relativePath of dossierSurfaces) {
   const source = readFileSync(new URL(relativePath, import.meta.url), "utf8");
   assert(!source.includes("ProjectMedia"), `${relativePath} must not use a media-shaped Home project placeholder.`);
+  assert(!source.includes("/images/projects/"), `${relativePath} must not render project photography on Home.`);
 }
 
 const innerProjectSurfaces = [
