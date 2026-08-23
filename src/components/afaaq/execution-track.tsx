@@ -12,12 +12,13 @@ export function ExecutionTrack() {
     <ol className="mt-10 grid list-none border-y border-[var(--ink)] p-0 sm:mt-12 md:grid-cols-2 lg:grid-cols-3">
       {steps.map(([title, description], index) => {
         const isLastColumn = index % 3 === 2;
-        const isSecondRow = index >= 3;
+        const isLastMdRow = index >= 4;
+        const isSecondLgRow = index >= 3;
 
         return (
           <li
             key={title}
-            className={`relative min-w-0 border-b border-[var(--rule)] py-7 sm:py-8 md:px-6 lg:min-h-[15.5rem] lg:px-8 ${isLastColumn ? "lg:border-r-0" : "lg:border-r"} ${isSecondRow ? "lg:border-b-0" : ""}`}
+            className={`relative min-w-0 border-b border-[var(--rule)] py-7 last:border-b-0 sm:py-8 md:px-6 ${isLastMdRow ? "md:border-b-0" : ""} lg:min-h-[15.5rem] lg:px-8 ${isLastColumn ? "lg:border-r-0" : "lg:border-r"} ${isSecondLgRow ? "lg:border-b-0" : ""}`}
           >
             <div className="flex items-baseline justify-between gap-4">
               <span className="font-technical text-[clamp(2.5rem,4vw,3.8rem)] font-medium leading-none tracking-[-0.055em] text-[var(--ink)]">
