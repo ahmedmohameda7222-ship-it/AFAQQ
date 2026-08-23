@@ -7,6 +7,7 @@ function assert(condition, message) {
 const home = readFileSync(new URL("../src/app/page.tsx", import.meta.url), "utf8");
 const projectBoard = readFileSync(new URL("../src/components/afaaq/project-reference-board.tsx", import.meta.url), "utf8");
 const capabilityGrid = readFileSync(new URL("../src/components/afaaq/capability-grid.tsx", import.meta.url), "utf8");
+const companyScale = readFileSync(new URL("../src/components/afaaq/company-scale.tsx", import.meta.url), "utf8");
 const relationships = readFileSync(new URL("../src/components/afaaq/relationship-rail.tsx", import.meta.url), "utf8");
 
 assert(
@@ -23,7 +24,7 @@ assert(!home.includes("FeaturedProjectDossier"), "Home must not retain the black
 assert(!home.includes("<ProjectMedia"), "Home must not render a media-shaped project placeholder.");
 assert(home.includes("AboutBrandArtwork"), "Home About must keep the approved AFAAQ artwork.");
 assert(!home.includes('/images/projects/'), "Home must not render project photography.");
-assert(home.includes("companyFacts"), "Home must continue sourcing company credibility from verified content.");
+assert(companyScale.includes('from "@/content/company"'), "Company scale must source proof from verified company content.");
 assert(!projectBoard.includes("ProjectMedia"), "Project references must remain image-free.");
 assert(!projectBoard.includes('"use client"'), "Project references must remain server-rendered.");
 assert(!capabilityGrid.includes("padStart"), "Capabilities must not use decorative numbering.");
