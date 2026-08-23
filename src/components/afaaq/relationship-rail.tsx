@@ -39,16 +39,16 @@ function ClientItem({ name }: { name: string }) {
   const logoUrl = visual?.logoUrl ?? (visual?.domain
     ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${visual.domain}`)}&sz=128`
     : null);
-  const width = visual?.wide ? 64 : 40;
-  const height = 40;
+  const width = visual?.wide ? 72 : 48;
+  const height = 48;
 
   return (
     <span className="flex min-w-0 items-center">
       <span
-        className={`relative mr-3 inline-flex h-9 shrink-0 items-center justify-center overflow-hidden rounded-[2px] bg-white md:mr-4 md:h-10 ${visual?.wide ? "w-14 md:w-16" : "w-9 md:w-10"}`}
+        className={`relative mr-3.5 inline-flex h-11 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)]/75 bg-white md:mr-4 md:h-12 ${visual?.wide ? "w-16 md:w-[72px]" : "w-11 md:w-12"}`}
         aria-hidden="true"
       >
-        <span className="font-technical text-[0.55rem] font-semibold tracking-[-0.04em] text-[var(--brand-navy)]/55">{fallbackMark(name)}</span>
+        <span className="font-technical text-[0.6rem] font-semibold tracking-[-0.04em] text-[var(--brand-navy)]/60">{fallbackMark(name)}</span>
         {logoUrl ? (
           <Image
             src={logoUrl}
@@ -57,7 +57,7 @@ function ClientItem({ name }: { name: string }) {
             height={height}
             sizes={`${width}px`}
             loading="lazy"
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${visual?.wide ? "h-8 w-12 md:h-9 md:w-14" : "h-7 w-7 md:h-8 md:w-8"}`}
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${visual?.wide ? "h-9 w-14 md:h-10 md:w-16" : "h-8 w-8 md:h-9 md:w-9"}`}
           />
         ) : null}
       </span>
@@ -72,10 +72,13 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
   const items = [...names, ...names];
 
   return (
-    <div className="border-y border-[var(--rule)] py-7 sm:py-8 md:py-10">
-      <p className="font-technical mb-6 mt-0 text-[0.75rem] font-medium uppercase leading-5 tracking-[0.09em] text-[var(--muted)] sm:mb-7 sm:text-[0.78rem] sm:tracking-[0.1em]">
-        Project Relationships
-      </p>
+    <div className="border-y border-[var(--rule)] py-8 sm:py-9 md:py-11">
+      <div className="mb-7 flex items-end justify-between gap-5 sm:mb-8">
+        <p className="font-technical m-0 text-[0.8rem] font-medium uppercase leading-5 tracking-[0.09em] text-[var(--muted)] sm:text-[0.82rem]">
+          Project Relationships
+        </p>
+        <span className="hidden h-px max-w-[18rem] flex-1 bg-[var(--rule)] sm:block" aria-hidden="true" />
+      </div>
 
       <div
         className="relationship-rail__viewport overflow-hidden"
@@ -86,11 +89,11 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
           {items.map((name, index) => (
             <span
               key={`${name}-${index}`}
-              className="flex items-center text-[1.3rem] font-medium tracking-[-0.025em] sm:text-[1.55rem] sm:tracking-[-0.03em] md:text-[clamp(1.65rem,2.8vw,2.35rem)] md:tracking-[-0.035em]"
+              className="flex items-center text-[1.38rem] font-medium tracking-[-0.025em] sm:text-[1.62rem] sm:tracking-[-0.03em] md:text-[clamp(1.75rem,2.6vw,2.25rem)] md:tracking-[-0.035em]"
               aria-hidden={index >= names.length}
             >
               <ClientItem name={name} />
-              <span className="mx-5 text-[var(--rule)] sm:mx-7 md:mx-9 lg:mx-12">—</span>
+              <span className="mx-6 h-7 w-px bg-[var(--rule)] sm:mx-8 md:mx-10 lg:mx-12" aria-hidden="true" />
             </span>
           ))}
         </div>
