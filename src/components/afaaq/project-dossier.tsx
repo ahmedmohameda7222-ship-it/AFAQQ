@@ -13,15 +13,14 @@ function ArrowIcon() {
 function TechnicalGuide() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <span className="absolute inset-x-0 top-[28%] border-t border-white/10" />
-      <span className="absolute inset-x-0 top-[64%] border-t border-white/10" />
-      <span className="absolute bottom-0 left-[18%] top-0 border-l border-white/[0.07]" />
-      <span className="absolute bottom-0 left-[72%] top-0 border-l border-white/[0.05]" />
-      <span className="absolute left-6 top-[28%] h-2 w-2 -translate-y-1/2 border border-white/25 sm:left-8 lg:left-10" />
-      <span className="absolute bottom-8 right-8 h-2 w-2 border border-white/30" />
-      <span className="font-technical absolute right-8 top-8 text-[0.64rem] uppercase tracking-[0.16em] text-white/24">
-        SYS / REF
-      </span>
+      <span className="absolute inset-x-0 top-[34%] border-t border-white/10" />
+      <span className="absolute inset-x-0 top-[72%] border-t border-white/[0.08]" />
+      <span className="absolute bottom-0 left-[14%] top-0 border-l border-white/[0.07]" />
+      <span className="absolute bottom-0 left-[52%] top-0 border-l border-white/[0.045]" />
+      <span className="absolute bottom-0 left-[78%] top-0 border-l border-white/[0.06]" />
+      <span className="absolute left-[14%] top-[34%] h-2 w-2 -translate-x-1/2 -translate-y-1/2 border border-white/30" />
+      <span className="absolute left-[52%] top-[72%] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 bg-white/18" />
+      <span className="absolute bottom-7 right-7 h-2 w-2 border border-white/30 sm:bottom-8 sm:right-8" />
     </div>
   );
 }
@@ -34,42 +33,76 @@ export function FeaturedProjectDossier({
   projectNumber: string;
 }) {
   const technicalLabel = getProjectTechnicalLabel(project);
+  const technicalLabelHeading = project.voltage.length ? "System Voltage" : "Technical Profile";
   const locationYear = [project.location, project.year].filter(Boolean).join(" · ");
 
   return (
     <article className="mt-8 overflow-hidden border-y border-[var(--rule)] sm:mt-10 md:mt-12">
       <div className="grid md:grid-cols-12">
-        <div className="relative flex min-h-[22rem] overflow-hidden bg-[var(--graphite)] p-6 text-[var(--canvas)] sm:min-h-[25rem] sm:p-8 md:col-span-7 md:min-h-[32rem] md:border-r md:border-[var(--rule)] lg:p-10">
+        <div className="relative flex min-h-[19rem] overflow-hidden bg-[var(--graphite)] p-6 text-[var(--canvas)] sm:min-h-[21rem] sm:p-8 md:col-span-7 md:min-h-[26rem] md:border-r md:border-[var(--rule)] lg:p-9">
           <TechnicalGuide />
-          <div className="relative z-10 flex w-full flex-1 flex-col justify-between gap-12">
-            <div className="flex items-start justify-between gap-5">
-              <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.1em] text-white/58">
-                Project Ref / {projectNumber}
-              </p>
-              {technicalLabel ? (
-                <p className="font-technical m-0 max-w-[54%] text-right text-[0.8rem] font-medium leading-5 text-white/64">
-                  {technicalLabel}
+          <div className="relative z-10 flex w-full flex-1 flex-col justify-between gap-8 sm:gap-10">
+            <div className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
+              <div>
+                <p className="font-technical m-0 text-[0.76rem] font-medium uppercase tracking-[0.1em] text-white/62">
+                  Project Ref / {projectNumber}
                 </p>
+                <p className="font-technical mb-0 mt-2 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-white/58">
+                  Technical Dossier
+                </p>
+              </div>
+              {technicalLabel ? (
+                <div className="sm:text-right">
+                  <p className="font-technical m-0 text-[0.64rem] font-medium uppercase tracking-[0.12em] text-white/58">
+                    {technicalLabelHeading}
+                  </p>
+                  <p className="font-technical mb-0 mt-2 text-[clamp(0.95rem,1.8vw,1.25rem)] font-medium leading-5 text-white/78">
+                    {technicalLabel}
+                  </p>
+                </div>
               ) : null}
             </div>
 
-            <div>
-              <p className="font-technical m-0 text-[0.72rem] uppercase tracking-[0.1em] text-white/48">
-                AFAAQ ARAB / Major Project
-              </p>
-              <h3 className="mb-0 mt-4 max-w-[16ch] text-[clamp(2.45rem,5vw,4.8rem)] font-medium leading-[0.94] tracking-[-0.052em]">
-                {project.name}
-              </h3>
-              {locationYear ? (
-                <p className="font-technical mb-0 mt-6 text-[0.82rem] leading-5 text-white/60">
-                  {locationYear}
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+              <div>
+                <p className="font-technical m-0 text-[0.7rem] uppercase tracking-[0.1em] text-white/58">
+                  AFAAQ ARAB / Major Project
                 </p>
-              ) : null}
+                <h3 className="mb-0 mt-3 max-w-[16ch] text-[clamp(2.25rem,4.6vw,4.2rem)] font-medium leading-[0.94] tracking-[-0.052em]">
+                  {project.name}
+                </h3>
+                {locationYear ? (
+                  <p className="font-technical mb-0 mt-4 text-[0.78rem] leading-5 text-white/62">
+                    {locationYear}
+                  </p>
+                ) : null}
+              </div>
+
+              <dl className="grid grid-cols-2 gap-5 border-t border-white/14 pt-4 lg:min-w-[13rem] lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
+                {project.voltage.length ? (
+                  <div>
+                    <dt className="font-technical text-[0.62rem] font-medium uppercase tracking-[0.12em] text-white/60">
+                      Voltage Levels
+                    </dt>
+                    <dd className="font-technical mb-0 ml-0 mt-2 text-[1.2rem] font-medium leading-none text-white/82">
+                      {String(project.voltage.length).padStart(2, "0")}
+                    </dd>
+                  </div>
+                ) : null}
+                <div>
+                  <dt className="font-technical text-[0.62rem] font-medium uppercase tracking-[0.12em] text-white/60">
+                    Work Scopes
+                  </dt>
+                  <dd className="font-technical mb-0 ml-0 mt-2 text-[1.2rem] font-medium leading-none text-white/82">
+                    {String(project.scopes.length).padStart(2, "0")}
+                  </dd>
+                </div>
+              </dl>
             </div>
           </div>
         </div>
 
-        <div className="min-w-0 border-t border-[var(--rule)] py-7 sm:py-8 md:col-span-5 md:border-t-0 md:pl-8 md:py-9 lg:pl-10">
+        <div className="min-w-0 border-t border-[var(--rule)] py-6 sm:py-7 md:col-span-5 md:border-t-0 md:pl-8 md:py-7 lg:pl-9">
           {project.relationship ? (
             <div>
               <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.09em] text-[var(--muted)]">
@@ -81,21 +114,21 @@ export function FeaturedProjectDossier({
             </div>
           ) : null}
 
-          <div className="mt-8 border-t border-[var(--rule)] pt-6">
+          <div className="mt-6 border-t border-[var(--rule)] pt-5">
             <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.09em] text-[var(--muted)]">
               Scope
             </p>
-            <ul className="mt-5 grid list-none gap-3 p-0">
+            <ul className="mt-3 grid list-none gap-2 p-0">
               {project.scopes.map((scope) => (
-                <li key={scope} className="grid grid-cols-[auto_1fr] gap-3 text-[1.02rem] leading-7 text-[var(--ink)]">
-                  <span className="mt-[0.72rem] h-px w-4 bg-[var(--brand-blue)]" aria-hidden="true" />
+                <li key={scope} className="grid grid-cols-[auto_1fr] gap-3 text-[1.02rem] leading-6 text-[var(--ink)]">
+                  <span className="mt-[0.68rem] h-px w-4 bg-[var(--brand-blue)]" aria-hidden="true" />
                   <span>{scope}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-8 border-t border-[var(--rule)] pt-6">
+          <div className="mt-6 border-t border-[var(--rule)] pt-5">
             <Link
               href={`/projects/${project.slug}`}
               className="group inline-flex min-h-12 items-center gap-3 text-[0.98rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
