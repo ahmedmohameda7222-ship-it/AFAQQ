@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #f4f3ef;
-  --ink: #111315;
-  --graphite: #121517;
-  --muted: #535a5e;
-  --muted-dark: #adb2b5;
-  --rule: #d6d6d1;
-  --brand-navy: #082a72;
+  --canvas: #ffffff;
+  --surface: #f4f7fa;
+  --ink: #111827;
+  --graphite: #111827;
+  --muted: #52606d;
+  --muted-dark: #c4ced8;
+  --rule: #d7dee8;
+  --brand-navy: #0a2f82;
+  --brand-deep-navy: #061d58;
   --brand-blue: #0b8cff;
   --accent: var(--brand-blue);
 
@@ -68,6 +70,10 @@ h3 {
 
 p {
   text-wrap: pretty;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), "Helvetica Neue", "Segoe UI", Arial, sans-serif;
 }
 
 .font-technical {
