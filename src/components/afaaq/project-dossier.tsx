@@ -47,13 +47,13 @@ export function FeaturedProjectDossier({
                 <p className="font-technical m-0 text-[0.76rem] font-medium uppercase tracking-[0.1em] text-white/62">
                   Project Ref / {projectNumber}
                 </p>
-                <p className="font-technical mb-0 mt-2 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-white/38">
+                <p className="font-technical mb-0 mt-2 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-white/58">
                   Technical Dossier
                 </p>
               </div>
               {technicalLabel ? (
                 <div className="sm:text-right">
-                  <p className="font-technical m-0 text-[0.64rem] font-medium uppercase tracking-[0.12em] text-white/38">
+                  <p className="font-technical m-0 text-[0.64rem] font-medium uppercase tracking-[0.12em] text-white/58">
                     {technicalLabelHeading}
                   </p>
                   <p className="font-technical mb-0 mt-2 text-[clamp(0.95rem,1.8vw,1.25rem)] font-medium leading-5 text-white/78">
@@ -65,14 +65,14 @@ export function FeaturedProjectDossier({
 
             <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
               <div>
-                <p className="font-technical m-0 text-[0.7rem] uppercase tracking-[0.1em] text-white/46">
+                <p className="font-technical m-0 text-[0.7rem] uppercase tracking-[0.1em] text-white/58">
                   AFAAQ ARAB / Major Project
                 </p>
                 <h3 className="mb-0 mt-3 max-w-[16ch] text-[clamp(2.25rem,4.6vw,4.2rem)] font-medium leading-[0.94] tracking-[-0.052em]">
                   {project.name}
                 </h3>
                 {locationYear ? (
-                  <p className="font-technical mb-0 mt-4 text-[0.78rem] leading-5 text-white/58">
+                  <p className="font-technical mb-0 mt-4 text-[0.78rem] leading-5 text-white/62">
                     {locationYear}
                   </p>
                 ) : null}
@@ -81,7 +81,7 @@ export function FeaturedProjectDossier({
               <dl className="grid grid-cols-2 gap-5 border-t border-white/14 pt-4 lg:min-w-[13rem] lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
                 {project.voltage.length ? (
                   <div>
-                    <dt className="font-technical text-[0.58rem] font-medium uppercase tracking-[0.12em] text-white/36">
+                    <dt className="font-technical text-[0.62rem] font-medium uppercase tracking-[0.12em] text-white/60">
                       Voltage Levels
                     </dt>
                     <dd className="font-technical mb-0 ml-0 mt-2 text-[1.2rem] font-medium leading-none text-white/82">
@@ -90,7 +90,7 @@ export function FeaturedProjectDossier({
                   </div>
                 ) : null}
                 <div>
-                  <dt className="font-technical text-[0.58rem] font-medium uppercase tracking-[0.12em] text-white/36">
+                  <dt className="font-technical text-[0.62rem] font-medium uppercase tracking-[0.12em] text-white/60">
                     Work Scopes
                   </dt>
                   <dd className="font-technical mb-0 ml-0 mt-2 text-[1.2rem] font-medium leading-none text-white/82">
