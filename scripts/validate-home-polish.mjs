@@ -29,5 +29,6 @@ assert(dossier.includes("Work Scopes"), "Featured project panel must surface its
 assert(dossier.includes("md:min-h-[26rem]"), "Featured project panel must use the reduced 26rem desktop minimum height.");
 assert(!dossier.includes("md:min-h-[32rem]"), "Featured project panel must not retain the oversized 32rem desktop minimum height.");
 assert(dossier.includes("md:py-7"), "Featured project details column must use compact desktop vertical padding.");
+assert(!dossier.includes("text-white/36"), "Functional dossier micro labels must not use low-contrast white/36 text.");
 
 console.log("Premium Technical Dossier Home invariants OK.");
