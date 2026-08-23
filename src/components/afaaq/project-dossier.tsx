@@ -39,9 +39,9 @@ export function FeaturedProjectDossier({
   return (
     <article className="mt-8 overflow-hidden border-y border-[var(--rule)] sm:mt-10 md:mt-12">
       <div className="grid md:grid-cols-12">
-        <div className="relative min-h-[22rem] overflow-hidden bg-[var(--graphite)] p-6 text-[var(--canvas)] sm:min-h-[25rem] sm:p-8 md:col-span-7 md:min-h-[32rem] md:border-r md:border-[var(--rule)] lg:p-10">
+        <div className="relative flex min-h-[22rem] overflow-hidden bg-[var(--graphite)] p-6 text-[var(--canvas)] sm:min-h-[25rem] sm:p-8 md:col-span-7 md:min-h-[32rem] md:border-r md:border-[var(--rule)] lg:p-10">
           <TechnicalGuide />
-          <div className="relative z-10 flex h-full flex-col justify-between gap-12">
+          <div className="relative z-10 flex w-full flex-1 flex-col justify-between gap-12">
             <div className="flex items-start justify-between gap-5">
               <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.1em] text-white/58">
                 Project Ref / {projectNumber}
