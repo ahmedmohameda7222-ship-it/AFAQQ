@@ -19,7 +19,7 @@ export function ServiceIndex() {
         <article
           key={service.slug}
           id={service.slug}
-          className="group grid min-w-0 gap-5 border-t border-white/20 py-7 transition-colors duration-[var(--motion-ui)] hover:bg-white/[0.025] sm:gap-6 sm:py-8 md:grid-cols-12 md:gap-8 md:px-2 md:py-10 last:border-b"
+          className="group grid min-w-0 gap-5 border-t border-white/20 py-8 transition-colors duration-[var(--motion-ui)] hover:bg-white/[0.025] sm:gap-6 sm:py-9 md:grid-cols-12 md:gap-8 md:px-2 md:py-11 last:border-b"
         >
           <p className="font-technical m-0 text-[0.82rem] font-medium leading-5 tracking-[0.08em] text-white/64 md:col-span-1">
             {String(index + 1).padStart(2, "0")}
@@ -32,7 +32,7 @@ export function ServiceIndex() {
           </div>
 
           <div className="min-w-0 md:col-span-5 md:col-start-8">
-            <p className="m-0 max-w-xl text-[1.02rem] leading-7 text-white/76 sm:text-[1.06rem] sm:leading-8">{service.summary}</p>
+            <p className="m-0 max-w-xl text-[1.02rem] leading-7 text-white/80 sm:text-[1.06rem] sm:leading-8">{service.summary}</p>
             <Link
               href={`/services/${service.slug}`}
               className="group/link mt-4 inline-flex min-h-12 max-w-full items-center gap-3 text-[0.96rem] font-medium sm:mt-5 sm:text-[0.98rem]"
