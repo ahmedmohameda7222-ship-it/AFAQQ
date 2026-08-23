@@ -123,10 +123,10 @@ export function ProjectDossierRecord({
   const locationYear = [project.location, project.year].filter(Boolean).join(" · ");
 
   return (
-    <article className="group min-w-0 border-t border-[var(--rule)] py-6 sm:py-7 lg:py-8">
+    <article className="min-w-0 border-t border-[var(--rule)] py-6 sm:py-7 lg:py-8">
       <Link
         href={`/projects/${project.slug}`}
-        className="block min-h-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
+        className="group block min-h-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
       >
         <div className="flex items-start justify-between gap-5">
           <p className="font-technical m-0 text-[0.76rem] font-medium uppercase tracking-[0.09em] text-[var(--muted)]">
