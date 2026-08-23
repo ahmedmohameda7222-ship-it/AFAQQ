@@ -6,7 +6,6 @@ import { SectionLabel } from "@/components/primitives/section-label";
 import { AboutBrandArtwork } from "@/components/afaaq/about-brand-artwork";
 import { ExecutionTrack } from "@/components/afaaq/execution-track";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
-import { ProjectMedia } from "@/components/afaaq/project-media";
 import { ProjectShowcaseRail } from "@/components/afaaq/project-showcase-rail";
 import { RelationshipRail } from "@/components/afaaq/relationship-rail";
 import { ServiceIndex } from "@/components/afaaq/service-index";
@@ -141,15 +140,9 @@ export default function HomePage() {
                   <h3 className="mt-4 max-w-3xl text-[clamp(2.15rem,4.4vw,3.9rem)] font-medium leading-[1] tracking-[-0.042em] sm:mt-5">
                     {featuredProject.name}
                   </h3>
-                  <ProjectMedia
-                    project={featuredProject}
-                    priority
-                    sizes="(max-width: 767px) calc(100vw - 2.5rem), 58vw"
-                    className="mt-7 aspect-[4/3] sm:mt-8 sm:aspect-[16/10] md:mt-10 md:aspect-[16/9] md:min-h-[23rem]"
-                  />
                 </div>
 
-                <div className="min-w-0 md:col-span-4 md:col-start-9 md:pt-[4.2rem]">
+                <div className="min-w-0 md:col-span-4 md:col-start-9">
                   {featuredProject.relationship ? (
                     <div className="border-t border-[var(--rule)] pt-5">
                       <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">Project Relationship</p>
