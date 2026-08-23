@@ -141,9 +141,6 @@ export default function HomePage() {
                     <h3 className="mt-4 max-w-[16ch] text-[clamp(2.2rem,4.3vw,4rem)] font-medium leading-[0.99] tracking-[-0.046em] sm:mt-5">
                       {featuredProject.name}
                     </h3>
-                    <p className="mb-0 mt-5 max-w-2xl text-[1.02rem] leading-7 text-[var(--muted)] sm:mt-6 sm:text-[1.05rem] sm:leading-8">
-                      {featuredProject.summary}
-                    </p>
                   </div>
 
                   <div className="min-w-0 border-t border-[var(--rule)] py-7 sm:py-8 md:col-span-5 md:border-l md:border-t-0 md:pl-10 md:py-10">
@@ -187,17 +184,10 @@ export default function HomePage() {
 
       <section className="bg-[var(--graphite)] py-16 text-[var(--canvas)] sm:py-20 md:py-24">
         <Container>
-          <div className="grid gap-6 md:grid-cols-12 md:items-end md:gap-8">
-            <div className="md:col-span-8">
-              <SectionLabel>Core Technical Services</SectionLabel>
-              <h2 className="mt-5 max-w-[18ch] text-[clamp(2.3rem,4.8vw,4.35rem)] font-medium leading-[0.98] tracking-[-0.047em] sm:mt-6">
-                Technical disciplines for substations, protection and control.
-              </h2>
-            </div>
-            <p className="m-0 max-w-md text-[1rem] leading-7 text-white/68 md:col-span-4 md:text-[1.03rem]">
-              Focused engineering support across testing, commissioning, protection and control scopes.
-            </p>
-          </div>
+          <SectionLabel>Core Technical Services</SectionLabel>
+          <h2 className="mt-5 max-w-[18ch] text-[clamp(2.3rem,4.8vw,4.35rem)] font-medium leading-[0.98] tracking-[-0.047em] sm:mt-6">
+            Technical disciplines for substations, protection and control.
+          </h2>
 
           <ServiceIndex />
 
