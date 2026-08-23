@@ -10,7 +10,7 @@ export function ArrowLink({ href, children, className = "" }: ArrowLinkProps) {
   return (
     <Link
       href={href}
-      className={`group inline-flex min-h-12 max-w-full items-center gap-3 text-sm font-medium tracking-[-0.01em] ${className}`}
+      className={`group inline-flex min-h-12 max-w-full items-center gap-3 text-[0.95rem] font-medium tracking-[-0.01em] sm:text-[0.98rem] ${className}`}
     >
       <span className="min-w-0">{children}</span>
       <svg

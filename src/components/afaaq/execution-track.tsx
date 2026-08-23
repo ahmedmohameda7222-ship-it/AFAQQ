@@ -9,15 +9,20 @@ const steps = [
 
 export function ExecutionTrack() {
   return (
-    <ol className="mt-8 grid list-none gap-0 p-0 sm:mt-10 md:mt-12 md:grid-cols-2 lg:grid-cols-3">
+    <ol className="mt-9 grid list-none gap-0 p-0 sm:mt-11 md:mt-13 md:grid-cols-2 lg:grid-cols-3">
       {steps.map(([title, description], index) => (
         <li
           key={title}
-          className="relative min-w-0 border-t border-[var(--rule)] py-5 sm:py-6 md:min-h-48 md:px-6 md:py-7 lg:px-8"
+          className="relative min-w-0 border-t-2 border-[var(--ink)] py-6 sm:py-7 md:min-h-[16rem] md:px-6 md:py-8 lg:px-8"
         >
-          <p className="font-technical m-0 text-[0.75rem] font-medium leading-5 tracking-[0.08em] text-[var(--muted)] sm:text-[0.78rem]">{String(index + 1).padStart(2, "0")}</p>
-          <h3 className="mb-0 mt-4 max-w-[19rem] text-[1.22rem] font-medium leading-7 tracking-[-0.025em] sm:mt-5 sm:text-[1.3rem]">{title}</h3>
-          <p className="mb-0 mt-2.5 max-w-[24rem] text-[0.96rem] leading-7 text-[var(--muted)] sm:mt-3 sm:text-[1rem]">{description}</p>
+          <div className="flex items-center gap-4">
+            <span className="font-technical text-[clamp(1.9rem,3vw,2.7rem)] font-medium leading-none tracking-[-0.05em] text-[var(--ink)]">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="h-px flex-1 bg-[var(--rule)]" aria-hidden="true" />
+          </div>
+          <h3 className="mb-0 mt-5 max-w-[19rem] text-[1.3rem] font-medium leading-[1.2] tracking-[-0.028em] sm:mt-6 sm:text-[1.38rem]">{title}</h3>
+          <p className="mb-0 mt-3 max-w-[24rem] text-[0.99rem] leading-7 text-[var(--muted)] sm:text-[1.02rem]">{description}</p>
         </li>
       ))}
     </ol>

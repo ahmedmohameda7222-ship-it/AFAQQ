@@ -39,15 +39,15 @@ export function ProjectClientMark({ name, compact = false }: ProjectClientMarkPr
   const logoUrl = domain
     ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${domain}`)}&sz=128`
     : null;
-  const imageSize = compact ? 24 : 30;
+  const imageSize = compact ? 28 : 34;
 
   return (
-    <span className="inline-flex max-w-full min-w-0 items-center gap-3">
+    <span className="inline-flex max-w-full min-w-0 items-center gap-3.5">
       <span
-        className={`relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)] bg-white ${compact ? "h-8 w-8" : "h-10 w-10"}`}
+        className={`relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)] bg-white ${compact ? "h-9 w-9" : "h-11 w-11"}`}
         aria-hidden="true"
       >
-        <span className="font-technical text-[0.5rem] font-semibold text-[var(--brand-navy)]/55">{fallbackMark(name)}</span>
+        <span className="font-technical text-[0.56rem] font-semibold text-[var(--brand-navy)]/60">{fallbackMark(name)}</span>
         {logoUrl ? (
           <Image
             src={logoUrl}
@@ -56,11 +56,11 @@ export function ProjectClientMark({ name, compact = false }: ProjectClientMarkPr
             height={imageSize}
             sizes={`${imageSize}px`}
             loading="lazy"
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${compact ? "h-6 w-6" : "h-[1.875rem] w-[1.875rem]"}`}
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${compact ? "h-7 w-7" : "h-[2.125rem] w-[2.125rem]"}`}
           />
         ) : null}
       </span>
-      <span className={`${compact ? "text-[0.82rem]" : "text-[0.95rem]"} min-w-0 font-medium leading-5`}>{name}</span>
+      <span className={`${compact ? "text-[0.9rem]" : "text-[1rem]"} min-w-0 font-medium leading-5`}>{name}</span>
     </span>
   );
 }
