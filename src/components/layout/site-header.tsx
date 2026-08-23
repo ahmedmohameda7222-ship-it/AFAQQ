@@ -23,7 +23,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--rule)]/75 bg-[color:var(--canvas)]/96 backdrop-blur-[10px]">
       <Container className="relative flex h-[84px] min-w-0 items-center justify-between gap-3 sm:h-[88px]">
-        <Link href="/" className="inline-flex min-h-12 min-w-0 items-center gap-3 sm:gap-4" aria-label="AFAAQ ARAB home">
+        <Link href="/" className="inline-flex min-h-12 min-w-0 items-center gap-3.5 sm:gap-4" aria-label="AFAAQ ARAB home">
           <Image
             src="/brand/afaaq-mark.svg"
             alt=""
@@ -32,10 +32,10 @@ export function SiteHeader() {
             priority
             className="w-[52px] shrink-0 object-contain sm:w-[60px]"
           />
-          <span className="min-w-0 whitespace-nowrap text-[0.94rem] font-semibold tracking-[0.12em] sm:text-[1.08rem] sm:tracking-[0.15em]">AFAAQ ARAB</span>
+          <span className="min-w-0 whitespace-nowrap text-[0.98rem] font-semibold tracking-[0.12em] sm:text-[1.08rem] sm:tracking-[0.15em]">AFAAQ ARAB</span>
         </Link>
         <nav aria-label="Primary navigation" className="hidden md:block">
-          <ul className="m-0 flex list-none items-center gap-10 p-0 lg:gap-12">
+          <ul className="m-0 flex list-none items-center gap-9 p-0 lg:gap-11">
             {nav.map(([label, href]) => {
               const active = isCurrentSection(pathname, href);
 
