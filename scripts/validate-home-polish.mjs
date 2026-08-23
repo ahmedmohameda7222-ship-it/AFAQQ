@@ -12,6 +12,11 @@ assert(
   "Home hero must keep the approved substation photo.",
 );
 assert(home.includes("ProjectMedia"), "Home flagship project must be image-led.");
+const featuredProjectMedia = home.match(/<ProjectMedia[\s\S]*?\/>/)?.[0] ?? "";
+assert(
+  featuredProjectMedia && !featuredProjectMedia.includes("priority"),
+  "Below-the-fold Home flagship project image must remain lazy-loaded so it does not compete with the hero LCP image.",
+);
 assert(projectIndex.includes("ProjectMedia"), "Home project portfolio cards must include project imagery.");
 assert(!home.includes("AboutBrandArtwork"), "Home About must not use the brochure artwork component.");
 assert(

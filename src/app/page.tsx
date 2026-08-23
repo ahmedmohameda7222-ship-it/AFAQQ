@@ -159,7 +159,6 @@ export default function HomePage() {
                   <div className="min-w-0 py-6 sm:py-7 md:col-span-7 md:border-r md:border-[var(--rule)] md:py-8 md:pr-8 lg:pr-10">
                     <ProjectMedia
                       project={featuredProject}
-                      priority
                       sizes="(max-width: 767px) calc(100vw - 2.5rem), 58vw"
                       className="aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/11]"
                       imageClassName="transition-transform duration-500 hover:scale-[1.015]"
