@@ -82,13 +82,43 @@ assert(
 );
 assert(!relationships.includes("relationship-marquee__track"), "Relationships must not use an infinite marquee.");
 assert(!relationships.includes("google.com/s2/favicons"), "Relationships must not use remote favicon substitutes as logos.");
+assert(!globals.includes("@keyframes relationship-marquee"), "Obsolete relationship marquee CSS must be removed.");
+
+const execution = readFileSync(new URL("../src/components/afaaq/execution-track.tsx", import.meta.url), "utf8");
+assert(!execution.includes("Step"), "Execution must not repeat decorative STEP labels.");
+assert(execution.includes("padStart(2"), "Ordered execution numbers 01–06 must remain because order is meaningful.");
+
+const sectionLabel = readFileSync(new URL("../src/components/primitives/section-label.tsx", import.meta.url), "utf8");
+assert(!sectionLabel.includes("font-technical"), "Generic section labels must use corporate sans typography, not technical mono.");
+
+assert(home.includes("2017"), "About must foreground the verified founding year.");
+assert(home.includes("Cairo, Egypt"), "About must foreground the verified company location.");
+assert(
+  home.includes('bg-[var(--brand-deep-navy)]'),
+  "Project Inquiry must use AFAAQ Deep Navy as the authority close.",
+);
+
+const header = readFileSync(new URL("../src/components/layout/site-header.tsx", import.meta.url), "utf8");
+const footer = readFileSync(new URL("../src/components/layout/site-footer.tsx", import.meta.url), "utf8");
+assert(
+  header.includes("var(--canvas)") || header.includes("bg-white"),
+  "Header must use the corporate light surface.",
+);
+assert(footer.includes("var(--brand-deep-navy)"), "Footer must close with AFAAQ Deep Navy.");
+for (const route of ["Services", "Projects", "About", "Contact"]) {
+  assert(header.includes(`\"${route}\"`), `Header must preserve the ${route} route.`);
+}
 
 const capabilityIndex = home.indexOf("<CapabilityGrid");
 const projectIndex = home.indexOf("<ProjectReferenceBoard");
 const scaleIndex = home.indexOf("<CompanyScale");
 const relationshipIndex = home.indexOf("<RelationshipRail");
+const executionIndex = home.indexOf("<ExecutionTrack");
+const aboutIndex = home.indexOf("<AboutBrandArtwork");
 assert(capabilityIndex >= 0 && projectIndex > capabilityIndex, "Capabilities must appear before project references.");
 assert(scaleIndex > projectIndex, "Company Scale must appear after project references.");
 assert(relationshipIndex > scaleIndex, "Selected Relationships must appear after Company Scale.");
+assert(executionIndex > relationshipIndex, "Project Execution must appear after Selected Relationships.");
+assert(aboutIndex > executionIndex, "About AFAAQ must appear after Project Execution.");
 
-console.log("Corporate Grid Power core Home invariants OK.");
+console.log("Corporate Grid Power Home and shared-chrome invariants OK.");
