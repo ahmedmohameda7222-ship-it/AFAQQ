@@ -10,7 +10,7 @@ import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
-import { clients, company } from "@/content/company";
+import { clients, company, companyFacts } from "@/content/company";
 import { verifiedProjects } from "@/content/projects";
 
 const voltageExperience = [
@@ -18,6 +18,8 @@ const voltageExperience = [
   { value: "66", unit: "kV" },
   { value: "11", unit: "kV" },
 ] as const;
+
+const substationDeliveryFact = companyFacts.find(([, label]) => label === "Substations delivered");
 
 export default function HomePage() {
   return (
@@ -76,8 +78,8 @@ export default function HomePage() {
 
       <PowerRail
         voltages={voltageExperience}
-        scaleValue="150+"
-        scaleLabel="Substations delivered"
+        scaleValue={substationDeliveryFact?.[0]}
+        scaleLabel={substationDeliveryFact?.[1]}
       />
 
       <section className="py-18 sm:py-22 md:py-26">
