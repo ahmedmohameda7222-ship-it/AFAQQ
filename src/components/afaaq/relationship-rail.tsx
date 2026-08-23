@@ -20,7 +20,7 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
           </h2>
         </div>
         <p className="m-0 max-w-lg text-[1rem] leading-7 text-[var(--muted)] md:col-span-4 md:justify-self-end md:text-[1.05rem]">
-          Organizations and engineering partners connected to AFAAQ&apos;s verified project and delivery experience.
+          Selected organizations represented in AFAAQ&apos;s project and client relationships.
         </p>
       </div>
 
