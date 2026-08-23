@@ -21,9 +21,6 @@ function TechnicalGuide() {
       <span className="absolute left-[14%] top-[34%] h-2 w-2 -translate-x-1/2 -translate-y-1/2 border border-white/30" />
       <span className="absolute left-[52%] top-[72%] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 bg-white/18" />
       <span className="absolute bottom-7 right-7 h-2 w-2 border border-white/30 sm:bottom-8 sm:right-8" />
-      <span className="font-technical absolute bottom-7 left-6 text-[0.6rem] uppercase tracking-[0.16em] text-white/20 sm:bottom-8 sm:left-8 lg:left-10">
-        GRID / REF
-      </span>
     </div>
   );
 }
@@ -36,6 +33,7 @@ export function FeaturedProjectDossier({
   projectNumber: string;
 }) {
   const technicalLabel = getProjectTechnicalLabel(project);
+  const technicalLabelHeading = project.voltage.length ? "System Voltage" : "Technical Profile";
   const locationYear = [project.location, project.year].filter(Boolean).join(" · ");
 
   return (
@@ -56,7 +54,7 @@ export function FeaturedProjectDossier({
               {technicalLabel ? (
                 <div className="sm:text-right">
                   <p className="font-technical m-0 text-[0.64rem] font-medium uppercase tracking-[0.12em] text-white/38">
-                    System Voltage
+                    {technicalLabelHeading}
                   </p>
                   <p className="font-technical mb-0 mt-2 text-[clamp(0.95rem,1.8vw,1.25rem)] font-medium leading-5 text-white/78">
                     {technicalLabel}
@@ -65,7 +63,7 @@ export function FeaturedProjectDossier({
               ) : null}
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
               <div>
                 <p className="font-technical m-0 text-[0.7rem] uppercase tracking-[0.1em] text-white/46">
                   AFAAQ ARAB / Major Project
@@ -80,15 +78,17 @@ export function FeaturedProjectDossier({
                 ) : null}
               </div>
 
-              <dl className="grid grid-cols-2 gap-5 border-t border-white/14 pt-4 sm:min-w-[13rem] sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
-                <div>
-                  <dt className="font-technical text-[0.58rem] font-medium uppercase tracking-[0.12em] text-white/36">
-                    Voltage Levels
-                  </dt>
-                  <dd className="font-technical mb-0 ml-0 mt-2 text-[1.2rem] font-medium leading-none text-white/82">
-                    {String(project.voltage.length).padStart(2, "0")}
-                  </dd>
-                </div>
+              <dl className="grid grid-cols-2 gap-5 border-t border-white/14 pt-4 lg:min-w-[13rem] lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
+                {project.voltage.length ? (
+                  <div>
+                    <dt className="font-technical text-[0.58rem] font-medium uppercase tracking-[0.12em] text-white/36">
+                      Voltage Levels
+                    </dt>
+                    <dd className="font-technical mb-0 ml-0 mt-2 text-[1.2rem] font-medium leading-none text-white/82">
+                      {String(project.voltage.length).padStart(2, "0")}
+                    </dd>
+                  </div>
+                ) : null}
                 <div>
                   <dt className="font-technical text-[0.58rem] font-medium uppercase tracking-[0.12em] text-white/36">
                     Work Scopes
