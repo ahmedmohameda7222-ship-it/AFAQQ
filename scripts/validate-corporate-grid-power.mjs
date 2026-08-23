@@ -91,8 +91,8 @@ assert(execution.includes("padStart(2"), "Ordered execution numbers 01–06 must
 const sectionLabel = readFileSync(new URL("../src/components/primitives/section-label.tsx", import.meta.url), "utf8");
 assert(!sectionLabel.includes("font-technical"), "Generic section labels must use corporate sans typography, not technical mono.");
 
-assert(home.includes("2017"), "About must foreground the verified founding year.");
-assert(home.includes("Cairo, Egypt"), "About must foreground the verified company location.");
+assert(home.includes("company.founded"), "About must source the verified founding year from company content.");
+assert(home.includes("company.location"), "About must source the verified company location from company content.");
 assert(
   home.includes('bg-[var(--brand-deep-navy)]'),
   "Project Inquiry must use AFAAQ Deep Navy as the authority close.",
