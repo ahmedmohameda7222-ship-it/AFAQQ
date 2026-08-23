@@ -11,17 +11,16 @@ assert(
   home.includes('src="/images/home/home-substation-original-1440.jpg"'),
   "Home hero must keep the approved substation photo.",
 );
-assert(home.includes("ProjectMedia"), "Home flagship project must keep the project-reference fallback surface.");
-const featuredProjectMedia = home.match(/<ProjectMedia[\s\S]*?\/>/)?.[0] ?? "";
-assert(
-  featuredProjectMedia && !featuredProjectMedia.includes("priority"),
-  "Below-the-fold Home flagship project surface must remain lazy-loaded so it does not compete with the hero LCP image.",
-);
-assert(home.includes("AboutBrandArtwork"), "Home About must use the approved brand artwork until authenticated field photography is available.");
-assert(!home.includes('/images/projects/rcc.jpg'), "Home About must not present unrelated stock project imagery as AFAAQ evidence.");
+assert(home.includes("FeaturedProjectDossier"), "Home must render the featured project as a technical dossier.");
+assert(!home.includes("<ProjectMedia"), "Home must not render a media-shaped project placeholder.");
+assert(home.includes("Power System Experience"), "Home must preserve the voltage-experience proof layer.");
+assert(home.includes("Company Proof"), "Home must label company proof separately from voltage experience.");
+assert(home.includes("AboutBrandArtwork"), "Home About must keep the approved AFAAQ artwork.");
+assert(!home.includes('/images/projects/'), "Home must not render project photography.");
 assert(home.includes("companyFacts"), "Home proof area must expose verified company credibility facts.");
-assert(projectIndex.includes("ProjectMedia"), "Home project portfolio must keep the project-reference fallback surfaces.");
-assert(!projectIndex.includes('"use client"'), "Home project portfolio must stay server-rendered and non-carousel.");
-assert(projectIndex.includes("lg:grid-cols-3"), "Home project portfolio must retain a stable desktop grid.");
+assert(projectIndex.includes("ProjectDossierRecord"), "Home project portfolio must render technical dossier records.");
+assert(!projectIndex.includes("ProjectMedia"), "Home secondary project records must not render media placeholders.");
+assert(!projectIndex.includes('"use client"'), "Home project portfolio must remain server-rendered.");
+assert(projectIndex.includes("lg:grid-cols-3"), "Home project portfolio must retain a stable three-column desktop grid.");
 
-console.log("Engineered Editorial 2.0 Home integrity invariants OK.");
+console.log("Premium Technical Dossier Home invariants OK.");
