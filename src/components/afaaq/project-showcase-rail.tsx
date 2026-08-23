@@ -12,12 +12,9 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
 
   return (
     <div className="mt-8 sm:mt-10 md:mt-12">
-      <div className="flex items-end justify-between gap-4 border-t border-[var(--rule)] pt-5 sm:pt-6">
+      <div className="border-t border-[var(--rule)] pt-5 sm:pt-6">
         <p className="font-technical m-0 text-[0.8rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)] sm:text-[0.82rem]">
           Major Project Portfolio
-        </p>
-        <p className="font-technical m-0 text-[0.78rem] leading-5 text-[var(--muted)]">
-          {String(projects.length).padStart(2, "0")} additional references
         </p>
       </div>
 
@@ -26,7 +23,6 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
           const projectIndex = allProjects.findIndex((item) => item.slug === project.slug);
           const projectNumber = String(projectIndex + 1).padStart(2, "0");
           const technicalLabel = getProjectTechnicalLabel(project);
-          const projectMeta = [project.location, project.year].filter(Boolean).join(" · ");
 
           return (
             <article
@@ -35,7 +31,7 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
             >
               <Link
                 href={`/projects/${project.slug}`}
-                className="group flex h-full min-h-[18rem] min-w-0 flex-col py-6 transition-colors sm:py-7 lg:px-6 lg:py-8 lg:first:pl-0 lg:last:pr-0"
+                className="group flex h-full min-h-[17rem] min-w-0 flex-col py-6 transition-colors sm:py-7 lg:px-6 lg:py-8 lg:first:pl-0 lg:last:pr-0"
               >
                 <div className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2">
                   <p className="font-technical m-0 text-[0.8rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
@@ -62,10 +58,7 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
                   {project.scopes.join(" · ")}
                 </p>
 
-                <div className="mt-auto flex items-end justify-between gap-4 pt-7">
-                  {projectMeta ? (
-                    <p className="font-technical m-0 text-[0.8rem] leading-5 text-[var(--muted)]">{projectMeta}</p>
-                  ) : <span />}
+                <div className="mt-auto flex justify-end pt-7">
                   <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1 group-focus-visible:translate-x-1" fill="none">
                     <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
                   </svg>
