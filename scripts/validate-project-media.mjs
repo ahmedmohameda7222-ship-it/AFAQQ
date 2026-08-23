@@ -12,14 +12,15 @@ const projectSurfaces = [
   "../src/components/afaaq/project-showcase-rail.tsx",
 ];
 
-for (const project of projects.filter((item) => item.status === "verified")) {
-  assert(Boolean(project.image), `Project ${project.slug} must define an approved project image.`);
-  assert(Boolean(project.imageAlt), `Project ${project.slug} must define useful image alt text.`);
+for (const project of projects) {
+  assert(project.image === undefined, `Project ${project.slug} must not define unauthenticated project imagery.`);
+  assert(project.imageAlt === undefined, `Project ${project.slug} must not define image alt text without authenticated imagery.`);
+  assert(project.imagePosition === undefined, `Project ${project.slug} must not define image positioning without authenticated imagery.`);
 }
 
 for (const relativePath of projectSurfaces) {
   const source = readFileSync(new URL(relativePath, import.meta.url), "utf8");
-  assert(source.includes("ProjectMedia"), `${relativePath} must render project image media.`);
+  assert(source.includes("ProjectMedia"), `${relativePath} must keep the honest text-only ProjectMedia fallback.`);
 }
 
-console.log(`Project media presentation OK: ${projects.length} projects use approved imagery.`);
+console.log(`Project media integrity OK: ${projects.length} projects use authenticated-photo fallback mode.`);

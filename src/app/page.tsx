@@ -3,6 +3,7 @@ import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
+import { AboutBrandArtwork } from "@/components/afaaq/about-brand-artwork";
 import { ExecutionTrack } from "@/components/afaaq/execution-track";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
 import { ProjectMedia } from "@/components/afaaq/project-media";
@@ -271,15 +272,7 @@ export default function HomePage() {
         <Container>
           <div className="grid gap-8 border-t border-[var(--rule)] pt-8 sm:gap-10 sm:pt-9 md:grid-cols-12 md:items-center md:pt-10">
             <div className="min-w-0 md:col-span-6">
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#d8d7d1] sm:aspect-[16/10]">
-                <Image
-                  src="/images/projects/rcc.jpg"
-                  alt="Engineers testing and commissioning control and SCADA panels for a regional control center."
-                  fill
-                  sizes="(max-width: 767px) calc(100vw - 2.5rem), 50vw"
-                  className="object-cover"
-                />
-              </div>
+              <AboutBrandArtwork variant="compact" />
             </div>
             <div className="min-w-0 md:col-span-5 md:col-start-8">
               <SectionLabel>About AFAAQ</SectionLabel>
