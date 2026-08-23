@@ -12,23 +12,18 @@ assert(
   home.includes('src="/images/home/home-substation-original-1440.jpg"'),
   "Home hero must keep the approved substation photo.",
 );
-assert(home.includes("FeaturedProjectDossier"), "Home must render the featured project as a technical dossier.");
+assert(home.includes('[--hero-canvas:#f4f3ef]'), "Home Hero must preserve its approved warm blend base.");
+assert(home.includes("<PowerRail"), "Home must expose immediate voltage and delivery proof through the Power Rail.");
+assert(!home.includes("Power System Experience"), "Home must remove the oversized editorial voltage section.");
+assert(home.includes("FeaturedProjectDossier"), "Home project portfolio remains on the technical dossier system until the project-reference task replaces it.");
 assert(!home.includes("<ProjectMedia"), "Home must not render a media-shaped project placeholder.");
-assert(home.includes("Power System Experience"), "Home must preserve the voltage-experience proof layer.");
-assert(home.includes("Company Proof"), "Home must label company proof separately from voltage experience.");
 assert(home.includes("AboutBrandArtwork"), "Home About must keep the approved AFAAQ artwork.");
 assert(!home.includes('/images/projects/'), "Home must not render project photography.");
-assert(home.includes("companyFacts"), "Home proof area must expose verified company credibility facts.");
-assert(projectIndex.includes("ProjectDossierRecord"), "Home project portfolio must render technical dossier records.");
+assert(home.includes("companyFacts"), "Home must continue sourcing company credibility from verified content.");
+assert(projectIndex.includes("ProjectDossierRecord"), "Current secondary project portfolio must remain server-rendered dossier records until replacement.");
 assert(!projectIndex.includes("ProjectMedia"), "Home secondary project records must not render media placeholders.");
 assert(!projectIndex.includes('"use client"'), "Home project portfolio must remain server-rendered.");
-assert(projectIndex.includes("lg:grid-cols-3"), "Home project portfolio must retain a stable three-column desktop grid.");
-assert(dossier.includes("Technical Dossier"), "Featured project panel must identify itself as a Technical Dossier.");
-assert(dossier.includes("Voltage Levels"), "Featured project panel must surface its real voltage-level count.");
-assert(dossier.includes("Work Scopes"), "Featured project panel must surface its real scope count.");
-assert(dossier.includes("md:min-h-[26rem]"), "Featured project panel must use the reduced 26rem desktop minimum height.");
-assert(!dossier.includes("md:min-h-[32rem]"), "Featured project panel must not retain the oversized 32rem desktop minimum height.");
-assert(dossier.includes("md:py-7"), "Featured project details column must use compact desktop vertical padding.");
+assert(dossier.includes("Technical Dossier"), "Current featured project panel must remain internally coherent until replacement.");
 assert(!dossier.includes("text-white/36"), "Functional dossier micro labels must not use low-contrast white/36 text.");
 
-console.log("Premium Technical Dossier Home invariants OK.");
+console.log("Corporate Grid Power transitional Home invariants OK.");
