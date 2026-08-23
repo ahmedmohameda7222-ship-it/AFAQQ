@@ -5,8 +5,9 @@ function assert(condition, message) {
 }
 
 const home = readFileSync(new URL("../src/app/page.tsx", import.meta.url), "utf8");
-const projectIndex = readFileSync(new URL("../src/components/afaaq/project-showcase-rail.tsx", import.meta.url), "utf8");
-const dossier = readFileSync(new URL("../src/components/afaaq/project-dossier.tsx", import.meta.url), "utf8");
+const projectBoard = readFileSync(new URL("../src/components/afaaq/project-reference-board.tsx", import.meta.url), "utf8");
+const capabilityGrid = readFileSync(new URL("../src/components/afaaq/capability-grid.tsx", import.meta.url), "utf8");
+const relationships = readFileSync(new URL("../src/components/afaaq/relationship-rail.tsx", import.meta.url), "utf8");
 
 assert(
   home.includes('src="/images/home/home-substation-original-1440.jpg"'),
@@ -14,16 +15,18 @@ assert(
 );
 assert(home.includes('[--hero-canvas:#f4f3ef]'), "Home Hero must preserve its approved warm blend base.");
 assert(home.includes("<PowerRail"), "Home must expose immediate voltage and delivery proof through the Power Rail.");
-assert(!home.includes("Power System Experience"), "Home must remove the oversized editorial voltage section.");
-assert(home.includes("FeaturedProjectDossier"), "Home project portfolio remains on the technical dossier system until the project-reference task replaces it.");
+assert(home.includes("<CapabilityGrid"), "Home must render the corporate capability hierarchy.");
+assert(home.includes("<ProjectReferenceBoard"), "Home must render the image-free corporate project reference board.");
+assert(home.includes("<CompanyScale"), "Home must render verified company scale separately from voltage experience.");
+assert(home.includes("<RelationshipRail"), "Home must render selected relationships after company scale.");
+assert(!home.includes("FeaturedProjectDossier"), "Home must not retain the black technical dossier presentation.");
 assert(!home.includes("<ProjectMedia"), "Home must not render a media-shaped project placeholder.");
 assert(home.includes("AboutBrandArtwork"), "Home About must keep the approved AFAAQ artwork.");
 assert(!home.includes('/images/projects/'), "Home must not render project photography.");
 assert(home.includes("companyFacts"), "Home must continue sourcing company credibility from verified content.");
-assert(projectIndex.includes("ProjectDossierRecord"), "Current secondary project portfolio must remain server-rendered dossier records until replacement.");
-assert(!projectIndex.includes("ProjectMedia"), "Home secondary project records must not render media placeholders.");
-assert(!projectIndex.includes('"use client"'), "Home project portfolio must remain server-rendered.");
-assert(dossier.includes("Technical Dossier"), "Current featured project panel must remain internally coherent until replacement.");
-assert(!dossier.includes("text-white/36"), "Functional dossier micro labels must not use low-contrast white/36 text.");
+assert(!projectBoard.includes("ProjectMedia"), "Project references must remain image-free.");
+assert(!projectBoard.includes('"use client"'), "Project references must remain server-rendered.");
+assert(!capabilityGrid.includes("padStart"), "Capabilities must not use decorative numbering.");
+assert(!relationships.includes("relationship-marquee__track"), "Relationships must not use the old marquee.");
 
-console.log("Corporate Grid Power transitional Home invariants OK.");
+console.log("Corporate Grid Power Home invariants OK.");
