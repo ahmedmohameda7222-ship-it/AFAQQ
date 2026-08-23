@@ -12,15 +12,14 @@ const projectSurfaces = [
   "../src/components/afaaq/project-showcase-rail.tsx",
 ];
 
+for (const project of projects.filter((item) => item.status === "verified")) {
+  assert(Boolean(project.image), `Project ${project.slug} must define an approved project image.`);
+  assert(Boolean(project.imageAlt), `Project ${project.slug} must define useful image alt text.`);
+}
+
 for (const relativePath of projectSurfaces) {
   const source = readFileSync(new URL(relativePath, import.meta.url), "utf8");
-  assert(!source.includes("ProjectMedia"), `${relativePath} must not render project image media.`);
+  assert(source.includes("ProjectMedia"), `${relativePath} must render project image media.`);
 }
 
-for (const project of projects) {
-  assert(project.image === undefined, `Project ${project.slug} must not define an image.`);
-  assert(project.imageAlt === undefined, `Project ${project.slug} must not define image alt text.`);
-  assert(project.imagePosition === undefined, `Project ${project.slug} must not define image positioning.`);
-}
-
-console.log(`Project media removal OK: ${projects.length} projects are text-only.`);
+console.log(`Project media presentation OK: ${projects.length} projects use approved imagery.`);

@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/container";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
+import { ProjectMedia } from "@/components/afaaq/project-media";
 import { getProjectTechnicalLabel, verifiedProjects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
@@ -60,12 +61,20 @@ export default function ProjectsPage() {
 
               return (
                 <article key={project.slug} className="border-b border-[var(--rule)] py-7 sm:py-8 md:py-10">
-                  <Link href={`/projects/${project.slug}`} className="group grid min-w-0 gap-6 sm:gap-7 md:grid-cols-12 md:items-start md:gap-8">
-                    <div className="min-w-0 md:col-span-8">
+                  <Link href={`/projects/${project.slug}`} className="group grid min-w-0 gap-6 sm:gap-7 md:grid-cols-12 md:items-center md:gap-8">
+                    <ProjectMedia
+                      project={project}
+                      priority={index === 0}
+                      sizes="(max-width: 767px) calc(100vw - 2.5rem), 34vw"
+                      className="aspect-[16/10] md:col-span-4"
+                      imageClassName="transition-transform duration-500 group-hover:scale-[1.025] group-focus-visible:scale-[1.025]"
+                    />
+
+                    <div className="min-w-0 md:col-span-5">
                       <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
                         Project {projectNumber}
                       </p>
-                      <h2 className="mb-0 mt-3 text-[clamp(1.8rem,3.2vw,2.9rem)] font-medium leading-[1.03] tracking-[-0.035em] group-hover:text-[var(--brand-navy)] sm:tracking-[-0.04em]">
+                      <h2 className="mb-0 mt-3 text-[clamp(1.8rem,3.2vw,2.9rem)] font-medium leading-[1.03] tracking-[-0.035em] group-hover:text-[var(--brand-navy)] group-focus-visible:text-[var(--brand-navy)] sm:tracking-[-0.04em]">
                         {project.name}
                       </h2>
 
@@ -80,7 +89,7 @@ export default function ProjectsPage() {
                       </p>
                     </div>
 
-                    <div className="flex min-w-0 flex-col items-start gap-4 md:col-span-4 md:h-full md:items-end md:justify-between md:gap-6 md:py-1 md:text-right">
+                    <div className="flex min-w-0 flex-col items-start gap-4 md:col-span-3 md:h-full md:items-end md:justify-between md:gap-6 md:py-1 md:text-right">
                       <div className="min-w-0">
                         {technicalLabel ? (
                           <p className="font-technical m-0 text-[0.95rem] font-medium text-[var(--ink)] sm:text-[1rem]">{technicalLabel}</p>
@@ -91,7 +100,7 @@ export default function ProjectsPage() {
                       </div>
                       <span className="inline-flex min-h-12 items-center gap-3 text-[0.9rem] font-medium">
                         <span>View Project Scope</span>
-                        <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1" fill="none">
+                        <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1 group-focus-visible:translate-x-1" fill="none">
                           <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
                         </svg>
                       </span>
