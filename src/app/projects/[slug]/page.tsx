@@ -5,7 +5,6 @@ import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
-import { ProjectMedia } from "@/components/afaaq/project-media";
 import { getProject, getProjectTechnicalLabel, projects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
@@ -47,17 +46,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               {projectMeta ? <p className="font-technical mb-0 mt-2 text-[0.78rem] leading-5 text-[var(--muted)] sm:mt-3">{projectMeta}</p> : null}
             </div>
           </div>
-        </Container>
-      </section>
-
-      <section className="pb-14 sm:pb-20 md:pb-24">
-        <Container>
-          <ProjectMedia
-            project={project}
-            priority
-            sizes="(max-width: 767px) calc(100vw - 2.5rem), calc(100vw - 4rem)"
-            className="aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/8] md:min-h-[28rem]"
-          />
         </Container>
       </section>
 
