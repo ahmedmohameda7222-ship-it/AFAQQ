@@ -105,6 +105,10 @@ assert(
   "Header must use the corporate light surface.",
 );
 assert(footer.includes("var(--brand-deep-navy)"), "Footer must close with AFAAQ Deep Navy.");
+assert(
+  footer.includes('/brand/afaaq-mark-reversed.svg'),
+  "Deep-navy footer must use the approved reversed AFAAQ mark for contrast.",
+);
 for (const route of ["Services", "Projects", "About", "Contact"]) {
   assert(header.includes(`\"${route}\"`), `Header must preserve the ${route} route.`);
 }
