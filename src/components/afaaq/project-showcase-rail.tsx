@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getProjectTechnicalLabel, type Project } from "@/content/projects";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
-import { ProjectMedia } from "@/components/afaaq/project-media";
 
 type ProjectShowcaseRailProps = {
   projects: readonly Project[];
@@ -113,40 +112,31 @@ export function ProjectShowcaseRail({ projects, allProjects }: ProjectShowcaseRa
               data-project-card
               className="w-[82vw] max-w-[430px] shrink-0 snap-start sm:w-[56vw] lg:w-[31vw]"
             >
-              <Link href={`/projects/${project.slug}`} className="group block min-w-0">
-                <ProjectMedia
-                  project={project}
-                  sizes="(max-width: 639px) 82vw, (max-width: 1023px) 56vw, 31vw"
-                  className="aspect-[4/3]"
-                  imageClassName="transition-transform duration-500 group-hover:scale-[1.015]"
-                />
-
-                <div className="mt-5 border-t border-[var(--rule)] pt-4">
-                  <div className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2">
-                    <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
-                      Project {projectNumber}
-                    </p>
-                    {technicalLabel ? (
-                      <p className="font-technical m-0 shrink-0 text-[0.82rem] font-medium text-[var(--muted)]">
-                        {technicalLabel}
-                      </p>
-                    ) : null}
-                  </div>
-
-                  <h3 className="mb-0 mt-3 text-[clamp(1.45rem,2.4vw,2rem)] font-medium leading-[1.06] tracking-[-0.03em] group-hover:text-[var(--brand-navy)]">
-                    {project.name}
-                  </h3>
-
-                  {project.relationship ? (
-                    <div className="mt-4">
-                      <ProjectClientMark name={project.relationship} compact />
-                    </div>
-                  ) : null}
-
-                  <p className="mb-0 mt-4 line-clamp-2 text-[0.94rem] leading-6 text-[var(--muted)]">
-                    {project.scopes.join(" · ")}
+              <Link href={`/projects/${project.slug}`} className="group block min-w-0 border-t border-[var(--rule)] pt-4">
+                <div className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2">
+                  <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
+                    Project {projectNumber}
                   </p>
+                  {technicalLabel ? (
+                    <p className="font-technical m-0 shrink-0 text-[0.82rem] font-medium text-[var(--muted)]">
+                      {technicalLabel}
+                    </p>
+                  ) : null}
                 </div>
+
+                <h3 className="mb-0 mt-3 text-[clamp(1.45rem,2.4vw,2rem)] font-medium leading-[1.06] tracking-[-0.03em] group-hover:text-[var(--brand-navy)]">
+                  {project.name}
+                </h3>
+
+                {project.relationship ? (
+                  <div className="mt-4">
+                    <ProjectClientMark name={project.relationship} compact />
+                  </div>
+                ) : null}
+
+                <p className="mb-0 mt-4 line-clamp-2 text-[0.94rem] leading-6 text-[var(--muted)]">
+                  {project.scopes.join(" · ")}
+                </p>
               </Link>
             </article>
           );

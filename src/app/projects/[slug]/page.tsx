@@ -5,7 +5,6 @@ import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
-import { ProjectMedia } from "@/components/afaaq/project-media";
 import { getProject, getProjectTechnicalLabel, projects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
@@ -50,20 +49,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </Container>
       </section>
 
-      <section className="pb-14 sm:pb-20 md:pb-28">
-        <Container>
-          <ProjectMedia
-            project={project}
-            priority
-            sizes="(max-width: 767px) calc(100vw - 2.5rem), calc(100vw - 3rem)"
-            className="aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/8] md:min-h-[28rem]"
-          />
-        </Container>
-      </section>
-
       <section className="pb-16 sm:pb-20 md:pb-28">
         <Container>
-          <div className="grid gap-8 sm:gap-12 md:grid-cols-12">
+          <div className="grid gap-8 border-t border-[var(--rule)] pt-7 sm:gap-12 sm:pt-8 md:grid-cols-12 md:pt-10">
             <div className="min-w-0 md:col-span-4">
               <SectionLabel>Project Scope</SectionLabel>
               <p className="mt-5 max-w-md text-[1.02rem] leading-7 text-[var(--muted)] sm:mt-6 md:text-[1.05rem] md:leading-8">{project.summary}</p>

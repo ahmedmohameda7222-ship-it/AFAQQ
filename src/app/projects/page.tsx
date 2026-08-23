@@ -4,7 +4,6 @@ import { Container } from "@/components/layout/container";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
-import { ProjectMedia } from "@/components/afaaq/project-media";
 import { getProjectTechnicalLabel, verifiedProjects } from "@/content/projects";
 import { buildMetadata } from "@/lib/seo";
 
@@ -61,16 +60,8 @@ export default function ProjectsPage() {
 
               return (
                 <article key={project.slug} className="border-b border-[var(--rule)] py-7 sm:py-8 md:py-10">
-                  <Link href={`/projects/${project.slug}`} className="group grid min-w-0 gap-6 sm:gap-7 md:grid-cols-12 md:items-center md:gap-8">
-                    <ProjectMedia
-                      project={project}
-                      priority={index === 0}
-                      sizes="(max-width: 767px) calc(100vw - 2.5rem), 34vw"
-                      className="aspect-[16/10] md:col-span-4"
-                      imageClassName="transition-transform duration-500 group-hover:scale-[1.015]"
-                    />
-
-                    <div className="min-w-0 md:col-span-5">
+                  <Link href={`/projects/${project.slug}`} className="group grid min-w-0 gap-6 sm:gap-7 md:grid-cols-12 md:items-start md:gap-8">
+                    <div className="min-w-0 md:col-span-8">
                       <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
                         Project {projectNumber}
                       </p>
@@ -89,7 +80,7 @@ export default function ProjectsPage() {
                       </p>
                     </div>
 
-                    <div className="flex min-w-0 flex-col items-start gap-4 md:col-span-3 md:h-full md:items-end md:justify-between md:gap-6 md:py-1 md:text-right">
+                    <div className="flex min-w-0 flex-col items-start gap-4 md:col-span-4 md:h-full md:items-end md:justify-between md:gap-6 md:py-1 md:text-right">
                       <div className="min-w-0">
                         {technicalLabel ? (
                           <p className="font-technical m-0 text-[0.95rem] font-medium text-[var(--ink)] sm:text-[1rem]">{technicalLabel}</p>
