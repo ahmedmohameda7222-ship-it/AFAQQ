@@ -102,7 +102,7 @@ export function FeaturedProjectDossier({
           </div>
         </div>
 
-        <div className="min-w-0 border-t border-[var(--rule)] py-7 sm:py-8 md:col-span-5 md:border-t-0 md:pl-8 md:py-9 lg:pl-10">
+        <div className="min-w-0 border-t border-[var(--rule)] py-6 sm:py-7 md:col-span-5 md:border-t-0 md:pl-8 md:py-7 lg:pl-9">
           {project.relationship ? (
             <div>
               <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.09em] text-[var(--muted)]">
@@ -114,21 +114,21 @@ export function FeaturedProjectDossier({
             </div>
           ) : null}
 
-          <div className="mt-8 border-t border-[var(--rule)] pt-6">
+          <div className="mt-6 border-t border-[var(--rule)] pt-5">
             <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.09em] text-[var(--muted)]">
               Scope
             </p>
-            <ul className="mt-5 grid list-none gap-3 p-0">
+            <ul className="mt-3 grid list-none gap-2 p-0">
               {project.scopes.map((scope) => (
-                <li key={scope} className="grid grid-cols-[auto_1fr] gap-3 text-[1.02rem] leading-7 text-[var(--ink)]">
-                  <span className="mt-[0.72rem] h-px w-4 bg-[var(--brand-blue)]" aria-hidden="true" />
+                <li key={scope} className="grid grid-cols-[auto_1fr] gap-3 text-[1.02rem] leading-6 text-[var(--ink)]">
+                  <span className="mt-[0.68rem] h-px w-4 bg-[var(--brand-blue)]" aria-hidden="true" />
                   <span>{scope}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-8 border-t border-[var(--rule)] pt-6">
+          <div className="mt-6 border-t border-[var(--rule)] pt-5">
             <Link
               href={`/projects/${project.slug}`}
               className="group inline-flex min-h-12 items-center gap-3 text-[0.98rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
