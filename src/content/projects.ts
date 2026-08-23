@@ -7,6 +7,9 @@ export type Project = {
   technicalLabel?: string;
   scopes: readonly string[];
   summary: string;
+  image?: string;
+  imageAlt?: string;
+  imagePosition?: string;
   systems?: readonly string[];
   relationship?: string;
   location?: string;
