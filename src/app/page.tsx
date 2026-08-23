@@ -10,7 +10,7 @@ import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
-import { clients, company, companyFacts } from "@/content/company";
+import { clients, company } from "@/content/company";
 import { verifiedProjects } from "@/content/projects";
 
 const voltageExperience = [
@@ -168,15 +168,15 @@ export default function HomePage() {
                 A Cairo-based engineering contractor focused on power-system delivery.
               </h2>
               <p className="mt-5 max-w-xl text-[1.03rem] leading-7 text-[var(--muted)] sm:mt-6 md:text-[1.08rem] md:leading-8">
-                Founded in 2017, AFAAQ ARAB delivers electrical contracting, testing and commissioning, protection and control work for power-system environments.
+                Founded in {company.founded}, AFAAQ ARAB delivers electrical contracting, testing and commissioning, protection and control work for power-system environments.
               </p>
               <div className="mt-7 grid gap-4 border-y border-[var(--rule)] py-5 sm:grid-cols-2">
                 <div>
-                  <p className="font-display m-0 text-[1.55rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]">2017</p>
+                  <p className="font-display m-0 text-[1.55rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]">{company.founded}</p>
                   <p className="mb-0 mt-1 text-[0.94rem] leading-6 text-[var(--muted)]">Founded</p>
                 </div>
                 <div>
-                  <p className="font-display m-0 text-[1.55rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]">Cairo, Egypt</p>
+                  <p className="font-display m-0 text-[1.55rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]">{company.location}</p>
                   <p className="mb-0 mt-1 text-[0.94rem] leading-6 text-[var(--muted)]">Head office</p>
                 </div>
               </div>
