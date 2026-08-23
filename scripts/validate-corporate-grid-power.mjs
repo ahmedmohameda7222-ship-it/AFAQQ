@@ -41,6 +41,8 @@ assert(
   "Desktop Hero blend must remain on the approved warm base.",
 );
 assert(home.includes("<PowerRail"), "Home must render the AFAAQ Power Rail immediately after Hero.");
+assert(home.includes("companyFacts.find"), "Power Rail delivery proof must be derived from verified company facts.");
+assert(!home.includes('scaleValue="150+"'), "Power Rail must not hardcode the substation delivery total.");
 assert(!home.includes("Power System Experience"), "Old oversized voltage proof section must be removed from Home.");
 
 assert(home.includes("<CapabilityGrid"), "Capabilities must use the Corporate Grid Power capability system.");
