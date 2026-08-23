@@ -39,7 +39,7 @@ export default function HomePage() {
               </h1>
 
               <p className="mt-6 max-w-[39rem] text-[1.06rem] leading-7 text-[var(--muted)] sm:mt-7 md:text-[1.15rem] md:leading-8">
-                AFAAQ ARAB supports utilities, EPC contractors and power-system teams across substations and control infrastructure, from electrical installation and system integration through testing, energization and handover.
+                AFAAQ ARAB supports utilities and power-system teams across substations and control infrastructure, from electrical installation and system integration through testing, energization and handover.
               </p>
 
               <div className="mt-8 flex flex-col items-stretch gap-3 sm:mt-9 sm:flex-row sm:items-center sm:gap-8">
