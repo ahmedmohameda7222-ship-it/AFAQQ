@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #f4f3ef;
-  --ink: #111315;
-  --graphite: #121517;
-  --muted: #535a5e;
-  --muted-dark: #adb2b5;
-  --rule: #d6d6d1;
-  --brand-navy: #082a72;
+  --canvas: #ffffff;
+  --surface: #f4f7fa;
+  --ink: #111827;
+  --graphite: #111827;
+  --muted: #52606d;
+  --muted-dark: #c4ced8;
+  --rule: #d7dee8;
+  --brand-navy: #0a2f82;
+  --brand-deep-navy: #061d58;
   --brand-blue: #0b8cff;
   --accent: var(--brand-blue);
 
@@ -70,6 +72,10 @@ p {
   text-wrap: pretty;
 }
 
+.font-display {
+  font-family: var(--font-display), var(--font-sans), "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+}
+
 .font-technical {
   font-family: var(--font-mono), "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-variant-numeric: tabular-nums;
@@ -124,42 +130,4 @@ img[data-nimg="fill"] {
     linear-gradient(to right, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px);
   background-size: 100% 100%, 12.5% 100%, 100% 20%;
-}
-
-@keyframes relationship-marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
-
-.relationship-marquee__track {
-  animation: relationship-marquee 50s linear infinite;
-  will-change: transform;
-}
-
-@media (min-width: 768px) {
-  .relationship-marquee__track {
-    animation-duration: 52s;
-  }
-}
-
-.relationship-rail__viewport:hover .relationship-marquee__track,
-.relationship-rail__viewport:focus-within .relationship-marquee__track {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .relationship-marquee__track {
-    animation: none;
-    transform: none;
-  }
-}
-
-.relationship-rail__viewport {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  overscroll-behavior-inline: contain;
-}
-
-.relationship-rail__viewport::-webkit-scrollbar {
-  display: none;
 }

@@ -21,18 +21,20 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--rule)]/75 bg-[color:var(--canvas)]/96 backdrop-blur-[10px]">
+    <header className="sticky top-0 z-50 border-b border-[var(--rule)] bg-white/96 backdrop-blur-[10px]">
       <Container className="relative flex h-[84px] min-w-0 items-center justify-between gap-3 sm:h-[88px]">
         <Link href="/" className="inline-flex min-h-12 min-w-0 items-center gap-3.5 sm:gap-4" aria-label="AFAAQ ARAB home">
           <Image
             src="/brand/afaaq-mark.svg"
             alt=""
-            width={60}
-            height={40}
+            width={64}
+            height={42}
             priority
-            className="w-[52px] shrink-0 object-contain sm:w-[60px]"
+            className="w-[54px] shrink-0 object-contain sm:w-[62px]"
           />
-          <span className="min-w-0 whitespace-nowrap text-[0.98rem] font-semibold tracking-[0.12em] sm:text-[1.08rem] sm:tracking-[0.15em]">AFAAQ ARAB</span>
+          <span className="min-w-0 whitespace-nowrap text-[1rem] font-semibold tracking-[0.1em] text-[var(--brand-deep-navy)] sm:text-[1.1rem] sm:tracking-[0.12em]">
+            AFAAQ ARAB
+          </span>
         </Link>
         <nav aria-label="Primary navigation" className="hidden md:block">
           <ul className="m-0 flex list-none items-center gap-9 p-0 lg:gap-11">
@@ -44,7 +46,7 @@ export function SiteHeader() {
                   <Link
                     href={href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative inline-flex min-h-12 items-center text-[1rem] font-medium tracking-[-0.01em] after:absolute after:bottom-2.5 after:left-0 after:h-px after:bg-[var(--brand-blue)] after:transition-[width] after:duration-[var(--motion-ui)] hover:after:w-full focus-visible:after:w-full ${active ? "after:w-full" : "after:w-0"}`}
+                    className={`relative inline-flex min-h-12 items-center text-[1rem] font-semibold tracking-[-0.01em] text-[var(--ink)] after:absolute after:bottom-2 after:left-0 after:h-0.5 after:bg-[var(--brand-blue)] after:transition-[width] after:duration-[var(--motion-ui)] hover:text-[var(--brand-navy)] hover:after:w-full focus-visible:text-[var(--brand-navy)] focus-visible:after:w-full ${active ? "text-[var(--brand-navy)] after:w-full" : "after:w-0"}`}
                   >
                     {label}
                   </Link>

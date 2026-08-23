@@ -12,7 +12,8 @@
     "test:content": "node --experimental-strip-types scripts/validate-content.mjs",
     "test:project-media": "node --experimental-strip-types scripts/validate-project-media.mjs",
     "test:home-polish": "node --experimental-strip-types scripts/validate-home-polish.mjs",
-    "check": "npm run test:site-url && npm run test:content && npm run test:project-media && npm run test:home-polish && npm run lint && npm run typecheck",
+    "test:corporate-grid": "node --experimental-strip-types scripts/validate-corporate-grid-power.mjs",
+    "check": "npm run test:site-url && npm run test:content && npm run test:project-media && npm run test:home-polish && npm run test:corporate-grid && npm run lint && npm run typecheck",
     "vercel-build": "npm run check && next build"
   },
   "dependencies": {
