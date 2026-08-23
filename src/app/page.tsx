@@ -5,13 +5,12 @@ import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { AboutBrandArtwork } from "@/components/afaaq/about-brand-artwork";
 import { ExecutionTrack } from "@/components/afaaq/execution-track";
-import { ProjectClientMark } from "@/components/afaaq/project-client-mark";
-import { ProjectMedia } from "@/components/afaaq/project-media";
+import { FeaturedProjectDossier } from "@/components/afaaq/project-dossier";
 import { ProjectShowcaseRail } from "@/components/afaaq/project-showcase-rail";
 import { RelationshipRail } from "@/components/afaaq/relationship-rail";
 import { ServiceIndex } from "@/components/afaaq/service-index";
 import { clients, companyFacts } from "@/content/company";
-import { getProjectTechnicalLabel, verifiedProjects } from "@/content/projects";
+import { verifiedProjects } from "@/content/projects";
 
 const voltageExperience = [
   ["220", "kV", "Testing & Commissioning"],
@@ -40,7 +39,6 @@ export default function HomePage() {
     ? verifiedProjects.findIndex((project) => project.slug === featuredProject.slug)
     : -1;
   const featuredNumber = featuredIndex >= 0 ? String(featuredIndex + 1).padStart(2, "0") : "01";
-  const featuredTechnicalLabel = featuredProject ? getProjectTechnicalLabel(featuredProject) : "";
 
   return (
     <>
@@ -54,11 +52,11 @@ export default function HomePage() {
                 Electrical testing, commissioning and protection for power systems.
               </h1>
 
-              <p className="mt-6 max-w-[40rem] text-[1.08rem] leading-7 text-[var(--muted)] sm:mt-7 md:text-[1.17rem] md:leading-8">
+              <p className="mt-6 max-w-[38rem] text-[1.1rem] leading-7 text-[var(--muted)] sm:mt-7 md:text-[1.2rem] md:leading-8">
                 AFAAQ ARAB supports utilities, EPC contractors and power-system teams across substations and control infrastructure, from electrical installation and system integration through testing, energization and handover.
               </p>
 
-              <div className="mt-8 flex flex-col items-stretch gap-3 sm:mt-9 sm:flex-row sm:items-center sm:gap-8">
+              <div className="mt-8 flex flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-8">
                 <PrimaryAction href="/contact">Discuss a Project Scope</PrimaryAction>
                 <ArrowLink href="/projects">View Our Projects</ArrowLink>
               </div>
@@ -96,7 +94,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="pb-16 pt-10 sm:pb-18 sm:pt-12 md:pb-22 md:pt-14">
+      <section className="pb-18 pt-12 sm:pb-20 sm:pt-14 md:pb-24 md:pt-16">
         <Container>
           <div className="border-y border-[var(--rule)] py-7 sm:py-8 md:py-10">
             <SectionLabel>Power System Experience</SectionLabel>
@@ -122,25 +120,32 @@ export default function HomePage() {
               ))}
             </div>
 
-            <div className="grid border-t border-[var(--rule)] md:grid-cols-2">
-              {credibilityFacts.map(([value, label], index) => (
-                <div
-                  key={label}
-                  className={`grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-4 py-5 sm:gap-5 sm:py-6 md:px-7 md:py-7 ${index === 0 ? "md:border-r md:border-[var(--rule)] md:pl-0" : "md:pr-0"}`}
-                >
-                  <span className="font-technical text-[clamp(1.7rem,3vw,2.8rem)] font-medium leading-none tracking-[-0.045em]">
-                    {value}
-                  </span>
-                  <span className="text-[0.95rem] leading-6 text-[var(--muted)] sm:text-[1rem]">{label}</span>
-                </div>
-              ))}
+            <div className="border-t border-[var(--rule)] pt-5 sm:pt-6">
+              <p className="font-technical m-0 text-[0.78rem] font-medium uppercase tracking-[0.09em] text-[var(--muted)] sm:text-[0.8rem]">
+                Company Proof
+              </p>
+              <div className="mt-4 grid border-t border-[var(--rule)] md:grid-cols-2">
+                {credibilityFacts.map(([value, label], index) => (
+                  <div
+                    key={label}
+                    className={`grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-4 py-5 sm:gap-5 sm:py-6 md:px-7 ${index === 0 ? "md:border-r md:border-[var(--rule)] md:pl-0" : "md:pr-0"}`}
+                  >
+                    <span className="font-technical text-[clamp(1.7rem,3vw,2.8rem)] font-medium leading-none tracking-[-0.045em]">
+                      {value}
+                    </span>
+                    <span className="text-[0.98rem] leading-6 text-[var(--muted)] sm:text-[1.02rem]">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
       {featuredProject ? (
-        <section className="pb-18 sm:pb-22 md:pb-28">
+        <section className="pb-20 sm:pb-24 md:pb-28">
           <Container>
             <div className="border-t border-[var(--rule)] pt-7 sm:pt-8 md:pt-10">
               <div className="grid gap-6 md:grid-cols-12 md:items-end md:gap-8">
@@ -155,76 +160,20 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <article className="mt-8 overflow-hidden border-y border-[var(--rule)] sm:mt-10 md:mt-12">
-                <div className="grid md:grid-cols-12">
-                  <div className="min-w-0 py-6 sm:py-7 md:col-span-7 md:border-r md:border-[var(--rule)] md:py-8 md:pr-8 lg:pr-10">
-                    <ProjectMedia
-                      project={featuredProject}
-                      sizes="(max-width: 767px) calc(100vw - 2.5rem), 58vw"
-                      className="aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/11]"
-                      imageClassName="transition-transform duration-500 hover:scale-[1.015]"
-                    />
-                  </div>
-
-                  <div className="min-w-0 border-t border-[var(--rule)] py-7 sm:py-8 md:col-span-5 md:border-t-0 md:pl-8 md:py-8 lg:pl-10">
-                    <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
-                      <p className="font-technical m-0 text-[0.8rem] font-medium uppercase leading-5 tracking-[0.08em] text-[var(--muted)]">
-                        Project Reference / {featuredNumber}
-                      </p>
-                      {featuredTechnicalLabel ? (
-                        <p className="font-technical m-0 shrink-0 text-[0.86rem] font-medium text-[var(--muted)]">
-                          {featuredTechnicalLabel}
-                        </p>
-                      ) : null}
-                    </div>
-
-                    <h3 className="mt-5 max-w-[15ch] text-[clamp(2.2rem,4vw,3.85rem)] font-medium leading-[0.99] tracking-[-0.046em]">
-                      {featuredProject.name}
-                    </h3>
-
-                    {featuredProject.relationship ? (
-                      <div className="mt-7 border-t border-[var(--rule)] pt-5">
-                        <p className="font-technical m-0 text-[0.8rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
-                          Project Relationship
-                        </p>
-                        <div className="mt-4">
-                          <ProjectClientMark name={featuredProject.relationship} />
-                        </div>
-                      </div>
-                    ) : null}
-
-                    <div className="mt-7 border-t border-[var(--rule)] pt-5">
-                      <p className="font-technical m-0 text-[0.8rem] font-medium uppercase tracking-[0.08em] text-[var(--muted)]">
-                        Scope
-                      </p>
-                      <p className="mb-0 mt-4 text-[1rem] leading-7 text-[var(--muted)] sm:text-[1.04rem]">
-                        {featuredProject.scopes.join(" · ")}
-                      </p>
-                    </div>
-
-                    <div className="mt-7 flex flex-col gap-4 border-t border-[var(--rule)] pt-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-                      <p className="font-technical m-0 text-[0.82rem] leading-5 text-[var(--muted)]">
-                        {[featuredProject.location, featuredProject.year].filter(Boolean).join(" · ")}
-                      </p>
-                      <ArrowLink href={`/projects/${featuredProject.slug}`}>View Full Project Scope</ArrowLink>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
+              <FeaturedProjectDossier project={featuredProject} projectNumber={featuredNumber} />
               <ProjectShowcaseRail projects={projectRail} allProjects={verifiedProjects} />
             </div>
           </Container>
         </section>
       ) : null}
 
-      <section className="pb-14 sm:pb-16 md:pb-20">
+      <section className="pb-16 sm:pb-18 md:pb-22">
         <Container>
           <RelationshipRail names={clients} />
         </Container>
       </section>
 
-      <section className="bg-[var(--graphite)] py-16 text-[var(--canvas)] sm:py-20 md:py-24">
+      <section className="bg-[var(--graphite)] py-18 text-[var(--canvas)] sm:py-22 md:py-26">
         <Container>
           <SectionLabel>Core Technical Services</SectionLabel>
           <h2 className="mt-5 max-w-[18ch] text-[clamp(2.35rem,4.8vw,4.4rem)] font-medium leading-[0.98] tracking-[-0.047em] sm:mt-6">
@@ -237,21 +186,26 @@ export default function HomePage() {
             <p className="font-technical m-0 text-[0.8rem] font-medium uppercase tracking-[0.08em] text-white/58">
               Supporting Engineering Disciplines
             </p>
-            <div className="mt-5 grid gap-0 border-y border-white/14 text-[1rem] font-medium leading-6 text-white/82 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-5 grid border-y border-white/16 lg:grid-cols-4">
               {supportingDisciplines.map((discipline, index) => (
-                <span
+                <div
                   key={discipline}
-                  className={`flex min-h-16 items-center border-b border-white/14 py-4 sm:min-h-18 sm:px-5 ${index % 2 === 0 ? "sm:border-r" : ""} lg:border-b-0 lg:border-r lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0`}
+                  className="grid min-h-24 grid-cols-[auto_1fr] gap-4 border-b border-white/16 py-5 sm:min-h-26 lg:min-h-28 lg:border-b-0 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
                 >
-                  {discipline}
-                </span>
+                  <span className="font-technical text-[0.74rem] font-medium text-white/50">
+                    {String(index + 3).padStart(2, "0")}
+                  </span>
+                  <span className="text-[1.08rem] font-medium leading-6 text-white/88 sm:text-[1.14rem]">
+                    {discipline}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="py-16 sm:py-20 md:py-24">
+      <section className="py-18 sm:py-22 md:py-26">
         <Container>
           <div className="grid gap-7 sm:gap-8 md:grid-cols-12 md:items-end md:gap-8">
             <div className="min-w-0 md:col-span-5">
@@ -268,9 +222,9 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="pb-16 sm:pb-20 md:pb-24">
+      <section className="pb-18 sm:pb-22 md:pb-26">
         <Container>
-          <div className="grid gap-8 border-t border-[var(--rule)] pt-8 sm:gap-10 sm:pt-9 md:grid-cols-12 md:items-center md:pt-10">
+          <div className="grid gap-8 border-t border-[var(--rule)] pt-8 sm:gap-10 sm:pt-10 md:grid-cols-12 md:items-center md:gap-10">
             <div className="min-w-0 md:col-span-6">
               <AboutBrandArtwork variant="compact" />
             </div>
@@ -298,17 +252,17 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-[var(--graphite)] py-16 text-[var(--canvas)] sm:py-20 md:py-24">
+      <section className="bg-[var(--graphite)] py-18 text-[var(--canvas)] sm:py-22 md:py-26">
         <Container>
           <div className="grid gap-8 border-t border-white/16 pt-8 sm:gap-10 sm:pt-10 md:grid-cols-12 md:items-end">
-            <div className="min-w-0 md:col-span-7">
+            <div className="min-w-0 md:col-span-6">
               <SectionLabel>Project Inquiry</SectionLabel>
               <h2 className="mt-5 max-w-[16ch] text-[clamp(2.4rem,5vw,4.7rem)] font-medium leading-[0.97] tracking-[-0.05em] sm:mt-6">
                 Have a testing, commissioning or protection scope?
               </h2>
             </div>
             <div className="min-w-0 md:col-span-4 md:col-start-9">
-              <p className="m-0 max-w-md text-[1.05rem] leading-7 text-white/78 md:text-[1.1rem] md:leading-8">
+              <p className="m-0 max-w-md text-[1rem] leading-7 text-white/72">
                 Discuss your project requirements directly with AFAAQ&apos;s engineering team.
               </p>
               <div className="mt-6">
