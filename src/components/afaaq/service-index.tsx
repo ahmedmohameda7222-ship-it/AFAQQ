@@ -14,23 +14,31 @@ export function ServiceIndex() {
     .filter((service): service is NonNullable<typeof service> => Boolean(service && service.status === "verified"));
 
   return (
-    <div className="mt-9 sm:mt-12 md:mt-14">
+    <div className="mt-10 sm:mt-12 md:mt-14">
       {primaryServices.map((service, index) => (
-        <article key={service.slug} id={service.slug} className="grid min-w-0 gap-4 border-t border-white/18 py-6 sm:gap-5 sm:py-7 md:grid-cols-12 md:gap-8 md:py-9">
-          <p className="font-technical m-0 text-[0.75rem] leading-5 text-white/60 sm:text-[0.78rem] md:col-span-1">{String(index + 1).padStart(2, "0")}</p>
-          <div className="min-w-0 md:col-span-6">
-            <h3 className="m-0 text-[clamp(1.7rem,3vw,2.75rem)] font-medium leading-[1.05] tracking-[-0.035em]">
+        <article
+          key={service.slug}
+          id={service.slug}
+          className="group grid min-w-0 gap-5 border-t border-white/20 py-7 transition-colors duration-[var(--motion-ui)] hover:bg-white/[0.025] sm:gap-6 sm:py-8 md:grid-cols-12 md:gap-8 md:px-2 md:py-10 last:border-b"
+        >
+          <p className="font-technical m-0 text-[0.82rem] font-medium leading-5 tracking-[0.08em] text-white/64 md:col-span-1">
+            {String(index + 1).padStart(2, "0")}
+          </p>
+
+          <div className="min-w-0 md:col-span-5">
+            <h3 className="m-0 max-w-[18ch] text-[clamp(1.85rem,3.2vw,3rem)] font-medium leading-[1.02] tracking-[-0.04em]">
               {service.title}
             </h3>
           </div>
-          <div className="min-w-0 md:col-span-5">
-            <p className="m-0 max-w-lg text-[0.98rem] leading-7 text-white/72 sm:text-[1rem]">{service.summary}</p>
+
+          <div className="min-w-0 md:col-span-5 md:col-start-8">
+            <p className="m-0 max-w-xl text-[1.02rem] leading-7 text-white/76 sm:text-[1.06rem] sm:leading-8">{service.summary}</p>
             <Link
               href={`/services/${service.slug}`}
-              className="group mt-3 inline-flex min-h-12 max-w-full items-center gap-3 text-[0.92rem] font-medium sm:mt-4 sm:text-[0.95rem]"
+              className="group/link mt-4 inline-flex min-h-12 max-w-full items-center gap-3 text-[0.96rem] font-medium sm:mt-5 sm:text-[0.98rem]"
             >
               <span className="min-w-0">{detailLabels[service.slug as (typeof primarySlugs)[number]]}</span>
-              <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1" fill="none">
+              <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform duration-[var(--motion-fast)] group-hover/link:translate-x-1" fill="none">
                 <path d="M4 10h11M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" />
               </svg>
             </Link>
