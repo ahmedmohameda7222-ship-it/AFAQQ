@@ -3,7 +3,7 @@ import Link from "next/link";
 import { company } from "@/content/company";
 import { Container } from "./container";
 
-const footerLinkClass = "inline-flex min-h-11 items-center text-white/90 transition-colors hover:text-white";
+const footerLinkClass = "inline-flex min-h-11 items-center text-[0.98rem] text-white/90 transition-colors hover:text-white";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -16,14 +16,14 @@ export function SiteFooter() {
             <p className="font-technical m-0 text-[0.82rem] font-medium uppercase leading-5 tracking-[0.09em] text-white/68">
               AFAAQ ARAB / Engineering & Contracting
             </p>
-            <p className="mt-4 max-w-md text-[1rem] leading-7 text-white/76">
+            <p className="mt-4 max-w-md text-[1rem] leading-7 text-white/78">
               Electrical engineering and contracting for power-system installation, testing, commissioning, protection and control.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-7 text-[0.98rem] leading-6 sm:grid-cols-3 sm:gap-8 md:col-span-7 md:col-start-6">
             <div>
-              <p className="font-technical mb-2 text-[0.82rem] font-medium uppercase leading-5 tracking-[0.08em] text-white/64">Navigate</p>
+              <p className="font-technical mb-2 text-[0.82rem] font-medium uppercase leading-5 tracking-[0.08em] text-white/66">Navigate</p>
               <div className="grid">
                 <Link href="/services" className={footerLinkClass}>Services</Link>
                 <Link href="/projects" className={footerLinkClass}>Projects</Link>
@@ -32,16 +32,16 @@ export function SiteFooter() {
               </div>
             </div>
             <div>
-              <p className="font-technical mb-2 text-[0.82rem] font-medium uppercase leading-5 tracking-[0.08em] text-white/64">Direct</p>
+              <p className="font-technical mb-2 text-[0.82rem] font-medium uppercase leading-5 tracking-[0.08em] text-white/66">Direct</p>
               <div className="grid">
                 <a href={`mailto:${company.email}`} className={`${footerLinkClass} break-all`}>{company.email}</a>
                 <a href={`tel:${company.phone.replace(/\s/g, "")}`} className={footerLinkClass}>{company.phone}</a>
               </div>
             </div>
             <div>
-              <p className="font-technical mb-2 text-[0.82rem] font-medium uppercase leading-5 tracking-[0.08em] text-white/64">Office</p>
+              <p className="font-technical mb-2 text-[0.82rem] font-medium uppercase leading-5 tracking-[0.08em] text-white/66">Office</p>
               <div className="grid">
-                <span className="inline-flex min-h-11 items-center text-white/90">{company.location}</span>
+                <span className="inline-flex min-h-11 items-center text-[0.98rem] text-white/90">{company.location}</span>
                 <Link href="/contact" className={footerLinkClass}>Discuss a project</Link>
               </div>
             </div>
@@ -59,7 +59,7 @@ export function SiteFooter() {
             />
             <span className="text-[0.9rem] font-semibold tracking-[0.13em]">AFAAQ ARAB</span>
           </Link>
-          <p className="m-0 max-w-2xl text-[0.86rem] leading-6 text-white/58 sm:text-right">
+          <p className="m-0 max-w-2xl text-[0.9rem] leading-6 text-white/66 sm:text-right">
             © {year} {company.legalName} · {company.location}
           </p>
         </div>

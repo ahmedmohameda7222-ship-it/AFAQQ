@@ -5,22 +5,32 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-const projectSurfaces = [
-  "../src/app/page.tsx",
-  "../src/app/projects/page.tsx",
-  "../src/app/projects/[slug]/page.tsx",
-  "../src/components/afaaq/project-showcase-rail.tsx",
-];
-
 for (const project of projects) {
   assert(project.image === undefined, `Project ${project.slug} must not define unauthenticated project imagery.`);
   assert(project.imageAlt === undefined, `Project ${project.slug} must not define image alt text without authenticated imagery.`);
   assert(project.imagePosition === undefined, `Project ${project.slug} must not define image positioning without authenticated imagery.`);
 }
 
-for (const relativePath of projectSurfaces) {
+const dossierSurfaces = [
+  "../src/app/page.tsx",
+  "../src/components/afaaq/project-showcase-rail.tsx",
+  "../src/components/afaaq/project-dossier.tsx",
+];
+
+for (const relativePath of dossierSurfaces) {
   const source = readFileSync(new URL(relativePath, import.meta.url), "utf8");
-  assert(source.includes("ProjectMedia"), `${relativePath} must keep the honest text-only ProjectMedia fallback.`);
+  assert(!source.includes("ProjectMedia"), `${relativePath} must not use a media-shaped Home project placeholder.`);
+  assert(!source.includes("/images/projects/"), `${relativePath} must not render project photography on Home.`);
 }
 
-console.log(`Project media integrity OK: ${projects.length} projects use authenticated-photo fallback mode.`);
+const innerProjectSurfaces = [
+  "../src/app/projects/page.tsx",
+  "../src/app/projects/[slug]/page.tsx",
+];
+
+for (const relativePath of innerProjectSurfaces) {
+  const source = readFileSync(new URL(relativePath, import.meta.url), "utf8");
+  assert(source.includes("ProjectMedia"), `${relativePath} must keep the honest image-ready fallback surface.`);
+}
+
+console.log(`Project media integrity OK: ${projects.length} projects remain photo-free.`);
