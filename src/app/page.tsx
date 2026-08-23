@@ -1,16 +1,16 @@
 import Image from "next/image";
+import { AboutBrandArtwork } from "@/components/afaaq/about-brand-artwork";
+import { CapabilityGrid } from "@/components/afaaq/capability-grid";
+import { CompanyScale } from "@/components/afaaq/company-scale";
+import { ExecutionTrack } from "@/components/afaaq/execution-track";
+import { PowerRail } from "@/components/afaaq/power-rail";
+import { ProjectReferenceBoard } from "@/components/afaaq/project-reference-board";
+import { RelationshipRail } from "@/components/afaaq/relationship-rail";
 import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
-import { AboutBrandArtwork } from "@/components/afaaq/about-brand-artwork";
-import { ExecutionTrack } from "@/components/afaaq/execution-track";
-import { FeaturedProjectDossier } from "@/components/afaaq/project-dossier";
-import { ProjectShowcaseRail } from "@/components/afaaq/project-showcase-rail";
-import { PowerRail } from "@/components/afaaq/power-rail";
-import { RelationshipRail } from "@/components/afaaq/relationship-rail";
-import { ServiceIndex } from "@/components/afaaq/service-index";
-import { clients, companyFacts } from "@/content/company";
+import { clients, company, companyFacts } from "@/content/company";
 import { verifiedProjects } from "@/content/projects";
 
 const voltageExperience = [
@@ -19,24 +19,7 @@ const voltageExperience = [
   { value: "11", unit: "kV" },
 ] as const;
 
-const supportingDisciplines = [
-  "Electrical Installation",
-  "Power Quality",
-  "Operation & Maintenance",
-  "Engineering Support",
-] as const;
-
-const featuredProject = verifiedProjects[0];
-const projectRail = featuredProject
-  ? verifiedProjects.filter((project) => project.slug !== featuredProject.slug)
-  : verifiedProjects;
-
 export default function HomePage() {
-  const featuredIndex = featuredProject
-    ? verifiedProjects.findIndex((project) => project.slug === featuredProject.slug)
-    : -1;
-  const featuredNumber = featuredIndex >= 0 ? String(featuredIndex + 1).padStart(2, "0") : "01";
-
   return (
     <>
       <section className="relative isolate overflow-hidden bg-[var(--hero-canvas)] pt-8 [--hero-canvas:#f4f3ef] sm:pt-10 md:pt-12 lg:min-h-[690px] lg:pt-0 xl:min-h-[730px]">
@@ -97,64 +80,65 @@ export default function HomePage() {
         scaleLabel="Substations delivered"
       />
 
-      {featuredProject ? (
-        <section className="pb-20 pt-18 sm:pb-24 sm:pt-22 md:pb-28 md:pt-26">
-          <Container>
-            <div className="border-t border-[var(--rule)] pt-7 sm:pt-8 md:pt-10">
-              <div className="grid gap-6 md:grid-cols-12 md:items-end md:gap-8">
-                <div className="min-w-0 md:col-span-8">
-                  <SectionLabel>Major Projects</SectionLabel>
-                  <h2 className="font-display mt-5 max-w-[22ch] text-[clamp(2.2rem,4vw,3.8rem)] font-semibold leading-[0.99] tracking-[-0.035em] sm:mt-6">
-                    Project references across regional control centers and solar-power infrastructure.
-                  </h2>
-                </div>
-                <div className="md:col-span-3 md:col-start-10 md:text-right">
-                  <ArrowLink href="/projects">View All Projects</ArrowLink>
-                </div>
-              </div>
-
-              <FeaturedProjectDossier project={featuredProject} projectNumber={featuredNumber} />
-              <ProjectShowcaseRail projects={projectRail} allProjects={verifiedProjects} />
+      <section className="py-18 sm:py-22 md:py-26">
+        <Container>
+          <div className="grid gap-7 md:grid-cols-12 md:items-end md:gap-8">
+            <div className="min-w-0 md:col-span-7">
+              <SectionLabel>Technical Capabilities</SectionLabel>
+              <h2 className="font-display mt-5 max-w-[17ch] text-[clamp(2.35rem,4.4vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.035em] sm:mt-6">
+                Engineering disciplines focused on safe, controlled power-system delivery.
+              </h2>
             </div>
+            <p className="m-0 max-w-xl text-[1.04rem] leading-7 text-[var(--muted)] md:col-span-4 md:col-start-9 md:text-[1.08rem] md:leading-8">
+              Testing, protection, installation and engineering support are organized around the requirements of substations and control infrastructure.
+            </p>
+          </div>
+          <CapabilityGrid />
+        </Container>
+      </section>
+
+      {verifiedProjects.length ? (
+        <section className="bg-[var(--surface)] py-18 sm:py-22 md:py-26">
+          <Container>
+            <div className="grid gap-7 md:grid-cols-12 md:items-end md:gap-8">
+              <div className="min-w-0 md:col-span-8">
+                <SectionLabel>Major Project References</SectionLabel>
+                <h2 className="font-display mt-5 max-w-[20ch] text-[clamp(2.35rem,4.4vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.035em] sm:mt-6">
+                  Verified references across regional control centers and solar-power infrastructure.
+                </h2>
+              </div>
+              <div className="md:col-span-3 md:col-start-10 md:text-right">
+                <ArrowLink href="/projects">View All Projects</ArrowLink>
+              </div>
+            </div>
+
+            <ProjectReferenceBoard projects={verifiedProjects} />
           </Container>
         </section>
       ) : null}
 
-      <section className="pb-16 sm:pb-18 md:pb-22">
+      <section className="py-18 sm:py-22 md:py-26">
         <Container>
-          <RelationshipRail names={clients} />
+          <div className="grid gap-7 md:grid-cols-12 md:items-end md:gap-8">
+            <div className="min-w-0 md:col-span-7">
+              <SectionLabel>Company Scale</SectionLabel>
+              <h2 className="font-display mt-5 max-w-[18ch] text-[clamp(2.3rem,4.1vw,3.9rem)] font-semibold leading-[0.99] tracking-[-0.034em] sm:mt-6">
+                Delivery scale shown through verified company experience.
+              </h2>
+            </div>
+            <p className="m-0 max-w-lg text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-4 md:col-start-9 md:text-[1.06rem]">
+              Company credentials are presented separately from voltage experience so technical depth and delivery scale remain distinct.
+            </p>
+          </div>
+          <div className="mt-10 sm:mt-12">
+            <CompanyScale />
+          </div>
         </Container>
       </section>
 
-      <section className="bg-[var(--graphite)] py-18 text-white sm:py-22 md:py-26">
+      <section className="bg-[var(--surface)] py-18 sm:py-22 md:py-26">
         <Container>
-          <SectionLabel>Core Technical Services</SectionLabel>
-          <h2 className="font-display mt-5 max-w-[18ch] text-[clamp(2.35rem,4.8vw,4.4rem)] font-semibold leading-[0.98] tracking-[-0.035em] sm:mt-6">
-            Technical disciplines for substations, protection and control.
-          </h2>
-
-          <ServiceIndex />
-
-          <div className="mt-10 border-t border-white/20 pt-6 sm:mt-12 sm:pt-7">
-            <p className="m-0 text-[0.86rem] font-semibold uppercase tracking-[0.06em] text-white/68">
-              Supporting Engineering Disciplines
-            </p>
-            <div className="mt-5 grid border-y border-white/16 lg:grid-cols-4">
-              {supportingDisciplines.map((discipline, index) => (
-                <div
-                  key={discipline}
-                  className="grid min-h-24 grid-cols-[auto_1fr] gap-4 border-b border-white/16 py-5 sm:min-h-26 lg:min-h-28 lg:border-b-0 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
-                >
-                  <span className="font-technical text-[0.74rem] font-medium text-white/58">
-                    {String(index + 3).padStart(2, "0")}
-                  </span>
-                  <span className="text-[1.08rem] font-medium leading-6 text-white/88 sm:text-[1.14rem]">
-                    {discipline}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <RelationshipRail names={clients} />
         </Container>
       </section>
 
@@ -175,13 +159,10 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="pb-18 sm:pb-22 md:pb-26">
+      <section className="bg-[var(--surface)] py-18 sm:py-22 md:py-26">
         <Container>
-          <div className="grid gap-8 border-t border-[var(--rule)] pt-8 sm:gap-10 sm:pt-10 md:grid-cols-12 md:items-center md:gap-10">
-            <div className="min-w-0 md:col-span-6">
-              <AboutBrandArtwork variant="compact" />
-            </div>
-            <div className="min-w-0 md:col-span-5 md:col-start-8">
+          <div className="grid gap-9 md:grid-cols-12 md:items-center md:gap-10">
+            <div className="min-w-0 md:col-span-5 md:col-start-1">
               <SectionLabel>About AFAAQ</SectionLabel>
               <h2 className="font-display mt-5 max-w-[17ch] text-[clamp(2.1rem,3.5vw,3.35rem)] font-semibold leading-[1.01] tracking-[-0.03em] sm:mt-6">
                 A Cairo-based engineering contractor focused on power-system delivery.
@@ -189,25 +170,31 @@ export default function HomePage() {
               <p className="mt-5 max-w-xl text-[1.03rem] leading-7 text-[var(--muted)] sm:mt-6 md:text-[1.08rem] md:leading-8">
                 Founded in 2017, AFAAQ ARAB delivers electrical contracting, testing and commissioning, protection and control work for power-system environments.
               </p>
-              <div className="mt-7 grid grid-cols-2 border-y border-[var(--rule)]">
-                {companyFacts.slice(0, 1).concat(companyFacts.slice(3, 4)).map(([value, label], index) => (
-                  <div key={label} className={`py-5 ${index === 0 ? "border-r border-[var(--rule)] pr-5" : "pl-5"}`}>
-                    <p className="font-display m-0 text-[1.45rem] font-semibold tracking-[-0.03em]">{value}</p>
-                    <p className="mb-0 mt-2 text-[0.9rem] leading-5 text-[var(--muted)]">{label}</p>
-                  </div>
-                ))}
+              <div className="mt-7 grid gap-4 border-y border-[var(--rule)] py-5 sm:grid-cols-2">
+                <div>
+                  <p className="font-display m-0 text-[1.55rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]">2017</p>
+                  <p className="mb-0 mt-1 text-[0.94rem] leading-6 text-[var(--muted)]">Founded</p>
+                </div>
+                <div>
+                  <p className="font-display m-0 text-[1.55rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]">Cairo, Egypt</p>
+                  <p className="mb-0 mt-1 text-[0.94rem] leading-6 text-[var(--muted)]">Head office</p>
+                </div>
               </div>
               <div className="mt-6">
                 <ArrowLink href="/about">About AFAAQ</ArrowLink>
               </div>
             </div>
+            <div className="min-w-0 md:col-span-6 md:col-start-7">
+              <AboutBrandArtwork variant="compact" />
+            </div>
           </div>
         </Container>
       </section>
 
-      <section className="bg-[var(--graphite)] py-18 text-white sm:py-22 md:py-26">
+      <section className="bg-[var(--brand-deep-navy)] py-18 text-white sm:py-22 md:py-26">
         <Container>
-          <div className="grid gap-8 border-t border-white/16 pt-8 sm:gap-10 sm:pt-10 md:grid-cols-12 md:items-end">
+          <div className="h-1 w-20 bg-[var(--brand-blue)]" aria-hidden="true" />
+          <div className="mt-8 grid gap-8 md:grid-cols-12 md:items-end md:gap-10">
             <div className="min-w-0 md:col-span-6">
               <SectionLabel>Project Inquiry</SectionLabel>
               <h2 className="font-display mt-5 max-w-[16ch] text-[clamp(2.4rem,5vw,4.7rem)] font-semibold leading-[0.97] tracking-[-0.038em] sm:mt-6">
@@ -215,7 +202,7 @@ export default function HomePage() {
               </h2>
             </div>
             <div className="min-w-0 md:col-span-4 md:col-start-9">
-              <p className="m-0 max-w-md text-[1rem] leading-7 text-white/72">
+              <p className="m-0 max-w-md text-[1.02rem] leading-7 text-white/78">
                 Discuss your project requirements directly with AFAAQ&apos;s engineering team.
               </p>
               <div className="mt-6">
