@@ -29,6 +29,10 @@ assert(schneiderMark.includes('#3dcd58'), "Schneider Electric mark must use its 
 assert(abbMark.includes('#ff000f'), "ABB mark must use its verified red brand color, not a default-black glyph.");
 assert(!schneiderMark.includes('<path d='), "Schneider Electric mark must not rely on a default-black SVG path.");
 assert(!abbMark.includes('<path d='), "ABB mark must not rely on a default-black SVG path.");
+assert(
+  /logoUrl \? \([\s\S]*?<Image[\s\S]*?\) : \([\s\S]*?fallbackMark\(name\)/.test(rail),
+  "Fallback initials must render only when no logo image is available, never underneath transparent company marks.",
+);
 
 const expectedDomains = [
   'elsewedyelectric.com',
