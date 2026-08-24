@@ -17,6 +17,6 @@ assert(visual.includes('"electrical-installation"'), "Service visual must define
 assert(visual.includes('"power-quality"'), "Service visual must define Power Quality content.");
 assert(visual.includes('"operation-maintenance"'), "Service visual must define Operation & Maintenance content.");
 assert(visual.includes('"engineering-consultancy"'), "Service visual must define Engineering Support content.");
-assert(visual.includes('"training"'), "Service visual must define Training content.");
+assert(visual.includes("training:"), "Service visual must define Training content.");
 
 console.log("Service differentiation validation passed.");
