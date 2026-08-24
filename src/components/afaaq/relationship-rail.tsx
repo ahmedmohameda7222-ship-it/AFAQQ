@@ -57,9 +57,6 @@ function ClientItem({ name }: { name: string }) {
         className="relative inline-flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)] bg-white sm:h-16 sm:w-16"
         aria-hidden="true"
       >
-        <span className="text-[0.68rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]/68">
-          {fallbackMark(name)}
-        </span>
         {logoUrl ? (
           <Image
             src={logoUrl}
@@ -68,9 +65,13 @@ function ClientItem({ name }: { name: string }) {
             height={44}
             sizes="44px"
             loading="lazy"
-            className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 bg-white object-contain sm:h-11 sm:w-11"
+            className="h-10 w-10 object-contain sm:h-11 sm:w-11"
           />
-        ) : null}
+        ) : (
+          <span className="text-[0.68rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]/68">
+            {fallbackMark(name)}
+          </span>
+        )}
       </span>
       <span className="min-w-0 text-[1.18rem] font-semibold tracking-[-0.016em] text-[var(--ink)] sm:text-[1.3rem] md:text-[1.38rem]">
         {name}
