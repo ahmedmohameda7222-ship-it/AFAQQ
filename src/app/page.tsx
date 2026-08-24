@@ -31,7 +31,7 @@ export default function HomePage() {
               <SectionLabel>Electrical Engineering & Contracting</SectionLabel>
 
               <h1 className="font-display mt-5 max-w-[12ch] text-[clamp(2.9rem,5vw,4.75rem)] font-semibold leading-[0.97] tracking-[-0.037em] text-[var(--ink)] sm:mt-6">
-                Power-system testing, commissioning and protection.
+                Testing. Commissioning. Protection.
               </h1>
 
               <p className="mt-6 max-w-[38rem] text-[1.1rem] leading-7 text-[var(--muted)] sm:mt-7 md:text-[1.2rem] md:leading-8">
