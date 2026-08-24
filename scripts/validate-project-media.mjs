@@ -11,15 +11,17 @@ for (const project of projects) {
   assert(project.imagePosition === undefined, `Project ${project.slug} must not define image positioning without authenticated imagery.`);
 }
 
-const homeProjectSurfaces = [
+const projectSurfaces = [
   "../src/app/page.tsx",
   "../src/components/afaaq/project-reference-board.tsx",
+  "../src/app/projects/page.tsx",
+  "../src/app/projects/[slug]/page.tsx",
 ];
 
-for (const relativePath of homeProjectSurfaces) {
+for (const relativePath of projectSurfaces) {
   const source = readFileSync(new URL(relativePath, import.meta.url), "utf8");
-  assert(!source.includes("ProjectMedia"), `${relativePath} must not use a media-shaped Home project placeholder.`);
-  assert(!source.includes("/images/projects/"), `${relativePath} must not render project photography on Home.`);
+  assert(!source.includes("ProjectMedia"), `${relativePath} must not render a media-shaped project placeholder.`);
+  assert(!source.includes("/images/projects/"), `${relativePath} must not render unauthenticated project photography.`);
   assert(!source.includes("drcc.jpg"), `${relativePath} must not treat repository DRCC imagery as authenticated project evidence.`);
   assert(!source.includes("crcc.jpg"), `${relativePath} must not treat repository CRCC imagery as authenticated project evidence.`);
   assert(!source.includes("rcc.jpg"), `${relativePath} must not treat repository RCC imagery as authenticated project evidence.`);
@@ -29,14 +31,4 @@ for (const relativePath of homeProjectSurfaces) {
 const projectBoard = readFileSync(new URL("../src/components/afaaq/project-reference-board.tsx", import.meta.url), "utf8");
 assert(!projectBoard.includes('"use client"'), "Home project references must remain server-rendered.");
 
-const innerProjectSurfaces = [
-  "../src/app/projects/page.tsx",
-  "../src/app/projects/[slug]/page.tsx",
-];
-
-for (const relativePath of innerProjectSurfaces) {
-  const source = readFileSync(new URL(relativePath, import.meta.url), "utf8");
-  assert(source.includes("ProjectMedia"), `${relativePath} must keep the honest image-ready fallback surface.`);
-}
-
-console.log(`Project media integrity OK: ${projects.length} projects remain photo-free on Home.`);
+console.log(`Project media integrity OK: ${projects.length} verified project records remain image-independent.`);

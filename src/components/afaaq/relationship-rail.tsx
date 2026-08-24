@@ -1,20 +1,31 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 type RelationshipRailProps = {
   names: readonly string[];
+  motion?: "marquee" | "static";
 };
 
 type ClientVisual = {
+  localSrc?: string;
   domain?: string;
 };
 
 const clientVisuals: Record<string, ClientVisual> = {
-  "Schneider Electric": { domain: "se.com" },
+  "Schneider Electric": {
+    localSrc: "/brand/relationships/schneider-electric.svg",
+    domain: "se.com",
+  },
   "ELSEWEDY ELECTRIC": { domain: "elsewedyelectric.com" },
   Madkour: { domain: "madkour.com.eg" },
   "GE Vernova": { domain: "gevernova.com" },
   "Siemens Energy": { domain: "siemens-energy.com" },
-  ABB: { domain: "abb.com" },
+  ABB: {
+    localSrc: "/brand/relationships/abb.svg",
+    domain: "abb.com",
+  },
   "Hitachi Energy": { domain: "hitachienergy.com" },
   EGEMAC: { domain: "egemac.com.eg" },
   EETC: { domain: "eetc.gov.eg" },
@@ -35,9 +46,10 @@ function fallbackMark(name: string) {
 
 function ClientItem({ name }: { name: string }) {
   const visual = clientVisuals[name];
-  const logoUrl = visual?.domain
+  const fallbackUrl = visual?.domain
     ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${visual.domain}`)}&sz=128`
     : null;
+  const logoUrl = visual?.localSrc ?? fallbackUrl;
 
   return (
     <span className="flex min-w-0 items-center gap-4 sm:gap-5">
@@ -67,33 +79,61 @@ function ClientItem({ name }: { name: string }) {
   );
 }
 
-export function RelationshipRail({ names }: RelationshipRailProps) {
+function RelationshipHeader() {
+  return (
+    <div className="max-w-4xl">
+      <h2
+        id="relationship-heading"
+        className="font-display m-0 max-w-[20ch] text-[clamp(2.1rem,3.7vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.032em] text-[var(--ink)]"
+      >
+        Selected Project & Client Relationships
+      </h2>
+      <p className="mb-0 mt-5 max-w-2xl text-[1rem] leading-7 text-[var(--muted)] md:text-[1.05rem]">
+        Organizations represented across AFAAQ&apos;s project and client relationships.
+      </p>
+    </div>
+  );
+}
+
+export function RelationshipRail({ names, motion = "marquee" }: RelationshipRailProps) {
+  const [paused, setPaused] = useState(false);
+
   if (names.length === 0) return null;
+
+  if (motion === "static") {
+    return (
+      <section aria-labelledby="relationship-heading">
+        <RelationshipHeader />
+        <div className="mt-8 grid border-t border-[var(--rule)] sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
+          {names.map((name) => (
+            <div key={name} className="min-w-0 border-b border-[var(--rule)] py-6 sm:px-5 sm:py-7 sm:first:pl-0 lg:px-7 lg:first:pl-0">
+              <ClientItem name={name} />
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   const items = [...names, ...names];
 
   return (
     <section aria-labelledby="relationship-heading">
-      <div className="grid gap-5 md:grid-cols-12 md:items-end md:gap-8">
-        <div className="min-w-0 md:col-span-8">
-          <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-[var(--brand-navy)]">
-            Relationships
-          </p>
-          <h2
-            id="relationship-heading"
-            className="font-display mb-0 mt-4 max-w-[20ch] text-[clamp(2.1rem,3.7vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.032em] text-[var(--ink)]"
-          >
-            Selected Project & Client Relationships
-          </h2>
-        </div>
-        <p className="m-0 max-w-lg text-[1rem] leading-7 text-[var(--muted)] md:col-span-4 md:justify-self-end md:text-[1.05rem]">
-          Selected organizations represented in AFAAQ&apos;s project and client relationships.
-        </p>
+      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-8">
+        <RelationshipHeader />
+        <button
+          type="button"
+          aria-pressed={paused}
+          onClick={() => setPaused((value) => !value)}
+          className="relationship-marquee__control inline-flex min-h-11 w-fit items-center border-b border-[var(--brand-navy)] px-0 text-[0.9rem] font-semibold text-[var(--brand-navy)]"
+        >
+          {paused ? "Resume motion" : "Pause motion"}
+        </button>
       </div>
 
       <div className="mt-8 border-y border-[var(--rule)] py-5 sm:mt-10 sm:py-6">
         <div
-          className="relationship-marquee__viewport overflow-hidden"
+          className={`relationship-marquee__viewport overflow-hidden ${paused ? "relationship-marquee__paused" : ""}`}
           role="region"
           aria-label="Project and client relationships"
           tabIndex={0}
@@ -106,7 +146,7 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
                 <span
                   key={`${name}-${index}`}
                   role="listitem"
-                  aria-hidden={index >= names.length}
+                  aria-hidden={isDuplicate}
                   className={`relationship-marquee__item flex shrink-0 items-center ${isDuplicate ? "relationship-marquee__duplicate" : ""}`}
                 >
                   <ClientItem name={name} />
