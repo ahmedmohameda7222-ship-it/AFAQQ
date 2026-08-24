@@ -131,3 +131,36 @@ img[data-nimg="fill"] {
     linear-gradient(to bottom, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px);
   background-size: 100% 100%, 12.5% 100%, 100% 20%;
 }
+
+@keyframes relationship-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.relationship-marquee__track {
+  animation: relationship-marquee 50s linear infinite;
+  will-change: transform;
+}
+
+.relationship-marquee__viewport:hover .relationship-marquee__track,
+.relationship-marquee__viewport:focus-within .relationship-marquee__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .relationship-marquee__viewport {
+    overflow: visible;
+  }
+
+  .relationship-marquee__track {
+    width: auto;
+    flex-wrap: wrap;
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+
+  .relationship-marquee__duplicate {
+    display: none;
+  }
+}
