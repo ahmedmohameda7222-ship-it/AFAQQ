@@ -160,6 +160,13 @@ img[data-nimg="fill"] {
     will-change: auto;
   }
 
+  .relationship-marquee__item {
+    min-width: 0;
+    flex: 1 1 100%;
+    padding-block: 0.75rem;
+  }
+
+  .relationship-marquee__separator,
   .relationship-marquee__duplicate {
     display: none;
   }
