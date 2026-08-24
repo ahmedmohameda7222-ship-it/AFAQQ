@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ScrollRevealManager } from "@/components/layout/scroll-reveal-manager";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -16,9 +16,9 @@ const archivo = Archivo({
   display: "swap",
 });
 
-const plexSans = IBM_Plex_Sans({
+const publicSans = Public_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
 });
@@ -85,7 +85,7 @@ const organizationSchema = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${publicSans.variable} ${plexMono.variable}`}>
       <body>
         <JsonLd data={organizationSchema} />
         <a
