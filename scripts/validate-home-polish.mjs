@@ -28,6 +28,7 @@ assert(companyScale.includes('from "@/content/company"'), "Company scale must so
 assert(!projectBoard.includes("ProjectMedia"), "Project references must remain image-free.");
 assert(!projectBoard.includes('"use client"'), "Project references must remain server-rendered.");
 assert(!capabilityGrid.includes("padStart"), "Capabilities must not use decorative numbering.");
-assert(!relationships.includes("relationship-marquee__track"), "Relationships must not use the old marquee.");
+assert(relationships.includes("relationship-marquee__track"), "Relationships must use the approved moving corporate rail.");
+assert(relationships.includes('import Image from "next/image"'), "Relationships must restore company icons beside names.");
 
 console.log("Corporate Grid Power Home invariants OK.");
