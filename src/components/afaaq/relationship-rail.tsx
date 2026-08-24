@@ -125,7 +125,7 @@ export function RelationshipRail({ names, motion = "marquee" }: RelationshipRail
           type="button"
           aria-pressed={paused}
           onClick={() => setPaused((value) => !value)}
-          className="inline-flex min-h-11 w-fit items-center border-b border-[var(--brand-navy)] px-0 text-[0.9rem] font-semibold text-[var(--brand-navy)]"
+          className="relationship-marquee__control inline-flex min-h-11 w-fit items-center border-b border-[var(--brand-navy)] px-0 text-[0.9rem] font-semibold text-[var(--brand-navy)]"
         >
           {paused ? "Resume motion" : "Pause motion"}
         </button>
