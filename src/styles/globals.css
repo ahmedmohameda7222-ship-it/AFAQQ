@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #ffffff;
+  --canvas: #fbfcfe;
   --surface: #f4f7fa;
   --ink: #111827;
   --graphite: #111827;
@@ -143,7 +143,8 @@ img[data-nimg="fill"] {
 }
 
 .relationship-marquee__viewport:hover .relationship-marquee__track,
-.relationship-marquee__viewport:focus-within .relationship-marquee__track {
+.relationship-marquee__viewport:focus-within .relationship-marquee__track,
+.relationship-marquee__paused .relationship-marquee__track {
   animation-play-state: paused;
 }
 
