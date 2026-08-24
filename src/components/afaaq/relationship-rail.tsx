@@ -131,13 +131,13 @@ export function RelationshipRail({ names, motion = "marquee" }: RelationshipRail
 
   return (
     <section aria-labelledby="relationship-heading">
-      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10">
+      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10">
         <RelationshipHeader />
         <button
           type="button"
           aria-pressed={paused}
           onClick={() => setPaused((value) => !value)}
-          className="relationship-marquee__control inline-flex min-h-12 w-fit shrink-0 items-center gap-2.5 border border-[var(--rule)] bg-[var(--canvas)] px-4 text-[0.94rem] font-semibold text-[var(--brand-navy)] transition-colors hover:border-[var(--brand-blue)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
+          className="relationship-marquee__control inline-flex min-h-11 w-fit shrink-0 items-center gap-2 px-1.5 text-[1rem] font-semibold text-[var(--brand-navy)] transition-colors hover:text-[var(--brand-blue)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
         >
           <PauseIcon paused={paused} />
           {paused ? "Resume motion" : "Pause motion"}
@@ -146,7 +146,7 @@ export function RelationshipRail({ names, motion = "marquee" }: RelationshipRail
 
       <div className="mt-8 border-y border-[var(--rule)] py-6 sm:mt-10 sm:py-7">
         <div
-          className={`relationship-marquee__viewport overflow-hidden ${paused ? "relationship-marquee__paused" : ""}`}
+          className={`relationship-marquee__viewport relationship-marquee__edge-mask overflow-hidden ${paused ? "relationship-marquee__paused" : ""}`}
           role="region"
           aria-label="Project and client relationships"
           tabIndex={0}
