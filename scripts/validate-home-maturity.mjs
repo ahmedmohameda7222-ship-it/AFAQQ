@@ -10,6 +10,7 @@ const execution = readFileSync(new URL("../src/components/afaaq/execution-track.
 const relationships = readFileSync(new URL("../src/components/afaaq/relationship-rail.tsx", import.meta.url), "utf8");
 const projects = readFileSync(new URL("../src/components/afaaq/project-reference-board.tsx", import.meta.url), "utf8");
 const header = readFileSync(new URL("../src/components/layout/site-header.tsx", import.meta.url), "utf8");
+const mobileNav = readFileSync(new URL("../src/components/layout/mobile-nav.tsx", import.meta.url), "utf8");
 const footer = readFileSync(new URL("../src/components/layout/site-footer.tsx", import.meta.url), "utf8");
 
 assert(home.includes("Power-system testing, commissioning and protection."), "Hero must use the shorter technical brand statement.");
@@ -32,6 +33,9 @@ assert(projects.includes('text-[0.78rem] font-semibold uppercase'), "Project met
 assert(projects.includes('text-[0.94rem] font-semibold leading-6'), "Secondary project technical metadata must be enlarged.");
 assert(header.includes('sm:w-[70px]'), "Desktop header logo must have stronger brand presence.");
 assert(header.includes('sm:h-[92px]'), "Header height must support the larger brand mark.");
+assert(mobileNav.includes('top-[86px]'), "Mobile navigation must start below the 86px base header.");
+assert(mobileNav.includes('sm:top-[92px]'), "Mobile navigation must start below the 92px small-screen header.");
+assert(!mobileNav.includes('top-[82px]'), "Mobile navigation must not retain the stale pre-refinement header offset.");
 assert(footer.includes('text-[1rem] text-white/88'), "Footer navigation/contact text must remain legible at the refined scale.");
 
 console.log("Home maturity refinement invariants OK.");
