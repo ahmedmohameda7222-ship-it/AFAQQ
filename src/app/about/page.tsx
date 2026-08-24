@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AboutBrandArtwork } from "@/components/afaaq/about-brand-artwork";
-import { Container } from "@/components/layout/container";
 import { RelationshipRail } from "@/components/afaaq/relationship-rail";
+import { Container } from "@/components/layout/container";
 import { ArrowLink } from "@/components/primitives/arrow-link";
 import { PrimaryAction } from "@/components/primitives/primary-action";
 import { SectionLabel } from "@/components/primitives/section-label";
@@ -91,10 +91,9 @@ export default function AboutPage() {
               </h2>
             </div>
             <div className="min-w-0 md:col-span-7 md:col-start-6">
-              {focus.map((item, index) => (
-                <p key={item} className="m-0 grid grid-cols-[2.5rem_minmax(0,1fr)] gap-3 border-t border-white/18 py-5 text-[clamp(1.3rem,2.7vw,2.2rem)] font-medium tracking-[-0.03em] last:border-b sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-4 sm:py-6 sm:tracking-[-0.035em]">
-                  <span className="pt-1 text-[0.72rem] tracking-[0.1em] text-white/50 sm:text-xs">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="min-w-0">{item}</span>
+              {focus.map((item) => (
+                <p key={item} className="m-0 border-t border-white/18 py-5 text-[clamp(1.3rem,2.7vw,2.2rem)] font-medium tracking-[-0.03em] last:border-b sm:py-6 sm:tracking-[-0.035em]">
+                  {item}
                 </p>
               ))}
             </div>
