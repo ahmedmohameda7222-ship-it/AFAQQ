@@ -82,9 +82,10 @@ assert(
   relationships.includes("Selected Project & Client Relationships"),
   "Relationships must use the approved corporate label.",
 );
-assert(!relationships.includes("relationship-marquee__track"), "Relationships must not use an infinite marquee.");
-assert(!relationships.includes("google.com/s2/favicons"), "Relationships must not use remote favicon substitutes as logos.");
-assert(!globals.includes("@keyframes relationship-marquee"), "Obsolete relationship marquee CSS must be removed.");
+assert(relationships.includes("relationship-marquee__track"), "Relationships must restore the moving horizontal rail.");
+assert(relationships.includes("google.com/s2/favicons"), "Relationships must restore company icons beside known company names.");
+assert(globals.includes("@keyframes relationship-marquee"), "Relationship marquee motion must be defined globally.");
+assert(globals.includes("animation-play-state: paused"), "Relationship marquee must pause on hover or focus.");
 
 const execution = readFileSync(new URL("../src/components/afaaq/execution-track.tsx", import.meta.url), "utf8");
 assert(!execution.includes("Step"), "Execution must not repeat decorative STEP labels.");
