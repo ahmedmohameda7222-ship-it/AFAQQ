@@ -149,6 +149,10 @@ img[data-nimg="fill"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .relationship-marquee__control {
+    display: none;
+  }
+
   .relationship-marquee__viewport {
     overflow: visible;
   }
