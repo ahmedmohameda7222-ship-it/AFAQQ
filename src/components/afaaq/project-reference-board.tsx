@@ -11,7 +11,7 @@ function ArrowIcon() {
 
 function MetaLabel({ children }: { children: React.ReactNode }) {
   return (
-    <dt className="m-0 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+    <dt className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.07em] text-[var(--muted)]">
       {children}
     </dt>
   );
@@ -25,15 +25,15 @@ function FlagshipProjectReference({ project }: { project: Project }) {
       <div className="h-1.5 w-full bg-[var(--brand-blue)]" aria-hidden="true" />
       <div className="grid lg:grid-cols-12">
         <div className="bg-[var(--brand-deep-navy)] p-7 text-white sm:p-9 lg:col-span-5 lg:p-10 xl:p-12">
-          <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-white/72">
+          <p className="m-0 text-[0.8rem] font-semibold uppercase tracking-[0.07em] text-white/74">
             Flagship Project Reference
           </p>
-          <h3 className="font-display mb-0 mt-5 max-w-[13ch] text-[clamp(2.35rem,4.4vw,4.35rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
+          <h3 className="font-display mb-0 mt-5 max-w-[13ch] text-[clamp(2.3rem,4.1vw,4.05rem)] font-semibold leading-[0.96] tracking-[-0.037em]">
             {project.name}
           </h3>
           {project.relationship ? (
             <div className="mt-8 border-t border-white/18 pt-5">
-              <p className="m-0 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-white/64">
+              <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.07em] text-white/68">
                 Project Relationship
               </p>
               <p className="mb-0 mt-2 text-[1.2rem] font-semibold leading-7 text-white sm:text-[1.32rem]">
@@ -48,7 +48,7 @@ function FlagshipProjectReference({ project }: { project: Project }) {
             {technicalLabel ? (
               <div>
                 <MetaLabel>{project.voltage.length ? "System Voltage" : "Technical Profile"}</MetaLabel>
-                <dd className="font-technical mb-0 ml-0 mt-2 text-[1.02rem] font-semibold leading-6 text-[var(--ink)]">
+                <dd className="font-technical mb-0 ml-0 mt-2 text-[1.04rem] font-semibold leading-6 text-[var(--ink)]">
                   {technicalLabel}
                 </dd>
               </div>
@@ -56,7 +56,7 @@ function FlagshipProjectReference({ project }: { project: Project }) {
             {project.location ? (
               <div>
                 <MetaLabel>Location</MetaLabel>
-                <dd className="mb-0 ml-0 mt-2 text-[1.02rem] font-medium leading-6 text-[var(--ink)]">
+                <dd className="mb-0 ml-0 mt-2 text-[1.04rem] font-medium leading-6 text-[var(--ink)]">
                   {project.location}
                 </dd>
               </div>
@@ -64,7 +64,7 @@ function FlagshipProjectReference({ project }: { project: Project }) {
             {project.year ? (
               <div>
                 <MetaLabel>Year</MetaLabel>
-                <dd className="font-technical mb-0 ml-0 mt-2 text-[1rem] font-semibold leading-6 text-[var(--ink)]">
+                <dd className="font-technical mb-0 ml-0 mt-2 text-[1.02rem] font-semibold leading-6 text-[var(--ink)]">
                   {project.year}
                 </dd>
               </div>
@@ -72,12 +72,12 @@ function FlagshipProjectReference({ project }: { project: Project }) {
           </dl>
 
           <div className="mt-8 border-t border-[var(--rule)] pt-6">
-            <p className="m-0 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+            <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.07em] text-[var(--muted)]">
               Scope
             </p>
             <ul className="mt-4 grid list-none gap-x-8 gap-y-3 p-0 sm:grid-cols-2">
               {project.scopes.map((scope) => (
-                <li key={scope} className="flex items-start gap-3 text-[1.02rem] font-medium leading-7 text-[var(--ink)]">
+                <li key={scope} className="flex items-start gap-3 text-[1.04rem] font-medium leading-7 text-[var(--ink)]">
                   <span className="mt-[0.72rem] h-0.5 w-5 shrink-0 bg-[var(--brand-blue)]" aria-hidden="true" />
                   <span>{scope}</span>
                 </li>
@@ -87,7 +87,7 @@ function FlagshipProjectReference({ project }: { project: Project }) {
 
           <Link
             href={`/projects/${project.slug}`}
-            className="group mt-8 inline-flex min-h-12 items-center gap-3 font-semibold text-[var(--brand-navy)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
+            className="group mt-8 inline-flex min-h-12 items-center gap-3 text-[1rem] font-semibold text-[var(--brand-navy)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
           >
             <span>View project scope</span>
             <span className="transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1 group-focus-visible:translate-x-1">
@@ -108,14 +108,14 @@ function ProjectReferenceRow({ project }: { project: Project }) {
     <article className="border-t border-[var(--rule)] last:border-b">
       <Link
         href={`/projects/${project.slug}`}
-        className="group grid min-h-12 gap-5 py-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4 sm:py-8 lg:grid-cols-12 lg:items-start lg:gap-8"
+        className="group grid min-h-12 gap-5 py-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4 sm:py-9 lg:grid-cols-12 lg:items-start lg:gap-8"
       >
         <div className="min-w-0 lg:col-span-5">
-          <h3 className="font-display m-0 max-w-[22ch] text-[clamp(1.75rem,2.6vw,2.45rem)] font-semibold leading-[1.02] tracking-[-0.03em] text-[var(--ink)] transition-colors group-hover:text-[var(--brand-navy)] group-focus-visible:text-[var(--brand-navy)]">
+          <h3 className="font-display m-0 max-w-[22ch] text-[clamp(1.75rem,2.5vw,2.35rem)] font-semibold leading-[1.03] tracking-[-0.028em] text-[var(--ink)] transition-colors group-hover:text-[var(--brand-navy)] group-focus-visible:text-[var(--brand-navy)]">
             {project.name}
           </h3>
           {project.relationship ? (
-            <p className="mb-0 mt-3 text-[1rem] font-semibold leading-6 text-[var(--brand-navy)]">
+            <p className="mb-0 mt-3 text-[1.02rem] font-semibold leading-6 text-[var(--brand-navy)]">
               {project.relationship}
             </p>
           ) : null}
@@ -123,12 +123,12 @@ function ProjectReferenceRow({ project }: { project: Project }) {
 
         <div className="min-w-0 lg:col-span-3">
           {technicalLabel ? (
-            <p className="font-technical m-0 text-[0.86rem] font-semibold leading-6 text-[var(--ink)]">
+            <p className="font-technical m-0 text-[0.94rem] font-semibold leading-6 text-[var(--ink)]">
               {technicalLabel}
             </p>
           ) : null}
           {locationYear ? (
-            <p className="mb-0 mt-2 text-[0.96rem] leading-6 text-[var(--muted)]">
+            <p className="mb-0 mt-2 text-[1rem] leading-6 text-[var(--muted)]">
               {locationYear}
             </p>
           ) : null}
@@ -136,7 +136,7 @@ function ProjectReferenceRow({ project }: { project: Project }) {
 
         <div className="min-w-0 lg:col-span-4">
           <div className="flex items-end justify-between gap-5">
-            <p className="m-0 max-w-[31rem] text-[0.98rem] leading-7 text-[var(--muted)]">
+            <p className="m-0 max-w-[31rem] text-[1rem] leading-7 text-[var(--muted)]">
               {project.scopes.join(" · ")}
             </p>
             <span className="mb-1 shrink-0 text-[var(--brand-navy)] transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1 group-focus-visible:translate-x-1">
@@ -164,7 +164,7 @@ export function ProjectReferenceBoard({ projects }: ProjectReferenceBoardProps) 
       {secondary.length ? (
         <div className="mt-8 sm:mt-10">
           <div className="mb-4 flex items-center gap-5 sm:mb-5">
-            <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+            <p className="m-0 text-[0.8rem] font-semibold uppercase tracking-[0.07em] text-[var(--muted)]">
               Additional Project References
             </p>
             <span className="h-px flex-1 bg-[var(--rule)]" aria-hidden="true" />
