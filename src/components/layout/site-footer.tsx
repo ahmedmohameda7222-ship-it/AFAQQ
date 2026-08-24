@@ -25,7 +25,7 @@ export function SiteFooter() {
 
           <div className="grid grid-cols-1 gap-7 text-[1rem] leading-6 sm:grid-cols-3 sm:gap-8 md:col-span-7 md:col-start-6">
             <div>
-              <p className="mb-2 text-[0.8rem] font-semibold uppercase leading-5 tracking-[0.07em] text-white/68">Navigate</p>
+              <p className="mb-2 text-[0.84rem] font-semibold uppercase leading-5 tracking-[0.065em] text-white/68">Navigate</p>
               <div className="grid">
                 <Link href="/services" className={footerLinkClass}>Services</Link>
                 <Link href="/projects" className={footerLinkClass}>Projects</Link>
@@ -34,14 +34,14 @@ export function SiteFooter() {
               </div>
             </div>
             <div>
-              <p className="mb-2 text-[0.8rem] font-semibold uppercase leading-5 tracking-[0.07em] text-white/68">Direct</p>
+              <p className="mb-2 text-[0.84rem] font-semibold uppercase leading-5 tracking-[0.065em] text-white/68">Direct</p>
               <div className="grid">
                 <a href={`mailto:${company.email}`} className={`${footerLinkClass} break-all`}>{company.email}</a>
                 <a href={`tel:${company.phone.replace(/\s/g, "")}`} className={footerLinkClass}>{company.phone}</a>
               </div>
             </div>
             <div>
-              <p className="mb-2 text-[0.8rem] font-semibold uppercase leading-5 tracking-[0.07em] text-white/68">Office</p>
+              <p className="mb-2 text-[0.84rem] font-semibold uppercase leading-5 tracking-[0.065em] text-white/68">Office</p>
               <div className="grid">
                 <span className="inline-flex min-h-11 items-center text-[1rem] text-white/88">{company.location}</span>
                 <Link href="/contact" className={footerLinkClass}>Discuss a project</Link>
@@ -61,7 +61,7 @@ export function SiteFooter() {
             />
             <span className="text-[0.96rem] font-semibold tracking-[0.1em] text-white">AFAAQ ARAB</span>
           </Link>
-          <p className="m-0 max-w-2xl text-[0.96rem] leading-6 text-white/68 sm:text-right">
+          <p className="m-0 max-w-2xl text-[1rem] leading-6 text-white/68 sm:text-right">
             © {year} {company.legalName} · {company.location}
           </p>
         </div>
