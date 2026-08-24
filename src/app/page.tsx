@@ -84,14 +84,11 @@ export default function HomePage() {
 
       <section className="py-18 sm:py-22 md:py-26">
         <Container>
-          <div className="grid gap-7 md:grid-cols-12 md:items-end md:gap-8">
-            <div className="min-w-0 md:col-span-7">
-              <SectionLabel>Technical Capabilities</SectionLabel>
-              <h2 className="font-display mt-5 max-w-[17ch] text-[clamp(2.35rem,4.4vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.035em] sm:mt-6">
-                Engineering disciplines focused on safe, controlled power-system delivery.
-              </h2>
-            </div>
-            <p className="m-0 max-w-xl text-[1.04rem] leading-7 text-[var(--muted)] md:col-span-4 md:col-start-9 md:text-[1.08rem] md:leading-8">
+          <div className="max-w-4xl">
+            <h2 className="font-display m-0 max-w-[17ch] text-[clamp(2.35rem,4.4vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.035em]">
+              Engineering disciplines focused on safe, controlled power-system delivery.
+            </h2>
+            <p className="mb-0 mt-6 max-w-2xl text-[1.04rem] leading-7 text-[var(--muted)] md:text-[1.08rem] md:leading-8">
               Testing, protection, installation and engineering support are organized around the requirements of substations and control infrastructure.
             </p>
           </div>
@@ -121,15 +118,12 @@ export default function HomePage() {
 
       <section className="py-18 sm:py-22 md:py-26">
         <Container>
-          <div className="grid gap-7 md:grid-cols-12 md:items-end md:gap-8">
-            <div className="min-w-0 md:col-span-7">
-              <SectionLabel>Company Scale</SectionLabel>
-              <h2 className="font-display mt-5 max-w-[18ch] text-[clamp(2.3rem,4.1vw,3.9rem)] font-semibold leading-[0.99] tracking-[-0.034em] sm:mt-6">
-                Delivery scale shown through verified company experience.
-              </h2>
-            </div>
-            <p className="m-0 max-w-lg text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-4 md:col-start-9 md:text-[1.06rem]">
-              Company credentials are presented separately from voltage experience so technical depth and delivery scale remain distinct.
+          <div className="max-w-4xl">
+            <h2 className="font-display m-0 max-w-[16ch] text-[clamp(2.3rem,4.1vw,3.9rem)] font-semibold leading-[0.99] tracking-[-0.034em]">
+              Proven delivery at utility scale.
+            </h2>
+            <p className="mb-0 mt-6 max-w-2xl text-[1.02rem] leading-7 text-[var(--muted)] md:text-[1.06rem] md:leading-8">
+              Experience across substations and utility control infrastructure in Egypt.
             </p>
           </div>
           <div className="mt-10 sm:mt-12">
@@ -146,14 +140,11 @@ export default function HomePage() {
 
       <section className="py-18 sm:py-22 md:py-26">
         <Container>
-          <div className="grid gap-7 sm:gap-8 md:grid-cols-12 md:items-end md:gap-8">
-            <div className="min-w-0 md:col-span-5">
-              <SectionLabel>Project Execution</SectionLabel>
-              <h2 className="font-display mt-5 max-w-[14ch] text-[clamp(2.2rem,3.9vw,3.7rem)] font-semibold leading-[1] tracking-[-0.032em] sm:mt-6">
-                A controlled path from engineering review to energization.
-              </h2>
-            </div>
-            <p className="m-0 max-w-xl text-[1.04rem] leading-7 text-[var(--muted)] md:col-span-6 md:col-start-7 md:text-[1.08rem] md:leading-8">
+          <div className="max-w-4xl">
+            <h2 className="font-display m-0 max-w-[15ch] text-[clamp(2.2rem,3.9vw,3.7rem)] font-semibold leading-[1] tracking-[-0.032em]">
+              A controlled path from engineering review to energization.
+            </h2>
+            <p className="mb-0 mt-6 max-w-2xl text-[1.04rem] leading-7 text-[var(--muted)] md:text-[1.08rem] md:leading-8">
               Each scope moves through documented review, approved procedures, installation, functional testing, commissioning and final records for handover.
             </p>
           </div>
@@ -165,8 +156,7 @@ export default function HomePage() {
         <Container>
           <div className="grid gap-9 md:grid-cols-12 md:items-center md:gap-10">
             <div className="min-w-0 md:col-span-5 md:col-start-1">
-              <SectionLabel>About AFAAQ</SectionLabel>
-              <h2 className="font-display mt-5 max-w-[17ch] text-[clamp(2.1rem,3.5vw,3.35rem)] font-semibold leading-[1.01] tracking-[-0.03em] sm:mt-6">
+              <h2 className="font-display m-0 max-w-[17ch] text-[clamp(2.1rem,3.5vw,3.35rem)] font-semibold leading-[1.01] tracking-[-0.03em]">
                 A Cairo-based engineering contractor focused on power-system delivery.
               </h2>
               <p className="mt-5 max-w-xl text-[1.03rem] leading-7 text-[var(--muted)] sm:mt-6 md:text-[1.08rem] md:leading-8">
