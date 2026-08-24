@@ -12,7 +12,9 @@ assert(rail.includes("Pause motion"), "Relationship rail must expose a Pause mot
 assert(rail.includes("Resume motion"), "Relationship rail must expose a Resume motion control.");
 assert(rail.includes("aria-pressed={paused}"), "Motion control must expose paused state to assistive technology.");
 assert(rail.includes("relationship-marquee__paused"), "Relationship rail must expose an explicit paused-state hook.");
+assert(rail.includes("relationship-marquee__control"), "Relationship motion button must expose a reduced-motion control hook.");
 assert(globals.includes(".relationship-marquee__paused .relationship-marquee__track"), "Global CSS must stop animation for explicit paused state.");
+assert(globals.includes(".relationship-marquee__control"), "Reduced-motion CSS must target the motion control.");
 assert(rail.includes("localSrc"), "Relationship visual mapping must support local relationship marks before favicon fallback.");
 assert(rail.includes('/brand/relationships/schneider-electric.svg'), "Schneider Electric must use the verified local mark.");
 assert(rail.includes('/brand/relationships/abb.svg'), "ABB must use the verified local mark.");
