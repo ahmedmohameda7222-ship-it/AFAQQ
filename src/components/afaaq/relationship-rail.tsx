@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 type RelationshipRailProps = {
   names: readonly string[];
@@ -6,6 +9,7 @@ type RelationshipRailProps = {
 };
 
 type ClientVisual = {
+  localSrc?: string;
   domain?: string;
 };
 
@@ -36,9 +40,10 @@ function fallbackMark(name: string) {
 
 function ClientItem({ name }: { name: string }) {
   const visual = clientVisuals[name];
-  const logoUrl = visual?.domain
+  const fallbackUrl = visual?.domain
     ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${visual.domain}`)}&sz=128`
     : null;
+  const logoUrl = visual?.localSrc ?? fallbackUrl;
 
   return (
     <span className="flex min-w-0 items-center gap-4 sm:gap-5">
@@ -85,6 +90,8 @@ function RelationshipHeader() {
 }
 
 export function RelationshipRail({ names, motion = "marquee" }: RelationshipRailProps) {
+  const [paused, setPaused] = useState(false);
+
   if (names.length === 0) return null;
 
   if (motion === "static") {
@@ -106,11 +113,21 @@ export function RelationshipRail({ names, motion = "marquee" }: RelationshipRail
 
   return (
     <section aria-labelledby="relationship-heading">
-      <RelationshipHeader />
+      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-8">
+        <RelationshipHeader />
+        <button
+          type="button"
+          aria-pressed={paused}
+          onClick={() => setPaused((value) => !value)}
+          className="inline-flex min-h-11 w-fit items-center border-b border-[var(--brand-navy)] px-0 text-[0.9rem] font-semibold text-[var(--brand-navy)]"
+        >
+          {paused ? "Resume motion" : "Pause motion"}
+        </button>
+      </div>
 
       <div className="mt-8 border-y border-[var(--rule)] py-5 sm:mt-10 sm:py-6">
         <div
-          className="relationship-marquee__viewport overflow-hidden"
+          className={`relationship-marquee__viewport overflow-hidden ${paused ? "relationship-marquee__paused" : ""}`}
           role="region"
           aria-label="Project and client relationships"
           tabIndex={0}
