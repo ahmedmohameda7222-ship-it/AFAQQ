@@ -17,10 +17,11 @@
     "test:about-institutional": "node --experimental-strip-types scripts/validate-about-institutional.mjs",
     "test:typography-system": "node --experimental-strip-types scripts/validate-typography-system.mjs",
     "test:relationship-quality": "node --experimental-strip-types scripts/validate-relationship-quality.mjs",
+    "test:contact-states": "node --experimental-strip-types scripts/validate-contact-states.mjs",
     "test:home-polish": "node --experimental-strip-types scripts/validate-home-polish.mjs",
     "test:corporate-grid": "node --experimental-strip-types scripts/validate-corporate-grid-power.mjs",
     "test:relationship-marquee": "node --experimental-strip-types scripts/validate-relationship-marquee.mjs",
-    "check": "npm run test:site-url && npm run test:content && npm run test:project-media && npm run test:project-truth && npm run test:anti-slop && npm run test:service-differentiation && npm run test:about-institutional && npm run test:typography-system && npm run test:relationship-quality && npm run test:home-polish && npm run test:corporate-grid && npm run test:relationship-marquee && npm run lint && npm run typecheck",
+    "check": "npm run test:site-url && npm run test:content && npm run test:project-media && npm run test:project-truth && npm run test:anti-slop && npm run test:service-differentiation && npm run test:about-institutional && npm run test:typography-system && npm run test:relationship-quality && npm run test:contact-states && npm run test:home-polish && npm run test:corporate-grid && npm run test:relationship-marquee && npm run lint && npm run typecheck",
     "vercel-build": "npm run check && next build"
   },
   "dependencies": {
