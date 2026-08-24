@@ -10,6 +10,11 @@ const globals = readFileSync(new URL("../src/styles/globals.css", import.meta.ur
 assert(relationships.includes('import Image from "next/image"'), "Relationship rail must render company icons/logos with next/image.");
 assert(relationships.includes("clientVisuals"), "Relationship rail must map known companies to visual icons.");
 assert(relationships.includes("google.com/s2/favicons"), "Relationship rail must use the approved favicon source for known company icons.");
+assert(relationships.includes('EGEMAC: { domain: "egemac.com.eg" }'), "EGEMAC must use its official website icon.");
+assert(
+  relationships.includes('"Arab Organization for Industrialization": { domain: "aoi.org.eg" }'),
+  "Arab Organization for Industrialization must use its official website icon.",
+);
 assert(relationships.includes("const items = [...names, ...names]"), "Relationship rail must duplicate items for a seamless loop.");
 assert(relationships.includes("relationship-marquee__track"), "Relationship rail must restore the horizontal moving track.");
 assert(relationships.includes("aria-hidden={index >= names.length}"), "Duplicate loop items must be hidden from assistive technology.");
