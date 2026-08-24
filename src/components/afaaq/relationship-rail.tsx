@@ -6,7 +6,6 @@ type RelationshipRailProps = {
 
 type ClientVisual = {
   domain?: string;
-  wide?: boolean;
 };
 
 const clientVisuals: Record<string, ClientVisual> = {
