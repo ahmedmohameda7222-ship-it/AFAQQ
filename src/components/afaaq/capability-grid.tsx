@@ -38,18 +38,18 @@ export function CapabilityGrid() {
             key={service.slug}
             className={`min-w-0 bg-[var(--surface)] p-7 sm:p-9 lg:p-10 ${index === 1 ? "border-t border-[var(--rule)] lg:border-l lg:border-t-0" : ""}`}
           >
-            <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-[var(--brand-navy)]">
+            <p className="m-0 text-[0.82rem] font-semibold uppercase tracking-[0.07em] text-[var(--brand-navy)]">
               Core Capability
             </p>
-            <h3 className="font-display mb-0 mt-4 max-w-[14ch] text-[clamp(2.05rem,3.5vw,3.25rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-[var(--ink)]">
+            <h3 className="font-display mb-0 mt-4 max-w-[14ch] text-[clamp(2rem,3.2vw,3rem)] font-semibold leading-[0.99] tracking-[-0.032em] text-[var(--ink)]">
               {service.title}
             </h3>
-            <p className="mb-0 mt-5 max-w-xl text-[1.04rem] leading-8 text-[var(--muted)] sm:text-[1.08rem]">
+            <p className="mb-0 mt-5 max-w-xl text-[1.05rem] leading-8 text-[var(--muted)] sm:text-[1.1rem]">
               {service.summary}
             </p>
             <Link
               href={`/services/${service.slug}`}
-              className="group mt-6 inline-flex min-h-12 items-center gap-3 font-semibold text-[var(--brand-navy)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
+              className="group mt-6 inline-flex min-h-12 items-center gap-3 text-[1rem] font-semibold text-[var(--brand-navy)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
             >
               <span>Explore capability</span>
               <span className="transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1 group-focus-visible:translate-x-1">
@@ -60,25 +60,23 @@ export function CapabilityGrid() {
         ))}
       </div>
 
-      <div className="mt-5 grid border-y border-[var(--rule)] sm:grid-cols-2 lg:grid-cols-4">
-        {supportingServices.map(({ service, displayTitle }, index) => (
-          <article
+      <div className="supporting-capability-index mt-8 border-t border-[var(--rule)] sm:mt-10">
+        {supportingServices.map(({ service, displayTitle }) => (
+          <Link
             key={service.slug}
-            className={`min-w-0 py-6 sm:min-h-[12rem] sm:px-6 sm:py-7 lg:min-h-[13rem] lg:px-7 ${index > 0 ? "border-t border-[var(--rule)] sm:border-t-0" : ""} ${index % 2 === 1 ? "sm:border-l sm:border-[var(--rule)]" : ""} ${index > 1 ? "sm:border-t lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-[var(--rule)]" : ""}`}
+            href={`/services/${service.slug}`}
+            className="group grid min-h-12 gap-3 border-b border-[var(--rule)] py-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4 sm:py-7 md:grid-cols-12 md:items-center md:gap-7"
           >
-            <h3 className="font-display m-0 max-w-[15ch] text-[1.45rem] font-semibold leading-[1.08] tracking-[-0.025em] text-[var(--ink)] sm:text-[1.58rem]">
+            <h3 className="font-display m-0 text-[1.42rem] font-semibold leading-[1.08] tracking-[-0.022em] text-[var(--ink)] transition-colors group-hover:text-[var(--brand-navy)] group-focus-visible:text-[var(--brand-navy)] sm:text-[1.55rem] md:col-span-4">
               {displayTitle}
             </h3>
-            <p className="mb-0 mt-4 text-[0.98rem] leading-7 text-[var(--muted)]">
+            <p className="m-0 max-w-3xl text-[1.01rem] leading-7 text-[var(--muted)] sm:text-[1.05rem] md:col-span-7">
               {service.summary}
             </p>
-            <Link
-              href={`/services/${service.slug}`}
-              className="mt-5 inline-flex min-h-11 items-center font-semibold text-[0.94rem] text-[var(--brand-navy)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
-            >
-              View service
-            </Link>
-          </article>
+            <span className="inline-flex items-center justify-self-start text-[var(--brand-navy)] transition-transform duration-[var(--motion-fast)] group-hover:translate-x-1 group-focus-visible:translate-x-1 md:col-span-1 md:justify-self-end" aria-hidden="true">
+              <ArrowIcon />
+            </span>
+          </Link>
         ))}
       </div>
     </div>
