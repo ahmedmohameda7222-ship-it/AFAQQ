@@ -54,11 +54,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </h2>
             </div>
             <div className="min-w-0 md:col-span-7 md:col-start-6">
-              {service.capabilities.map((item, index) => (
-                <div key={item} className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-3 border-t border-white/18 py-4 last:border-b sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-4 sm:py-5">
-                  <span className="text-[0.72rem] font-semibold tracking-[0.1em] text-white/50 sm:text-xs">{String(index + 1).padStart(2, "0")}</span>
-                  <p className="m-0 min-w-0 text-[1rem] font-medium leading-7 sm:text-[1.05rem]">{item}</p>
-                </div>
+              {service.capabilities.map((item) => (
+                <p key={item} className="m-0 border-t border-white/18 py-4 text-[1rem] font-medium leading-7 last:border-b sm:py-5 sm:text-[1.05rem]">
+                  {item}
+                </p>
               ))}
             </div>
           </div>
