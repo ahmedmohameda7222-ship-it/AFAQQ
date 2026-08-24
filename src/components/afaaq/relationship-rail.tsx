@@ -107,11 +107,11 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
                   key={`${name}-${index}`}
                   role="listitem"
                   aria-hidden={index >= names.length}
-                  className={`flex shrink-0 items-center ${isDuplicate ? "relationship-marquee__duplicate" : ""}`}
+                  className={`relationship-marquee__item flex shrink-0 items-center ${isDuplicate ? "relationship-marquee__duplicate" : ""}`}
                 >
                   <ClientItem name={name} />
                   <span
-                    className="mx-7 h-8 w-px shrink-0 bg-[var(--rule)] sm:mx-9 md:mx-11 lg:mx-12"
+                    className="relationship-marquee__separator mx-7 h-8 w-px shrink-0 bg-[var(--rule)] sm:mx-9 md:mx-11 lg:mx-12"
                     aria-hidden="true"
                   />
                 </span>
