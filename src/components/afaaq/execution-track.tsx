@@ -9,16 +9,21 @@ const steps = [
 
 export function ExecutionTrack() {
   return (
-    <ol className="mt-10 grid list-none gap-px border border-[var(--rule)] bg-[var(--rule)] p-0 sm:mt-12 md:grid-cols-2 lg:grid-cols-3">
+    <ol className="execution-process__rail relative mt-10 list-none border-y border-[var(--rule)] p-0 before:absolute before:bottom-0 before:left-0 before:top-0 before:w-[3px] before:bg-[var(--brand-blue)] sm:mt-12">
       {steps.map(([title, description], index) => (
-        <li key={title} className="min-w-0 bg-white p-7 sm:p-8 lg:min-h-[15rem] lg:p-9">
-          <span className="font-technical text-[clamp(2.4rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.05em] text-[var(--brand-navy)]">
+        <li
+          key={title}
+          className="grid min-w-0 gap-4 border-b border-[var(--rule)] py-6 pl-6 last:border-b-0 sm:grid-cols-[4.75rem_minmax(0,1fr)] sm:gap-6 sm:py-7 sm:pl-8 md:grid-cols-12 md:items-start md:gap-8 md:py-8"
+        >
+          <span className="font-technical text-[1.55rem] font-semibold leading-none tracking-[-0.035em] text-[var(--brand-navy)] sm:text-[1.7rem] md:col-span-2 md:pt-1">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <h3 className="font-display mb-0 mt-6 max-w-[18rem] text-[1.38rem] font-semibold leading-[1.14] tracking-[-0.022em] text-[var(--ink)] sm:text-[1.48rem]">
-            {title}
-          </h3>
-          <p className="mb-0 mt-4 max-w-[25rem] text-[1rem] leading-7 text-[var(--muted)] sm:text-[1.04rem]">
+          <div className="min-w-0 sm:col-start-2 md:col-span-4 md:col-start-3">
+            <h3 className="font-display m-0 max-w-[20rem] text-[1.42rem] font-semibold leading-[1.12] tracking-[-0.022em] text-[var(--ink)] sm:text-[1.55rem] md:text-[1.65rem]">
+              {title}
+            </h3>
+          </div>
+          <p className="m-0 max-w-[34rem] text-[1.02rem] leading-7 text-[var(--muted)] sm:col-start-2 sm:text-[1.06rem] md:col-span-6 md:col-start-7 md:leading-8">
             {description}
           </p>
         </li>

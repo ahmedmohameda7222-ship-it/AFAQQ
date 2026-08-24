@@ -54,25 +54,25 @@ function ClientItem({ name }: { name: string }) {
   return (
     <span className="flex min-w-0 items-center gap-4 sm:gap-5">
       <span
-        className="relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)] bg-white sm:h-12 sm:w-12"
+        className="relative inline-flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)] bg-white sm:h-16 sm:w-16"
         aria-hidden="true"
       >
-        <span className="text-[0.62rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]/68">
+        <span className="text-[0.68rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]/68">
           {fallbackMark(name)}
         </span>
         {logoUrl ? (
           <Image
             src={logoUrl}
             alt=""
-            width={36}
-            height={36}
-            sizes="36px"
+            width={44}
+            height={44}
+            sizes="44px"
             loading="lazy"
-            className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 bg-white object-contain sm:h-9 sm:w-9"
+            className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 bg-white object-contain sm:h-11 sm:w-11"
           />
         ) : null}
       </span>
-      <span className="min-w-0 text-[1.16rem] font-semibold tracking-[-0.018em] text-[var(--ink)] sm:text-[1.28rem] md:text-[1.36rem]">
+      <span className="min-w-0 text-[1.18rem] font-semibold tracking-[-0.016em] text-[var(--ink)] sm:text-[1.3rem] md:text-[1.38rem]">
         {name}
       </span>
     </span>
@@ -84,14 +84,26 @@ function RelationshipHeader() {
     <div className="max-w-4xl">
       <h2
         id="relationship-heading"
-        className="font-display m-0 max-w-[20ch] text-[clamp(2.1rem,3.7vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.032em] text-[var(--ink)]"
+        className="font-display m-0 max-w-[20ch] text-[clamp(2.05rem,3.5vw,3.4rem)] font-semibold leading-[1] tracking-[-0.03em] text-[var(--ink)]"
       >
         Selected Project & Client Relationships
       </h2>
-      <p className="mb-0 mt-5 max-w-2xl text-[1rem] leading-7 text-[var(--muted)] md:text-[1.05rem]">
+      <p className="mb-0 mt-5 max-w-2xl text-[1.04rem] leading-7 text-[var(--muted)] md:text-[1.09rem] md:leading-8">
         Organizations represented across AFAAQ&apos;s project and client relationships.
       </p>
     </div>
+  );
+}
+
+function PauseIcon({ paused }: { paused: boolean }) {
+  return paused ? (
+    <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
+      <path d="m7 5 8 5-8 5V5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+    </svg>
+  ) : (
+    <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
+      <path d="M7 5v10M13 5v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
   );
 }
 
@@ -119,19 +131,20 @@ export function RelationshipRail({ names, motion = "marquee" }: RelationshipRail
 
   return (
     <section aria-labelledby="relationship-heading">
-      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-8">
+      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10">
         <RelationshipHeader />
         <button
           type="button"
           aria-pressed={paused}
           onClick={() => setPaused((value) => !value)}
-          className="relationship-marquee__control inline-flex min-h-11 w-fit items-center border-b border-[var(--brand-navy)] px-0 text-[0.9rem] font-semibold text-[var(--brand-navy)]"
+          className="relationship-marquee__control inline-flex min-h-12 w-fit shrink-0 items-center gap-2.5 border border-[var(--rule)] bg-[var(--canvas)] px-4 text-[0.94rem] font-semibold text-[var(--brand-navy)] transition-colors hover:border-[var(--brand-blue)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
         >
+          <PauseIcon paused={paused} />
           {paused ? "Resume motion" : "Pause motion"}
         </button>
       </div>
 
-      <div className="mt-8 border-y border-[var(--rule)] py-5 sm:mt-10 sm:py-6">
+      <div className="mt-8 border-y border-[var(--rule)] py-6 sm:mt-10 sm:py-7">
         <div
           className={`relationship-marquee__viewport overflow-hidden ${paused ? "relationship-marquee__paused" : ""}`}
           role="region"
@@ -151,7 +164,7 @@ export function RelationshipRail({ names, motion = "marquee" }: RelationshipRail
                 >
                   <ClientItem name={name} />
                   <span
-                    className="relationship-marquee__separator mx-7 h-8 w-px shrink-0 bg-[var(--rule)] sm:mx-9 md:mx-11 lg:mx-12"
+                    className="relationship-marquee__separator mx-8 h-10 w-px shrink-0 bg-[var(--rule)] sm:mx-10 md:mx-12 lg:mx-14"
                     aria-hidden="true"
                   />
                 </span>

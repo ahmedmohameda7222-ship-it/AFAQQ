@@ -22,17 +22,17 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--rule)] bg-white/96 backdrop-blur-[10px]">
-      <Container className="relative flex h-[84px] min-w-0 items-center justify-between gap-3 sm:h-[88px]">
+      <Container className="relative flex h-[86px] min-w-0 items-center justify-between gap-3 sm:h-[92px]">
         <Link href="/" className="inline-flex min-h-12 min-w-0 items-center gap-3.5 sm:gap-4" aria-label="AFAAQ ARAB home">
           <Image
             src="/brand/afaaq-mark.svg"
             alt=""
-            width={64}
-            height={42}
+            width={72}
+            height={48}
             priority
-            className="w-[54px] shrink-0 object-contain sm:w-[62px]"
+            className="w-[60px] shrink-0 object-contain sm:w-[70px]"
           />
-          <span className="min-w-0 whitespace-nowrap text-[1rem] font-semibold tracking-[0.1em] text-[var(--brand-deep-navy)] sm:text-[1.1rem] sm:tracking-[0.12em]">
+          <span className="min-w-0 whitespace-nowrap text-[1.03rem] font-semibold tracking-[0.095em] text-[var(--brand-deep-navy)] sm:text-[1.14rem] sm:tracking-[0.11em]">
             AFAAQ ARAB
           </span>
         </Link>
@@ -46,7 +46,7 @@ export function SiteHeader() {
                   <Link
                     href={href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative inline-flex min-h-12 items-center text-[1rem] font-semibold tracking-[-0.01em] text-[var(--ink)] after:absolute after:bottom-2 after:left-0 after:h-0.5 after:bg-[var(--brand-blue)] after:transition-[width] after:duration-[var(--motion-ui)] hover:text-[var(--brand-navy)] hover:after:w-full focus-visible:text-[var(--brand-navy)] focus-visible:after:w-full ${active ? "text-[var(--brand-navy)] after:w-full" : "after:w-0"}`}
+                    className={`relative inline-flex min-h-12 items-center text-[1.03rem] font-semibold tracking-[-0.008em] text-[var(--ink)] after:absolute after:bottom-2 after:left-0 after:h-0.5 after:bg-[var(--brand-blue)] after:transition-[width] after:duration-[var(--motion-ui)] hover:text-[var(--brand-navy)] hover:after:w-full focus-visible:text-[var(--brand-navy)] focus-visible:after:w-full ${active ? "text-[var(--brand-navy)] after:w-full" : "after:w-0"}`}
                   >
                     {label}
                   </Link>
