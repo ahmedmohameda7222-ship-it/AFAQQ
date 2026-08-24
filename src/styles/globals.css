@@ -142,6 +142,11 @@ img[data-nimg="fill"] {
   will-change: transform;
 }
 
+.relationship-marquee__edge-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2rem, #000 calc(100% - 2rem), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 2rem, #000 calc(100% - 2rem), transparent 100%);
+}
+
 .relationship-marquee__viewport:hover .relationship-marquee__track,
 .relationship-marquee__viewport:focus-within .relationship-marquee__track,
 .relationship-marquee__paused .relationship-marquee__track {
@@ -155,6 +160,11 @@ img[data-nimg="fill"] {
 
   .relationship-marquee__viewport {
     overflow: visible;
+  }
+
+  .relationship-marquee__edge-mask {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .relationship-marquee__track {
