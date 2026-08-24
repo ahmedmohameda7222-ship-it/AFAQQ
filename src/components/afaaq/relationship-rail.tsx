@@ -14,12 +14,18 @@ type ClientVisual = {
 };
 
 const clientVisuals: Record<string, ClientVisual> = {
-  "Schneider Electric": { domain: "se.com" },
+  "Schneider Electric": {
+    localSrc: "/brand/relationships/schneider-electric.svg",
+    domain: "se.com",
+  },
   "ELSEWEDY ELECTRIC": { domain: "elsewedyelectric.com" },
   Madkour: { domain: "madkour.com.eg" },
   "GE Vernova": { domain: "gevernova.com" },
   "Siemens Energy": { domain: "siemens-energy.com" },
-  ABB: { domain: "abb.com" },
+  ABB: {
+    localSrc: "/brand/relationships/abb.svg",
+    domain: "abb.com",
+  },
   "Hitachi Energy": { domain: "hitachienergy.com" },
   EGEMAC: { domain: "egemac.com.eg" },
   EETC: { domain: "eetc.gov.eg" },
