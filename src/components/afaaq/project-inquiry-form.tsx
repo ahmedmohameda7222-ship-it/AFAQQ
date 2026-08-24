@@ -61,7 +61,7 @@ export function ProjectInquiryForm({
       }
 
       setStatus("success");
-      setMessage("Requirement received. AFAAQ's engineering team can reply directly to the email you provided.");
+      setMessage("AFAAQ's engineering team can reply directly to the email you provided.");
       formElement.reset();
     } catch (error) {
       setStatus("error");
@@ -70,8 +70,8 @@ export function ProjectInquiryForm({
   }
 
   const fieldClass =
-    "min-h-13 w-full min-w-0 max-w-full border-0 border-b border-[var(--rule)] bg-transparent px-0 py-4 text-[1rem] text-[var(--ink)] outline-none placeholder:text-[var(--muted)]/75 focus:border-[var(--ink)]";
-  const labelClass = "text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--muted)] sm:text-xs";
+    "min-h-13 w-full min-w-0 max-w-full border-0 border-b border-[var(--rule)] bg-transparent px-0 py-4 text-[1rem] text-[var(--ink)] outline-none placeholder:text-[var(--muted)]/75 focus:border-[var(--brand-navy)]";
+  const labelClass = "text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-[var(--muted)] sm:text-xs";
 
   return (
     <form onSubmit={onSubmit} aria-busy={status === "submitting"} className="relative grid min-w-0 gap-x-8 md:grid-cols-2">
@@ -139,13 +139,15 @@ export function ProjectInquiryForm({
 
       <label className="mt-7 grid min-w-0 gap-3 md:col-span-2">
         <span className={labelClass}>Technical Files <span className="normal-case tracking-normal">(optional)</span></span>
-        <input
-          name="attachments"
-          type="file"
-          multiple
-          accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg"
-          className="block w-full min-w-0 max-w-full overflow-hidden border-b border-[var(--rule)] pb-4 text-[0.8rem] text-[var(--muted)] file:mr-3 file:min-h-11 file:border-0 file:bg-[var(--ink)] file:px-4 file:py-2.5 file:text-[0.8rem] file:font-semibold file:text-[var(--canvas)] sm:text-sm sm:file:mr-4 sm:file:text-sm"
-        />
+        <span className="block border border-[var(--rule)] bg-[var(--surface)] px-4 py-4 sm:px-5">
+          <input
+            name="attachments"
+            type="file"
+            multiple
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg"
+            className="block w-full min-w-0 max-w-full overflow-hidden text-[0.82rem] text-[var(--muted)] file:mr-4 file:min-h-11 file:border-0 file:bg-[var(--brand-deep-navy)] file:px-4 file:py-2.5 file:text-[0.82rem] file:font-semibold file:text-white sm:text-sm sm:file:text-sm"
+          />
+        </span>
         <span className="text-[0.75rem] leading-5 text-[var(--muted)] sm:text-xs">Up to 3 files, 3 MB total. PDF, Word, Excel, JPG or PNG.</span>
       </label>
 
@@ -153,7 +155,7 @@ export function ProjectInquiryForm({
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="group inline-flex min-h-[52px] w-full max-w-full items-center justify-between gap-6 rounded-[var(--radius-xs)] bg-[var(--ink)] px-5 text-sm font-semibold text-[var(--canvas)] transition-colors hover:bg-[var(--graphite)] disabled:cursor-wait disabled:opacity-60 sm:w-auto sm:gap-8"
+          className="group inline-flex min-h-[52px] w-full max-w-full items-center justify-between gap-6 rounded-[var(--radius-xs)] bg-[var(--brand-deep-navy)] px-5 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-navy)] disabled:cursor-wait disabled:opacity-60 sm:w-auto sm:gap-8"
         >
           <span className="min-w-0">{status === "submitting" ? "Sending Requirement…" : "Send Project Requirement"}</span>
           <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" fill="none">
@@ -161,14 +163,26 @@ export function ProjectInquiryForm({
           </svg>
         </button>
 
-        <div className="mt-4 min-h-6" aria-live="polite">
-          {message ? (
-            <p className={`m-0 max-w-2xl text-sm leading-6 ${status === "success" ? "font-medium text-[var(--ink)]" : "text-[var(--muted)]"}`}>
-              {message}{" "}
-              {status === "error" ? <a href={`mailto:${company.email}`} className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">Email AFAAQ directly</a> : null}
-            </p>
+        <div className="mt-5 min-h-6" aria-live="polite">
+          {status === "success" ? (
+            <div role="status" className="border-l-4 border-[var(--brand-blue)] bg-[var(--surface)] px-5 py-4 sm:px-6 sm:py-5">
+              <p className="font-display m-0 text-[1.2rem] font-semibold tracking-[-0.02em] text-[var(--brand-deep-navy)]">
+                Requirement received
+              </p>
+              <p className="mb-0 mt-2 max-w-2xl text-[0.95rem] leading-6 text-[var(--muted)]">{message}</p>
+            </div>
+          ) : status === "error" ? (
+            <div role="alert" className="border-l-4 border-[#9f2f2f] bg-[#fff7f7] px-5 py-4 sm:px-6 sm:py-5">
+              <p className="font-display m-0 text-[1.2rem] font-semibold tracking-[-0.02em] text-[#7d2323]">
+                Unable to send requirement
+              </p>
+              <p className="mb-0 mt-2 max-w-2xl text-[0.95rem] leading-6 text-[var(--muted)]">{message}</p>
+              <a href={`mailto:${company.email}`} className="mt-3 inline-flex min-h-11 items-center font-semibold text-[var(--brand-navy)] underline decoration-[var(--brand-blue)] underline-offset-4">
+                Email AFAAQ directly
+              </a>
+            </div>
           ) : (
-            <p className="m-0 max-w-xl text-[0.75rem] leading-5 text-[var(--muted)] sm:text-xs">
+            <p className="m-0 max-w-xl text-[0.78rem] leading-5 text-[var(--muted)]">
               Your requirement is sent directly to AFAAQ&apos;s engineering contact. Required fields are marked with *.
             </p>
           )}
