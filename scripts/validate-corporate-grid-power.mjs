@@ -15,8 +15,9 @@ const globals = readFileSync(new URL("../src/styles/globals.css", import.meta.ur
 const home = readFileSync(new URL("../src/app/page.tsx", import.meta.url), "utf8");
 
 assert(layout.includes("Archivo"), "Corporate Grid Power must load Archivo for display typography.");
+assert(layout.includes("Public_Sans"), "Corporate Grid Power must load Public Sans for body and interface typography.");
 assert(layout.includes("--font-display"), "Archivo must be exposed as --font-display.");
-assert(globals.includes("--canvas: #ffffff"), "Global canvas must be Corporate White.");
+assert(globals.includes("--canvas: #fbfcfe"), "Global canvas must use the approved cool near-white surface.");
 assert(globals.includes("--surface: #f4f7fa"), "Global surface must be Cool Surface.");
 assert(globals.includes("--brand-navy: #0a2f82"), "AFAAQ Navy token must match the approved mark.");
 assert(globals.includes("--brand-deep-navy: #061d58"), "Deep Navy token must be available for authority surfaces.");
@@ -80,12 +81,14 @@ assert(
 const relationships = readFileSync(new URL("../src/components/afaaq/relationship-rail.tsx", import.meta.url), "utf8");
 assert(
   relationships.includes("Selected Project & Client Relationships"),
-  "Relationships must use the approved corporate label.",
+  "Relationships must use the approved corporate heading.",
 );
-assert(relationships.includes("relationship-marquee__track"), "Relationships must restore the moving horizontal rail.");
-assert(relationships.includes("google.com/s2/favicons"), "Relationships must restore company icons beside known company names.");
+assert(relationships.includes("relationship-marquee__track"), "Relationships must retain the moving horizontal rail on Home.");
+assert(relationships.includes("localSrc"), "Relationships must support local corporate marks before fallback icons.");
+assert(relationships.includes("google.com/s2/favicons"), "Relationships must retain an official-domain fallback when a verified local mark is unavailable.");
+assert(relationships.includes("Pause motion"), "Relationship rail must expose explicit motion control.");
 assert(globals.includes("@keyframes relationship-marquee"), "Relationship marquee motion must be defined globally.");
-assert(globals.includes("animation-play-state: paused"), "Relationship marquee must pause on hover or focus.");
+assert(globals.includes("animation-play-state: paused"), "Relationship marquee must pause on hover, focus, or manual control.");
 
 const execution = readFileSync(new URL("../src/components/afaaq/execution-track.tsx", import.meta.url), "utf8");
 assert(!execution.includes("Step"), "Execution must not repeat decorative STEP labels.");
