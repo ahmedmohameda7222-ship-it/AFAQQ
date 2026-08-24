@@ -11,7 +11,7 @@ function ArrowIcon() {
 
 function MetaLabel({ children }: { children: React.ReactNode }) {
   return (
-    <dt className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.07em] text-[var(--muted)]">
+    <dt className="m-0 text-[0.84rem] font-semibold uppercase tracking-[0.065em] text-[var(--muted)]">
       {children}
     </dt>
   );
@@ -25,7 +25,7 @@ function FlagshipProjectReference({ project }: { project: Project }) {
       <div className="h-1.5 w-full bg-[var(--brand-blue)]" aria-hidden="true" />
       <div className="grid lg:grid-cols-12">
         <div className="bg-[var(--brand-deep-navy)] p-7 text-white sm:p-9 lg:col-span-5 lg:p-10 xl:p-12">
-          <p className="m-0 text-[0.8rem] font-semibold uppercase tracking-[0.07em] text-white/74">
+          <p className="m-0 text-[0.84rem] font-semibold uppercase tracking-[0.065em] text-white/74">
             Flagship Project Reference
           </p>
           <h3 className="font-display mb-0 mt-5 max-w-[13ch] text-[clamp(2.3rem,4.1vw,4.05rem)] font-semibold leading-[0.96] tracking-[-0.037em]">
@@ -33,7 +33,7 @@ function FlagshipProjectReference({ project }: { project: Project }) {
           </h3>
           {project.relationship ? (
             <div className="mt-8 border-t border-white/18 pt-5">
-              <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.07em] text-white/68">
+              <p className="m-0 text-[0.84rem] font-semibold uppercase tracking-[0.065em] text-white/68">
                 Project Relationship
               </p>
               <p className="mb-0 mt-2 text-[1.2rem] font-semibold leading-7 text-white sm:text-[1.32rem]">
@@ -72,7 +72,7 @@ function FlagshipProjectReference({ project }: { project: Project }) {
           </dl>
 
           <div className="mt-8 border-t border-[var(--rule)] pt-6">
-            <p className="m-0 text-[0.78rem] font-semibold uppercase tracking-[0.07em] text-[var(--muted)]">
+            <p className="m-0 text-[0.84rem] font-semibold uppercase tracking-[0.065em] text-[var(--muted)]">
               Scope
             </p>
             <ul className="mt-4 grid list-none gap-x-8 gap-y-3 p-0 sm:grid-cols-2">
@@ -164,7 +164,7 @@ export function ProjectReferenceBoard({ projects }: ProjectReferenceBoardProps) 
       {secondary.length ? (
         <div className="mt-8 sm:mt-10">
           <div className="mb-4 flex items-center gap-5 sm:mb-5">
-            <p className="m-0 text-[0.8rem] font-semibold uppercase tracking-[0.07em] text-[var(--muted)]">
+            <p className="m-0 text-[0.84rem] font-semibold uppercase tracking-[0.065em] text-[var(--muted)]">
               Additional Project References
             </p>
             <span className="h-px flex-1 bg-[var(--rule)]" aria-hidden="true" />
