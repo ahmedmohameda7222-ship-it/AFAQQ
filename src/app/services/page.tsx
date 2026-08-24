@@ -37,12 +37,9 @@ export default function ServicesPage() {
         <Container>
           <SectionLabel>Core Services</SectionLabel>
           <div className="mt-8 sm:mt-10 md:mt-14">
-            {primaryServices.map((service, index) => (
+            {primaryServices.map((service) => (
               <article key={service.slug} className="grid min-w-0 gap-4 border-t border-white/18 py-6 sm:gap-5 sm:py-8 md:grid-cols-12 md:gap-8 md:py-11">
-                <p className="m-0 text-[0.72rem] font-semibold tracking-[0.1em] text-white/50 sm:text-xs md:col-span-1">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <div className="min-w-0 md:col-span-6">
+                <div className="min-w-0 md:col-span-7">
                   <h2 className="m-0 text-[clamp(1.85rem,4vw,3.5rem)] font-medium leading-[1.02] tracking-[-0.04em] md:leading-[1] md:tracking-[-0.045em]">
                     {service.title}
                   </h2>
@@ -119,10 +116,9 @@ export default function ServicesPage() {
               </h2>
             </div>
             <div className="grid min-w-0 gap-0 md:col-span-7 md:col-start-6 md:grid-cols-2 md:gap-x-8">
-              {equipment.map((item, index) => (
-                <p key={item} className="m-0 grid grid-cols-[2rem_minmax(0,1fr)] border-t border-[var(--rule)] py-4 text-[0.96rem] font-medium leading-6 sm:grid-cols-[2.5rem_minmax(0,1fr)] sm:text-[0.98rem]">
-                  <span className="text-[0.72rem] text-[var(--muted)] sm:text-xs">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="min-w-0">{item}</span>
+              {equipment.map((item) => (
+                <p key={item} className="m-0 border-t border-[var(--rule)] py-4 text-[0.96rem] font-medium leading-6 sm:text-[0.98rem]">
+                  {item}
                 </p>
               ))}
             </div>
