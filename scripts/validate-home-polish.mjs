@@ -6,6 +6,7 @@ function assert(condition, message) {
 
 const home = readFileSync(new URL("../src/app/page.tsx", import.meta.url), "utf8");
 const projectIndex = readFileSync(new URL("../src/components/afaaq/project-showcase-rail.tsx", import.meta.url), "utf8");
+const footer = readFileSync(new URL("../src/components/layout/site-footer.tsx", import.meta.url), "utf8");
 
 assert(
   home.includes('src="/images/home/home-substation-original-1440.jpg"'),
@@ -23,5 +24,9 @@ assert(home.includes("companyFacts"), "Home proof area must expose verified comp
 assert(projectIndex.includes("ProjectMedia"), "Home project portfolio must keep the project-reference fallback surfaces.");
 assert(!projectIndex.includes('"use client"'), "Home project portfolio must stay server-rendered and non-carousel.");
 assert(projectIndex.includes("lg:grid-cols-3"), "Home project portfolio must retain a stable desktop grid.");
+assert(
+  footer.includes('src="/brand/afaaq-mark-reversed.svg"'),
+  "Dark footer must use the reversed AFAAQ mark for sufficient contrast.",
+);
 
 console.log("Engineered Editorial 2.0 Home integrity invariants OK.");
