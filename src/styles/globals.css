@@ -148,9 +148,22 @@ img[data-nimg="fill"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .relationship-rail__viewport {
+    overflow: visible;
+  }
+
   .relationship-marquee__track {
     animation: none;
     transform: none;
+    width: auto;
+    flex-wrap: wrap;
+    white-space: normal;
+    row-gap: 1.25rem;
+    will-change: auto;
+  }
+
+  .relationship-marquee__duplicate {
+    display: none;
   }
 }
 
