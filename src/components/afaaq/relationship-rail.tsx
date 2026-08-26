@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 type RelationshipRailProps = {
   names: readonly string[];
@@ -67,6 +70,8 @@ function ClientItem({ name }: { name: string }) {
 }
 
 export function RelationshipRail({ names }: RelationshipRailProps) {
+  const [paused, setPaused] = useState(false);
+
   if (names.length === 0) return null;
 
   const items = [...names, ...names];
@@ -77,13 +82,24 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
         <p className="font-technical m-0 text-[0.8rem] font-medium uppercase leading-5 tracking-[0.09em] text-[var(--muted)] sm:text-[0.82rem]">
           Project Relationships
         </p>
-        <span className="hidden h-px max-w-[18rem] flex-1 bg-[var(--rule)] sm:block" aria-hidden="true" />
+        <div className="flex min-w-0 flex-1 items-center justify-end gap-4">
+          <span className="hidden h-px max-w-[18rem] flex-1 bg-[var(--rule)] sm:block" aria-hidden="true" />
+          <button
+            type="button"
+            aria-pressed={paused}
+            onClick={() => setPaused((value) => !value)}
+            className="relationship-marquee__control inline-flex min-h-11 shrink-0 items-center px-2 text-[0.82rem] font-semibold text-[var(--brand-navy)] transition-colors hover:text-[var(--brand-blue)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
+          >
+            {paused ? "Resume motion" : "Pause motion"}
+          </button>
+        </div>
       </div>
 
       <div
-        className="relationship-rail__viewport overflow-hidden"
+        className={`relationship-rail__viewport overflow-hidden ${paused ? "relationship-marquee__paused" : ""}`}
         role="region"
         aria-label="Project relationships"
+        tabIndex={0}
       >
         <div className="relationship-marquee__track flex w-max items-center whitespace-nowrap" aria-label={names.join(", ")}>
           {items.map((name, index) => (
