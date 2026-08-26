@@ -107,11 +107,11 @@ export default function HomePage() {
                   key={value}
                   className="min-w-0 border-r border-[var(--rule)] py-6 pr-3 last:border-r-0 sm:py-7 sm:pr-5 md:py-8 md:pr-8"
                 >
-                  <div className="flex items-end gap-1.5 sm:gap-2">
-                    <span className="font-technical text-[clamp(2.7rem,5.7vw,4.9rem)] font-medium leading-none tracking-[-0.055em]">
+                  <div className="flex items-end gap-1 sm:gap-2">
+                    <span className="font-technical text-[clamp(2.05rem,10vw,2.55rem)] font-medium leading-none tracking-[-0.055em] sm:text-[clamp(2.7rem,5.7vw,4.9rem)]">
                       {value}
                     </span>
-                    <span className="font-technical mb-1 text-[0.8rem] font-medium uppercase tracking-[0.06em] text-[var(--muted)] sm:text-[0.84rem] md:mb-2">
+                    <span className="font-technical mb-1 text-[0.7rem] font-medium uppercase tracking-[0.06em] text-[var(--muted)] sm:text-[0.84rem] md:mb-2">
                       {unit}
                     </span>
                   </div>
