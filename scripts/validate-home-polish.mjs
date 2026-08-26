@@ -64,7 +64,8 @@ assert(
 );
 assert(
   home.includes("gap-1 sm:gap-2") &&
-    home.includes("text-[clamp(2.05rem,10vw,2.55rem)] sm:text-[clamp(2.7rem,5.7vw,4.9rem)]") &&
+    home.includes("text-[clamp(2.05rem,10vw,2.55rem)]") &&
+    home.includes("sm:text-[clamp(2.7rem,5.7vw,4.9rem)]") &&
     home.includes("text-[0.7rem] font-medium uppercase") &&
     home.includes("sm:text-[0.84rem]"),
   "Voltage proof must use a compact mobile scale so 220 kV does not cross its column divider at 320px.",
