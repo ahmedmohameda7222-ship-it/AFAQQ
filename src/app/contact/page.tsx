@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ProjectInquiryForm } from "@/components/afaaq/project-inquiry-form";
 import { Container } from "@/components/layout/container";
+import { ProjectInquiryForm } from "@/components/afaaq/project-inquiry-form";
 import { SectionLabel } from "@/components/primitives/section-label";
 import { company } from "@/content/company";
 import { services } from "@/content/services";
@@ -32,13 +32,15 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     <>
       <section className="pb-14 pt-12 sm:pb-16 sm:pt-14 md:pb-20 md:pt-20">
         <Container>
-          <div className="max-w-4xl">
-            <SectionLabel>Discuss a Project Scope</SectionLabel>
-            <h1 className="font-display mt-5 max-w-[15ch] text-[clamp(2.8rem,6vw,5.1rem)] font-semibold leading-[0.96] tracking-[-0.04em] sm:mt-6">
-              Send AFAAQ your technical requirement.
-            </h1>
-            <p className="mb-0 mt-6 max-w-2xl text-[1.05rem] leading-7 text-[var(--muted)] sm:text-[1.1rem] sm:leading-8">
-              Send the service, voltage level, project details and any useful technical files. Service and project context is retained when you arrive from another AFAAQ page.
+          <div className="grid gap-7 sm:gap-10 md:grid-cols-12 md:items-end">
+            <div className="min-w-0 md:col-span-8">
+              <SectionLabel>Discuss a Project Scope</SectionLabel>
+              <h1 className="mt-5 max-w-4xl text-[clamp(2.55rem,6vw,5.3rem)] font-medium leading-[0.97] tracking-[-0.048em] sm:mt-6 md:leading-[0.96] md:tracking-[-0.052em]">
+                Send AFAAQ your technical requirement.
+              </h1>
+            </div>
+            <p className="m-0 max-w-lg text-[1.02rem] leading-7 text-[var(--muted)] md:col-span-4 md:text-[1.05rem] md:leading-8">
+              Send the service, voltage level, project details and any useful technical files. The form keeps service or project context when you arrive from another AFAAQ page.
             </p>
           </div>
         </Container>

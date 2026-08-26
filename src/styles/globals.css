@@ -1,15 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --canvas: #fbfcfe;
-  --surface: #f4f7fa;
-  --ink: #111827;
-  --graphite: #111827;
-  --muted: #52606d;
-  --muted-dark: #c4ced8;
-  --rule: #d7dee8;
-  --brand-navy: #0a2f82;
-  --brand-deep-navy: #061d58;
+  --canvas: #f4f3ef;
+  --ink: #111315;
+  --graphite: #121517;
+  --muted: #535a5e;
+  --muted-dark: #adb2b5;
+  --rule: #d6d6d1;
+  --brand-navy: #082a72;
   --brand-blue: #0b8cff;
   --accent: var(--brand-blue);
 
@@ -70,10 +68,6 @@ h3 {
 
 p {
   text-wrap: pretty;
-}
-
-.font-display {
-  font-family: var(--font-display), var(--font-sans), "Helvetica Neue", "Segoe UI", Arial, sans-serif;
 }
 
 .font-technical {
@@ -142,13 +136,14 @@ img[data-nimg="fill"] {
   will-change: transform;
 }
 
-.relationship-marquee__edge-mask {
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2rem, #000 calc(100% - 2rem), transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0, #000 2rem, #000 calc(100% - 2rem), transparent 100%);
+@media (min-width: 768px) {
+  .relationship-marquee__track {
+    animation-duration: 52s;
+  }
 }
 
-.relationship-marquee__viewport:hover .relationship-marquee__track,
-.relationship-marquee__viewport:focus-within .relationship-marquee__track,
+.relationship-rail__viewport:hover .relationship-marquee__track,
+.relationship-rail__viewport:focus-within .relationship-marquee__track,
 .relationship-marquee__paused .relationship-marquee__track {
   animation-play-state: paused;
 }
@@ -158,31 +153,31 @@ img[data-nimg="fill"] {
     display: none;
   }
 
-  .relationship-marquee__viewport {
+  .relationship-rail__viewport {
     overflow: visible;
   }
 
-  .relationship-marquee__edge-mask {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
   .relationship-marquee__track {
-    width: auto;
-    flex-wrap: wrap;
     animation: none;
     transform: none;
+    width: auto;
+    flex-wrap: wrap;
+    white-space: normal;
+    row-gap: 1.25rem;
     will-change: auto;
   }
 
-  .relationship-marquee__item {
-    min-width: 0;
-    flex: 1 1 100%;
-    padding-block: 0.75rem;
-  }
-
-  .relationship-marquee__separator,
   .relationship-marquee__duplicate {
     display: none;
   }
+}
+
+.relationship-rail__viewport {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-inline: contain;
+}
+
+.relationship-rail__viewport::-webkit-scrollbar {
+  display: none;
 }
