@@ -51,7 +51,7 @@ export function SiteFooter() {
         <div className="mt-10 flex flex-col gap-5 border-t border-white/16 pt-6 sm:flex-row sm:items-center sm:justify-between md:mt-12 md:pt-7">
           <Link href="/" className="inline-flex min-h-12 items-center gap-3" aria-label="AFAAQ ARAB home">
             <Image
-              src="/brand/afaaq-mark.svg"
+              src="/brand/afaaq-mark-reversed.svg"
               alt=""
               width={48}
               height={32}
