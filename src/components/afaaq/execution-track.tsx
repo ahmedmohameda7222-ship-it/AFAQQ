@@ -9,23 +9,20 @@ const steps = [
 
 export function ExecutionTrack() {
   return (
-    <ol className="execution-process__rail relative mt-10 list-none border-y border-[var(--rule)] p-0 before:absolute before:bottom-0 before:left-0 before:top-0 before:w-[3px] before:bg-[var(--brand-blue)] sm:mt-12">
+    <ol className="mt-9 grid list-none gap-0 p-0 sm:mt-11 md:mt-13 md:grid-cols-2 lg:grid-cols-3">
       {steps.map(([title, description], index) => (
         <li
           key={title}
-          className="grid min-w-0 gap-4 border-b border-[var(--rule)] py-6 pl-6 last:border-b-0 sm:grid-cols-[4.75rem_minmax(0,1fr)] sm:gap-6 sm:py-7 sm:pl-8 md:grid-cols-12 md:items-start md:gap-8 md:py-8"
+          className="relative min-w-0 border-t-2 border-[var(--ink)] py-6 sm:py-7 md:min-h-[16rem] md:px-6 md:py-8 lg:px-8"
         >
-          <span className="font-technical text-[1.55rem] font-semibold leading-none tracking-[-0.035em] text-[var(--brand-navy)] sm:text-[1.7rem] md:col-span-2 md:pt-1">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <div className="min-w-0 sm:col-start-2 md:col-span-4 md:col-start-3">
-            <h3 className="font-display m-0 max-w-[20rem] text-[1.42rem] font-semibold leading-[1.12] tracking-[-0.022em] text-[var(--ink)] sm:text-[1.55rem] md:text-[1.65rem]">
-              {title}
-            </h3>
+          <div className="flex items-center gap-4">
+            <span className="font-technical text-[clamp(1.9rem,3vw,2.7rem)] font-medium leading-none tracking-[-0.05em] text-[var(--ink)]">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="h-px flex-1 bg-[var(--rule)]" aria-hidden="true" />
           </div>
-          <p className="m-0 max-w-[34rem] text-[1.02rem] leading-7 text-[var(--muted)] sm:col-start-2 sm:text-[1.06rem] md:col-span-6 md:col-start-7 md:leading-8">
-            {description}
-          </p>
+          <h3 className="mb-0 mt-5 max-w-[19rem] text-[1.3rem] font-medium leading-[1.2] tracking-[-0.028em] sm:mt-6 sm:text-[1.38rem]">{title}</h3>
+          <p className="mb-0 mt-3 max-w-[24rem] text-[0.99rem] leading-7 text-[var(--muted)] sm:text-[1.02rem]">{description}</p>
         </li>
       ))}
     </ol>

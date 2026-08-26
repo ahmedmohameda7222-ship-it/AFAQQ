@@ -76,7 +76,7 @@ export function MobileNav({ pathname }: MobileNavProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
-          className="fixed inset-x-0 bottom-0 top-[86px] z-[60] overflow-y-auto border-t border-[var(--rule)] bg-[var(--canvas)] px-[var(--gutter-mobile)] pb-[max(2rem,env(safe-area-inset-bottom))] pt-4 shadow-[0_20px_50px_rgba(17,19,21,0.10)] sm:top-[92px]"
+          className="fixed inset-x-0 bottom-0 top-[82px] z-[60] overflow-y-auto border-t border-[var(--rule)] bg-[var(--canvas)] px-[var(--gutter-mobile)] pb-[max(2rem,env(safe-area-inset-bottom))] pt-4 shadow-[0_20px_50px_rgba(17,19,21,0.10)]"
         >
           <nav aria-label="Mobile navigation">
             <ul className="m-0 list-none p-0">

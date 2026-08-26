@@ -20,16 +20,15 @@ function ArtworkFrame({
 }) {
   return (
     <div
-      className={`relative w-full overflow-hidden border border-[var(--rule)] bg-[color:var(--canvas)] ${aspectClass} ${className}`}
+      className={`relative w-full overflow-hidden border border-[var(--rule)] bg-white ${aspectClass} ${className}`}
     >
-      <div className="absolute inset-0 bg-white/55" aria-hidden="true" />
       <Image
         src={src}
         alt={artworkAlt}
         fill
         sizes={sizes}
         quality={92}
-        className="relative object-contain"
+        className="object-contain"
       />
     </div>
   );

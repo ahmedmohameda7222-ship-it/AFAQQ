@@ -1,36 +1,26 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
 
 type RelationshipRailProps = {
   names: readonly string[];
-  motion?: "marquee" | "static";
 };
 
 type ClientVisual = {
-  localSrc?: string;
   domain?: string;
+  logoUrl?: string;
+  wide?: boolean;
 };
 
 const clientVisuals: Record<string, ClientVisual> = {
-  "Schneider Electric": {
-    localSrc: "/brand/relationships/schneider-electric.svg",
-    domain: "se.com",
-  },
+  "Schneider Electric": { domain: "se.com" },
+  "ELSEWED ELECTRIC": { domain: "elsewedyelectric.com" },
   "ELSEWEDY ELECTRIC": { domain: "elsewedyelectric.com" },
   Madkour: { domain: "madkour.com.eg" },
   "GE Vernova": { domain: "gevernova.com" },
   "Siemens Energy": { domain: "siemens-energy.com" },
-  ABB: {
-    localSrc: "/brand/relationships/abb.svg",
-    domain: "abb.com",
-  },
+  ABB: { domain: "abb.com" },
   "Hitachi Energy": { domain: "hitachienergy.com" },
-  EGEMAC: { domain: "egemac.com.eg" },
   EETC: { domain: "eetc.gov.eg" },
   NECC: { domain: "eetc.gov.eg" },
-  "Arab Organization for Industrialization": { domain: "aoi.org.eg" },
 };
 
 function fallbackMark(name: string) {
@@ -46,134 +36,68 @@ function fallbackMark(name: string) {
 
 function ClientItem({ name }: { name: string }) {
   const visual = clientVisuals[name];
-  const fallbackUrl = visual?.domain
+  const logoUrl = visual?.logoUrl ?? (visual?.domain
     ? `https://www.google.com/s2/favicons?domain_url=${encodeURIComponent(`https://${visual.domain}`)}&sz=128`
-    : null;
-  const logoUrl = visual?.localSrc ?? fallbackUrl;
+    : null);
+  const width = visual?.wide ? 72 : 48;
+  const height = 48;
 
   return (
-    <span className="flex min-w-0 items-center gap-4 sm:gap-5">
+    <span className="flex min-w-0 items-center">
       <span
-        className="relative inline-flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)] bg-white sm:h-16 sm:w-16"
+        className={`relative mr-3.5 inline-flex h-11 shrink-0 items-center justify-center overflow-hidden rounded-[2px] border border-[var(--rule)]/75 bg-white md:mr-4 md:h-12 ${visual?.wide ? "w-16 md:w-[72px]" : "w-11 md:w-12"}`}
         aria-hidden="true"
       >
+        <span className="font-technical text-[0.6rem] font-semibold tracking-[-0.04em] text-[var(--brand-navy)]/60">{fallbackMark(name)}</span>
         {logoUrl ? (
           <Image
             src={logoUrl}
             alt=""
-            width={44}
-            height={44}
-            sizes="44px"
+            width={width}
+            height={height}
+            sizes={`${width}px`}
             loading="lazy"
-            className="h-10 w-10 object-contain sm:h-11 sm:w-11"
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white object-contain ${visual?.wide ? "h-9 w-14 md:h-10 md:w-16" : "h-8 w-8 md:h-9 md:w-9"}`}
           />
-        ) : (
-          <span className="text-[0.68rem] font-semibold tracking-[-0.03em] text-[var(--brand-navy)]/68">
-            {fallbackMark(name)}
-          </span>
-        )}
+        ) : null}
       </span>
-      <span className="min-w-0 text-[1.18rem] font-semibold tracking-[-0.016em] text-[var(--ink)] sm:text-[1.3rem] md:text-[1.38rem]">
-        {name}
-      </span>
+      <span className="min-w-0">{name}</span>
     </span>
   );
 }
 
-function RelationshipHeader() {
-  return (
-    <div className="max-w-4xl">
-      <h2
-        id="relationship-heading"
-        className="font-display m-0 max-w-[20ch] text-[clamp(2.05rem,3.5vw,3.4rem)] font-semibold leading-[1] tracking-[-0.03em] text-[var(--ink)]"
-      >
-        Selected Project & Client Relationships
-      </h2>
-      <p className="mb-0 mt-5 max-w-2xl text-[1.04rem] leading-7 text-[var(--muted)] md:text-[1.09rem] md:leading-8">
-        Organizations represented across AFAAQ&apos;s project and client relationships.
-      </p>
-    </div>
-  );
-}
-
-function PauseIcon({ paused }: { paused: boolean }) {
-  return paused ? (
-    <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
-      <path d="m7 5 8 5-8 5V5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    </svg>
-  ) : (
-    <svg aria-hidden="true" viewBox="0 0 20 20" className="h-4 w-4" fill="none">
-      <path d="M7 5v10M13 5v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-export function RelationshipRail({ names, motion = "marquee" }: RelationshipRailProps) {
-  const [paused, setPaused] = useState(false);
-
+export function RelationshipRail({ names }: RelationshipRailProps) {
   if (names.length === 0) return null;
-
-  if (motion === "static") {
-    return (
-      <section aria-labelledby="relationship-heading">
-        <RelationshipHeader />
-        <div className="mt-8 grid border-t border-[var(--rule)] sm:mt-10 sm:grid-cols-2 lg:grid-cols-3">
-          {names.map((name) => (
-            <div key={name} className="min-w-0 border-b border-[var(--rule)] py-6 sm:px-5 sm:py-7 sm:first:pl-0 lg:px-7 lg:first:pl-0">
-              <ClientItem name={name} />
-            </div>
-          ))}
-        </div>
-      </section>
-    );
-  }
 
   const items = [...names, ...names];
 
   return (
-    <section aria-labelledby="relationship-heading">
-      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10">
-        <RelationshipHeader />
-        <button
-          type="button"
-          aria-pressed={paused}
-          onClick={() => setPaused((value) => !value)}
-          className="relationship-marquee__control inline-flex min-h-11 w-fit shrink-0 items-center gap-2 px-1.5 text-[1rem] font-semibold text-[var(--brand-navy)] transition-colors hover:text-[var(--brand-blue)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-blue)] focus-visible:ring-offset-4"
-        >
-          <PauseIcon paused={paused} />
-          {paused ? "Resume motion" : "Pause motion"}
-        </button>
+    <div className="border-y border-[var(--rule)] py-8 sm:py-9 md:py-11">
+      <div className="mb-7 flex items-end justify-between gap-5 sm:mb-8">
+        <p className="font-technical m-0 text-[0.8rem] font-medium uppercase leading-5 tracking-[0.09em] text-[var(--muted)] sm:text-[0.82rem]">
+          Project Relationships
+        </p>
+        <span className="hidden h-px max-w-[18rem] flex-1 bg-[var(--rule)] sm:block" aria-hidden="true" />
       </div>
 
-      <div className="mt-8 border-y border-[var(--rule)] py-6 sm:mt-10 sm:py-7">
-        <div
-          className={`relationship-marquee__viewport relationship-marquee__edge-mask overflow-hidden ${paused ? "relationship-marquee__paused" : ""}`}
-          role="region"
-          aria-label="Project and client relationships"
-          tabIndex={0}
-        >
-          <div className="relationship-marquee__track flex w-max items-center" role="list">
-            {items.map((name, index) => {
-              const isDuplicate = index >= names.length;
-
-              return (
-                <span
-                  key={`${name}-${index}`}
-                  role="listitem"
-                  aria-hidden={isDuplicate}
-                  className={`relationship-marquee__item flex shrink-0 items-center ${isDuplicate ? "relationship-marquee__duplicate" : ""}`}
-                >
-                  <ClientItem name={name} />
-                  <span
-                    className="relationship-marquee__separator mx-8 h-10 w-px shrink-0 bg-[var(--rule)] sm:mx-10 md:mx-12 lg:mx-14"
-                    aria-hidden="true"
-                  />
-                </span>
-              );
-            })}
-          </div>
+      <div
+        className="relationship-rail__viewport overflow-hidden"
+        role="region"
+        aria-label="Project relationships"
+      >
+        <div className="relationship-marquee__track flex w-max items-center whitespace-nowrap" aria-label={names.join(", ")}>
+          {items.map((name, index) => (
+            <span
+              key={`${name}-${index}`}
+              className="flex items-center text-[1.38rem] font-medium tracking-[-0.025em] sm:text-[1.62rem] sm:tracking-[-0.03em] md:text-[clamp(1.75rem,2.6vw,2.25rem)] md:tracking-[-0.035em]"
+              aria-hidden={index >= names.length}
+            >
+              <ClientItem name={name} />
+              <span className="mx-6 h-7 w-px bg-[var(--rule)] sm:mx-8 md:mx-10 lg:mx-12" aria-hidden="true" />
+            </span>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
