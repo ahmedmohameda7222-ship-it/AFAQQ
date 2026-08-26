@@ -45,5 +45,22 @@ assert(
     globals.includes("white-space: normal;"),
   "Reduced motion must expose the complete first relationship set without clipping.",
 );
+assert(
+  relationshipRail.includes('"use client"') && relationshipRail.includes("useState"),
+  "Animated relationship rail must be interactive so motion can be paused explicitly.",
+);
+assert(
+  relationshipRail.includes("aria-pressed={paused}") &&
+    relationshipRail.includes("Pause motion") &&
+    relationshipRail.includes("Resume motion") &&
+    relationshipRail.includes("relationship-marquee__paused") &&
+    relationshipRail.includes("tabIndex={0}"),
+  "Relationship marquee must expose an operable Pause/Resume control and keyboard pause target.",
+);
+assert(
+  globals.includes(".relationship-marquee__paused .relationship-marquee__track") &&
+    globals.includes("animation-play-state: paused;"),
+  "Paused relationship state must stop the marquee animation.",
+);
 
 console.log("Engineered Editorial 2.0 Home integrity invariants OK.");
