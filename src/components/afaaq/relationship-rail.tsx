@@ -89,7 +89,7 @@ export function RelationshipRail({ names }: RelationshipRailProps) {
           {items.map((name, index) => (
             <span
               key={`${name}-${index}`}
-              className="flex items-center text-[1.38rem] font-medium tracking-[-0.025em] sm:text-[1.62rem] sm:tracking-[-0.03em] md:text-[clamp(1.75rem,2.6vw,2.25rem)] md:tracking-[-0.035em]"
+              className={`flex items-center text-[1.38rem] font-medium tracking-[-0.025em] sm:text-[1.62rem] sm:tracking-[-0.03em] md:text-[clamp(1.75rem,2.6vw,2.25rem)] md:tracking-[-0.035em] ${index >= names.length ? "relationship-marquee__duplicate" : ""}`}
               aria-hidden={index >= names.length}
             >
               <ClientItem name={name} />
