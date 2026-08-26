@@ -143,11 +143,16 @@ img[data-nimg="fill"] {
 }
 
 .relationship-rail__viewport:hover .relationship-marquee__track,
-.relationship-rail__viewport:focus-within .relationship-marquee__track {
+.relationship-rail__viewport:focus-within .relationship-marquee__track,
+.relationship-marquee__paused .relationship-marquee__track {
   animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .relationship-marquee__control {
+    display: none;
+  }
+
   .relationship-rail__viewport {
     overflow: visible;
   }
